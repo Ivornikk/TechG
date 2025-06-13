@@ -1,4 +1,4 @@
-const sequelize = require('../db')
+const sequelize = require('../db.mjs')
 const {DataTypes} = require('sequelize')
 
 const User = sequelize.define('user', {
@@ -177,7 +177,7 @@ AttributeValue.belongsTo(Product)
 AttributeValue.hasMany(Attribute)
 Attribute.belongsTo(AttributeValue)
 
-module.exports = {
+export default {
     User,
     Order,
     OrderProduct,
