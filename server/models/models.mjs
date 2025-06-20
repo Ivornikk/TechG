@@ -1,9 +1,8 @@
-const sequelize = require('../db.mjs')
-const {DataTypes} = require('sequelize')
+import sequelize from '../db.mjs'
+import { DataTypes } from 'sequelize'
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false},
     userName: {type: DataTypes.STRING, allowNull: false, unique: true},
     gender: {type: DataTypes.STRING, allowNull: false},
     phoneNumber: {type: DataTypes.STRING, unique: true},
@@ -17,10 +16,23 @@ const User = sequelize.define('user', {
     createdAt: {type: DataTypes.DATE}
 })
 
+const Address = sequelize.define('address', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    firstName: {type: DataTypes.STRING, allowNull: false},
+    lastName: {type: DataTypes.STRING, allowNull: false},
+    telephone: {type: DataTypes.STRING, allowNull: false},
+    addressLine: {type: DataTypes.STRING, allowNull: false},
+    country: {type: DataTypes.STRING, allowNull: false},
+    region: {type: DataTypes.STRING, allowNull: false},
+    city: {type: DataTypes.STRING, allowNull: false},
+    ZipCode: {type: DataTypes.STRING, allowNull: false}
+})
+
 const Order = sequelize.define('order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     createdAt: {type: DataTypes.DATE},
-    status: {type: DataTypes.STRING, allowNull: false, defaultValue: "in progress"}
+    status: {type: DataTypes.STRING, allowNull: false, defaultValue: "in progress"},
+    paymentMethod: {type: DataTypes.STRING, allowNull: false}
 })
 
 const OrderProduct = sequelize.define('order_product', {
@@ -34,20 +46,38 @@ const Product = sequelize.define('product', {
     title: {type: DataTypes.STRING, allowNull: false},
     price: {type: DataTypes.INTEGER},
     description: {type: DataTypes.STRING},
-    img: {type: DataTypes.STRING, allowNull: false}
+    preview_image: {type: DataTypes.STRING, allowNull: false},
+    description_images: {type: DataTypes.STRING}
 })
 
 const Promotion = sequelize.define('promotion', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING},
     percentage: {type: DataTypes.INTEGER, allowNull: false},
     startDate: {type: DataTypes.DATE, allowNull: false},
     endDate: {type: DataTypes.DATE, allowNull: false},
+})
+
+const PromotionType = sequelize.define('promotion_type', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING},
 })
 
 const ProductInfo = sequelize.define('product_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false}
+})
+
+const ProductFeature = sequelize.define('product_feature', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    title: {type: DataTypes.STRING, allowNull: false},
+    description: {type: DataTypes.STRING, allowNull: false}
+})
+
+const PackageElement = sequelize.define('package_element', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, allowNull: false}
 })
 
 const Group = sequelize.define('group', {
@@ -99,91 +129,77 @@ const AttributeValue = sequelize.define('attribute_value', {
     value: {type: DataTypes.STRING, allowNull: false}
 })
 
-const GroupAttributes = sequelize.define('group_attributes', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
-})
-
-const History = sequelize.define('history', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    viewedAt: {type: DataTypes.DATE, allowNull: false}
-})
+User.hasMany(Address)
+Address.belongsTo(User)
 
 User.hasMany(Order)
 Order.belongsTo(User)
 
-Order.hasMany(OrderProduct)
-OrderProduct.belongsTo(Order)
-
-OrderProduct.hasOne(Product)
-Product.belongsTo(OrderProduct)
-
-User.hasOne(History)
-History.belongsTo(User)
-
-History.hasMany(Product)
-Product.belongsTo(History)
-
 User.hasMany(Rating)
 Rating.belongsTo(User)
-
-Rating.hasOne(Product)
-Product.belongsTo(Rating)
-
-Product.hasMany(Rating)
-Rating.belongsTo(Product)
 
 User.hasOne(Wishlist)
 Wishlist.belongsTo(User)
 
-Wishlist.hasMany(WishlistProduct)
-WishlistProduct.belongsTo(Wishlist)
-
-WishlistProduct.hasOne(Product)
-Product.belongsTo(WishlistProduct)
-
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-Basket.hasMany(BasketProduct)
-BasketProduct.belongsTo(Basket)
+Order.belongsToMany(Product, {through: OrderProduct})
+Product.belongsToMany(Order, {through: OrderProduct})
 
-BasketProduct.hasOne(Product)
-Product.belongsTo(BasketProduct)
+Product.hasMany(Rating)
+Rating.belongsTo(Product)
 
-Promotion.hasOne(Product)
-Product.belongsTo(Promotion)
+Wishlist.belongsToMany(Product, {through: WishlistProduct})
+Product.belongsToMany(Wishlist, {through: WishlistProduct})
+
+Basket.belongsToMany(Product, {through: WishlistProduct})
+Product.belongsToMany(Basket, {through: WishlistProduct})
+
+Product.hasOne(Promotion)
+Promotion.belongsTo(Product)
+
+PromotionType.hasMany(Promotion)
+Promotion.belongsTo(PromotionType)
 
 Product.hasMany(ProductInfo)
 ProductInfo.belongsTo(Product)
 
-Group.hasMany(Product)
-Product.belongsTo(Group)
+Product.hasMany(ProductFeature)
+ProductFeature.belongsTo(Product)
 
-Group.hasOne(GroupAttributes)
-GroupAttributes.belongsTo(Group)
-
-GroupAttributes.hasMany(Attribute)
-Attribute.belongsTo(GroupAttributes)
-
-Type.hasMany(Group)
-Group.belongsTo(Type)
+Product.hasMany(PackageElement)
+PackageElement.belongsTo(Product)
 
 Category.hasMany(Type)
 Type.belongsTo(Category)
 
-Product.hasMany(AttributeValue)
-AttributeValue.belongsTo(Product)
+Type.hasMany(Group)
+Group.belongsTo(Type)
 
-AttributeValue.hasMany(Attribute)
-Attribute.belongsTo(AttributeValue)
+Group.hasMany(Product)
+Product.belongsTo(Group)
+
+AttributeValue.hasMany(Product)
+Product.belongsTo(AttributeValue)
+
+Attribute.hasMany(AttributeValue)
+AttributeValue.belongsTo(Attribute)
+
+Group.hasMany(Attribute)
+Attribute.belongsTo(Group)
 
 export default {
     User,
+    Address,
     Order,
     OrderProduct,
     Product,
     Promotion,
+    PromotionType,
     ProductInfo,
+    ProductFeature,
+    PackageElement,
     Group,
     Type,
     Category,
@@ -193,7 +209,5 @@ export default {
     Basket,
     BasketProduct,
     Attribute,
-    AttributeValue,
-    GroupAttributes,
-    History
+    AttributeValue
 }
