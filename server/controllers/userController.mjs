@@ -41,6 +41,10 @@ class UserController {
     async check(req, res, next) {
         res.json({message: "Working user auth"})
     }
+
+    async edit(req, res, next) {
+        
+    }
 }
 
 export default new UserController()

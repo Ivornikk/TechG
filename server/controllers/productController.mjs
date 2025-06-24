@@ -1,3 +1,6 @@
+import models from "../models/models.mjs"
+const {Product} =  models
+
 class ProductController {
     async getAll(req, res, next) {
         res.json({message: "Working product get all"})
@@ -7,6 +10,12 @@ class ProductController {
     }
     async create(req, res, next) {
         res.json({message: "Working product create"})
+    }
+    async remove(req, res) {
+
+    }
+    async edit(req, res, next) {
+
     }
 }
 

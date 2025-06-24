@@ -1,11 +1,9 @@
 import express from 'express'
-import controller from '../controllers/productController.mjs'
+import controller from '../controllers/wishlistController.mjs'
 
 const route = new express()
 route.get('/', controller.getAll)
 route.get('/:id', controller.getOne)
 route.post('/', controller.create)
-route.delete('/', controller.remove)
-route.patch('/:id/edit', controller.edit)
 
 export default route
