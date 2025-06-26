@@ -9,7 +9,14 @@ class CategoryController {
         res.json({message: "Working category get one"})
     }
     async create(req, res, next) {
-        res.json({message: "Working category create"})
+        const {name} = req.body
+        try {
+            const category = await Category.create({name})
+            return res.json(category)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async remove(req, res) {
 

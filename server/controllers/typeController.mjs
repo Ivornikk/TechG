@@ -9,7 +9,14 @@ class TypeController {
         res.json({message: "Working type get one"})
     }
     async create(req, res, next) {
-        res.json({message: "Working type create"})
+        const {name, categoryId} = req.body
+        try {
+            const type = await Type.create({name, categoryId})
+            return res.json(type)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async remove(req, res) {
 

@@ -44,7 +44,7 @@ const OrderProduct = sequelize.define('order_product', {
 const Product = sequelize.define('product', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    price: {type: DataTypes.INTEGER},
+    price: {type: DataTypes.DECIMAL},
     description: {type: DataTypes.STRING},
     preview_image: {type: DataTypes.STRING, allowNull: false},
     description_images: {type: DataTypes.STRING}
