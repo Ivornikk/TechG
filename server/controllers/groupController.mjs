@@ -8,11 +8,8 @@ class GroupController {
             return res.json(groups)
         }
         catch (err) {
-            return res.json({"Message": "An error occured!"})
+            next(ApiError.badRequest(err.message))
         }
-    }
-    async getOne(req, res, next) {
-        res.json({message: "Working group get one"})
     }
     async create(req, res, next) {
         const {name, typeId} = req.body
@@ -25,7 +22,10 @@ class GroupController {
         }
     }
     async remove(req, res) {
-
+        const {id} = req.params
+        const deleteCount = Group.destroy({where: id})
+        if (deleteCount) return res.json({"message": "Success!"})
+        else return res.json({"message": "Failure!"})
     }
 }
 

@@ -1,12 +1,25 @@
 import models from "../models/models.mjs"
-const {Category} =  models
+const {Category, Type} =  models
 
 class CategoryController {
     async getAll(req, res, next) {
-        res.json({message: "Working category get all"})
+        try {
+            const categories = await Category.findAndCountAll()
+            return res.json(categories)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async getOne(req, res, next) {
-        res.json({message: "Working category get one"})
+        const {id} = req.params
+        try {
+            const category = await Category.findOne({where: {id}, include: Type})
+            return res.json(category)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async create(req, res, next) {
         const {name} = req.body
@@ -19,7 +32,10 @@ class CategoryController {
         }
     }
     async remove(req, res) {
-
+        const {id} = req.params
+        const deleteCount = Category.destroy({where: id})
+        if (deleteCount) return res.json({"message": "Success!"})
+        else return res.json({"message": "Failure!"})
     }
 }
 

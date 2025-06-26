@@ -3,7 +3,6 @@ import controller from '../controllers/groupController.mjs'
 
 const route = new express()
 route.get('/', controller.getAll)
-route.get('/:id', controller.getOne)
 route.post('/', controller.create)
 route.delete('/', controller.remove)
 
