@@ -1,15 +1,46 @@
 import models from "../models/models.mjs"
-const {Order} =  models
+import ApiError from "../errors/ApiError.mjs"
+const {Order, Product, OrderProduct} =  models
 
 class OrderController {
     async getAll(req, res, next) {
-        res.json({message: "Working address get all"})
+        const {userId} = req.body
+        const {limit, page} = req.query
+        let offset = page * limit - limit
+        try {
+            let orders
+            if (userId)
+                orders = await Order.findAndCountAll({where: {userId}, limit, offset})
+            else
+                orders = await Order.findAndCountAll({limit, offset})
+            return res.json(orders)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async getOne(req, res, next) {
-        res.json({message: "Working address get one"})
+        const {id} = req.params
+        try {
+            const order = await Order.findOne({
+                where: {id},
+                include: [{model: {Product}, through: OrderProduct}]
+            })
+            return res.json(order)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async create(req, res, next) {
-        res.json({message: "Working address create"})
+        const {userId, paymentMethod} = req.body
+        try {
+            const order = await Order.create({userId: userId, paymentMethod: paymentMethod})
+            return res.json(order)
+        }
+        catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async remove(req, res) {
 

@@ -31,7 +31,7 @@ const Address = sequelize.define('address', {
 const Order = sequelize.define('order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     createdAt: {type: DataTypes.DATE},
-    status: {type: DataTypes.STRING, allowNull: false, defaultValue: "in progress"},
+    status: {type: DataTypes.STRING, allowNull: false, defaultValue: "Pending"},
     paymentMethod: {type: DataTypes.STRING, allowNull: false}
 })
 
@@ -144,7 +144,7 @@ Wishlist.belongsTo(User)
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-Order.belongsToMany(Product, {through: OrderProduct})
+Order.belongsToMany(Product, {through: OrderProduct, as: "product"})
 Product.belongsToMany(Order, {through: OrderProduct})
 
 Product.hasMany(Rating)

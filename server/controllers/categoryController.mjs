@@ -1,5 +1,5 @@
 import models from "../models/models.mjs"
-const {Category, Type} =  models
+const {Category, Type, Group} =  models
 
 class CategoryController {
     async getAll(req, res, next) {
@@ -14,7 +14,11 @@ class CategoryController {
     async getOne(req, res, next) {
         const {id} = req.params
         try {
-            const category = await Category.findOne({where: {id}, include: Type})
+            const category = await Category.findOne({where: {id}, include: [{
+                model: Type,
+                include: [{model: Group}]
+                }]
+            })
             return res.json(category)
         }
         catch (err) {
