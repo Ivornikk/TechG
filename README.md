@@ -1,2 +1,0 @@
-"# TechG"
-"# TechG" 

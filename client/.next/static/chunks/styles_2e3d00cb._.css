@@ -1,0 +1,22 @@
+/* [project]/styles/main.css [client] (css) */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: orange;
+  padding: 10px;
+}
+
+.navbar a {
+  padding: 10px;
+}
+
+/* [project]/styles/navbar.module.css [client] (css) */
+.navbar-module__bk5_hG__navbar {
+  background-color: #3b3678;
+  width: 100vw;
+}
+
+/*# sourceMappingURL=styles_2e3d00cb._.css.map*/

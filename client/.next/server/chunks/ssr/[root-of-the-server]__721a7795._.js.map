@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Velislav/Desktop/Work/TechG/site/client/pages/index.js"],"sourcesContent":["import Link from \"next/link\"\r\nconst Index = () => {\r\n    return (\r\n        <div>\r\n            <div className=\"navbar\">\r\n                <Link className=\"bg-black\" href={'/'}>Home</Link>\r\n                <Link href={'/users'}>users</Link>\r\n            </div>\r\n            <h1>Main Page</h1>\r\n\r\n        </div>\r\n\r\n    )\r\n}\r\n\r\nexport default Index"],"names":[],"mappings":";;;;AAAA;;;AACA,MAAM,QAAQ;IACV,qBACI,qKAAC;;0BACG,qKAAC;gBAAI,WAAU;;kCACX,qKAAC,qHAAA,CAAA,UAAI;wBAAC,WAAU;wBAAW,MAAM;kCAAK;;;;;;kCACtC,qKAAC,qHAAA,CAAA,UAAI;wBAAC,MAAM;kCAAU;;;;;;;;;;;;0BAE1B,qKAAC;0BAAG;;;;;;;;;;;;AAKhB;uCAEe","debugId":null}}]
+}

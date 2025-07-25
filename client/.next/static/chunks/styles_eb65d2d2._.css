@@ -1,0 +1,19 @@
+/* [project]/styles/main.css [client] (css) */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: orange;
+  padding: 10px;
+}
+
+.navbar a {
+  padding: 10px;
+}
+
+/* [project]/styles/navbar.css [client] (css) */
+
+
+/*# sourceMappingURL=styles_eb65d2d2._.css.map*/

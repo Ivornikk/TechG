@@ -1,0 +1,52 @@
+/* [project]/styles/navbar.module.css [client] (css) */
+.navbar-module__bk5_hG__navbar {
+  background-color: #3b3678;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  display: flex;
+}
+
+.navbar-module__bk5_hG__logo {
+  margin: 15px 0;
+}
+
+.navbar-module__bk5_hG__searchBar form {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 720px;
+  max-height: 60px;
+  display: flex;
+  position: relative;
+}
+
+.navbar-module__bk5_hG__searchInput {
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+  height: 56px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1em;
+  right: 0;
+}
+
+.navbar-module__bk5_hG__searchButton {
+  float: right;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  transition: all .2s;
+  top: 0;
+  left: 0;
+}
+
+.navbar-module__bk5_hG__searchButton:hover {
+  background-color: #3b3678;
+}
+
+/*# sourceMappingURL=styles_navbar_module_css_14eac1ce._.single.css.map*/
