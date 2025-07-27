@@ -29,6 +29,7 @@
   padding-left: 20px;
   padding-right: 20px;
   font-size: 1em;
+  transition: all .2s;
   right: 0;
 }
 
@@ -37,16 +38,11 @@
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  border-radius: 100px;
   width: 56px;
   height: 56px;
   padding: 0;
-  transition: all .2s;
-  top: 0;
-  left: 0;
-}
-
-.navbar-module__bk5_hG__searchButton:hover {
-  background-color: #3b3678;
+  transform: translateX(-56px);
 }
 
 /* [project]/styles/main.css [client] (css) */

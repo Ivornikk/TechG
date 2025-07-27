@@ -1,3 +1,49 @@
+/* [project]/styles/categoriesButton.module.css [client] (css) */
+.categoriesButton-module__sqbAuG__container {
+  flex-direction: column;
+  justify-content: end;
+  width: 250px;
+  margin-right: 50px;
+  display: flex;
+  transform: translateX(-100px);
+}
+
+.categoriesButton-module__sqbAuG__text * {
+  margin: 0;
+  padding: 0;
+}
+
+.categoriesButton-module__sqbAuG__text div {
+  align-items: center;
+  display: flex;
+}
+
+.categoriesButton-module__sqbAuG__text {
+  color: #fff;
+  background-color: #2f2b68;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  display: flex;
+  bottom: 0;
+}
+
+.categoriesButton-module__sqbAuG__text img {
+  margin: 0 5px;
+}
+
+.categoriesButton-module__sqbAuG__categoriesIcon {
+  width: 38px;
+}
+
+.categoriesButton-module__sqbAuG__dropdownArrow {
+  width: 24px;
+}
+
 /* [project]/styles/navbar.module.css [client] (css) */
 .navbar-module__bk5_hG__navbar {
   background-color: #3b3678;
@@ -105,4 +151,10 @@
   background-color: #fff;
 }
 
-/*# sourceMappingURL=styles_navbar_module_css_14eac1ce._.single.css.map*/
+/* [project]/styles/main.css [client] (css) */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*# sourceMappingURL=styles_10e0d2a8._.css.map*/

@@ -8,30 +8,15 @@ const mod = __turbopack_context__.x("react/jsx-dev-runtime", () => require("reac
 
 module.exports = mod;
 }}),
-"[externals]/react/jsx-runtime [external] (react/jsx-runtime, cjs)": ((__turbopack_context__) => {
+"[project]/styles/categoriesButton.module.css [ssr] (css module)": ((__turbopack_context__) => {
 
-var { m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("react/jsx-runtime", () => require("react/jsx-runtime"));
-
-module.exports = mod;
-}}),
-"[externals]/react [external] (react, cjs)": ((__turbopack_context__) => {
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("react", () => require("react"));
-
-module.exports = mod;
-}}),
-"[externals]/next/dist/compiled/next-server/pages-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/pages-turbo.runtime.dev.js, cjs)": ((__turbopack_context__) => {
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("next/dist/compiled/next-server/pages-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/pages-turbo.runtime.dev.js"));
-
-module.exports = mod;
-}}),
+__turbopack_context__.v({
+  "categoriesIcon": "categoriesButton-module__sqbAuG__categoriesIcon",
+  "container": "categoriesButton-module__sqbAuG__container",
+  "dropdownArrow": "categoriesButton-module__sqbAuG__dropdownArrow",
+  "text": "categoriesButton-module__sqbAuG__text",
+});
+}),
 "[project]/components/categoriesButton.js [ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -40,36 +25,62 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/link.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/styles/categoriesButton.module.css [ssr] (css module)");
+;
 ;
 ;
 const CategoriesButton = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                className: "categories-icon"
-            }, void 0, false, {
+        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].container,
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].text,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
+                                src: '/list.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].categoriesIcon
+                            }, void 0, false, {
+                                fileName: "[project]/components/categoriesButton.js",
+                                lineNumber: 11,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                children: "Categories"
+                            }, void 0, false, {
+                                fileName: "[project]/components/categoriesButton.js",
+                                lineNumber: 12,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/categoriesButton.js",
+                        lineNumber: 10,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
+                        src: '/dropdownArrow.svg',
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].dropdownArrow
+                    }, void 0, false, {
+                        fileName: "[project]/components/categoriesButton.js",
+                        lineNumber: 14,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 6,
-                columnNumber: 13
-            }, ("TURBOPACK compile-time value", void 0)),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                children: "Categories"
-            }, void 0, false, {
-                fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 7,
-                columnNumber: 13
-            }, ("TURBOPACK compile-time value", void 0)),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                className: "dropdown-arrow"
-            }, void 0, false, {
-                fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 8,
-                columnNumber: 13
+                lineNumber: 9,
+                columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0))
-        ]
-    }, void 0, true, {
+        }, void 0, false, {
+            fileName: "[project]/components/categoriesButton.js",
+            lineNumber: 8,
+            columnNumber: 13
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
         fileName: "[project]/components/categoriesButton.js",
-        lineNumber: 5,
+        lineNumber: 7,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -78,11 +89,17 @@ const __TURBOPACK__default__export__ = CategoriesButton;
 "[project]/styles/navbar.module.css [ssr] (css module)": ((__turbopack_context__) => {
 
 __turbopack_context__.v({
+  "cartButton": "navbar-module__bk5_hG__cartButton",
+  "logInBtn": "navbar-module__bk5_hG__logInBtn",
   "logo": "navbar-module__bk5_hG__logo",
   "navbar": "navbar-module__bk5_hG__navbar",
   "searchBar": "navbar-module__bk5_hG__searchBar",
   "searchButton": "navbar-module__bk5_hG__searchButton",
   "searchInput": "navbar-module__bk5_hG__searchInput",
+  "signButtonsCont": "navbar-module__bk5_hG__signButtonsCont",
+  "signUpBtn": "navbar-module__bk5_hG__signUpBtn",
+  "wishlistButton": "navbar-module__bk5_hG__wishlistButton",
+  "wishlistCartCont": "navbar-module__bk5_hG__wishlistCartCont",
 });
 }),
 "[project]/components/navbar.js [ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -165,13 +182,14 @@ const Navbar = ()=>{
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                className: "wishlist-cart-cont",
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].wishlistCartCont,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                        className: "wishlist-button",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].wishlistButton,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                                className: "wishlist-icon"
+                                src: '/wishlistIcon.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].wishlistIcon
                             }, void 0, false, {
                                 fileName: "[project]/components/navbar.js",
                                 lineNumber: 22,
@@ -191,10 +209,11 @@ const Navbar = ()=>{
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                        className: "cart-button",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].cartButton,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                                className: "cart-icon"
+                                src: '/cartIcon.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].cartIcon
                             }, void 0, false, {
                                 fileName: "[project]/components/navbar.js",
                                 lineNumber: 26,
@@ -220,10 +239,10 @@ const Navbar = ()=>{
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                className: "sign-buttons-cont",
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].signButtonsCont,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                        className: "sign-up-btn",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].signUpBtn,
                         children: "Sign up"
                     }, void 0, false, {
                         fileName: "[project]/components/navbar.js",
@@ -231,7 +250,7 @@ const Navbar = ()=>{
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                        className: "log-in-btn",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].logInBtn,
                         children: "Log in"
                     }, void 0, false, {
                         fileName: "[project]/components/navbar.js",
@@ -543,220 +562,6 @@ function omit(object, keys) {
     return omitted;
 } //# sourceMappingURL=omit.js.map
 }}),
-"[project]/node_modules/next/dist/shared/lib/utils.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    DecodeError: null,
-    MiddlewareNotFoundError: null,
-    MissingStaticPage: null,
-    NormalizeError: null,
-    PageNotFoundError: null,
-    SP: null,
-    ST: null,
-    WEB_VITALS: null,
-    execOnce: null,
-    getDisplayName: null,
-    getLocationOrigin: null,
-    getURL: null,
-    isAbsoluteUrl: null,
-    isResSent: null,
-    loadGetInitialProps: null,
-    normalizeRepeatedSlashes: null,
-    stringifyError: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    DecodeError: function() {
-        return DecodeError;
-    },
-    MiddlewareNotFoundError: function() {
-        return MiddlewareNotFoundError;
-    },
-    MissingStaticPage: function() {
-        return MissingStaticPage;
-    },
-    NormalizeError: function() {
-        return NormalizeError;
-    },
-    PageNotFoundError: function() {
-        return PageNotFoundError;
-    },
-    SP: function() {
-        return SP;
-    },
-    ST: function() {
-        return ST;
-    },
-    WEB_VITALS: function() {
-        return WEB_VITALS;
-    },
-    execOnce: function() {
-        return execOnce;
-    },
-    getDisplayName: function() {
-        return getDisplayName;
-    },
-    getLocationOrigin: function() {
-        return getLocationOrigin;
-    },
-    getURL: function() {
-        return getURL;
-    },
-    isAbsoluteUrl: function() {
-        return isAbsoluteUrl;
-    },
-    isResSent: function() {
-        return isResSent;
-    },
-    loadGetInitialProps: function() {
-        return loadGetInitialProps;
-    },
-    normalizeRepeatedSlashes: function() {
-        return normalizeRepeatedSlashes;
-    },
-    stringifyError: function() {
-        return stringifyError;
-    }
-});
-const WEB_VITALS = [
-    'CLS',
-    'FCP',
-    'FID',
-    'INP',
-    'LCP',
-    'TTFB'
-];
-function execOnce(fn) {
-    let used = false;
-    let result;
-    return function() {
-        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
-            args[_key] = arguments[_key];
-        }
-        if (!used) {
-            used = true;
-            result = fn(...args);
-        }
-        return result;
-    };
-}
-// Scheme: https://tools.ietf.org/html/rfc3986#section-3.1
-// Absolute URL: https://tools.ietf.org/html/rfc3986#section-4.3
-const ABSOLUTE_URL_REGEX = /^[a-zA-Z][a-zA-Z\d+\-.]*?:/;
-const isAbsoluteUrl = (url)=>ABSOLUTE_URL_REGEX.test(url);
-function getLocationOrigin() {
-    const { protocol, hostname, port } = window.location;
-    return protocol + "//" + hostname + (port ? ':' + port : '');
-}
-function getURL() {
-    const { href } = window.location;
-    const origin = getLocationOrigin();
-    return href.substring(origin.length);
-}
-function getDisplayName(Component) {
-    return typeof Component === 'string' ? Component : Component.displayName || Component.name || 'Unknown';
-}
-function isResSent(res) {
-    return res.finished || res.headersSent;
-}
-function normalizeRepeatedSlashes(url) {
-    const urlParts = url.split('?');
-    const urlNoQuery = urlParts[0];
-    return urlNoQuery // first we replace any non-encoded backslashes with forward
-    // then normalize repeated forward slashes
-    .replace(/\\/g, '/').replace(/\/\/+/g, '/') + (urlParts[1] ? "?" + urlParts.slice(1).join('?') : '');
-}
-async function loadGetInitialProps(App, ctx) {
-    if ("TURBOPACK compile-time truthy", 1) {
-        var _App_prototype;
-        if ((_App_prototype = App.prototype) == null ? void 0 : _App_prototype.getInitialProps) {
-            const message = '"' + getDisplayName(App) + '.getInitialProps()" is defined as an instance method - visit https://nextjs.org/docs/messages/get-initial-props-as-an-instance-method for more information.';
-            throw Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
-                value: "E394",
-                enumerable: false,
-                configurable: true
-            });
-        }
-    }
-    // when called from _app `ctx` is nested in `ctx`
-    const res = ctx.res || ctx.ctx && ctx.ctx.res;
-    if (!App.getInitialProps) {
-        if (ctx.ctx && ctx.Component) {
-            // @ts-ignore pageProps default
-            return {
-                pageProps: await loadGetInitialProps(ctx.Component, ctx.ctx)
-            };
-        }
-        return {};
-    }
-    const props = await App.getInitialProps(ctx);
-    if (res && isResSent(res)) {
-        return props;
-    }
-    if (!props) {
-        const message = '"' + getDisplayName(App) + '.getInitialProps()" should resolve to an object. But found "' + props + '" instead.';
-        throw Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
-            value: "E394",
-            enumerable: false,
-            configurable: true
-        });
-    }
-    if ("TURBOPACK compile-time truthy", 1) {
-        if (Object.keys(props).length === 0 && !ctx.ctx) {
-            console.warn("" + getDisplayName(App) + " returned an empty object from `getInitialProps`. This de-optimizes and prevents automatic static optimization. https://nextjs.org/docs/messages/empty-object-getInitialProps");
-        }
-    }
-    return props;
-}
-const SP = typeof performance !== 'undefined';
-const ST = SP && [
-    'mark',
-    'measure',
-    'getEntriesByName'
-].every((method)=>typeof performance[method] === 'function');
-class DecodeError extends Error {
-}
-class NormalizeError extends Error {
-}
-class PageNotFoundError extends Error {
-    constructor(page){
-        super();
-        this.code = 'ENOENT';
-        this.name = 'PageNotFoundError';
-        this.message = "Cannot find module for page: " + page;
-    }
-}
-class MissingStaticPage extends Error {
-    constructor(page, message){
-        super();
-        this.message = "Failed to load static file for page: " + page + " " + message;
-    }
-}
-class MiddlewareNotFoundError extends Error {
-    constructor(){
-        super();
-        this.code = 'ENOENT';
-        this.message = "Cannot find the middleware module";
-    }
-}
-function stringifyError(error) {
-    return JSON.stringify({
-        message: error.message,
-        stack: error.stack
-    });
-} //# sourceMappingURL=utils.js.map
-}}),
 "[project]/node_modules/next/dist/shared/lib/router/utils/remove-trailing-slash.js [ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -928,556 +733,6 @@ function isLocalURL(url) {
         return false;
     }
 } //# sourceMappingURL=is-local-url.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/router/utils/sorted-routes.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    getSortedRouteObjects: null,
-    getSortedRoutes: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    getSortedRouteObjects: function() {
-        return getSortedRouteObjects;
-    },
-    getSortedRoutes: function() {
-        return getSortedRoutes;
-    }
-});
-class UrlNode {
-    insert(urlPath) {
-        this._insert(urlPath.split('/').filter(Boolean), [], false);
-    }
-    smoosh() {
-        return this._smoosh();
-    }
-    _smoosh(prefix) {
-        if (prefix === void 0) prefix = '/';
-        const childrenPaths = [
-            ...this.children.keys()
-        ].sort();
-        if (this.slugName !== null) {
-            childrenPaths.splice(childrenPaths.indexOf('[]'), 1);
-        }
-        if (this.restSlugName !== null) {
-            childrenPaths.splice(childrenPaths.indexOf('[...]'), 1);
-        }
-        if (this.optionalRestSlugName !== null) {
-            childrenPaths.splice(childrenPaths.indexOf('[[...]]'), 1);
-        }
-        const routes = childrenPaths.map((c)=>this.children.get(c)._smoosh("" + prefix + c + "/")).reduce((prev, curr)=>[
-                ...prev,
-                ...curr
-            ], []);
-        if (this.slugName !== null) {
-            routes.push(...this.children.get('[]')._smoosh(prefix + "[" + this.slugName + "]/"));
-        }
-        if (!this.placeholder) {
-            const r = prefix === '/' ? '/' : prefix.slice(0, -1);
-            if (this.optionalRestSlugName != null) {
-                throw Object.defineProperty(new Error('You cannot define a route with the same specificity as a optional catch-all route ("' + r + '" and "' + r + "[[..." + this.optionalRestSlugName + ']]").'), "__NEXT_ERROR_CODE", {
-                    value: "E458",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            routes.unshift(r);
-        }
-        if (this.restSlugName !== null) {
-            routes.push(...this.children.get('[...]')._smoosh(prefix + "[..." + this.restSlugName + "]/"));
-        }
-        if (this.optionalRestSlugName !== null) {
-            routes.push(...this.children.get('[[...]]')._smoosh(prefix + "[[..." + this.optionalRestSlugName + "]]/"));
-        }
-        return routes;
-    }
-    _insert(urlPaths, slugNames, isCatchAll) {
-        if (urlPaths.length === 0) {
-            this.placeholder = false;
-            return;
-        }
-        if (isCatchAll) {
-            throw Object.defineProperty(new Error("Catch-all must be the last part of the URL."), "__NEXT_ERROR_CODE", {
-                value: "E392",
-                enumerable: false,
-                configurable: true
-            });
-        }
-        // The next segment in the urlPaths list
-        let nextSegment = urlPaths[0];
-        // Check if the segment matches `[something]`
-        if (nextSegment.startsWith('[') && nextSegment.endsWith(']')) {
-            // Strip `[` and `]`, leaving only `something`
-            let segmentName = nextSegment.slice(1, -1);
-            let isOptional = false;
-            if (segmentName.startsWith('[') && segmentName.endsWith(']')) {
-                // Strip optional `[` and `]`, leaving only `something`
-                segmentName = segmentName.slice(1, -1);
-                isOptional = true;
-            }
-            if (segmentName.startsWith('…')) {
-                throw Object.defineProperty(new Error("Detected a three-dot character ('…') at ('" + segmentName + "'). Did you mean ('...')?"), "__NEXT_ERROR_CODE", {
-                    value: "E147",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            if (segmentName.startsWith('...')) {
-                // Strip `...`, leaving only `something`
-                segmentName = segmentName.substring(3);
-                isCatchAll = true;
-            }
-            if (segmentName.startsWith('[') || segmentName.endsWith(']')) {
-                throw Object.defineProperty(new Error("Segment names may not start or end with extra brackets ('" + segmentName + "')."), "__NEXT_ERROR_CODE", {
-                    value: "E421",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            if (segmentName.startsWith('.')) {
-                throw Object.defineProperty(new Error("Segment names may not start with erroneous periods ('" + segmentName + "')."), "__NEXT_ERROR_CODE", {
-                    value: "E288",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            function handleSlug(previousSlug, nextSlug) {
-                if (previousSlug !== null) {
-                    // If the specific segment already has a slug but the slug is not `something`
-                    // This prevents collisions like:
-                    // pages/[post]/index.js
-                    // pages/[id]/index.js
-                    // Because currently multiple dynamic params on the same segment level are not supported
-                    if (previousSlug !== nextSlug) {
-                        // TODO: This error seems to be confusing for users, needs an error link, the description can be based on above comment.
-                        throw Object.defineProperty(new Error("You cannot use different slug names for the same dynamic path ('" + previousSlug + "' !== '" + nextSlug + "')."), "__NEXT_ERROR_CODE", {
-                            value: "E337",
-                            enumerable: false,
-                            configurable: true
-                        });
-                    }
-                }
-                slugNames.forEach((slug)=>{
-                    if (slug === nextSlug) {
-                        throw Object.defineProperty(new Error('You cannot have the same slug name "' + nextSlug + '" repeat within a single dynamic path'), "__NEXT_ERROR_CODE", {
-                            value: "E247",
-                            enumerable: false,
-                            configurable: true
-                        });
-                    }
-                    if (slug.replace(/\W/g, '') === nextSegment.replace(/\W/g, '')) {
-                        throw Object.defineProperty(new Error('You cannot have the slug names "' + slug + '" and "' + nextSlug + '" differ only by non-word symbols within a single dynamic path'), "__NEXT_ERROR_CODE", {
-                            value: "E499",
-                            enumerable: false,
-                            configurable: true
-                        });
-                    }
-                });
-                slugNames.push(nextSlug);
-            }
-            if (isCatchAll) {
-                if (isOptional) {
-                    if (this.restSlugName != null) {
-                        throw Object.defineProperty(new Error('You cannot use both an required and optional catch-all route at the same level ("[...' + this.restSlugName + ']" and "' + urlPaths[0] + '" ).'), "__NEXT_ERROR_CODE", {
-                            value: "E299",
-                            enumerable: false,
-                            configurable: true
-                        });
-                    }
-                    handleSlug(this.optionalRestSlugName, segmentName);
-                    // slugName is kept as it can only be one particular slugName
-                    this.optionalRestSlugName = segmentName;
-                    // nextSegment is overwritten to [[...]] so that it can later be sorted specifically
-                    nextSegment = '[[...]]';
-                } else {
-                    if (this.optionalRestSlugName != null) {
-                        throw Object.defineProperty(new Error('You cannot use both an optional and required catch-all route at the same level ("[[...' + this.optionalRestSlugName + ']]" and "' + urlPaths[0] + '").'), "__NEXT_ERROR_CODE", {
-                            value: "E300",
-                            enumerable: false,
-                            configurable: true
-                        });
-                    }
-                    handleSlug(this.restSlugName, segmentName);
-                    // slugName is kept as it can only be one particular slugName
-                    this.restSlugName = segmentName;
-                    // nextSegment is overwritten to [...] so that it can later be sorted specifically
-                    nextSegment = '[...]';
-                }
-            } else {
-                if (isOptional) {
-                    throw Object.defineProperty(new Error('Optional route parameters are not yet supported ("' + urlPaths[0] + '").'), "__NEXT_ERROR_CODE", {
-                        value: "E435",
-                        enumerable: false,
-                        configurable: true
-                    });
-                }
-                handleSlug(this.slugName, segmentName);
-                // slugName is kept as it can only be one particular slugName
-                this.slugName = segmentName;
-                // nextSegment is overwritten to [] so that it can later be sorted specifically
-                nextSegment = '[]';
-            }
-        }
-        // If this UrlNode doesn't have the nextSegment yet we create a new child UrlNode
-        if (!this.children.has(nextSegment)) {
-            this.children.set(nextSegment, new UrlNode());
-        }
-        this.children.get(nextSegment)._insert(urlPaths.slice(1), slugNames, isCatchAll);
-    }
-    constructor(){
-        this.placeholder = true;
-        this.children = new Map();
-        this.slugName = null;
-        this.restSlugName = null;
-        this.optionalRestSlugName = null;
-    }
-}
-function getSortedRoutes(normalizedPages) {
-    // First the UrlNode is created, and every UrlNode can have only 1 dynamic segment
-    // Eg you can't have pages/[post]/abc.js and pages/[hello]/something-else.js
-    // Only 1 dynamic segment per nesting level
-    // So in the case that is test/integration/dynamic-routing it'll be this:
-    // pages/[post]/comments.js
-    // pages/blog/[post]/comment/[id].js
-    // Both are fine because `pages/[post]` and `pages/blog` are on the same level
-    // So in this case `UrlNode` created here has `this.slugName === 'post'`
-    // And since your PR passed through `slugName` as an array basically it'd including it in too many possibilities
-    // Instead what has to be passed through is the upwards path's dynamic names
-    const root = new UrlNode();
-    // Here the `root` gets injected multiple paths, and insert will break them up into sublevels
-    normalizedPages.forEach((pagePath)=>root.insert(pagePath));
-    // Smoosh will then sort those sublevels up to the point where you get the correct route definition priority
-    return root.smoosh();
-}
-function getSortedRouteObjects(objects, getter) {
-    // We're assuming here that all the pathnames are unique, that way we can
-    // sort the list and use the index as the key.
-    const indexes = {};
-    const pathnames = [];
-    for(let i = 0; i < objects.length; i++){
-        const pathname = getter(objects[i]);
-        indexes[pathname] = i;
-        pathnames[i] = pathname;
-    }
-    // Sort the pathnames.
-    const sorted = getSortedRoutes(pathnames);
-    // Map the sorted pathnames back to the original objects using the new sorted
-    // index.
-    return sorted.map((pathname)=>objects[indexes[pathname]]);
-} //# sourceMappingURL=sorted-routes.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/page-path/ensure-leading-slash.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-/**
- * For a given page path, this function ensures that there is a leading slash.
- * If there is not a leading slash, one is added, otherwise it is noop.
- */ Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-Object.defineProperty(exports, "ensureLeadingSlash", {
-    enumerable: true,
-    get: function() {
-        return ensureLeadingSlash;
-    }
-});
-function ensureLeadingSlash(path) {
-    return path.startsWith('/') ? path : "/" + path;
-} //# sourceMappingURL=ensure-leading-slash.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/segment.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    DEFAULT_SEGMENT_KEY: null,
-    PAGE_SEGMENT_KEY: null,
-    addSearchParamsIfPageSegment: null,
-    isGroupSegment: null,
-    isParallelRouteSegment: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    DEFAULT_SEGMENT_KEY: function() {
-        return DEFAULT_SEGMENT_KEY;
-    },
-    PAGE_SEGMENT_KEY: function() {
-        return PAGE_SEGMENT_KEY;
-    },
-    addSearchParamsIfPageSegment: function() {
-        return addSearchParamsIfPageSegment;
-    },
-    isGroupSegment: function() {
-        return isGroupSegment;
-    },
-    isParallelRouteSegment: function() {
-        return isParallelRouteSegment;
-    }
-});
-function isGroupSegment(segment) {
-    // Use array[0] for performant purpose
-    return segment[0] === '(' && segment.endsWith(')');
-}
-function isParallelRouteSegment(segment) {
-    return segment.startsWith('@') && segment !== '@children';
-}
-function addSearchParamsIfPageSegment(segment, searchParams) {
-    const isPageSegment = segment.includes(PAGE_SEGMENT_KEY);
-    if (isPageSegment) {
-        const stringifiedQuery = JSON.stringify(searchParams);
-        return stringifiedQuery !== '{}' ? PAGE_SEGMENT_KEY + '?' + stringifiedQuery : PAGE_SEGMENT_KEY;
-    }
-    return segment;
-}
-const PAGE_SEGMENT_KEY = '__PAGE__';
-const DEFAULT_SEGMENT_KEY = '__DEFAULT__'; //# sourceMappingURL=segment.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/router/utils/app-paths.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    normalizeAppPath: null,
-    normalizeRscURL: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    normalizeAppPath: function() {
-        return normalizeAppPath;
-    },
-    normalizeRscURL: function() {
-        return normalizeRscURL;
-    }
-});
-const _ensureleadingslash = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/page-path/ensure-leading-slash.js [ssr] (ecmascript)");
-const _segment = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/segment.js [ssr] (ecmascript)");
-function normalizeAppPath(route) {
-    return (0, _ensureleadingslash.ensureLeadingSlash)(route.split('/').reduce((pathname, segment, index, segments)=>{
-        // Empty segments are ignored.
-        if (!segment) {
-            return pathname;
-        }
-        // Groups are ignored.
-        if ((0, _segment.isGroupSegment)(segment)) {
-            return pathname;
-        }
-        // Parallel segments are ignored.
-        if (segment[0] === '@') {
-            return pathname;
-        }
-        // The last segment (if it's a leaf) should be ignored.
-        if ((segment === 'page' || segment === 'route') && index === segments.length - 1) {
-            return pathname;
-        }
-        return pathname + "/" + segment;
-    }, ''));
-}
-function normalizeRscURL(url) {
-    return url.replace(/\.rsc($|\?)/, '$1');
-} //# sourceMappingURL=app-paths.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/router/utils/interception-routes.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    INTERCEPTION_ROUTE_MARKERS: null,
-    extractInterceptionRouteInformation: null,
-    isInterceptionRouteAppPath: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    INTERCEPTION_ROUTE_MARKERS: function() {
-        return INTERCEPTION_ROUTE_MARKERS;
-    },
-    extractInterceptionRouteInformation: function() {
-        return extractInterceptionRouteInformation;
-    },
-    isInterceptionRouteAppPath: function() {
-        return isInterceptionRouteAppPath;
-    }
-});
-const _apppaths = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/router/utils/app-paths.js [ssr] (ecmascript)");
-const INTERCEPTION_ROUTE_MARKERS = [
-    '(..)(..)',
-    '(.)',
-    '(..)',
-    '(...)'
-];
-function isInterceptionRouteAppPath(path) {
-    // TODO-APP: add more serious validation
-    return path.split('/').find((segment)=>INTERCEPTION_ROUTE_MARKERS.find((m)=>segment.startsWith(m))) !== undefined;
-}
-function extractInterceptionRouteInformation(path) {
-    let interceptingRoute, marker, interceptedRoute;
-    for (const segment of path.split('/')){
-        marker = INTERCEPTION_ROUTE_MARKERS.find((m)=>segment.startsWith(m));
-        if (marker) {
-            ;
-            [interceptingRoute, interceptedRoute] = path.split(marker, 2);
-            break;
-        }
-    }
-    if (!interceptingRoute || !marker || !interceptedRoute) {
-        throw Object.defineProperty(new Error("Invalid interception route: " + path + ". Must be in the format /<intercepting route>/(..|...|..)(..)/<intercepted route>"), "__NEXT_ERROR_CODE", {
-            value: "E269",
-            enumerable: false,
-            configurable: true
-        });
-    }
-    interceptingRoute = (0, _apppaths.normalizeAppPath)(interceptingRoute) // normalize the path, e.g. /(blog)/feed -> /feed
-    ;
-    switch(marker){
-        case '(.)':
-            // (.) indicates that we should match with sibling routes, so we just need to append the intercepted route to the intercepting route
-            if (interceptingRoute === '/') {
-                interceptedRoute = "/" + interceptedRoute;
-            } else {
-                interceptedRoute = interceptingRoute + '/' + interceptedRoute;
-            }
-            break;
-        case '(..)':
-            // (..) indicates that we should match at one level up, so we need to remove the last segment of the intercepting route
-            if (interceptingRoute === '/') {
-                throw Object.defineProperty(new Error("Invalid interception route: " + path + ". Cannot use (..) marker at the root level, use (.) instead."), "__NEXT_ERROR_CODE", {
-                    value: "E207",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            interceptedRoute = interceptingRoute.split('/').slice(0, -1).concat(interceptedRoute).join('/');
-            break;
-        case '(...)':
-            // (...) will match the route segment in the root directory, so we need to use the root directory to prepend the intercepted route
-            interceptedRoute = '/' + interceptedRoute;
-            break;
-        case '(..)(..)':
-            // (..)(..) indicates that we should match at two levels up, so we need to remove the last two segments of the intercepting route
-            const splitInterceptingRoute = interceptingRoute.split('/');
-            if (splitInterceptingRoute.length <= 2) {
-                throw Object.defineProperty(new Error("Invalid interception route: " + path + ". Cannot use (..)(..) marker at the root level or one level up."), "__NEXT_ERROR_CODE", {
-                    value: "E486",
-                    enumerable: false,
-                    configurable: true
-                });
-            }
-            interceptedRoute = splitInterceptingRoute.slice(0, -2).concat(interceptedRoute).join('/');
-            break;
-        default:
-            throw Object.defineProperty(new Error('Invariant: unexpected marker'), "__NEXT_ERROR_CODE", {
-                value: "E112",
-                enumerable: false,
-                configurable: true
-            });
-    }
-    return {
-        interceptingRoute,
-        interceptedRoute
-    };
-} //# sourceMappingURL=interception-routes.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/router/utils/is-dynamic.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-Object.defineProperty(exports, "isDynamicRoute", {
-    enumerable: true,
-    get: function() {
-        return isDynamicRoute;
-    }
-});
-const _interceptionroutes = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/router/utils/interception-routes.js [ssr] (ecmascript)");
-// Identify /.*[param].*/ in route string
-const TEST_ROUTE = /\/[^/]*\[[^/]+\][^/]*(?=\/|$)/;
-// Identify /[param]/ in route string
-const TEST_STRICT_ROUTE = /\/\[[^/]+\](?=\/|$)/;
-function isDynamicRoute(route, strict) {
-    if (strict === void 0) strict = true;
-    if ((0, _interceptionroutes.isInterceptionRouteAppPath)(route)) {
-        route = (0, _interceptionroutes.extractInterceptionRouteInformation)(route).interceptedRoute;
-    }
-    if (strict) {
-        return TEST_STRICT_ROUTE.test(route);
-    }
-    return TEST_ROUTE.test(route);
-} //# sourceMappingURL=is-dynamic.js.map
-}}),
-"[project]/node_modules/next/dist/shared/lib/router/utils/index.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-0 && (module.exports = {
-    getSortedRouteObjects: null,
-    getSortedRoutes: null,
-    isDynamicRoute: null
-});
-function _export(target, all) {
-    for(var name in all)Object.defineProperty(target, name, {
-        enumerable: true,
-        get: all[name]
-    });
-}
-_export(exports, {
-    getSortedRouteObjects: function() {
-        return _sortedroutes.getSortedRouteObjects;
-    },
-    getSortedRoutes: function() {
-        return _sortedroutes.getSortedRoutes;
-    },
-    isDynamicRoute: function() {
-        return _isdynamic.isDynamicRoute;
-    }
-});
-const _sortedroutes = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/router/utils/sorted-routes.js [ssr] (ecmascript)");
-const _isdynamic = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/router/utils/is-dynamic.js [ssr] (ecmascript)"); //# sourceMappingURL=index.js.map
 }}),
 "[project]/node_modules/next/dist/shared/lib/router/utils/route-matcher.js [ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -2373,23 +1628,6 @@ if ((typeof exports.default === 'function' || typeof exports.default === 'object
     module.exports = exports.default;
 } //# sourceMappingURL=add-locale.js.map
 }}),
-"[project]/node_modules/next/dist/server/route-modules/pages/module.compiled.js [ssr] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-var { m: module, e: exports } = __turbopack_context__;
-{
-if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-;
-else {
-    if ("TURBOPACK compile-time truthy", 1) {
-        if ("TURBOPACK compile-time truthy", 1) {
-            module.exports = __turbopack_context__.r("[externals]/next/dist/compiled/next-server/pages-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/pages-turbo.runtime.dev.js, cjs)");
-        } else //TURBOPACK unreachable
-        ;
-    } else //TURBOPACK unreachable
-    ;
-} //# sourceMappingURL=module.compiled.js.map
-}}),
 "[project]/node_modules/next/dist/server/route-modules/pages/vendored/contexts/router-context.js [ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -3169,4 +2407,4 @@ module.exports = __turbopack_context__.r("[project]/node_modules/next/dist/clien
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__8b0ce25b._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__2afbe767._.js.map

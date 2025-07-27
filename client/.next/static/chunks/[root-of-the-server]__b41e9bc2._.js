@@ -469,6 +469,15 @@ function triggerUpdate(msg) {
     }
 }
 }),
+"[project]/styles/categoriesButton.module.css [client] (css module)": ((__turbopack_context__) => {
+
+__turbopack_context__.v({
+  "categoriesIcon": "categoriesButton-module__sqbAuG__categoriesIcon",
+  "container": "categoriesButton-module__sqbAuG__container",
+  "dropdownArrow": "categoriesButton-module__sqbAuG__dropdownArrow",
+  "text": "categoriesButton-module__sqbAuG__text",
+});
+}),
 "[project]/components/categoriesButton.js [client] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -479,36 +488,62 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react/jsx-dev-runtime.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/link.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__ = __turbopack_context__.i("[project]/styles/categoriesButton.module.css [client] (css module)");
+;
 ;
 ;
 const CategoriesButton = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                className: "categories-icon"
-            }, void 0, false, {
+        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].container,
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].text,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: '/list.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].categoriesIcon
+                            }, void 0, false, {
+                                fileName: "[project]/components/categoriesButton.js",
+                                lineNumber: 11,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                children: "Categories"
+                            }, void 0, false, {
+                                fileName: "[project]/components/categoriesButton.js",
+                                lineNumber: 12,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/categoriesButton.js",
+                        lineNumber: 10,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: '/dropdownArrow.svg',
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$categoriesButton$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].dropdownArrow
+                    }, void 0, false, {
+                        fileName: "[project]/components/categoriesButton.js",
+                        lineNumber: 14,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 6,
-                columnNumber: 13
-            }, ("TURBOPACK compile-time value", void 0)),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                children: "Categories"
-            }, void 0, false, {
-                fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 7,
-                columnNumber: 13
-            }, ("TURBOPACK compile-time value", void 0)),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                className: "dropdown-arrow"
-            }, void 0, false, {
-                fileName: "[project]/components/categoriesButton.js",
-                lineNumber: 8,
-                columnNumber: 13
+                lineNumber: 9,
+                columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0))
-        ]
-    }, void 0, true, {
+        }, void 0, false, {
+            fileName: "[project]/components/categoriesButton.js",
+            lineNumber: 8,
+            columnNumber: 13
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
         fileName: "[project]/components/categoriesButton.js",
-        lineNumber: 5,
+        lineNumber: 7,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -523,11 +558,17 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/styles/navbar.module.css [client] (css module)": ((__turbopack_context__) => {
 
 __turbopack_context__.v({
+  "cartButton": "navbar-module__bk5_hG__cartButton",
+  "logInBtn": "navbar-module__bk5_hG__logInBtn",
   "logo": "navbar-module__bk5_hG__logo",
   "navbar": "navbar-module__bk5_hG__navbar",
   "searchBar": "navbar-module__bk5_hG__searchBar",
   "searchButton": "navbar-module__bk5_hG__searchButton",
   "searchInput": "navbar-module__bk5_hG__searchInput",
+  "signButtonsCont": "navbar-module__bk5_hG__signButtonsCont",
+  "signUpBtn": "navbar-module__bk5_hG__signUpBtn",
+  "wishlistButton": "navbar-module__bk5_hG__wishlistButton",
+  "wishlistCartCont": "navbar-module__bk5_hG__wishlistCartCont",
 });
 }),
 "[project]/components/navbar.js [client] (ecmascript)": ((__turbopack_context__) => {
@@ -612,13 +653,14 @@ const Navbar = ()=>{
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "wishlist-cart-cont",
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].wishlistCartCont,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "wishlist-button",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].wishlistButton,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                className: "wishlist-icon"
+                                src: '/wishlistIcon.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].wishlistIcon
                             }, void 0, false, {
                                 fileName: "[project]/components/navbar.js",
                                 lineNumber: 22,
@@ -638,10 +680,11 @@ const Navbar = ()=>{
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "cart-button",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].cartButton,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                className: "cart-icon"
+                                src: '/cartIcon.svg',
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].cartIcon
                             }, void 0, false, {
                                 fileName: "[project]/components/navbar.js",
                                 lineNumber: 26,
@@ -667,10 +710,10 @@ const Navbar = ()=>{
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "sign-buttons-cont",
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].signButtonsCont,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "sign-up-btn",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].signUpBtn,
                         children: "Sign up"
                     }, void 0, false, {
                         fileName: "[project]/components/navbar.js",
@@ -678,7 +721,7 @@ const Navbar = ()=>{
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "log-in-btn",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$client$5d$__$28$css__module$29$__["default"].logInBtn,
                         children: "Log in"
                     }, void 0, false, {
                         fileName: "[project]/components/navbar.js",
@@ -775,4 +818,4 @@ __turbopack_context__.r("[next]/entry/page-loader.ts { PAGE => \"[project]/pages
 }}),
 }]);
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__d3efa026._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__b41e9bc2._.js.map

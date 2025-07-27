@@ -97,45 +97,47 @@ const Navbar = ()=>{
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].searchBar,
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("form", {
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                            className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].searchInput,
-                            placeholder: "Search for products",
-                            type: "text"
-                        }, void 0, false, {
-                            fileName: "[project]/components/navbar.js",
-                            lineNumber: 13,
-                            columnNumber: 21
-                        }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                            className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].searchButton,
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                                src: "/search-button.png"
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("form", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].searchInput,
+                                placeholder: "Search for products",
+                                type: "text"
                             }, void 0, false, {
                                 fileName: "[project]/components/navbar.js",
-                                lineNumber: 15,
-                                columnNumber: 25
+                                lineNumber: 13,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$styles$2f$navbar$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].searchButton,
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
+                                    src: "/search-button.png"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/navbar.js",
+                                    lineNumber: 15,
+                                    columnNumber: 25
+                                }, ("TURBOPACK compile-time value", void 0))
+                            }, void 0, false, {
+                                fileName: "[project]/components/navbar.js",
+                                lineNumber: 14,
+                                columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
-                        }, void 0, false, {
-                            fileName: "[project]/components/navbar.js",
-                            lineNumber: 14,
-                            columnNumber: 21
-                        }, ("TURBOPACK compile-time value", void 0))
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/navbar.js",
-                    lineNumber: 12,
-                    columnNumber: 17
-                }, ("TURBOPACK compile-time value", void 0))
-            }, void 0, false, {
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/navbar.js",
+                        lineNumber: 12,
+                        columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$categoriesButton$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                        fileName: "[project]/components/navbar.js",
+                        lineNumber: 18,
+                        columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/navbar.js",
                 lineNumber: 11,
-                columnNumber: 13
-            }, ("TURBOPACK compile-time value", void 0)),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$categoriesButton$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
-                fileName: "[project]/components/navbar.js",
-                lineNumber: 19,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {

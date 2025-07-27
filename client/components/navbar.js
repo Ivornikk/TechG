@@ -15,21 +15,21 @@ const Navbar = () => {
                         <img src="/search-button.png"></img>
                     </button>
                 </form>
+                <CategoriesButton />
             </div>
-            <CategoriesButton />
-            <div className="wishlist-cart-cont">
-                <button className="wishlist-button">
-                    <img className="wishlist-icon"></img>
+            <div className={styles.wishlistCartCont}>
+                <button className={styles.wishlistButton}>
+                    <img src={'/wishlistIcon.svg'} className={styles.wishlistIcon}></img>
                     <p>Wishlist</p>
                 </button>
-                <button className="cart-button">
-                    <img className="cart-icon"></img>
+                <button className={styles.cartButton}>
+                    <img src={'/cartIcon.svg'} className={styles.cartIcon}></img>
                     <p>Cart</p>
                 </button>
             </div>
-            <div className="sign-buttons-cont">
-                <button className="sign-up-btn">Sign up</button>
-                <button className="log-in-btn">Log in</button>
+            <div className={styles.signButtonsCont}>
+                <button className={styles.signUpBtn}>Sign up</button>
+                <button className={styles.logInBtn}>Log in</button>
             </div>
         </nav>
     )
