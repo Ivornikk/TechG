@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Velislav/Desktop/Work/TechG/site/client/pages/users.js"],"sourcesContent":["import { useState } from \"react\"\r\nimport Link from \"next/link\"\r\n\r\nconst Index = () => {\r\n\r\n    const [users, setUsers] = useState([\r\n        {id: 1, name: \"Ivelin\"},\r\n        {id: 2, name: \"Ivan\"},\r\n    ])\r\n\r\n    return (\r\n        <div>\r\n            <h1>Users Page</h1>\r\n            <ul>\r\n                {users.map(user => \r\n                    <Link href={`/users/${user.id}`}>\r\n                        {user.name}\r\n                    </Link>\r\n                )}\r\n            </ul>\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default Index"],"names":[],"mappings":";;;;AAAA;AACA;;;;AAEA,MAAM,QAAQ;IAEV,MAAM,CAAC,OAAO,SAAS,GAAG,CAAA,GAAA,mGAAA,CAAA,WAAQ,AAAD,EAAE;QAC/B;YAAC,IAAI;YAAG,MAAM;QAAQ;QACtB;YAAC,IAAI;YAAG,MAAM;QAAM;KACvB;IAED,qBACI,qKAAC;;0BACG,qKAAC;0BAAG;;;;;;0BACJ,qKAAC;0BACI,MAAM,GAAG,CAAC,CAAA,qBACP,qKAAC,qHAAA,CAAA,UAAI;wBAAC,MAAM,CAAC,OAAO,EAAE,KAAK,EAAE,EAAE;kCAC1B,KAAK,IAAI;;;;;;;;;;;;;;;;;AAMlC;uCAEe","debugId":null}}]
-}

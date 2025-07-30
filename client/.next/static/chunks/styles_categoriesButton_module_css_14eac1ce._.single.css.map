@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/styles/categoriesButton.module.css"],"sourcesContent":[".container {\r\n    display: flex;\r\n    justify-content: end;\r\n    flex-direction: column;\r\n    margin-right: 50px;\r\n    width: 250px;\r\n    transform: translateX(-100px);\r\n}\r\n\r\n.text * {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.text div {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.text {\r\n    color: white;\r\n    bottom: 0;\r\n    padding: 0;\r\n    margin: 0;\r\n    font-size: 18px;\r\n    background-color: #2F2B68;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    border-top-right-radius: 10px;\r\n    border-top-left-radius: 10px;\r\n}\r\n\r\n.text img {\r\n    margin: 0 5px;\r\n}\r\n\r\n.categoriesIcon {\r\n    width: 38px;\r\n}\r\n\r\n.dropdownArrow {\r\n    width: 24px;\r\n}"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;AAKA;;;;;AAKA;;;;;;;;;;;;;;AAcA;;;;AAIA;;;;AAIA"}}]
-}

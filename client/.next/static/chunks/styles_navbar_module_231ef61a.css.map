@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Velislav/Desktop/Work/TechG/site/client/styles/navbar.module.css"],"sourcesContent":[".navbar {\r\n    background-color: #3B3678;\r\n    width: 100vw;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-around;\r\n}\r\n\r\n.logo {\r\n    margin: 15 0;\r\n}"],"names":[],"mappings":"AAAA;;;;;;;;AAQA","debugId":null}}]
-}

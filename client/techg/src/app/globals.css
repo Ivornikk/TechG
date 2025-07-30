@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #3B3678;
+  --search: #ECE6F0;
+  --button: #2F2B68;
+}
+
+@theme {
+  --color-brand: var(--brand);
+  --color-search: var(--search);
+  --color-button: var(--button);
+}
+
+body {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
