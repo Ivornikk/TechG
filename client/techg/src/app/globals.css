@@ -7,6 +7,9 @@
   --button: #2F2B68;
   --categories: #F0F0F0;
   --hovered-text-1: #666666;
+  --background: #F8F8F8;
+  --stroke: #d9d9d9;
+  --button-active: #666bbd;
 }
 
 @theme {
@@ -14,10 +17,14 @@
   --color-search: var(--search);
   --color-button: var(--button);
   --color-categories: var(--categories);
-  --color-hovered-text-1: var(--hovered-text-1)
+  --color-hovered-text-1: var(--hovered-text-1);
+  --color-background: var(--background);
+  --color-stroke: var(--stroke);
+  --color-button-active: var(--button-active);
 }
 
 body {
-  color: white;
+  background-color: #f8f8f8;
+  color: black;
   font-family: 'JejuGothic';
 }

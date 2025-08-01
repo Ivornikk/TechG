@@ -33,10 +33,10 @@ const Categories = () => {
     ]
 
     return (
-        <div className="mr-30 self-start justify-self-start flex-shrink-0 flex flex-col relative">
-            <div onClick={() => {setShown(!shown); setTypesShown(false)}} className="group cursor-pointer flex bg-button rounded-lg p-1 flex-shrink-0">
+        <div className="mr-30 self-start justify-self-start flex-shrink-0 flex flex-col relative ">
+            <div onClick={() => {setShown(!shown); setTypesShown(false)}} className="group translate-y-19 md:translate-y-0 w-[195px] md:w-57 cursor-pointer flex bg-button rounded-lg p-1 flex-shrink-0">
                 <img className='ml-2' src="/categories-icon.svg"></img>
-                <button className="ml-2 mr-25 cursor-pointer text-lg">Categories</button>
+                <button className="ml-2 mr-10 md:mr-18 md:mr-15 cursor-pointer text-lg">Categories</button>
                 <img className={`mr-2 ${shown ? '-rotate-90' : ''} transition`} src="/dropdown-arrow.svg"></img>
             </div>
             <div className={''}>
