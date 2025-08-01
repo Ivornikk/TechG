@@ -40,8 +40,8 @@ const Categories = () => {
                 <img className={`mr-2 ${shown ? '-rotate-90' : ''} transition`} src="/dropdown-arrow.svg"></img>
             </div>
             <div className={''}>
-                <div className=''>
-                    <ul className={`bg-categories text-black text-lg fixed pr-29 min-h-100 transition-all duration-300 origin-top ${shown ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
+                <div className=' '>
+                    <ul className={`bg-categories shadow-2xl text-black text-lg fixed pr-29 min-h-100 transition-all duration-300 origin-top ${shown ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
                         {
                             categories.map(elem => {
                                 return (
