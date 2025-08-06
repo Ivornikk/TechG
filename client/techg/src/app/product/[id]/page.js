@@ -1,112 +1,67 @@
-'use client'
-import { useState } from "react"
-import ProductVariations from "@/app/components/productVariations"
+import ProductCard from "@/app/components/productPage/productCard"
+import Nav from "@/app/components/productPage/nav"
+import DescriptionCard from "@/app/components/productPage/descriptionCard"
+import SpecsCard from "@/app/components/productPage/specsCard"
+import ReviewsCard from "@/app/components/productPage/reviewsCard"
 
 const ProductPage = () => {
-    const productSample = {
-        id: 5124,
-        name: '16.8V Brushless 75mm Angle Grinder Cutting Machine 1PC Cutting Blade 0.5A Charger 1500mAh Battery Current Display Function - two battery & EU plug',
-        brand: 'Bosch',
-        price: 50.99,
-        soldNum: 321,
-        rating: 4.7
-    }
 
-    const sampleVariations = [
-        {
-            id: 1,
-            name: 'color',
-            types: [
-                {
-                    id: 1,
-                    name: 'white'
-                },
-                {
-                    id: 2,
-                    name: 'dark'
-                },
-                {
-                    id: 4,
-                    name: 'Yellow'
-                },
-                {
-                    id: 5,
-                    name: 'Purple'
-                },
-                {
-                    id: 6,
-                    name: 'Red'
-                },
-            ]
-        },
-        {
-            id: 2,
-            name: 'RAM',
-            types: [
-                {
-                    id: 1,
-                    name: '32GB'
-                },
-                {
-                    id: 2,
-                    name: '64GB'
-                },
-                {
-                    id: 3,
-                    name: '128GB'
-                },
-            ]
-        },
+    const specs = [
+        {name: 'Product name: samsung Galaxy S25 Ultra', id: 1},
+        {name: 'Product size: 150x80x12mm', id: 2},
+        {name: 'Display size: 30x30 mm', id: 3},
+        {name: 'Color: White', id: 4},
+        {name: 'Material: ABS', id: 5},
+        {name: 'Functions: Zoom, thermo cam, geolocation track', id: 6},
+        {name: 'Display size: 30x30 mm', id: 7},
+        {name: 'Functions: Zoom, thermo cam, geolocation track', id: 8},
+        {name: 'Color: White', id: 9},
+        {name: 'Material: ABS', id: 10},
+        {name: 'Display size: 30x30 mm', id: 11},
+        {name: 'Color: White', id: 12},
+        {name: 'Material: ABS', id: 13},
     ]
 
-    const [quantity, setQuantity] = useState(0)
-    const [shippingFee, setShippingFee] = useState(3.12)
-    const favorites = 3
+    const features = [
+        {name: 'Test feature 1', id: 1},
+        {name: 'Test feature 2', id: 2},
+        {name: 'Test feature 3', id: 3},
+        {name: 'Test feature 4', id: 4},
+    ]
+
+    const pack = [
+        {name: 'Smartphone', id: 1},
+        {name: 'Charger', id: 2},
+        {name: 'Headphones', id: 3},
+        {name: 'Wire for charging', id: 4},
+    ]
+
+    const reviews = [
+        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 1},
+        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 2},
+        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 3},
+        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 4}
+    ]
+
+    const images = [
+        {id: 1, url: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg'},
+        {id: 2, url: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg'},
+        {id: 3, url: 'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg'},
+    ]
+
     return (
-            <div className="w-[1350px] m-auto mb-10 shadow-2xl">
-                <div className="p-5 bg-categories flex flex-row">
-                    <div>
-                        <div className="bg-gray-300 flex text-4xl w-[730px] h-[630px] items-center justify-between">
-                            <img className="w-[36px]" src="/arrow-left.svg"></img>
-                            Product Picture
-                            <img className="w-[36px]" src="/arrow-right.svg"></img>
-                        </div>
-                    </div>
-                    <div className="px-5 text-lg">
-                        <h2>{productSample.name}</h2>
-                        <h2 className="pt-3">Brand: {productSample.brand}</h2>
-                        <h1 className="text-brand text-4xl py-4">{productSample.price}$</h1>
-                        <hr className="border-stroke" />
-                        <ProductVariations variations={sampleVariations} />
-                        <div className="flex flex-row justify-between">
-                            <div className="float-center h-[174px]">
-                                <h1 className="text-3xl my-3">Quantity:</h1>
-                                <div className="text-[30px] w-[200px] flex items-center border border-stroke rounded-lg overflow-hidden">
-                                    <button onClick={() => quantity > 0 ? 
-                                                        setQuantity(quantity-1) : 
-                                                        setQuantity(0)}
-                                            className="cursor-pointer text-[30px] bg-contain">
-                                                <img src="/minus-icon.svg"></img>
-                                            </button>
-                                    <p className="px-10 border-x border-stroke w-[118px] flex justify-center">{quantity}</p>
-                                    <button onClick={() => {setQuantity(quantity + 1)}} 
-                                            className=" cursor-pointer"><img className="h-full" src="/plus-icon.svg"></img></button>
-                                </div>
-                                <div className="mt-3">
-                                    Shipping: {shippingFee}$
-                                </div>
-                            </div>
-                            <div className="flex flex-col mx-20 w-full">
-                                <button className="bg-stroke my-3 w-full h-[42px]">Add to cart</button>
-                                <button className="bg-stroke my-3 w-full h-[43px]">Buy now</button>
-                                <button className="bg-stroke my-3 w-full flex h-[43px] items-center justify-center">
-                                    <img className="mr-3" src="/heart-icon.svg"></img>
-                                    <div className="">{favorites}</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="w-[1350px] m-auto mb-10">
+                <ProductCard />
+                <Nav />
+                <DescriptionCard description={'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvi '}
+                images={images}
+                />
+                <SpecsCard
+                specs={specs}
+                features={features}
+                pack={pack}
+                />
+                <ReviewsCard reviews={reviews} />
             </div>
     )
 }

@@ -1,4 +1,8 @@
+import { useState } from "react"
+
 const ProductVariations = ({variations}) => {
+    
+
     return (
         <div className="mt-2 w-full">
             {
@@ -10,7 +14,7 @@ const ProductVariations = ({variations}) => {
                                 {
                                     variationType.types.map(type => {
                                         return (
-                                            <li className="min-w-[85px] min-h-[45px] flex flex-shrink-0 justify-center items-center bg-stroke mr-4 my-3 cursor-pointer hover:bg-button-active transition rounded-sm" key={type.id}>
+                                            <li className="min-w-[85px] min-h-[45px] flex flex-shrink-0 justify-center items-center bg-stroke mr-4 my-3 cursor-pointer hover:bg-button-active hover:text-white transition rounded-sm" key={type.id}>
                                                 <button className="cursor-pointer">{type.name}</button>
                                             </li>
                                         )
