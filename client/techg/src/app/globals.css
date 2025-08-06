@@ -1,11 +1,12 @@
 @import url('//fonts.googleapis.com/earlyaccess/jejugothic.css');
 @import "tailwindcss";
+@plugin 'tailwind-scrollbar';
 
 :root {
   --brand: #3B3678;
   --search: #ECE6F0;
   --button: #2F2B68;
-  --categories: #F0F0F0;
+  --categories: #F1F1F1;
   --hovered-text-1: #666666;
   --background: #F8F8F8;
   --stroke: #d9d9d9;

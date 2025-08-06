@@ -45,9 +45,7 @@ const Categories = () => {
                         {
                             categories.map(elem => {
                                 return (
-                                <Link href={'/'} key={elem.id}>
-                                    <li onClick={() => setTypesShown(!typesShown)} className='category hover:text-button transition ml-4 p-1' key={elem.id}>{elem.name}</li>
-                                </Link>
+                                    <li onClick={() => setTypesShown(!typesShown)} className='category cursor-pointer hover:text-button transition ml-4 p-1' key={elem.id}>{elem.name}</li>
                                 )
                             })
                         }
