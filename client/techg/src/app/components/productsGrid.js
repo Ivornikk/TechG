@@ -77,7 +77,7 @@ const ProductsGrid = () => {
                     })
                 }
             </ul>
-            <Pages pagesNum={15} />
+            <Pages pagesNum={10} />
         </div>
     )
 }
