@@ -11,6 +11,7 @@
   --background: #F8F8F8;
   --stroke: #d9d9d9;
   --button-active: #666bbd;
+  --gray-text: #636363;
 }
 
 @theme {
@@ -22,6 +23,7 @@
   --color-background: var(--background);
   --color-stroke: var(--stroke);
   --color-button-active: var(--button-active);
+  --color-gray-text: var(--gray-text);
 }
 
 body {

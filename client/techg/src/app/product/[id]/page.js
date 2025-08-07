@@ -37,10 +37,10 @@ const ProductPage = () => {
     ]
 
     const reviews = [
-        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 1},
-        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 2},
-        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 3},
-        {review: 'Awesome job! Great Product! Lorem ipsum', stars: 5, id: 4}
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '07.08.2025', user: 'Michael', stars: 5, id: 1},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '17.08.2022', user: 'Ivornikk', stars: 3, id: 2},
+        {text: 'User review, Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo e!', country: 'BG', date: '16.05.2023', user: 'I_Pisheff', stars: 3, id: 3},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 4, id: 4}
     ]
 
     const images = [
@@ -53,7 +53,7 @@ const ProductPage = () => {
             <div className="w-[1350px] m-auto mb-10">
                 <ProductCard />
                 <Nav />
-                <DescriptionCard description={'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvi '}
+                <DescriptionCard description={'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvi'}
                 images={images}
                 />
                 <SpecsCard
