@@ -14,7 +14,7 @@ const ProductCard = () => {
 
     const sampleVariations = [
         {
-            id: 1,
+            id: 0,
             name: 'color',
             types: [
                 {
@@ -26,21 +26,21 @@ const ProductCard = () => {
                     name: 'Black'
                 },
                 {
-                    id: 4,
+                    id: 3,
                     name: 'Yellow'
                 },
                 {
-                    id: 5,
+                    id: 4,
                     name: 'Purple'
                 },
                 {
-                    id: 6,
+                    id: 5,
                     name: 'Red'
                 },
             ]
         },
         {
-            id: 2,
+            id: 1,
             name: 'RAM',
             types: [
                 {
@@ -59,7 +59,7 @@ const ProductCard = () => {
         },
     ]
 
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
     const [shippingFee, setShippingFee] = useState(3.12)
     const favorites = 3
     return (
@@ -81,15 +81,22 @@ const ProductCard = () => {
                             <div className="float-center h-[174px]">
                                 <h1 className="text-3xl my-3">Quantity:</h1>
                                 <div className="text-[30px] w-[200px] flex items-center border border-stroke rounded-lg overflow-hidden">
-                                    <button onClick={() => quantity > 0 ? 
+                                    <button onClick={() => quantity > 1 ? 
                                                         setQuantity(quantity-1) : 
-                                                        setQuantity(0)}
+                                                        setQuantity(1)}
                                             className="cursor-pointer text-[30px] bg-contain">
                                                 <img src="/minus-icon.svg"></img>
                                             </button>
-                                    <p className="px-10 border-x border-stroke w-[118px] flex justify-center">{quantity}</p>
+                                    <input type="text"
+                                    className="px-10 border-x border-stroke w-full flex justify-center text-center"
+                                    value={quantity}
+                                    onChange={e => {isNaN(e.target.value) ? setQuantity(1) : setQuantity(Number(e.target.value))}}
+                                    maxLength={4}
+                                    ></input>
                                     <button onClick={() => {setQuantity(quantity + 1)}} 
-                                            className=" cursor-pointer"><img className="h-full" src="/plus-icon.svg"></img></button>
+                                            className=" cursor-pointer">
+                                                <img className="h-full" src="/plus-icon.svg"></img>
+                                            </button>
                                 </div>
                                 <div className="mt-3">
                                     Shipping: {shippingFee}$

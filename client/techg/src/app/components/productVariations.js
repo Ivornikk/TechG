@@ -1,7 +1,21 @@
 import { useState } from "react"
 
 const ProductVariations = ({variations}) => {
-    
+    const getFirstVariations = () => {
+        let res = []
+        variations.map(variation => {
+            res.push(variation.types[0].id)
+        })
+        return res
+    }
+    const [activeVariations, setActiveVariations] = useState(getFirstVariations())
+
+    const setActiveVariation = (variationTypeId, typeId) => {
+        setActiveVariations(prev => ({
+            ...prev,
+            [variationTypeId]: typeId
+        }))
+    }
 
     return (
         <div className="mt-2 w-full">
@@ -14,8 +28,12 @@ const ProductVariations = ({variations}) => {
                                 {
                                     variationType.types.map(type => {
                                         return (
-                                            <li className="min-w-[85px] min-h-[45px] flex flex-shrink-0 justify-center items-center bg-stroke mr-4 my-3 cursor-pointer hover:bg-button-active hover:text-white transition rounded-sm" key={type.id}>
-                                                <button className="cursor-pointer">{type.name}</button>
+                                            <li className={`min-w-[85px] min-h-[45px] flex flex-shrink-0 justify-center
+                                            items-center mr-4 my-3 cursor-pointer ${activeVariations[variationType.id] == type.id ? 'bg-button-active text-white' : ' bg-stroke hover:bg-button-active hover:text-white'}
+                                            transition rounded-sm`}
+                                            key={type.id}>
+                                                <button onClick={() => setActiveVariation(variationType.id, type.id)}
+                                                 className="cursor-pointer">{type.name}</button>
                                             </li>
                                         )
                                     })

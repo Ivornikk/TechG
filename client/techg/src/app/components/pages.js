@@ -23,7 +23,7 @@ const Pages = ({pagesNum}) => {
     return (
         <div className="flex flex-col items-end mr-20 mb-5">
             <div className="flex flex-row gap-4 float-right m-10 mr-0 mb-5">
-                { page != 1 &&
+                { page > 1 &&
                 <Link className="border border-stroke py-1 px-5 rounded-md hover:bg-button-active hover:text-white transition" href={`/?page=${page-1}`}>{'<'}</Link>
                 }
                 <Link className={`border border-stroke py-1 px-5 

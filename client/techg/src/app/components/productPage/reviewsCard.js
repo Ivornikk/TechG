@@ -10,6 +10,19 @@ const ReviewsCard = ({reviews}) => {
         return sum
     }
 
+    const ratingBar = (ratingAmount) => {
+        const width = ratingAmount / reviews.length * 100
+        console.log(width)
+
+        return (
+            <div className="h-[10px] bg-stroke w-full rounded-xl self-center">
+                <div className={`z-10 h-[10px] rounded-xl bg-button-active ${
+                    width == 0 ? 'bg-stroke' : `w-[${width}%]`
+                }`}></div>
+            </div>
+        )
+    }
+
     const stars = (rating) => {
         return (
             <div className="flex">
@@ -43,30 +56,26 @@ const ReviewsCard = ({reviews}) => {
                     </div>
                     {stars(rating)}
                 </div>
-                <div className="grid grid-rows-5 gap-1">
-                    <div className="flex">
+                <div className="grid grid-cols-5">
+                    <div className="grid gap-1 col-span-1">
                         <p>5 Stars:</p>
-                        <div className="h-[75%] bg-stroke w-50 mx-5 rounded-xl self-center"></div>
-                        <p>{countReviewsByRating(5)}</p>
-                    </div>
-                    <div className="flex">
                         <p>4 Stars:</p>
-                        <div className="h-[75%] bg-stroke w-50 mx-5 rounded-xl self-center"></div>
-                        <p>{countReviewsByRating(4)}</p>
-                    </div>
-                    <div className="flex">
                         <p>3 Stars:</p>
-                        <div className="h-[75%] bg-stroke w-50 mx-5 rounded-xl self-center"></div>
-                        <p>{countReviewsByRating(3)}</p>
-                    </div>
-                    <div className="flex">
                         <p>2 Stars:</p>
-                        <div className="h-[75%] bg-stroke w-50 mx-5 rounded-xl self-center"></div>
-                        <p>{countReviewsByRating(2)}</p>
+                        <p>1 Star:</p>
                     </div>
-                    <div className="flex">
-                        <p>1 Stars:</p>
-                        <div className="h-[75%] bg-stroke w-50 mx-5 rounded-xl self-center"></div>
+                    <div className="grid gap-1 col-span-3">
+                        {ratingBar(countReviewsByRating(5))}
+                        {ratingBar(countReviewsByRating(4))}
+                        {ratingBar(countReviewsByRating(3))}
+                        {ratingBar(countReviewsByRating(2))}
+                        {ratingBar(countReviewsByRating(1))}
+                    </div>
+                    <div className="grid gap-1 ml-2">
+                        <p>{countReviewsByRating(5)}</p>
+                        <p>{countReviewsByRating(4)}</p>
+                        <p>{countReviewsByRating(3)}</p>
+                        <p>{countReviewsByRating(2)}</p>
                         <p>{countReviewsByRating(1)}</p>
                     </div>
                 </div>
@@ -76,7 +85,7 @@ const ReviewsCard = ({reviews}) => {
                     </button>
                 </div>
             </div>
-            <select className="mr-5">
+            <select className="mr-5 cursor-pointer">
                 <option>1 star</option>
                 <option>2 star</option>
                 <option>3 star</option>
@@ -84,7 +93,7 @@ const ReviewsCard = ({reviews}) => {
                 <option>5 star</option>
             </select>
             <label>Sort by:</label>
-            <select>
+            <select className=" cursor-pointer">
                 <option>Highest rating</option>
                 <option>Most recent</option>
                 <option>Oldest</option>
@@ -94,13 +103,13 @@ const ReviewsCard = ({reviews}) => {
                     reviews.map(review => {
                         return (
                             <li key={review.id}>
-                                <div key={review.id} className="flex justify-start mt-5 mb-10">
-                                    <div className="grid grid-cols-2 w-[15%] mr-50">
+                                <div key={review.id} className="flex justify-between mt-5 mb-5">
+                                    <div className="grid grid-cols-2 w-[15%]">
                                         <div className="w-[65px] h-[65px] bg-stroke rounded-4xl row-span-2"></div>
                                         <h2 className="text-lg">{review.user}</h2>
                                         <h2 className="text-lg -translate-y-3">{review.country}</h2>
                                     </div>
-                                    <div className="flex flex-col ">
+                                    <div className="flex flex-col w-[70%]">
                                         <div className="flex items-center">
                                             {stars(review.stars)}
                                             <p className="text-gray-text ml-7 ">{review.date}</p>
