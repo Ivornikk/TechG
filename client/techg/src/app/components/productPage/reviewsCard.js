@@ -1,6 +1,15 @@
 const ReviewsCard = ({reviews}) => {
 
-    const rating = 3.75
+    const estimateAverageRating = () => {
+        let res = 0
+        reviews.map(review => {
+            res+=review.stars
+        })
+        res/=reviews.length
+        return res.toFixed(2)
+    }
+
+    const rating = estimateAverageRating()
 
     const countReviewsByRating = (rating) => {
         let sum = 0
@@ -13,12 +22,11 @@ const ReviewsCard = ({reviews}) => {
     const ratingBar = (ratingAmount) => {
         const width = ratingAmount / reviews.length * 100
         console.log(width)
-
         return (
             <div className="h-[10px] bg-stroke w-full rounded-xl self-center">
-                <div className={`z-10 h-[10px] rounded-xl bg-button-active ${
-                    width == 0 ? 'bg-stroke' : `w-[${width}%]`
-                }`}></div>
+                <div className={`z-10 h-[10px] rounded-xl bg-button-active
+                `}
+                style={{width: `${width}%`}}></div>
             </div>
         )
     }
@@ -51,7 +59,7 @@ const ReviewsCard = ({reviews}) => {
             <div className="grid grid-cols-3 gap-5 mt-10">
                 <div className="flex flex-col items-center">
                     <div className="flex items-end">
-                        <h1 className="text-[50px]">3,75</h1>
+                        <h1 className="text-[50px]">{rating}</h1>
                         <p className="-translate-y-3 text-lg">out of 5</p>
                     </div>
                     {stars(rating)}
@@ -106,8 +114,10 @@ const ReviewsCard = ({reviews}) => {
                                 <div key={review.id} className="flex justify-between mt-5 mb-5">
                                     <div className="grid grid-cols-2 w-[15%]">
                                         <div className="w-[65px] h-[65px] bg-stroke rounded-4xl row-span-2"></div>
-                                        <h2 className="text-lg">{review.user}</h2>
-                                        <h2 className="text-lg -translate-y-3">{review.country}</h2>
+                                        <div>
+                                            <h2 className="text-lg mb-2">{review.user}</h2>
+                                            <h2 className="text-lg -translate-y-3">{review.country}</h2>
+                                        </div>
                                     </div>
                                     <div className="flex flex-col w-[70%]">
                                         <div className="flex items-center">

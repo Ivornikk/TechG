@@ -37,9 +37,13 @@ const ProductPage = () => {
     ]
     const reviews = [
         {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '07.08.2025', user: 'Michael', stars: 5, id: 1},
-        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '17.08.2022', user: 'Ivornikk', stars: 3, id: 2},
-        {text: 'User review, Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo e!', country: 'BG', date: '16.05.2023', user: 'I_Pisheff123123', stars: 3, id: 3},
-        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 4, id: 4}
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '17.08.2022', user: 'Ivornikk', stars: 4, id: 2},
+        {text: 'User review, Lorem ipsum dolor sit amet consectetur adipiscing elitUser review, Lorem ipsum dolor sit amet consectetur adipiscing elitUser review, Lorem ipsum dolor sit amet consectetur adipiscing elitUser review, Lorem ipsum dolor sit amet consectetur adipiscing elitUser review, Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo e!', country: 'BG', date: '16.05.2023', user: 'I_Pisheff123123', stars: 4, id: 3},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 2, id: 4},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 2, id: 5},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 2, id: 6},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 2, id: 7},
+        {text: 'Awesome job! Great Product! Lorem ipsum', country: 'BG', date: '08.11.2025', user: 'Kawasaki_h2r', stars: 2, id: 8},
     ]
 
     const images = [
