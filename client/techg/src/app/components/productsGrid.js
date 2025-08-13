@@ -60,19 +60,21 @@ const ProductsGrid = () => {
                 {
                     productSample.map(product => {
                         return (
-                            <Link href={`/product/${product.id}`} key={product.id}><li className="text-black w-[300px] bg-white">
-                                <div className="w-[300px] h-[315px] flex items-center justify-center text-3xl bg-gray-300">
-                                    Product pic
-                                </div>
-                                <div>{product.name}</div>
-                                <div className="mt-5">${product.price}</div>
-                                <div className="flex">
-                                    <div className="mr-5">{product.soldNum} sold</div>
-                                    <div className="flex">
-                                        <img src="/star.svg"></img>{product.rating}
+                            <Link href={`/product/${product.id}`} key={product.id}>
+                                <li className="text-black w-[300px] bg-white hover:shadow-xl transition">
+                                    <div className="w-[300px] h-[315px] flex items-center justify-center text-3xl bg-gray-300">
+                                        Product pic
                                     </div>
-                                </div>
-                            </li></Link>
+                                    <div>{product.name}</div>
+                                    <div className="mt-5">${product.price}</div>
+                                    <div className="flex">
+                                        <div className="mr-5">{product.soldNum} sold</div>
+                                        <div className="flex">
+                                            <img src="/star.svg"></img>{product.rating}
+                                        </div>
+                                    </div>
+                                </li>
+                            </Link>
                         )
                     })
                 }
