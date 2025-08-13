@@ -8,7 +8,7 @@ const Cart = () => {
         { id: 3, quantity: 5, price: 17.05, shippingDate: 'Aug 24th 2025', name: 'Sony Xperia', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
         { id: 4, quantity: 4, price: 56.73, shippingDate: 'Aug 25th 2025', name: 'Iphone 15 Pro', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
     ]
-    products.filter(product => product.id != 2)
+    // products.filter(product => product.id != 2)
 
     const estimateTotalPrice = () => {
         let sum = 0
