@@ -1,6 +1,5 @@
-'use client'
-import { useState } from "react"
 import ProductVariations from "@/app/components/productVariations"
+import QuantityCounter from "../quantityCounter"
 
 const ProductCard = () => {
     const productSample = {
@@ -58,61 +57,41 @@ const ProductCard = () => {
             ]
         },
     ]
-
-    const [quantity, setQuantity] = useState(1)
-    const [shippingFee, setShippingFee] = useState(3.12)
     const favorites = 3
     return (
-                <div className="p-5 bg-categories flex flex-row shadow-xl">
-                    <div>
-                        <div className="bg-gray-300 flex text-4xl w-[730px] h-[630px] items-center justify-between">
-                            <img className="w-[36px]" src="/arrow-left.svg"></img>
-                            Product Picture
-                            <img className="w-[36px]" src="/arrow-right.svg"></img>
+        <div className="p-5 bg-categories flex flex-row shadow-xl">
+            <div>
+                <div className="bg-gray-300 flex text-4xl w-[730px] h-[630px] items-center justify-between">
+                    <img className="w-[36px]" src="/arrow-left.svg"></img>
+                    Product Picture
+                    <img className="w-[36px]" src="/arrow-right.svg"></img>
+                </div>
+            </div>
+            <div className="px-5 text-lg">
+                <h2>{productSample.name}</h2>
+                <h2 className="pt-3">Brand: {productSample.brand}</h2>
+                <h1 className="text-brand text-4xl py-4">{productSample.price}$</h1>
+                <hr className="border-stroke" />
+                <ProductVariations variations={sampleVariations} />
+                <div className="flex flex-row justify-between">
+                    <div className="float-center h-[174px]">
+                        <h1 className="text-3xl my-3">Quantity:</h1>
+                        <QuantityCounter defaultValue={5} />
+                        <div className="mt-3">
+                            Shipping: 3.15$
                         </div>
                     </div>
-                    <div className="px-5 text-lg">
-                        <h2>{productSample.name}</h2>
-                        <h2 className="pt-3">Brand: {productSample.brand}</h2>
-                        <h1 className="text-brand text-4xl py-4">{productSample.price}$</h1>
-                        <hr className="border-stroke" />
-                        <ProductVariations variations={sampleVariations} />
-                        <div className="flex flex-row justify-between">
-                            <div className="float-center h-[174px]">
-                                <h1 className="text-3xl my-3">Quantity:</h1>
-                                <div className="text-[30px] w-[200px] flex items-center border border-stroke rounded-lg overflow-hidden">
-                                    <button onClick={() => quantity > 1 ? 
-                                                        setQuantity(quantity-1) : 
-                                                        setQuantity(1)}
-                                            className="cursor-pointer text-[30px] bg-contain">
-                                                <img src="/minus-icon.svg"></img>
-                                            </button>
-                                    <input type="text"
-                                    className="px-10 border-x border-stroke w-full flex justify-center text-center"
-                                    value={quantity}
-                                    onChange={e => {isNaN(e.target.value) ? setQuantity(1) : setQuantity(Number(e.target.value))}}
-                                    maxLength={4}
-                                    ></input>
-                                    <button onClick={() => {setQuantity(quantity + 1)}} 
-                                            className=" cursor-pointer">
-                                                <img className="h-full" src="/plus-icon.svg"></img>
-                                            </button>
-                                </div>
-                                <div className="mt-3">
-                                    Shipping: {shippingFee}$
-                                </div>
-                            </div>
-                            <div className="flex flex-col mx-20 w-full">
-                                <button className="bg-stroke my-3 w-full h-[42px]">Add to cart</button>
-                                <button className="bg-stroke my-3 w-full h-[43px]">Buy now</button>
-                                <button className="bg-stroke my-3 w-full flex h-[43px] items-center justify-center">
-                                    <img className="mr-3" src="/heart-icon.svg"></img>
-                                    <div className="">{favorites}</div>
-                                </button>
-                            </div>
-                        </div>
+                    <div className="flex flex-col mx-20 w-full">
+                        <button className="bg-stroke my-3 w-full h-[42px]">Add to cart</button>
+                        <button className="bg-stroke my-3 w-full h-[43px]">Buy now</button>
+                        <button className="bg-stroke my-3 w-full flex h-[43px] items-center justify-center">
+                            <img className="mr-3" src="/heart-icon.svg"></img>
+                            <div className="">{favorites}</div>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
     )
 }
 
