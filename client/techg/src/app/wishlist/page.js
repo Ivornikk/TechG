@@ -24,11 +24,11 @@ const Wishlist = () => {
                                     <div className="flex items-center row-span-2 col-span-3">
                                         <h2 className="text-[1.4em]">${product.price}</h2>
                                     </div>
-                                    <button className="flex justify-end row-span-3">
-                                        <img
-                                            className="w-[30px] cursor-pointer"
-                                            src="/binIcon.svg"
-                                        ></img>
+                                    <button className="px-10 py-3 cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:bg-categories hover:text-button-active transition">
+                                        Add to cart
+                                    </button>
+                                    <button className="row-span-2 text-center text-brand cursor-pointer text-xl">
+                                        Remove
                                     </button>
                                 </li>
                             )

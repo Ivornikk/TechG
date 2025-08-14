@@ -21,7 +21,6 @@ const ReviewsCard = ({reviews}) => {
 
     const ratingBar = (ratingAmount) => {
         const width = ratingAmount / reviews.length * 100
-        console.log(width)
         return (
             <div className="h-[10px] bg-stroke w-full rounded-xl self-center">
                 <div className={`z-10 h-[10px] rounded-xl bg-button-active
