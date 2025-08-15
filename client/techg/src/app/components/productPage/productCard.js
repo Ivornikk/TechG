@@ -76,7 +76,7 @@ const ProductCard = () => {
                 <div className="flex flex-row justify-between">
                     <div className="float-center h-[174px]">
                         <h1 className="text-3xl my-3">Quantity:</h1>
-                        <QuantityCounter defaultValue={5} />
+                        <QuantityCounter defaultValue={1} />
                         <div className="mt-3">
                             Shipping: 3.15$
                         </div>
