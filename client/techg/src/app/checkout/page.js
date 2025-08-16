@@ -1,5 +1,5 @@
 import AddressCardCheckout from "../components/addressCardCheckout"
-
+import Link from "next/link"
 const Checkout = () => {
     const addresses = [
         {
@@ -132,7 +132,7 @@ const Checkout = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="bg-categories shadow-xl h-100 py-5 px-5 text-lg">
+                <div className="bg-categories shadow-xl h-100 py-5 px-5 text-lg flex flex-col">
                     <h2 className="text-[2em] text-center mb-5">Total</h2>
                     <div className="flex flex-row justify-between">
                         <div className="flex flex-col justify-between">
@@ -163,9 +163,10 @@ const Checkout = () => {
                         <h3>Total:</h3>
                         <h3>{estimateTotal()}$</h3>
                     </div>
-                    <button className="mt-10 bg-brand border border-brand text-white rounded-xl w-full py-4 text-xl hover:bg-categories hover:text-brand cursor-pointer transition">
+                    <Link href={'/payment'}
+                        className="mt-10 text-center bg-brand border border-brand text-white rounded-xl w-full py-4 text-xl hover:bg-categories hover:text-brand cursor-pointer transition">
                         Place order
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

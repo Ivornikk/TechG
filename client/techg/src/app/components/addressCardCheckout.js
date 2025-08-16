@@ -320,7 +320,7 @@ const AddressCardCheckout = ({addresses}) => {
             { id: 9, name: "Utena County" },
             { id: 10, name: "Vilnius County" }
         ]},
-        {country: 'Luxemburg', regions: [
+        {country: 'Luxembourg', regions: [
             { id: 1, name: "Capellen" },
             { id: 2, name: "Clervaux" },
             { id: 3, name: "Diekirch" },
