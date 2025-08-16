@@ -1,3 +1,5 @@
+import AddressCardCheckout from "../components/addressCardCheckout"
+
 const Checkout = () => {
     const addresses = [
         {
@@ -12,11 +14,6 @@ const Checkout = () => {
         },
         {
             id: 3, firstName: "Ivelin", lastName: "Metodiev", phone: '0895757519',
-            addressLine: 'Burgas, Meden Rudnik Vustanicheska 487', country: 'Bulgaria',
-            region: 'Burgas', City: 'Burgas', ZIP: '5000'
-        },
-        {
-            id: 4, firstName: "Ivelin", lastName: "Metodiev", phone: '0895757519',
             addressLine: 'Burgas, Meden Rudnik Vustanicheska 487', country: 'Bulgaria',
             region: 'Burgas', City: 'Burgas', ZIP: '5000'
         },
@@ -50,8 +47,8 @@ const Checkout = () => {
     ]
 
     const discounts = [
-        {name: 'New User Bonus', percentage: 10},
-        {name: 'Summer Discount', percentage: 5},
+        {id: 1, name: 'New User Bonus', percentage: 10},
+        {id: 2, name: 'Summer Discount', percentage: 5},
     ]
 
     const estimateSubtotal = () => {
@@ -79,36 +76,7 @@ const Checkout = () => {
             <h1 className="text-[2em] ml-20">Checkout</h1>
             <div className="grid grid-cols-4 gap-10 my-10 mx-20">
                 <div className="col-span-3">
-                    <div className="flex justify-between px-20 py-7 flex-col shadow-xl bg-categories">
-                        <div className="w-full flex justify-between">
-                            <h2 className="text-[1.5em]">Address</h2>
-                            <button className="text-button-active text-[1.2em] cursor-pointer hover:text-[1.4em] transition-all">
-                                + Add new address
-                            </button>
-                        </div>
-                        {
-                            <ul className="flex my-7 scrollbar-thin overflow-x-auto">
-                                {
-                                    addresses.map(address => {
-                                        return (
-                                            <li key={address.id}
-                                                className="w-68 flex-shrink-0">
-                                                <div>
-                                                    {address.firstName}, {address.lastName}, {address.phone} <br />
-                                                    {address.addressLine}, {address.country}, {address.region}, {address.ZIP} <br />
-                                                </div>
-                                                <div className="mt-3">
-                                                    <button className="px-3 py-2 cursor-pointer bg-button-active text-white border border-button-active rounded-xl hover:bg-categories hover:text-brand transition">
-                                                        Choose
-                                                    </button>
-                                                </div>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        }
-                    </div>
+                    <AddressCardCheckout addresses={addresses} />
                     <div className="flex gap-5 py-5 items-center px-20 shadow-xl bg-categories my-10">
                         <h2 className="text-[1.5em]">Payment method</h2>
                         <div className="border border-brand px-10 py-5 rounded-xl text-xl">
