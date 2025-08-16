@@ -30,8 +30,14 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="flex flex-col justify-start md:justify-evenly flex-shrink-0">
-                <button className="my-2 md:py-3 md:px-10 w-[105px] h-[38px] md:w-[150px] md:h-[55px] rounded border border-white cursor-pointer flex-shrink-0 hover:text-brand hover:bg-white transition">Sign up</button>
-                <button className="my-2 md:py-3 md:px-10 w-[105px] h-[38px] md:w-[150px] md:h-[55px] rounded border border-white cursor-pointer flex-shrink-0 hover:text-brand hover:bg-white transition">Log in</button>
+                <Link href={'/sign-up'}
+                className="my-2 md:py-3 flex items-center justify-center md:px-10 w-[105px] h-[38px] md:w-[150px] md:h-[55px] rounded border border-white cursor-pointer flex-shrink-0 hover:text-brand hover:bg-white transition">
+                    Sign up
+                </Link>
+                <Link href={'/log-in'} 
+                className="my-2 md:py-3 flex items-center justify-center md:px-10 w-[105px] h-[38px] md:w-[150px] md:h-[55px] rounded border border-white cursor-pointer flex-shrink-0 hover:text-brand hover:bg-white transition">
+                    Log in
+                </Link>
             </div>
         </nav>
     )
