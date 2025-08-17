@@ -31,11 +31,15 @@ const ProductVariations = ({variations}) => {
                                     variationType.types.map(type => {
                                         return (
                                             <li className={`min-w-[85px] min-h-[45px] flex flex-shrink-0 justify-center
-                                            items-center mr-4 my-3 cursor-pointer ${activeVariations[variationType.id] == type.id ? 'bg-button-active text-white' : ' bg-stroke hover:bg-button-active hover:text-white'}
+                                            items-center mr-4 my-3 cursor-pointer ${
+                                                activeVariations[variationType.id] == type.id ? 'bg-button-active text-white' : ' bg-stroke hover:bg-button-active hover:text-white'
+                                            }
                                             transition rounded-sm`}
                                             key={type.id}>
                                                 <button onClick={() => setActiveVariation(variationType.id, type.id)}
-                                                 className="cursor-pointer">{type.name}</button>
+                                                 className="cursor-pointer">
+                                                    {type.name}
+                                                </button>
                                             </li>
                                         )
                                     })

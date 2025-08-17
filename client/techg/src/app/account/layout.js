@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation"
 const Layout = ({children}) => {
 
     const pathname = usePathname()
-    console.log(pathname)
 
     return (
         <div className="grid grid-cols-4 gap-10 my-10 px-20">
@@ -17,16 +16,21 @@ const Layout = ({children}) => {
                     <li className={`hover:translate-x-5 transition ${pathname == '/account/settings' ? 'text-button-active' : ''}`}>
                         <Link className="flex items-center gap-3 text-xl" href={'/account/settings'}>
                         {
-                        pathname == '/account/settings' ?
-                        <img src="/SettingsIconActive.svg"></img> :
-                        <img src="/SettingsIcon.svg"></img>
+                            pathname == '/account/settings' ?
+                            <img src="/SettingsIconActive.svg"></img> :
+                            <img src="/SettingsIcon.svg"></img>
                         }
                         Settings
                         </Link>
                     </li>
                     <li className={`hover:translate-x-5 transition ${pathname == '/account/my-orders' ? 'text-button-active' : ''}`}>
                         <Link className="flex items-center gap-3 text-xl" href={'/account/my-orders'}>
-                        <img src="/ordersIcon.svg"></img>My Orders
+                        {
+                            pathname == '/account/my-orders' ?
+                            <img src="/ordersActiveIcon.svg"></img> :
+                            <img src="/ordersIcon.svg"></img>
+                        }
+                        My Orders
                         </Link>
                     </li>
                     <li className={`hover:translate-x-5 transition`}>
