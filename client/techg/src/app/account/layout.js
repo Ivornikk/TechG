@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link"
-import Settings from '@/../public/SettingsIcon.svg'
 import { usePathname } from "next/navigation"
 
 const Layout = ({children}) => {
@@ -45,10 +44,15 @@ const Layout = ({children}) => {
                     </li>
                     <li  className={`mb-50 hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
                         <Link className="flex items-center gap-3 text-xl" href={'/account/address-book'}>
-                        <img src="/AddressBookIcon.svg"></img>Address Book
+                        {
+                            pathname == '/account/address-book' ?
+                            <img src="/addressBookActiveIcon.svg"></img> :
+                            <img src="/AddressBookIcon.svg"></img>
+                        }
+                        Address Book
                         </Link>
                     </li>
-                    <li className="mb-5">
+                    <li className="mb-5 mb-50 hover:translate-x-5 transition justify-self-end">
                         <Link className="flex items-center gap-3 text-xl" href={'/'}>
                         <img src="/logOutIcon.svg"></img>Log Out
                         </Link>

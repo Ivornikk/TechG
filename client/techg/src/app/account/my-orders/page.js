@@ -33,8 +33,8 @@ const MyOrders = () => {
                 {
                     id: 1,
                     name: 'Xiaomi Smart Camera C500 Dual 4MP UHD,BHR8755EU' ,
-                    quantity: 2,
-                    price: 12.43,
+                    quantity: 5,
+                    price: 162.43,
                     shippingDate: 'Jun 26th 2025',
                     orderNo: 132857
                 },
