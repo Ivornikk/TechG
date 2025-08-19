@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import { StoreProvider } from "./store/StoreProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -8,6 +9,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
@@ -16,9 +18,11 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=width-device, initial-scale=1.0" />
       </head>
       <body className="pt-50">
-        <Navbar />
-        {children}
-        <Footer />
+        <StoreProvider>
+          <Navbar />
+            {children}
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

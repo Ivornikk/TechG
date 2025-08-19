@@ -10,7 +10,8 @@ const Footer = () => {
     useEffect(() => {
         const checkHeight = () => {
             const contentHeight = document.documentElement.scrollHeight
-            const screenHeight = window.innerHeight
+            const footerHeight = document.querySelector('footer').getBoundingClientRect().height
+            const screenHeight = window.innerHeight - footerHeight
             setIsShort(contentHeight <= screenHeight)
         }
 

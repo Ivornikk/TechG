@@ -1,6 +1,5 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
-import { InvalidConnectionError } from "sequelize"
 const {Order, Product, OrderProduct} =  models
 
 class OrderController {
