@@ -1,5 +1,6 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
+import { createProduct, searchProducts } from "../services/productService.mjs"
 const {Product, Group, Type, Category} =  models
 
 class ProductController {
@@ -25,6 +26,17 @@ class ProductController {
             next(ApiError.badRequest(err.message))
         }
     }
+
+    async search(req, res, next) {
+        try {
+            const {q} = req.query
+            const results = await searchProducts(q)
+            res.json(results)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async create(req, res, next) {
         const {
             title,
@@ -35,7 +47,7 @@ class ProductController {
             groupId
         } = req.body
         try {
-            const product = await Product.create({
+            const product = await createProduct({
                 title: title, 
                 price: price, 
                 description: description, 

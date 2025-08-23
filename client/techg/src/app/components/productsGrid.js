@@ -14,7 +14,6 @@ const ProductsGrid = () => {
             store.productStore.setProducts(data.rows)
             store.productStore.setTotalProductsCount(data.count)
         })
-
     }, [])
 
     return (

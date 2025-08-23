@@ -1,6 +1,8 @@
 import Categories from "./categories"
 import Link from "next/link"
 import NavbarAuthButtons from "./navbarAuthButtons"
+import { redirect } from "next/navigation"
+import SearchPanel from "./searchPanel"
 
 const Navbar = () => {
 
@@ -9,12 +11,7 @@ const Navbar = () => {
             <Link className="flex-shrink-0 -translate-x-40 -translate-y-5 md:-translate-x-0 md:-translate-y-0" href={'/'}><img src="/nav-logo.svg" alt="Logo" className="py-5 h-auto md:w-[178px] cursor-pointer" width={150}></img></Link>
             <div className="flex flex-col justify-between w-full fixed md:relative">
                 <div className="translate-y-16">
-                    <form className="sm:ml-30">
-                        <div className="flex items-center">
-                            <input className="bg-search h-[40px] md:h-[56px] rounded-4xl px-5 xl:min-w-200 xl:flex-1 lg:w-130 md:w-70 text-black p-3 outline-none" placeholder="Search for products" type="text" />
-                            <button className="cursor-pointer -translate-x-[50px] flex-shrink-0 mx-4"><img src="/search-icon.svg"></img></button>
-                        </div>
-                    </form>
+                    <SearchPanel />
                 </div>
                 <Categories />
             </div>
