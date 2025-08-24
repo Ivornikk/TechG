@@ -1,19 +1,39 @@
 'use client'
 import { observer } from "mobx-react-lite";
-import { useStore } from "../store/StoreProvider";
+import { useContext, useState } from "react";
 import Link from "next/link";
+import { StoreContext } from "../store/StoreProvider";
+import { logIn } from "../http/UserAPI";
 
 const LogInForm = observer(() => {
-    const {userStore} = useStore()
+    const {user} = useContext(StoreContext)
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleLogin = async () => {
+        try {
+            await logIn(email, password)
+            user.setUser(user)
+            user.setIsAuth(true)
+        } catch (err) {
+            alert(err.response.data.message)
+        }
+    }
 
     return (
         <div>
             <form className="flex flex-col gap-5 mx-50"
                 onSubmit={e => e.preventDefault()}>
-                <input className="py-1 border border-brand" placeholder="Username" />
-                <input type="password" className="py-1 border border-brand font-sans" placeholder="Password" />
+                <input className="py-1 border border-brand" 
+                    placeholder="Email"
+                    onChange={e => setEmail(e.target.value)}/>
+                <input type="password" 
+                    className="py-1 border border-brand font-sans" 
+                    placeholder="Password"
+                    onChange={e => setPassword(e.target.value)} />
                 <button className="mt-5 text-center justify-self-end bg-brand border border-brand text-white rounded-xl w-full py-4 text-xl hover:bg-categories hover:text-brand cursor-pointer transition"
-                    onClick={() => userStore.setIsAuth(true)}>
+                    onClick={handleLogin}>
                     Log in
                 </button>
             </form>
