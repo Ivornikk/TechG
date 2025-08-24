@@ -1,11 +1,12 @@
 'use client'
 import { observer } from "mobx-react-lite"
-import { useStore } from "../store/StoreProvider"
+import { useContext } from "react"
 import Link from "next/link"
+import { StoreContext } from "../store/StoreProvider"
 
 const NavbarAuthButtons = observer(() => {
-    const { userStore } = useStore()
-
+    const storeContext = useContext(StoreContext)
+    const { user } = storeContext
     const currencies = [
         { id: 1, name: "EUR" },
         { id: 2, name: "GBP" },
@@ -41,7 +42,7 @@ const NavbarAuthButtons = observer(() => {
     return (
         <>
             {
-                userStore.isAuth ?
+                user.isAuth ?
                     <div className="flex flex-col items-center justify-start md:justify-evenly flex-shrink-0">
                         <Link href={'/account/settings'}
                             className="cursor-pointer">

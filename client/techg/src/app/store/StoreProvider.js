@@ -1,19 +1,23 @@
 'use client'
-import React, {createContext, useContext} from "react"
+
+import React, {createContext} from "react"
 import { userStore } from "./userStore"
 import { productStore } from "./productStore"
 
-const StoreContext = createContext({ 
-    userStore, 
-    productStore 
+export const StoreContext = createContext({
+    userStore,
+    productStore
 })
 
-export const StoreProvider = ({children}) => {
+const StoreProvider = ({children}) => {
     return (
-        <StoreContext.Provider value={ {userStore, productStore} }>
+        <StoreContext.Provider value={{
+            user: userStore,
+            product: productStore,
+        }}>
             {children}
         </StoreContext.Provider>
     )
 }
 
-export const useStore = () => useContext(StoreContext)
+export default StoreProvider

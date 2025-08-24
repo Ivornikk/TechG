@@ -3,9 +3,9 @@ import { makeAutoObservable } from "mobx"
 
 class ProductStore {
     constructor() {
-        makeAutoObservable(this)
         this._products = []
         this._totalProductsCount = 0
+        makeAutoObservable(this)
     }
 
     setProducts(products) {
