@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import StoreProvider from "./store/StoreProvider";
+import Loader from "./components/loader";
 
 export const metadata = {
   title: "TechG | Shop with pleasure",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="pt-50">
         <StoreProvider>
+          <Loader />
           <Navbar />
             {children}
           <Footer />

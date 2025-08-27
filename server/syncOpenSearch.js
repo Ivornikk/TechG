@@ -6,17 +6,16 @@ import sequelize from './db.mjs'
 
 async function syncProducts() {
   await sequelize.authenticate()
-  await sequelize.sync({allter: false})
 
   const products = await Product.findAll()
   const body = products.flatMap(product => [
     { index: { _index: 'products', _id: product.id.toString() } },
     {
       title: product.title,
-      price: product.price,
       description: product.description
     }
   ])
+  console.log(products)
   const { body: bulkResponse } = await osClient.bulk({ refresh: true, body })
 
   if (bulkResponse.errors) {

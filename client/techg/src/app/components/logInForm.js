@@ -5,6 +5,7 @@ import Link from "next/link";
 import { StoreContext } from "../store/StoreProvider";
 import { logIn } from "../http/UserAPI";
 
+
 const LogInForm = observer(() => {
     const {user} = useContext(StoreContext)
 
@@ -12,6 +13,8 @@ const LogInForm = observer(() => {
     const [password, setPassword] = useState('')
 
     const handleLogin = async () => {
+        setEmail('')
+        setPassword('')
         try {
             await logIn(email, password)
             user.setUser(user)
@@ -26,9 +29,11 @@ const LogInForm = observer(() => {
             <form className="flex flex-col gap-5 mx-50"
                 onSubmit={e => e.preventDefault()}>
                 <input className="py-1 border border-brand" 
+                    value={email}
                     placeholder="Email"
                     onChange={e => setEmail(e.target.value)}/>
                 <input type="password" 
+                    value={password}
                     className="py-1 border border-brand font-sans" 
                     placeholder="Password"
                     onChange={e => setPassword(e.target.value)} />
@@ -45,3 +50,4 @@ const LogInForm = observer(() => {
 })
 
 export default LogInForm
+

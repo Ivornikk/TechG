@@ -8,12 +8,12 @@ const $authHost = axios.create({
     baseURL: 'http://localhost:5000/'
 })
 
-const authIntroceptor = config => {
+const authInterceptor = config => {
     config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
     return config
 }
 
-$authHost.interceptors.request.use(authIntroceptor)
+$authHost.interceptors.request.use(authInterceptor)
 
 export {
     $host,

@@ -6,6 +6,7 @@ import sequelize from './db.mjs'
 import cors from 'cors'
 import './models/models.mjs'
 import errorhandler from "./middlewares/ErrorHandlingMiddleware.mjs"
+import authMiddleware from './middlewares/authMiddleware.mjs'
 
 const App = express()
 

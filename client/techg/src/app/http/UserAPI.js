@@ -1,4 +1,4 @@
-import { $host } from ".";
+import { $host, $authHost } from ".";
 import { jwtDecode } from "jwt-decode";
 
 export const signUp = async ({
@@ -39,7 +39,7 @@ export const logIn = async (email, password) => {
 }
 
 export const auth = async () => {
-    const {data} = await $host.get('api/user/auth' )
+    const {data} = await $authHost.get('api/user/auth' )
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }

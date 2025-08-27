@@ -62,8 +62,8 @@ class ProductController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Product.destroy({where: id})
+        const {id} = req.body
+        let deleteCount = Product.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }

@@ -65,8 +65,13 @@ class UserController {
     }
     
     async check(req, res, next) {
-        const token = generateJwtToken(req.user.id, req.user.username, req.user.email, req.user.role)
-        return res.json({token})    
+        try {
+            console.log('User req: ', req.user)
+            const token = generateJwtToken(req.user.id, req.user.username, req.user.email, req.user.role)
+            return res.json({token})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
 
     async edit(req, res, next) {
