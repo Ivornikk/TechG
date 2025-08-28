@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt'
 import ApiError from '../errors/ApiError.mjs'
 import jwt from 'jsonwebtoken'
 
-const generateJwtToken = (id, username, email, role) => {
+const generateJwtToken = (id, username, email, role, pfp) => {
     return jwt.sign(
-        {id, username, email, role},
+        {id, username, email, role, pfp},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -45,8 +45,7 @@ class UserController {
             avatar,
             createdAt: null
         })
-        console.log('FLAG')
-        const token = generateJwtToken(user.id, user.username, user.email, user.role)
+        const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
         return res.json({token})
     }
     
@@ -60,14 +59,13 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.badRequest('Incorrect password'))
         }
-        const token = generateJwtToken(user.id, user.username, user.email, user.role)
+        const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
         return res.json({token})
     }
     
     async check(req, res, next) {
         try {
-            console.log('User req: ', req.user)
-            const token = generateJwtToken(req.user.id, req.user.username, req.user.email, req.user.role)
+            const token = generateJwtToken(req.user.id, req.user.username, req.user.email, req.user.role, req.user.avatar)
             return res.json({token})
         } catch (err) {
             next(ApiError.badRequest(err.message))

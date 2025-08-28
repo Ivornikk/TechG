@@ -2,10 +2,18 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useContext } from "react"
+import { StoreContext } from "../store/StoreProvider"
 
 const Layout = ({children}) => {
-
+    const { user } = useContext(StoreContext)
     const pathname = usePathname()
+
+    const LogOut = () => {
+        user.setUser({})
+        user.setIsAuth(false)
+        localStorage.removeItem('token')
+    }
 
     return (
         <div className="grid grid-cols-4 gap-10 my-10 px-20">
@@ -42,7 +50,7 @@ const Layout = ({children}) => {
                         <img src="/cartIconAcc.svg"></img>Shopping Cart
                         </Link>
                     </li>
-                    <li  className={`mb-50 hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
+                    <li  className={`hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
                         <Link className="flex items-center gap-3 text-xl" href={'/account/address-book'}>
                         {
                             pathname == '/account/address-book' ?
@@ -52,10 +60,18 @@ const Layout = ({children}) => {
                         Address Book
                         </Link>
                     </li>
-                    <li className="mb-5 mb-50 hover:translate-x-5 transition justify-self-end">
-                        <Link className="flex items-center gap-3 text-xl" href={'/'}>
-                        <img src="/logOutIcon.svg"></img>Log Out
+                    <li  className={`mb-50 hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
+                        <Link className="flex items-center gap-3 text-xl"
+                            href={'/admin/dashboard'}>
+                        <img src="/admin.svg" className="w-[48px]"></img>
+                        Admin page
                         </Link>
+                    </li>
+                    <li className="mb-5 hover:translate-x-5 transition justify-self-end">
+                        <button className="flex items-center gap-3 text-xl cursor-pointer"
+                            onClick={() => LogOut()}>
+                        <img src="/logOutIcon.svg"></img>Log Out
+                        </button>
                     </li>
                 </ul>
             </div>

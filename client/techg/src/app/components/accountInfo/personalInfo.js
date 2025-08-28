@@ -13,20 +13,11 @@ const PersonalInfo = ({info}) => {
                     {
                         editState ?
                         <form className="flex flex-col gap-5 justify-between">
-                            {
-                                info.map(el => {
-                                    return ( el.id !=3 &&
-                                        <div key={el.id}
-                                            className="flex flex-col justify-between gap-2">
-                                            <label className="text-label-gray">
-                                                New {el.name}
-                                            </label>
-                                            <input className="py-1 border border-brand"
-                                                placeholder="" />
-                                        </div>
-                                    )
-                                })
-                            }
+                            <label className="text-label-gray">
+                                New username
+                            </label>
+                            <input className="py-1 border border-brand"
+                                placeholder="" />
                             <button className="bg-button-active text-white border border-button-active py-3 cursor-pointer transition hover:text-button-active hover:bg-categories rounded-xl"
                                 onClick={() => setEditState(!editState)}>
                                 Confirm
