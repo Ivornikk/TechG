@@ -1,10 +1,10 @@
 import models from "../models/models.mjs"
-const {Group} =  models
+const {Group, Type} =  models
 
 class GroupController {
     async getAll(req, res, next) {
         try {
-            const groups = await Group.findAndCountAll()
+            const groups = await Group.findAndCountAll({include: Type})
             return res.json(groups)
         }
         catch (err) {
@@ -22,8 +22,8 @@ class GroupController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Group.destroy({where: id})
+        const {id} = req.body
+        const deleteCount = Group.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }

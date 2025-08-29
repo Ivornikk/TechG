@@ -1,11 +1,11 @@
 import ApiError from "../errors/ApiError.mjs"
 import models from "../models/models.mjs"
-const {Type, Group} =  models
+const {Type, Group, Category} =  models
 
 class TypeController {
     async getAll(req, res, next) {
         try {
-            const types = await Type.findAndCountAll()
+            const types = await Type.findAndCountAll({include: Category})
             return res.json(types)
         }
         catch (err) {
@@ -33,8 +33,9 @@ class TypeController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Type.destroy({where: id})
+        const {id} = req.body
+        console.log("ID: ", id)
+        const deleteCount = Type.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }

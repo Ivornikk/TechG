@@ -152,8 +152,8 @@ Rating.belongsTo(Product)
 Wishlist.belongsToMany(Product, {through: WishlistProduct})
 Product.belongsToMany(Wishlist, {through: WishlistProduct})
 
-Basket.belongsToMany(Product, {through: WishlistProduct})
-Product.belongsToMany(Basket, {through: WishlistProduct})
+Basket.belongsToMany(Product, {through: BasketProduct})
+Product.belongsToMany(Basket, {through: BasketProduct})
 
 Product.hasOne(Promotion)
 Promotion.belongsTo(Product)

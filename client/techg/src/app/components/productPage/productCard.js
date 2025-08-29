@@ -1,7 +1,10 @@
+'use client'
 import ProductVariations from "@/app/components/productVariations"
 import QuantityCounter from "../quantityCounter"
+import ProductPicturesCarousel from "../productPicturesCarousel"
 
 const ProductCard = () => {
+
     const productSample = {
         id: 5124,
         name: '16.8V Brushless 75mm Angle Grinder Cutting Machine 1PC Cutting Blade 0.5A Charger 1500mAh Battery Current Display Function - two battery & EU plug',
@@ -61,11 +64,7 @@ const ProductCard = () => {
     return (
         <div className="p-5 bg-categories flex flex-row shadow-xl">
             <div>
-                <div className="bg-gray-300 flex text-4xl w-[730px] h-[630px] items-center justify-between">
-                    <img className="w-[36px]" src="/arrow-left.svg"></img>
-                    Product Picture
-                    <img className="w-[36px]" src="/arrow-right.svg"></img>
-                </div>
+                <ProductPicturesCarousel /> 
             </div>
             <div className="px-5 text-lg">
                 <h2>{productSample.name}</h2>
