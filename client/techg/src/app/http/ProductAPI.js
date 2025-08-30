@@ -12,6 +12,11 @@ export const fetchProducts = async ({page, limit = 5}) => {
     return data
 }
 
+export const fetchOneProduct = async id => {
+    const {data} = await $host.get(`api/product/${id}`)
+    return data
+}
+
 export const searchProducts = async ({page, limit=5, q}) => {
     const {data} = await $host.get(`api/product/search?q=${q}`, {params: {
         page, limit

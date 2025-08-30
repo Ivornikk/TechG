@@ -1,7 +1,8 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
 import { createProduct, searchProducts } from "../services/productService.mjs"
-const {Product, Group, Type, Category} =  models
+import { v4 } from "uuid"
+const {Product, Group} = models
 
 class ProductController {
     async getAll(req, res, next) {
@@ -42,17 +43,31 @@ class ProductController {
             title,
             price,
             description,
-            descriptionImages,
-            previewImage,
             groupId
         } = req.body
+        const {previewImage} = req.files
+        const {descriptionImages} = req.files
+
+        let previewFileName = v4() + '.jpg'
+        let descriptionImagesNames = []
+        
+        previewImage.mv(`${process.cwd()}\\static\\${previewFileName}`)
+
+        for (let i = 0; i < descriptionImages.length; i++)
+            descriptionImagesNames.push(v4() + '.jpg')
+        descriptionImages.map((image, index) => {
+            image.mv(`${process.cwd()}\\static\\${descriptionImagesNames[index]}`)
+        })
+        
+        descriptionImagesNames = descriptionImagesNames.toString()
+
         try {
             const product = await createProduct({
                 title: title, 
                 price: price, 
                 description: description, 
-                descriptionImages: descriptionImages,
-                preview_image: previewImage,
+                description_images: descriptionImagesNames,
+                preview_image: previewFileName,
                 groupId: groupId
             })
             return res.json(product)

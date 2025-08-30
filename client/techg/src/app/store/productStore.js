@@ -3,12 +3,22 @@ import { makeAutoObservable } from "mobx"
 
 class ProductStore {
     constructor() {
+        this._currentProduct = {}
+        this._pictures = []
         this._products = []
         this._categories = []
         this._types = []
         this._groups = []
         this._totalProductsCount = 0
         makeAutoObservable(this)
+    }
+
+    setCurrentProduct(product) {
+        this._currentProduct = product
+    }
+
+    setPictures(pictures) {
+        this._pictures = pictures
     }
 
     setProducts(products) {
@@ -29,6 +39,14 @@ class ProductStore {
 
     setGroups(groups) {
         this._groups = groups
+    }
+
+    get currentProduct() {
+        return this._currentProduct
+    }
+
+    get pictures() {
+        return this._pictures
     }
 
     get products() {

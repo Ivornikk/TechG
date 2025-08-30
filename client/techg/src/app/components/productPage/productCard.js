@@ -2,17 +2,22 @@
 import ProductVariations from "@/app/components/productVariations"
 import QuantityCounter from "../quantityCounter"
 import ProductPicturesCarousel from "../productPicturesCarousel"
+import { useParams } from "next/navigation"
+import { fetchOneProduct } from "@/app/http/ProductAPI"
+import { useContext, useEffect } from "react"
+import { StoreContext } from "@/app/store/StoreProvider"
+import { observer } from "mobx-react-lite"
 
-const ProductCard = () => {
+const ProductCard = observer(() => {
+    const {id} = useParams()
+    const {product} = useContext(StoreContext)
 
-    const productSample = {
-        id: 5124,
-        name: '16.8V Brushless 75mm Angle Grinder Cutting Machine 1PC Cutting Blade 0.5A Charger 1500mAh Battery Current Display Function - two battery & EU plug',
-        brand: 'Bosch',
-        price: 50.99,
-        soldNum: 321,
-        rating: 4.7
-    }
+    useEffect(() => {
+        fetchOneProduct(id).then(data => {
+            product.setCurrentProduct(data)
+            product.setPictures(data.description_images.split(','))
+        })
+    }, [])
 
     const sampleVariations = [
         {
@@ -64,12 +69,12 @@ const ProductCard = () => {
     return (
         <div className="p-5 bg-categories flex flex-row shadow-xl">
             <div>
-                <ProductPicturesCarousel /> 
+                <ProductPicturesCarousel pictures={product.pictures} />
             </div>
             <div className="px-5 text-lg">
-                <h2>{productSample.name}</h2>
-                <h2 className="pt-3">Brand: {productSample.brand}</h2>
-                <h1 className="text-brand text-4xl py-4">{productSample.price}$</h1>
+                <h2>{product.currentProduct.title}</h2>
+                <h2 className="pt-3">Brand: </h2>
+                <h1 className="text-brand text-4xl py-4">{product.currentProduct.price}$</h1>
                 <hr className="border-stroke" />
                 <ProductVariations variations={sampleVariations} />
                 <div className="flex flex-row justify-between">
@@ -92,6 +97,6 @@ const ProductCard = () => {
             </div>
         </div>
     )
-}
+})
 
 export default ProductCard

@@ -6,6 +6,10 @@ import useEmblaCarousel from "embla-carousel-react";
 const ProductPicturesCarousel = ({pictures}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
+  pictures = pictures.flatMap((pic, index) => {return{id: index, name: pic}})
+
+  console.log(pictures)
+
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -21,10 +25,12 @@ const ProductPicturesCarousel = ({pictures}) => {
         <div className="flex">
             {
             pictures.map(pic => {
-                <div className="min-w-full h-64 flex items-center justify-center bg-red-400 text-white text-2xl"
-                    key={pic.id}>
-                    <img src={`http://localhost:5000/${pic.name}`}></img>
-                </div>
+                return (
+                  <div className="min-w-full h-full flex items-center justify-center bg-red-400 text-white text-2xl"
+                      key={pic.id}>
+                      <img src={`http://localhost:5000/${pic.name}`}></img>
+                  </div>
+                )
             })
             }
         </div>
@@ -32,13 +38,13 @@ const ProductPicturesCarousel = ({pictures}) => {
 
       <button
         onClick={scrollPrev}
-        className="absolute top-1/2 left-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow"
+        className="absolute top-1/2 left-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer"
       >
         ‹
       </button>
       <button
         onClick={scrollNext}
-        className="absolute top-1/2 right-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow"
+        className="absolute top-1/2 right-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer"
       >
         ›
       </button>

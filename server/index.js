@@ -6,12 +6,15 @@ import sequelize from './db.mjs'
 import cors from 'cors'
 import './models/models.mjs'
 import errorhandler from "./middlewares/ErrorHandlingMiddleware.mjs"
-import authMiddleware from './middlewares/authMiddleware.mjs'
+import fileUpload from 'express-fileupload'
 
 const App = express()
 
+
 App.use(cors())
 App.use(express.json())
+App.use(express.static(`${process.cwd()}\\static`))
+App.use(fileUpload({}))
 App.use('/api', Router)
 
 // the errorhandler must always be registered last
