@@ -1,5 +1,5 @@
 import models from "../models/models.mjs"
-const {User} = models
+const {User, Basket} = models
 import bcrypt from 'bcrypt'
 import ApiError from '../errors/ApiError.mjs'
 import jwt from 'jsonwebtoken'
@@ -16,7 +16,6 @@ class UserController {
     async registration(req, res, next) {
         const {
             username,
-            gender,
             phoneNumber,
             email, 
             password,
@@ -34,7 +33,6 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({
             username,
-            gender,
             phoneNumber,
             email,
             password: hashPassword,
@@ -43,8 +41,9 @@ class UserController {
             language,
             role,
             avatar,
-            createdAt: null
         })
+        console.log("FLAG")
+        await Basket.create({userId: user.id})
         const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
         return res.json({token})
     }

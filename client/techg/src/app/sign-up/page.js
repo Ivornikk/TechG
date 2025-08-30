@@ -8,7 +8,6 @@ const SignUp = () => {
     const {user} = useContext(StoreContext)
 
     const [username, setUsername] = useState('')
-    const [gender, setGender] = useState('N/A')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -27,7 +26,6 @@ const SignUp = () => {
         try {
             await signUp({
                 username,
-                gender,
                 phoneNumber,
                 email,
                 password,
@@ -40,14 +38,15 @@ const SignUp = () => {
             user.setUser(user)
             user.setIsAuth(true)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(err.message)
         }
     }
 
     return (
         <div className="m-auto bg-categories shadow-xl w-200 pt-10">
             <h2 className="text-[1.5em] text-center mb-5">Sign Up</h2>
-            <form className="flex flex-col gap-5 mx-50">
+            <form className="flex flex-col gap-5 mx-50"
+                onSubmit={e => e.preventDefault()}>
                 <input className="py-1 border border-brand" 
                     placeholder="Username"
                     onChange={e => setUsername(e.target.value)}/>

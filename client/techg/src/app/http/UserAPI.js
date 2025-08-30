@@ -3,7 +3,6 @@ import { jwtDecode } from "jwt-decode";
 
 export const signUp = async ({
     username,
-    gender,
     phoneNumber,
     email,
     password,
@@ -15,7 +14,6 @@ export const signUp = async ({
 }) => {
     const {data} = await $host.post('api/user/registration', {
         username,
-        gender,
         phoneNumber,
         email,
         password,

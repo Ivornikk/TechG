@@ -65,15 +65,15 @@ const Product = () => {
                                     Create Product
                                 </button>
                             </div>
-                            <ul>
+                            <ul className="flex flex-col gap-3">
                                 {
                                     product.products.map(product => {
                                         return (
                                             <li key={product.id}
                                                 className="flex cursor-pointer"
                                                 onClick={ () => redirect(`/product/${product.id}`)}>
-                                                <img src={`http://localhost:5000/${product.previewImage}`}
-                                                    className="w-20"></img>
+                                                <img src={`http://localhost:5000/${product.preview_image}`}
+                                                    className="w-50"></img>
                                                 <div>
                                                     <h2 className="text-[1.3em]">
                                                         {product.title}

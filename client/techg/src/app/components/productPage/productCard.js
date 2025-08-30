@@ -7,10 +7,12 @@ import { fetchOneProduct } from "@/app/http/ProductAPI"
 import { useContext, useEffect } from "react"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
+import { addProductToBasket } from "@/app/http/BasketAPI"
 
 const ProductCard = observer(() => {
     const {id} = useParams()
-    const {product} = useContext(StoreContext)
+    const {product, user} = useContext(StoreContext)
+    const userId = user.user.id
 
     useEffect(() => {
         fetchOneProduct(id).then(data => {
@@ -18,6 +20,10 @@ const ProductCard = observer(() => {
             product.setPictures(data.description_images.split(','))
         })
     }, [])
+
+    const addToCart = () => {
+        addProductToBasket({userId, productId: product.currentProduct.id, quantity: product.quantity})
+    }
 
     const sampleVariations = [
         {
@@ -86,10 +92,16 @@ const ProductCard = observer(() => {
                         </div>
                     </div>
                     <div className="flex flex-col mx-20 w-full">
-                        <button className="bg-stroke my-3 w-full h-[42px]">Add to cart</button>
-                        <button className="bg-stroke my-3 w-full h-[43px]">Buy now</button>
-                        <button className="bg-stroke my-3 w-full flex h-[43px] items-center justify-center">
-                            <img className="mr-3" src="/heart-icon.svg"></img>
+                        <button className="my-3 w-full h-[42px] cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition"
+                            onClick={addToCart}>
+                            Add to cart
+                        </button>
+                        <button className="my-3 w-full h-[43px] cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
+                            Buy now
+                        </button>
+                        <button className="my-3 w-full flex h-[43px] items-center justify-center cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
+                            <img className="mr-3"
+                            src="/heart-icon.svg"></img>
                             <div className="">{favorites}</div>
                         </button>
                     </div>

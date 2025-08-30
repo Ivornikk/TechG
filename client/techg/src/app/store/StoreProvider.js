@@ -3,10 +3,12 @@
 import React, {createContext} from "react"
 import { userStore } from "./userStore"
 import { productStore } from "./productStore"
+import { basketStore } from "./basketStore"
 
 export const StoreContext = createContext({
     userStore,
-    productStore
+    productStore,
+    basketStore,
 })
 
 const StoreProvider = ({children}) => {
@@ -14,6 +16,7 @@ const StoreProvider = ({children}) => {
         <StoreContext.Provider value={{
             user: userStore,
             product: productStore,
+            basket: basketStore,
         }}>
             {children}
         </StoreContext.Provider>

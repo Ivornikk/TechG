@@ -38,15 +38,15 @@ const ProductPicturesCarousel = ({pictures}) => {
 
       <button
         onClick={scrollPrev}
-        className="absolute top-1/2 left-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer"
+        className="absolute top-1/2 left-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer hover:text-xl transition-all"
       >
-        ‹
+        {'<'}
       </button>
       <button
         onClick={scrollNext}
-        className="absolute top-1/2 right-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer"
+        className="absolute top-1/2 right-2 -translate-y-1/2 bg-white px-3 py-1 rounded shadow cursor-pointer hover:text-xl transition-all"
       >
-        ›
+        {'>'}
       </button>
     </div>
   );
