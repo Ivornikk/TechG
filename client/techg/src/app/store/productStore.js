@@ -9,6 +9,7 @@ class ProductStore {
         this._categories = []
         this._types = []
         this._groups = []
+        this._productsQuantities = {}
         this._quantity = 1
         this._totalProductsCount = 0
         makeAutoObservable(this)
@@ -42,6 +43,10 @@ class ProductStore {
         this._groups = groups
     }
 
+    setProductsQuantities(productQuantities) {
+        this._productsQuantities = productQuantities
+    }
+
     setQuantity(quantity) {
         this._quantity = quantity
     }
@@ -72,6 +77,10 @@ class ProductStore {
 
     get groups() {
         return this._groups
+    }
+
+    get productsQuantities() {
+        return this._productsQuantities
     }
 
     get quantity() {

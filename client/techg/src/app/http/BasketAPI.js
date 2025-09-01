@@ -18,8 +18,8 @@ export const addProductToBasket = async ({productId, userId, quantity}) => {
 }
 
 export const removeProductFromBasket = async ({userId, productId}) => {
-    const {data} = await $authHost.delete('api/basket/remove-product', {params: {
-        userId, productId
-    }})
+    const {data} = await $authHost.delete(`api/basket/remove-product`, {
+        data: {userId, productId}
+    })
     return data
 }

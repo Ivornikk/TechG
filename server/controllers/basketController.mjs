@@ -1,6 +1,7 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
-const {Basket, BasketProduct} = models
+import { Op } from "sequelize"
+const {Basket, BasketProduct, Product} = models
 
 class BasketController {
     async create(req, res, next) {
@@ -15,9 +16,10 @@ class BasketController {
     }
 
     async addProduct(req, res, next) {
-        const {basketId, productId, quantity} = req.body
+        const {userId, productId, quantity} = req.body
         try {
-            const item = await BasketProduct.create({basketId, productId, quantity})
+            const basket = await Basket.findAll({where: {userId: userId}})
+            const item = await BasketProduct.create({basketId: basket[0].id, productId, quantity})
             return res.json(item)
         } catch (err) {
             next(ApiError.badRequest(err.message))
@@ -25,10 +27,18 @@ class BasketController {
     }
 
     async removeProduct(req, res, next) {
-        const {productId} = req.body
-        let deleteCount = BasketProduct.destroy({where: {productId: productId}})
-        if (deleteCount) return res.json({message: "Success"})
-        else return res.json({message: "Failure"})
+        try {
+            const {userId, productId} = req.body
+            const basket = await Basket.findAll({where: {userId: userId}})
+            const deleteCount = BasketProduct.destroy({where: {
+                basketId: basket[0].id, productId: productId
+            }})
+            if (deleteCount) return res.json({"message": "Success!"})
+            else return res.json({"message": "Failure!"})
+        }
+        catch (err) {
+            next(ApiError.badRequest({message: err.message}))
+        }
     }
 
     async getAll(req, res, next) {
@@ -46,8 +56,21 @@ class BasketController {
         const {userId} = req.params
         try {
             const basket = await Basket.findAll({where: {userId: userId}})
-            const items = await BasketProduct.findAndCountAll({where: {basketId: basket[0].id}})
-            basket[0].setDataValue("items", items)
+            const items = await BasketProduct.findAll({where: {basketId: basket[0].id}})
+
+            const productsSearch = items.flatMap(item => {
+                return {id: item.productId}
+            })
+
+            const products = await Product.findAll({where: {
+                [Op.or]: productsSearch
+            }})
+
+            items.map((item, index) => {
+                products[index].setDataValue('quantity', item.quantity)
+            })
+
+            basket[0].setDataValue('products', products)
             return res.json(basket)
         }
         catch (err) {
@@ -55,18 +78,6 @@ class BasketController {
         }
     }
     async remove(req, res) {
-        const {userId, productId} = req.body
-        try {
-            const basket = await Basket.findAll({where: {userId: userId}})
-            const deleteCount = Basket.destroy({where: {
-                basketId: basket.id, productId: productId
-            }})
-            if (deleteCount) return res.json({"message": "Success!"})
-            else return res.json({"message": "Failure!"})
-        }
-        catch (err) {
-            next(ApiError.badRequest({message: err.message}))
-        }
     }
 }
 
