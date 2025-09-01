@@ -1,21 +1,97 @@
+import { Op } from "sequelize"
+import ApiError from "../errors/ApiError.mjs"
 import models from "../models/models.mjs"
-const {Wishlist} =  models
+const {Wishlist, WishlistProduct, Product} =  models
 
 class WishlistController {
     async getAll(req, res, next) {
-        res.json({message: "Working wishlist get all"})
+        try {   
+            const wishlists = await Wishlist.findAndCountAll()
+            return res.json(wishlists)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
+
     async getOne(req, res, next) {
-        res.json({message: "Working wishlist get one"})
+        const { userId } = req.params
+        try {
+            const wishlist = await Wishlist.findAll({where: {userId}})
+            const items = await WishlistProduct.findAll({where: {wishlistId: wishlist[0].id}})
+
+            const productsSearch = items.flatMap(item => {
+                return {id: item.productId}
+            })
+
+            const products = await Product.findAll({where: {
+                [Op.or]: productsSearch
+            }})
+            wishlist[0].setDataValue('products', products)
+
+            return res.json(wishlist)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
+
     async create(req, res, next) {
-        res.json({message: "Working wishlist create"})
-    }
-    async remove(req, res) {
+        const { userId } = req.body
 
+        try {
+            const wishlist = await Wishlist.create({userId})
+            return res.json(wishlist)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
+
+    async addProduct(req, res, next) {
+        const { userId, productId } = req.body
+
+        try {
+            const wishlist = await Wishlist.findAll({where: {userId: userId}})
+
+            const item = await WishlistProduct.create({
+                wishlistId: wishlist[0].id,
+                productId: productId
+            })
+            return res.json(item)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async removeProduct(req, res, next) {
+        const { userId, productId } = req.body
+
+        try {   
+            const wishlist = await Wishlist.findAll({where: {userId: userId}})
+
+            const deleteCount = WishlistProduct.delete({while: {
+                wishlistId: wishlist[0].id,
+                productId: productId
+            }})
+            if (deleteCount) return res.json({message: "Success"})
+            else return res.json({message: "Failure"})
+    } catch (err) {
+        next(ApiError.badRequest(err.message))
+    }
+}
+
+async remove(req, res) {
+    const { userId } = req.params
+    
+    try {
+        const deleteCount = Wishlist.delete({where: {userId: userId}})
+        if (deleteCount) return res.json({message: "Success"})
+        else return res.json({message: "Failure"})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async edit(req, res, next) {
-
+        
     }
 }
 
