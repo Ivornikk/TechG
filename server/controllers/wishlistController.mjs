@@ -67,7 +67,7 @@ class WishlistController {
         try {   
             const wishlist = await Wishlist.findAll({where: {userId: userId}})
 
-            const deleteCount = WishlistProduct.delete({while: {
+            const deleteCount = WishlistProduct.destroy({where: {
                 wishlistId: wishlist[0].id,
                 productId: productId
             }})

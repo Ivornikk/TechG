@@ -8,6 +8,7 @@ import { useContext, useEffect } from "react"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { addProductToBasket } from "@/app/http/BasketAPI"
+import { addProductToWishlist } from "@/app/http/WishlistAPI"
 
 const ProductCard = observer(() => {
     const {id} = useParams()
@@ -22,7 +23,15 @@ const ProductCard = observer(() => {
     }, [])
 
     const addToCart = () => {
-        addProductToBasket({userId, productId: product.currentProduct.id, quantity: product.quantity})
+        addProductToBasket({
+            userId, productId: product.currentProduct.id, quantity: product.quantity
+        })
+    }
+
+    const addToWishlist = () => {
+        addProductToWishlist({
+            userId, productId: product.currentProduct.id
+        })
     }
 
     const sampleVariations = [
@@ -99,7 +108,8 @@ const ProductCard = observer(() => {
                         <button className="my-3 w-full h-[43px] cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
                             Buy now
                         </button>
-                        <button className="my-3 w-full flex h-[43px] items-center justify-center cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
+                        <button className="my-3 w-full flex h-[43px] items-center justify-center cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition"
+                            onClick={addToWishlist}>
                             <img className="mr-3"
                             src="/heart-icon.svg"></img>
                             <div className="">{favorites}</div>
