@@ -59,7 +59,7 @@ const Cart = observer(() => {
                                     <li key={item.id}
                                         className="grid grid-cols-5 grid-rows-4 grid-flow-col-dense">
                                         <img className="w-[200px] row-span-4"
-                                            src={`http://localhost:5000/${item.preview_image}`}></img>
+                                            src={`http://192.168.1.2:5000/${item.preview_image}`}></img>
                                         <h2 className="text-[1.2em] col-span-3">{item.title}</h2>
                                         <p className=" col-span-3">Estimated delivery time: {item.shippingDate || 'Not estimated'}</p>
                                         <div className="flex items-center row-span-2 col-span-3">

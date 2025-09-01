@@ -5,8 +5,7 @@ import Link from "next/link"
 import { StoreContext } from "../store/StoreProvider"
 
 const NavbarAuthButtons = observer(() => {
-    const storeContext = useContext(StoreContext)
-    const { user } = storeContext
+    const {user} = useContext(StoreContext)
     const currencies = [
         { id: 1, name: "EUR" },
         { id: 2, name: "GBP" },
@@ -43,12 +42,15 @@ const NavbarAuthButtons = observer(() => {
         <>
             {
                 user.isAuth ?
-                    <div className="flex flex-col items-center justify-start md:justify-evenly flex-shrink-0">
+                    <div className="sm:justify-evenly
+                                    flex flex-col items-center justify-end gap-1 flex-shrink-0">
                         <Link href={'/account/settings'}
-                            className="cursor-pointer">
+                            className="
+                                        cursor-pointer">
                             <img src="/UserIcon.svg"></img>
                         </Link>
-                        <select className="cursor-pointer border border-white rounded px-5 py-2 w-full">
+                        <select className="
+                                            cursor-pointer border border-white rounded px-5 py-2 w-full">
                             {
                                 currencies.map(el => {
                                     return (
@@ -60,7 +62,8 @@ const NavbarAuthButtons = observer(() => {
                                 })
                             }
                         </select>
-                        <select className="cursor-pointer border border-white rounded px-5 py-2 w-full">
+                        <select className="
+                                            cursor-pointer border border-white rounded px-5 py-2 w-full">
                             {
                                 languages.map(el => {
                                     return (

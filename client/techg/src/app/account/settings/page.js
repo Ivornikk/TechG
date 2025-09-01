@@ -6,7 +6,8 @@ import { useContext, useState } from "react"
 
 const Settings = () => {
     const { user } = useContext(StoreContext)
-    console.log(user.user)
+    console.log("USER: ", user)
+
     return (
         <div className="bg-categories shadow-xl px-10 py-3">
             <h1 className="text-[1.5em] mb-5">Settings</h1>

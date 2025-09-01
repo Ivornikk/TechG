@@ -22,17 +22,19 @@ const ProductsGrid = observer(() => {
 
     return (
         <div>
-            <ul className="md:w-[1500px] w-500px grid grid-cols-5 gap-13 mx-auto">
+            <ul className="md:w-[1500px] w-500px grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
                 {console.log(product.products)}
                 {
                     product.products.map(product => {
                         return (
                             <Link href={`/product/${product.id}`}
-                                key={product.id}>
+                                key={product.id}
+                                className="m-auto">
                                 <li className="text-black w-[300px] bg-white hover:shadow-xl transition">
-                                    <div className="w-[300px] h-[315px] flex items-center justify-center text-3xl bg-gray-300">
-                                        Product pic
-                                    </div>
+                                    <img className="w-[300px] h-[315px]"
+                                        src={`http://192.168.1.2:5000/${product.preview_image}`}>
+
+                                    </img>
                                     <div>{product.title}</div>
                                     <div className="mt-5">${product.price}</div>
                                     <div className="flex">

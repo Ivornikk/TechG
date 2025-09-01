@@ -72,7 +72,7 @@ const Product = () => {
                                             <li key={product.id}
                                                 className="flex cursor-pointer"
                                                 onClick={ () => redirect(`/product/${product.id}`)}>
-                                                <img src={`http://localhost:5000/${product.preview_image}`}
+                                                <img src={`http://192.168.1.2:5000/${product.preview_image}`}
                                                     className="w-50"></img>
                                                 <div>
                                                     <h2 className="text-[1.3em]">
