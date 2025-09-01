@@ -1,3 +1,5 @@
+'use client'
+
 import AddressCardCheckout from "../components/addressCardCheckout"
 import Link from "next/link"
 const Checkout = () => {

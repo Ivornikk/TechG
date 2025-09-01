@@ -147,6 +147,9 @@ Basket.belongsTo(User)
 Order.belongsToMany(Product, {through: OrderProduct, as: "product"})
 Product.belongsToMany(Order, {through: OrderProduct})
 
+Address.hasMany(Order)
+Order.belongsTo(Address)
+
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
 

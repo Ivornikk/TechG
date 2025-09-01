@@ -12,13 +12,12 @@ class AddressController {
             next(ApiError.badRequest(err.message))
         }
     }
-    async getOne(req, res, next) {
-        const {id} = req.params
+    async getByUser(req, res, next) {
+        const {userId} = req.params
         try {
-            const address = await Address.findOne({where: {id}})
-            return res.json(address)
-        }
-        catch (err) {
+            const addresses = await Address.findAndCountAll({where: {userId: userId}})
+            return res.json(addresses)
+        } catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }
@@ -31,7 +30,8 @@ class AddressController {
             country,
             region,
             city,
-            ZipCode
+            ZipCode,
+            userId
         } = req.body
         
         try {
@@ -43,7 +43,8 @@ class AddressController {
                 country: country,
                 region: region,
                 city: city,
-                ZipCode: ZipCode
+                ZipCode: ZipCode,
+                userId: userId
             })
             return res.json(address)
         }
@@ -52,8 +53,8 @@ class AddressController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Address.destroy({where: id})
+        const {id} = req.body
+        const deleteCount = Address.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }
