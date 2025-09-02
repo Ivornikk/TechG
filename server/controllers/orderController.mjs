@@ -1,6 +1,6 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
-const {Order, Product, OrderProduct} =  models
+const {Order, User, Product, OrderProduct} =  models
 
 class OrderController {
     async getAll(req, res, next) {
@@ -30,8 +30,9 @@ class OrderController {
             next(ApiError.badRequest(err.message))
         }
     }
-    async getProducts(req, res, next) {
-        const {id} = req.params
+    async getByUser(req, res, next) {
+        const {userId} = req.params
+        const {status} = req.body
 
         try {
             const products = await OrderProduct.findAll({
@@ -44,15 +45,35 @@ class OrderController {
         }
     }
     async create(req, res, next) {
-        const {userId, paymentMethod} = req.body
+        const {
+            status,
+            paymentMethod,
+            userId,
+            addressId,
+            products
+        } = req.body
         try {
-            const order = await Order.create({userId: userId, paymentMethod: paymentMethod})
+            const order = await Order.create({
+                status, paymentMethod, userId, addressId
+            })
+            const resProducts = []
+            await products.map(async product => {
+                await OrderProduct.create({
+                    quantity: product.quantity,
+                    priceAtPurchase: product.priceAtPurchase,
+                    orderId: order.id,
+                    productId: product.id
+                })
+                .then(data => resProducts.push(data))
+            })
+            order.setDataValue('products', products)
             return res.json(order)
         }
         catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }
+
     async addProduct(req, res, next) {
         const {id} = req.params
         const {productId} = req.body

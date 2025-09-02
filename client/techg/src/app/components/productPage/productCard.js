@@ -4,7 +4,7 @@ import QuantityCounter from "../quantityCounter"
 import ProductPicturesCarousel from "../productPicturesCarousel"
 import { useParams } from "next/navigation"
 import { fetchOneProduct } from "@/app/http/ProductAPI"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { addProductToBasket } from "@/app/http/BasketAPI"
@@ -14,6 +14,7 @@ const ProductCard = observer(() => {
     const {id} = useParams()
     const {product, user} = useContext(StoreContext)
     const userId = user.user.id
+    const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
         fetchOneProduct(id).then(data => {
@@ -24,7 +25,7 @@ const ProductCard = observer(() => {
 
     const addToCart = () => {
         addProductToBasket({
-            userId, productId: product.currentProduct.id, quantity: product.quantity
+            userId, productId: product.currentProduct.id, quantity: quantity
         })
     }
 
@@ -95,7 +96,12 @@ const ProductCard = observer(() => {
                 <div className="flex flex-row justify-between">
                     <div className="float-center h-[174px]">
                         <h1 className="text-3xl my-3">Quantity:</h1>
-                        <QuantityCounter defaultValue={product.productsQuantities[`${product.currentProduct.id}`]} productId={product.currentProduct.id} />
+                        <QuantityCounter defaultValue={1}
+                            increment={() => setQuantity(quantity + 1)}
+                            decrement={() => quantity > 1 ?
+                                        setQuantity(quantity - 1) :
+                                        setQuantity(1)}
+                        />
                         <div className="mt-3">
                             Shipping: 3.15$
                         </div>

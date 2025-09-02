@@ -5,7 +5,7 @@ import { StoreContext } from "../store/StoreProvider"
 import { fetchUserAddresses } from "../http/AddressAPI"
 import { observer } from "mobx-react-lite"
 
-const AddressCardCheckout = observer(() => {
+const AddressCardCheckout = observer(({setSelectedAddressId}) => {
     const {address, user} = useContext(StoreContext)
     const userId = user.user.id
     
@@ -53,7 +53,10 @@ const AddressCardCheckout = observer(() => {
                                                             'cursor-pointer bg-button-active text-white hover:bg-categories hover:text-brand transition'
                                                         }`}
                                             onClick={() => {
-                                                if (address.id != selectedAddress) setSelectedAddress(address.id)
+                                                if (address.id != selectedAddress) {
+                                                    setSelectedAddressId(address.id)
+                                                    setSelectedAddress(address.id)
+                                                }
                                             }}>
                                             Choose
                                         </button>

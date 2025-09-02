@@ -1,36 +1,24 @@
 'use client'
 
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AddressCardCheckout from "../components/addressCardCheckout"
-import Link from "next/link"
-const Checkout = () => {
+import { StoreContext } from "../store/StoreProvider"
+import { fetchOneBasket } from "../http/BasketAPI"
+import { observer } from "mobx-react-lite"
+import { createOrder } from "../http/OrderAPI"
+import { redirect } from "next/navigation"
+const Checkout = observer(() => {
     
-    const products = [
-        { id: 1, quantity: 2, attributes: 
-            [
-                {id: 4, name: 'color', value: 'red'},
-                {id: 2, name: 'RAM', value: '64GB'},
-            ],
-             price: 13.54, shippingDate: 'Aug 25th 2025', shippingFee: 2.14, name: 'Samsung Galaxy S25 Pro Max', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
-        { id: 2, quantity: 1, attributes: 
-            [
-                {id: 4, name: 'color', value: 'red'},
-                {id: 2, name: 'RAM', value: '64GB'},
-            ],
-             price: 24.64, shippingDate: 'Aug 27th 2025', shippingFee: 2.14, name: 'Xiaomi Realme C55', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
-        { id: 3, quantity: 5, attributes: 
-            [
-                {id: 4, name: 'color', value: 'white'},
-                {id: 2, name: 'RAM', value: '32GB'},
-            ],
-             price: 17.05, shippingDate: 'Aug 24th 2025', shippingFee: 2.14, name: 'Sony Xperia', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
-        { id: 4, quantity: 4, attributes: 
-            [
-                {id: 4, name: 'color', value: 'black'},
-                {id: 2, name: 'RAM', value: '128GB'},
-            ],
-             price: 56.73, shippingDate: 'Aug 25th 2025', shippingFee: 2.14, name: 'Iphone 15 Pro', img: 'https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25626687/DSC08433.jpg?quality=90&strip=all&crop=16.675%2C0%2C66.65%2C100&w=2400' },
-    ]
+    const {address, basket, user} = useContext(StoreContext)
+    const userId = user.user.id
+    const [addressId, setAddressId] = useState(0)
+
+    useEffect(() => {
+        fetchOneBasket(userId).then(data => {
+            basket.setItems(data[0].products)
+            console.log(data)
+        })
+    }, [])
 
     const discounts = [
         {id: 1, name: 'New User Bonus', percentage: 10},
@@ -40,7 +28,7 @@ const Checkout = () => {
     // Price at purchase without any discounts
     const estimateSubtotal = () => {
         let sum = 0
-        products.map (product => {
+        basket.items.map(product => {
             sum = sum + (Number(product.shippingFee) + Number(product.quantity) * Number(product.price))
         })
         return sum.toFixed(2)
@@ -59,12 +47,32 @@ const Checkout = () => {
 
         return res.toFixed(2)
     }
+
+    const placeOrder = () => {
+        if (addressId == 0) {
+            alert("Please, select address")
+            return
+        }
+        const products = basket.items
+        products.flatMap(product => {
+            product.priceAtPurchase = (Number(product.price) * Number(product.quantity)).toFixed(2)
+            return product
+        })
+        createOrder({
+            status: "Payment pending",
+            paymentMethod: "Online payment",
+            userId: userId,
+            addressId: addressId,
+            products: products
+        })
+        .then(() => redirect('/payment'))
+    }
     return (
         <div className="max-w-1600 m-auto">
             <h1 className="text-[2em] ml-20">Checkout</h1>
             <div className="grid grid-cols-4 gap-10 my-10 mx-20">
                 <div className="col-span-3">
-                    <AddressCardCheckout />
+                    <AddressCardCheckout setSelectedAddressId={setAddressId} />
                     <div className="flex gap-5 py-5 items-center px-20 shadow-xl bg-categories my-10">
                         <h2 className="text-[1.5em]">Payment method</h2>
                         <div className="border border-brand px-10 py-5 rounded-xl text-xl">
@@ -75,26 +83,16 @@ const Checkout = () => {
                         <h2 className="text-[1.5em]">Order Previews</h2>
                         <ul className="w-full flex flex-col gap-5">
                             {
-                                products.map(product => {
+                                basket.items.map(product => {
                                     return (
                                         <li key={product.id}
                                         className="w-full">
                                             <hr className="border-stroke w-full mb-10" />
                                             <div className="grid grid-rows-3 grid-cols-4 grid-flow-col-dense">
-                                                <img src={product.img}
+                                                <img src={`http://192.168.1.2:5000/${product.preview_image}`}
                                                     className="row-span-3 w-[200px]"></img>
-                                                <h3 className="text-xl">{product.name}</h3>
+                                                <h3 className="text-xl">{product.title}</h3>
                                                 <ul className="flex gap-5">
-                                                    {
-                                                        product.attributes.map(attribute => {
-                                                            return (
-                                                                <li key={attribute.id}
-                                                                    className="px-3 py-1 bg-brand text-white rounded-xl flex justify-center items-center">
-                                                                    {attribute.name}: {attribute.value}
-                                                                </li>
-                                                            )
-                                                        })
-                                                    }
                                                 </ul>
                                                 <h3 className="flex items-center text-xl">{product.price}$</h3>
                                                 <h3 className="col-span-3 flex justify-end text-2xl">x{product.quantity}</h3>
@@ -106,10 +104,12 @@ const Checkout = () => {
                                                     <h4>Subtotal:</h4>
                                                 </div>
                                                 <div className="flex flex-col justify-between items-end">
-                                                    <h4>{Number(product.quantity) * Number(product.price)}$</h4>
-                                                    <h4>{Number(product.shippingFee)}$</h4>
+                                                    <h4>{(Number(product.quantity) * Number(product.price)).toFixed(2)}$</h4>
+                                                    <h4>
+                                                        {Number(product.shippingFee) || 'not estimated'}{!product.shippingFee || '$'}
+                                                    </h4>
                                                     <h4 className="mt-2">
-                                                        {(Number(product.shippingFee) + Number(product.quantity) * Number(product.price)).toFixed(2)}$
+                                                        {(Number(product.quantity) * Number(product.price)).toFixed(2)}$
                                                     </h4>
                                                 </div>
                                             </div>
@@ -151,14 +151,14 @@ const Checkout = () => {
                         <h3>Total:</h3>
                         <h3>{estimateTotal()}$</h3>
                     </div>
-                    <Link href={'/payment'}
-                        className="mt-10 text-center bg-brand border border-brand text-white rounded-xl w-full py-4 text-xl hover:bg-categories hover:text-brand cursor-pointer transition">
+                    <button className="mt-10 text-center bg-button-active border border-button-active text-white rounded-xl w-full py-4 text-xl hover:bg-categories hover:text-brand cursor-pointer transition"
+                        onClick={placeOrder}>
                         Place order
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>
     )
-}
+})
 
 export default Checkout

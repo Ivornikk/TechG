@@ -3,7 +3,7 @@ import Link from "next/link"
 import QuantityCounter from "../components/quantityCounter"
 import { useContext, useEffect } from "react"
 import { StoreContext } from "../store/StoreProvider"
-import { getOneBasket, removeProductFromBasket } from "../http/BasketAPI"
+import { fetchOneBasket, removeProductFromBasket } from "../http/BasketAPI"
 import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
 
@@ -11,7 +11,7 @@ const Cart = observer(() => {
 
     const {user, basket} = useContext(StoreContext)
     useEffect(() => {
-        getOneBasket(user.user.id).then(data => {
+        fetchOneBasket(user.user.id).then(data => {
             basket.setItems(data[0].products)
         })
     }, [])
@@ -27,7 +27,7 @@ const Cart = observer(() => {
     const deleteItem = id => {
         removeProductFromBasket({userId: user.user.id, productId: id})
         .then(() => {
-            getOneBasket(user.user.id).then(data => {
+            fetchOneBasket(user.user.id).then(data => {
                 basket.setItems(data[0].products)
             })
         })
@@ -65,7 +65,9 @@ const Cart = observer(() => {
                                         <div className="flex items-center row-span-2 col-span-3">
                                             <h2 className="text-[1.4em]">${item.price}</h2>
                                         </div>
-                                        <QuantityCounter defaultValue={item.quantity} productId={item.id} />
+                                        <h3 className="text-[1.5em] text-right">
+                                            {item.quantity} pcs
+                                        </h3>
                                         <button className="flex justify-end row-span-3"
                                             onClick={() => deleteItem(item.id)}>
                                             <img

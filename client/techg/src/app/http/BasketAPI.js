@@ -5,7 +5,7 @@ export const createBasket = async (userId) => {
     return data
 }
 
-export const getOneBasket = async (userId) => {
+export const fetchOneBasket = async (userId) => {
     const {data} = await $authHost.get(`api/basket/${userId}`)
     return data
 }
