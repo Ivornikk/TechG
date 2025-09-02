@@ -16,3 +16,10 @@ export const createOrder = async ({
     })
     return data
 }
+
+export const fetchByUser = async ({userId, status}) => {
+    const {data} = await $authHost.get(`api/order/${userId}`, {
+        status
+    })
+    return data
+}

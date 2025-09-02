@@ -35,10 +35,34 @@ class OrderController {
         const {status} = req.body
 
         try {
-            const products = await OrderProduct.findAll({
-                where: {orderId: id}
-            })
-            return res.json(products)
+            let orders
+
+            if (status) {
+                orders = await Order.findAndCountAll({
+                    where: {
+                        userId: userId,
+                        status: status
+                    }
+                })
+            }
+            else {
+                orders = await Order.findAndCountAll({
+                    where: {
+                        userId: userId
+                    }
+                })
+            }
+            orders.rows = await Promise.all(
+                orders.rows.flatMap(async order => {
+                    const products = await OrderProduct.findAll({
+                        where: {orderId: order.id}
+                    })
+                    order.setDataValue('products', products)
+                    return order
+                })
+            )
+
+            return res.json(orders)
         }
         catch (err) {
             next(ApiError.badRequest(err.message))
@@ -90,8 +114,8 @@ class OrderController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Order.destroy({where: id})
+        const {id} = req.body
+        const deleteCount = Order.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }
