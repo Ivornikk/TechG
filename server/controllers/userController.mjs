@@ -29,7 +29,6 @@ class UserController {
         if (candidate) {
             return next(ApiError.badRequest('User with this email already exists.'))
         }
-        
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({
             username,
@@ -72,8 +71,30 @@ class UserController {
     }
 
     async edit(req, res, next) {
-        
+        const { email, username, oldPassword, newPassword } = req.body
+        const { id } = req.params
+        try {
+            const user = await User.findOne({
+                where: {id: id}
+            })
+            if (email) {
+                user.email = email
+            }
+            if (username) {
+                user.username = username
+            }
+            if (newPassword) {
+                const validate = await bcrypt.compareSync(oldPassword, user.password)
+                if (validate) {
+                    user.passwrod = await bcrypt.hash(newPassword, 5)
+                }
+                else return res.json({message: 'Passwrods do not match'})
+            }
+            await user.save()
+            return res.json(user)
+        } catch (err) { 
+            next(ApiError.badRequest(err.message))
+        }
     }
 }
-
 export default new UserController()

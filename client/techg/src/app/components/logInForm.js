@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import Link from "next/link";
 import { StoreContext } from "../store/StoreProvider";
 import { logIn } from "../http/UserAPI";
+import { redirect } from "next/navigation";
 
 
 const LogInForm = observer(() => {
@@ -19,6 +20,7 @@ const LogInForm = observer(() => {
             await logIn(email, password)
             user.setUser(user)
             user.setIsAuth(true)
+            redirect('/')
         } catch (err) {
             alert(err.response.data.message)
         }

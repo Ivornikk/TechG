@@ -41,3 +41,12 @@ export const auth = async () => {
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
+
+export const editUser = async ({
+    id, email, username, oldPassword, newPassword
+}) => {
+    const {data} = await $authHost.patch(`api/user/${id}/edit`, {
+        email, username, oldPassword, newPassword
+    })
+    return data
+}
