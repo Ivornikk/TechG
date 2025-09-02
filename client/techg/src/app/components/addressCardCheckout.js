@@ -10,6 +10,7 @@ const AddressCardCheckout = observer(() => {
     const userId = user.user.id
     
     const [addAddressShown, setAddAddressShown] = useState(false)
+    const [selectedAddress, setSelectedAddress] = useState(0)
 
     useEffect(() => {
         fetchUserAddresses(userId).then(data => {
@@ -36,13 +37,24 @@ const AddressCardCheckout = observer(() => {
                         address.addresses.map(address => {
                             return (
                                 <li key={address.id}
-                                    className="w-68 flex-shrink-0">
+                                    className={`w-68 flex-shrink-0 p-3 rounded transition ${
+                                        address.id == selectedAddress ? 
+                                        'border border-xl border-brand text-white bg-brand' : ''
+                                        }`}>
                                     <div>
                                         {address.firstName} {address.lastName}, {address.telephone} <br />
                                         {address.country}, {address.region}, {address.addressLine},  {address.ZipCode} <br />
                                     </div>
                                     <div className="mt-3">
-                                        <button className="px-3 py-2 cursor-pointer bg-button-active text-white border border-button-active rounded-xl hover:bg-categories hover:text-brand transition">
+                                        <button className={`px-3 py-2
+                                                        border border-button-active rounded-xl ${
+                                                            address.id == selectedAddress ?
+                                                            'cursor-default bg-categories text-brand' :
+                                                            'cursor-pointer bg-button-active text-white hover:bg-categories hover:text-brand transition'
+                                                        }`}
+                                            onClick={() => {
+                                                if (address.id != selectedAddress) setSelectedAddress(address.id)
+                                            }}>
                                             Choose
                                         </button>
                                     </div>

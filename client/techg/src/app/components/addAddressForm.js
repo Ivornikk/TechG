@@ -3,9 +3,9 @@
 import { useContext, useState, useEffect } from "react"
 import { StoreContext } from "../store/StoreProvider"
 import { createAddress, fetchUserAddresses } from "../http/AddressAPI"
+import { observer } from "mobx-react-lite"
 
-const AddAddressForm = ({isShown, onHide}) => {
-
+const AddAddressForm = observer(({isShown, onHide}) => {
     const {address, user} = useContext(StoreContext)
     const userId = user.user.id
 
@@ -516,6 +516,7 @@ const AddAddressForm = ({isShown, onHide}) => {
     const [selectedCountry, setSelectedCountry] = useState('Austria')
     const [currentRegions, setCurrentRegions] = useState(regions[0].regions)
 
+    // Changes the regions selection according to the selected country
     useEffect(() => {
         const reg = regions.filter(el => {
             if (el.country === selectedCountry) return el.regions
@@ -543,10 +544,11 @@ const AddAddressForm = ({isShown, onHide}) => {
             ZipCode,
             userId
         }).then(() => {
-            fetchUserAddresses(userId).then( data => {
-                address.setAddresses(data)
+            fetchUserAddresses(userId).then(data => {
+                address.setAddresses(data.rows)
             })
-        }).finally(() => {
+        })
+        .finally(() => {
             onHide()
         })
     }
@@ -636,6 +638,6 @@ const AddAddressForm = ({isShown, onHide}) => {
         }
         </>
     )
-}
+})
 
 export default AddAddressForm

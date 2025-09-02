@@ -1,26 +1,10 @@
 'use client'
 
+import { useState } from "react"
 import AddressCardCheckout from "../components/addressCardCheckout"
 import Link from "next/link"
 const Checkout = () => {
-    const addresses = [
-        {
-            id: 1, firstName: "Ivelin", lastName: "Metodiev", phone: '0895757519',
-            addressLine: 'Burgas, Meden Rudnik Vustanicheska 487', country: 'Bulgaria',
-            region: 'Burgas', City: 'Burgas', ZIP: '5000'
-        },
-        {
-            id: 2, firstName: "Ivelin", lastName: "Metodiev", phone: '0895757519',
-            addressLine: 'Burgas, Meden Rudnik Vustanicheska 487', country: 'Bulgaria',
-            region: 'Burgas', City: 'Burgas', ZIP: '5000'
-        },
-        {
-            id: 3, firstName: "Ivelin", lastName: "Metodiev", phone: '0895757519',
-            addressLine: 'Burgas, Meden Rudnik Vustanicheska 487', country: 'Bulgaria',
-            region: 'Burgas', City: 'Burgas', ZIP: '5000'
-        },
-    ]
-
+    
     const products = [
         { id: 1, quantity: 2, attributes: 
             [
@@ -53,6 +37,7 @@ const Checkout = () => {
         {id: 2, name: 'Summer Discount', percentage: 5},
     ]
 
+    // Price at purchase without any discounts
     const estimateSubtotal = () => {
         let sum = 0
         products.map (product => {
@@ -63,6 +48,7 @@ const Checkout = () => {
 
     const subTotal = estimateSubtotal()
     
+    // Price at purchase with discounts
     const estimateTotal = () => {
         let res = Number(subTotal)
 
@@ -78,7 +64,7 @@ const Checkout = () => {
             <h1 className="text-[2em] ml-20">Checkout</h1>
             <div className="grid grid-cols-4 gap-10 my-10 mx-20">
                 <div className="col-span-3">
-                    <AddressCardCheckout addresses={addresses} />
+                    <AddressCardCheckout />
                     <div className="flex gap-5 py-5 items-center px-20 shadow-xl bg-categories my-10">
                         <h2 className="text-[1.5em]">Payment method</h2>
                         <div className="border border-brand px-10 py-5 rounded-xl text-xl">

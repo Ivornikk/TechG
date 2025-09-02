@@ -1,7 +1,7 @@
 'use client'
 
 import AddAddressForm from "@/app/components/addAddressForm"
-import { createAddress, fetchUserAddresses } from "@/app/http/AddressAPI"
+import { createAddress, fetchUserAddresses, removeAddress } from "@/app/http/AddressAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react"
@@ -16,13 +16,13 @@ const AddressBook = observer(() => {
             address.setAddresses(data.rows)
         })
     }, [])
-
-    const deleteAddress = () => {
-        removeAddress(userId).then(
+    
+    const deleteAddress = id => {
+        removeAddress(id).then(() => {
             fetchUserAddresses(userId).then(data => {
                 address.setAddresses(data.rows)
             })
-        )
+        })
     }
 
     return (
@@ -38,10 +38,8 @@ const AddressBook = observer(() => {
                                     {address.firstName} {address.lastName}, {address.telephone}, {address.addressLine}, {address.region}, {address.City}, {address.country}, {address.ZIP}
                                 </div>
                                 <div className="flex justify-between w-[50%]">
-                                    <button className="bg-button-active text-white px-5 py-1 rounded-xl border border-button-active cursor-pointer hover:bg-categories hover:text-button-active transition">
-                                        Edit
-                                    </button>
-                                    <button className="bg-button-active text-white px-5 py-1 rounded-xl border border-button-active cursor-pointer hover:bg-categories hover:text-button-active transition">
+                                    <button className="bg-button-active text-white px-5 py-1 rounded-xl border border-button-active cursor-pointer hover:bg-categories hover:text-button-active transition"
+                                        onClick={() => deleteAddress(address.id)}>
                                         Delete
                                     </button>
                                 </div>
