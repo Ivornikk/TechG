@@ -89,7 +89,7 @@ const MyOrders = observer(() => {
                     <h3 className="text-[1.3em]">Amount</h3>
                     <h3 className="text-[1.3em]">Status</h3>
                     <h3 className="text-[1.3em]">Options</h3>
-                </div>
+                </div>)
                 {
                     order.orders.map(order => {
                         return (

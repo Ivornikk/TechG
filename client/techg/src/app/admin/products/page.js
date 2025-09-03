@@ -1,10 +1,11 @@
 'use client'
-import { fetchCategories, fetchGroups, fetchProducts, fetchTypes } from "@/app/http/ProductAPI"
+import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
+import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
-const Product = () => {
+const Product = observer(() => {
     const [view, setView] = useState('products')
     const [editProduct, setEditProduct] = useState(0)
     const { product } = useContext(StoreContext)
@@ -22,6 +23,15 @@ const Product = () => {
             product.setGroups(data.rows)
         })
     }, [])
+
+    const removeProduct = id => {
+        deleteProduct(id)
+        .then(() => {
+            fetchProducts({ page: 1 }).then(data => {
+                product.setProducts(data.rows)
+            })
+        })
+    }
 
     return (
         <div className="bg-categories shadow-xl p-10 pt-5">
@@ -65,23 +75,31 @@ const Product = () => {
                                     Create Product
                                 </button>
                             </div>
-                            <ul className="flex flex-col gap-3">
+                            <ul className="flex flex-col gap-3 mt-10">
                                 {
                                     product.products.map(product => {
                                         return (
                                             <li key={product.id}
-                                                className="flex cursor-pointer"
-                                                onClick={ () => redirect(`/product/${product.id}`)}>
-                                                <img src={`http://192.168.1.2:5000/${product.preview_image}`}
-                                                    className="w-50"></img>
-                                                <div>
-                                                    <h2 className="text-[1.3em]">
-                                                        {product.title}
-                                                    </h2>
-                                                    <h2 className="text-[1.2em]">
-                                                        {product.price}$
-                                                    </h2>
+                                                className="flex justify-between grid grid-rows-3 grid-flow-col-dense">
+                                                <div className="flex gap-3 row-span-3 cursor-pointer"
+                                                    onClick={ () => redirect(`/product/${product.id}`)}>
+                                                    <img src={`http://192.168.1.2:5000/${product.preview_image}`}
+                                                        className="w-50"></img>
+                                                    <div>
+                                                        <h2 className="text-[1.3em]">
+                                                            {product.title}
+                                                        </h2>
+                                                        <h2 className="text-[1.2em]">
+                                                            {product.price}$
+                                                        </h2>
+                                                    </div>
                                                 </div>
+                                                <button className="cursor-pointer"
+                                                    onClick={() => removeProduct(product.id)}>
+                                                    <img src="/binIcon.svg"
+                                                        className="">
+                                                    </img>
+                                                </button>
                                             </li>
                                         )
                                     })
@@ -152,6 +170,6 @@ const Product = () => {
             </div>
         </div>
     )
-}
+})
 
 export default Product

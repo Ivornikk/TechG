@@ -26,7 +26,9 @@ export const searchProducts = async ({page, limit=5, q}) => {
 }
 
 export const deleteProduct = async id => {
-    const {data} = await $authHost.delete('api/product', id)
+    const {data} = await $authHost.delete('api/product', {
+        data: {id}
+    })
     return data
 }
 
