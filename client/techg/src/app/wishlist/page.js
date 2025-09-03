@@ -38,7 +38,7 @@ const Wishlist = observer(() => {
     }
 
     return (
-        <div className="max-w-[1500px] m-auto">
+        <div className="max-w-[1500px] mx-auto my-10">
             <h1 className="text-[2.5em]">My Wishlist</h1>
             <div className="bg-categories m-auto shadow-xl my-15">
                 {

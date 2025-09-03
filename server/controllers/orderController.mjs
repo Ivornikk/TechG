@@ -1,6 +1,6 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
-const {Order, User, Product, OrderProduct} =  models
+const {Order, Address, Product, OrderProduct} =  models
 
 class OrderController {
     async getAll(req, res, next) {
@@ -32,12 +32,11 @@ class OrderController {
     }
     async getByUser(req, res, next) {
         const {userId} = req.params
-        const {status} = req.body
-
+        const {status} = req.body || 'all'
         try {
             let orders
 
-            if (status) {
+            if (status && status != 'all') {
                 orders = await Order.findAndCountAll({
                     where: {
                         userId: userId,
@@ -54,10 +53,28 @@ class OrderController {
             }
             orders.rows = await Promise.all(
                 orders.rows.flatMap(async order => {
-                    const products = await OrderProduct.findAll({
+                    const items = await OrderProduct.findAll({
                         where: {orderId: order.id}
                     })
-                    order.setDataValue('products', products)
+                    order.setDataValue('items', items)
+                    return order
+                })
+            )
+            orders.rows = await Promise.all(
+                orders.rows.flatMap(async order => {
+                    order.items = await Promise.all(
+                        order.dataValues.items.flatMap(async item => {
+                            const product = await Product.findOne({
+                                where: {id: item.productId}
+                            })
+                            item.setDataValue('product', product)
+                            return item
+                        })
+                    )
+                    const address = await Address.findOne({
+                        where: {id: order.addressId}
+                    })
+                    order.setDataValue('address', address)
                     return order
                 })
             )
@@ -65,6 +82,7 @@ class OrderController {
             return res.json(orders)
         }
         catch (err) {
+            console.log(err)
             next(ApiError.badRequest(err.message))
         }
     }
@@ -115,6 +133,9 @@ class OrderController {
     }
     async remove(req, res) {
         const {id} = req.body
+        OrderProduct.destroy({
+            where: {orderId: id}
+        })
         const deleteCount = Order.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})

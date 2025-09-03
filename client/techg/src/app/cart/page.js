@@ -34,7 +34,7 @@ const Cart = observer(() => {
     }
 
     return (
-        <div className="max-w-[1600px] m-auto">
+        <div className="max-w-[1600px] mx-auto my-10">
             <h1 className="text-[2.5em]">Shopping cart</h1>
             <div className="grid grid-cols-4 gap-5">
                 <div className="bg-categories shadow-xl my-10 col-span-3">

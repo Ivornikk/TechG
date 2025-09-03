@@ -6,7 +6,7 @@ import SearchPanel from "./searchPanel"
 const Navbar = () => {
 
     return (
-        <nav className="xl:px-30 md:pb-0
+        <nav className="xl:px-30 pb-0
                         bg-brand fixed w-[100vw] top-0 px-2 z-50 flex text-white justify-between items-center">
             <div className="flex justify-between">
                 <div className="flex flex-col">
@@ -38,7 +38,7 @@ const Navbar = () => {
                             <img className="mx-7 md:mb-4"
                                 src="/wishlist-icon.svg"></img>
                             <button className=" md:block
-                                                hidden">
+                                                hidden cursor-pointer">
                                 Wishlist
                             </button>
                         </Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
                             <img className="ml-6 mr-7 mt-4"
                             src="/cart-icon.svg"></img>
                             <button className="md:block
-                                                hidden">
+                                                hidden cursor-pointer">
                                 Cart
                             </button>
                         </Link>
