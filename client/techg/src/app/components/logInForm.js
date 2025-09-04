@@ -1,6 +1,6 @@
 'use client'
 import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { StoreContext } from "../store/StoreProvider";
 import { logIn } from "../http/UserAPI";
@@ -13,17 +13,21 @@ const LogInForm = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    useEffect(() => {
+        if (user.isAuth) redirect('/')
+    }, [user.isAuth])
+
     const handleLogin = async () => {
-        setEmail('')
-        setPassword('')
         try {
             await logIn(email, password)
+            setEmail('')
+            setPassword('')
             user.setUser(user)
             user.setIsAuth(true)
-            redirect('/')
         } catch (err) {
             alert(err.response.data.message)
         }
+        if (user.isAuth) redirect('/')
     }
 
     return (

@@ -40,7 +40,7 @@ const Wishlist = observer(() => {
     return (
         <div className="max-w-[1500px] mx-auto my-10">
             <h1 className="text-[2.5em]">My Wishlist</h1>
-            <div className="bg-categories m-auto shadow-xl my-15">
+            <div className="bg-categories m-auto shadow-xl my-35">
                 {
                     wishlist.items.length === 0 ?
                     <div className="m-auto w-full h-full flex items-center justify-center py-10">
@@ -62,7 +62,7 @@ const Wishlist = observer(() => {
                                 <li key={product.id}
                                     className="grid grid-cols-5 grid-rows-4 grid-flow-col-dense">
                                     <img className="w-[200px] row-span-4"
-                                        src={`http://192.168.1.2:5000/${product.preview_image}`}></img>
+                                        src={`http://localhost:5000/${product.preview_image}`}></img>
                                     <h2 className="text-[1.2em] col-span-3">{product.title}</h2>
                                     <p className=" col-span-3">Estimated delivery time: {product.shippingDate || "Not estimated"}</p>
                                     <div className="flex items-center row-span-2 col-span-3">

@@ -45,6 +45,7 @@ class ProductController {
             description,
             groupId
         } = req.body
+        console.log(req.body.preview_image)
         const {previewImage} = req.files
         const {descriptionImages} = req.files
 

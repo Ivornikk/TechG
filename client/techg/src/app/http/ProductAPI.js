@@ -1,7 +1,16 @@
 import { $authHost, $host } from ".";
 
-export const createProduct = async product => {
-    const {data} = await $authHost.post('api/product', product)
+export const createProduct = async ({
+    title,
+    price,
+    description,
+    preview_image,
+    description_images,
+    groupId
+}) => {
+    const {data} = await $authHost.post('api/product', {
+        title, price, description, preview_image, description_images, groupId
+    })
     return data
 }
 

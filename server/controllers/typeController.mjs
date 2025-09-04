@@ -34,7 +34,6 @@ class TypeController {
     }
     async remove(req, res) {
         const {id} = req.body
-        console.log("ID: ", id)
         const deleteCount = Type.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})

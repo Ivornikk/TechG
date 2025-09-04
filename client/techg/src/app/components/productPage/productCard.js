@@ -1,7 +1,7 @@
 'use client'
 import ProductVariations from "@/app/components/productVariations"
 import QuantityCounter from "../quantityCounter"
-import ProductPicturesCarousel from "../productPicturesCarousel"
+import ProductPicturesCarousel from "./productPicturesCarousel"
 import { useParams } from "next/navigation"
 import { fetchOneProduct } from "@/app/http/ProductAPI"
 import { useContext, useEffect, useState } from "react"

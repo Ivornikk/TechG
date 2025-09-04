@@ -89,7 +89,7 @@ const MyOrders = observer(() => {
                     <h3 className="text-[1.3em]">Amount</h3>
                     <h3 className="text-[1.3em]">Status</h3>
                     <h3 className="text-[1.3em]">Options</h3>
-                </div>)
+                </div>
                 {
                     order.orders.map(order => {
                         return (
@@ -98,7 +98,7 @@ const MyOrders = observer(() => {
                                 className="flex flex-col gap-3 border border-stroke">
                                 <div className="grid grid-cols-6 p-3">
                                     <div className="col-span-3 flex gap-2">
-                                        <img src={`http://192.168.1.2:5000/${order.items[0].product.preview_image}`}
+                                        <img src={`http://localhost:5000/${order.items[0].product.preview_image}`}
                                             className="w-[150px]"></img>
                                         <div className="flex flex-col gap-3">
                                             <p>{order.items[0].product.title}</p>
@@ -153,7 +153,7 @@ const MyOrders = observer(() => {
                                                         className="flex flex-col gap-5">
                                                         <div className="gap-3 grid grid-cols-6 p-5">
                                                             <div className="col-span-3 flex gap-2">
-                                                                <img src={`http://192.168.1.2:5000/${item.product.preview_image}`}
+                                                                <img src={`http://localhost:5000/${item.product.preview_image}`}
                                                                     className="w-[150px]"></img>
                                                                 <div className="flex flex-col gap-3">
                                                                     <p>{item.product.title}</p>

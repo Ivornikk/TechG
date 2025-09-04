@@ -1,4 +1,5 @@
 'use client'
+import CreateProuctForm from "@/app/components/createProductForm"
 import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
@@ -8,6 +9,7 @@ import { useContext, useEffect, useState } from "react"
 const Product = observer(() => {
     const [view, setView] = useState('products')
     const [editProduct, setEditProduct] = useState(0)
+    const [createProduct, setCreateProduct] = useState(false)
     const { product } = useContext(StoreContext)
     useEffect(() => {
         fetchProducts({ page: 1 }).then(data => {
@@ -71,10 +73,13 @@ const Product = observer(() => {
                             <h1 className="text-[2em] mb-5">Products</h1>
                             <div className="border-y border-stroke text-center">
                                 <button className="bg-brand text-white px-5 py-2 text-[1.5em] rounded-xl cursor-pointer border border-brand hover:bg-categories hover:text-brand transition my-3"
-                                    onClick={() => console.log('hello world')}>
+                                    onClick={() => setCreateProduct(true)}>
                                     Create Product
                                 </button>
                             </div>
+                            { createProduct &&
+                                <CreateProuctForm onHide={() => setCreateProduct(false)} />
+                            }
                             <ul className="flex flex-col gap-3 mt-10">
                                 {
                                     product.products.map(product => {
@@ -83,7 +88,7 @@ const Product = observer(() => {
                                                 className="flex justify-between grid grid-rows-3 grid-flow-col-dense">
                                                 <div className="flex gap-3 row-span-3 cursor-pointer"
                                                     onClick={ () => redirect(`/product/${product.id}`)}>
-                                                    <img src={`http://192.168.1.2:5000/${product.preview_image}`}
+                                                    <img src={`http://localhost:5000/${product.preview_image}`}
                                                         className="w-50"></img>
                                                     <div>
                                                         <h2 className="text-[1.3em]">

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import { useContext } from "react"
 import { StoreContext } from "../store/StoreProvider"
 
@@ -13,6 +13,7 @@ const Layout = ({children}) => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.removeItem('token')
+        redirect('/')
     }
 
     return (

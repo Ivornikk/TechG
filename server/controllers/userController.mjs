@@ -1,5 +1,5 @@
 import models from "../models/models.mjs"
-const {User, Basket} = models
+const {User, Basket, Wishlist} = models
 import bcrypt from 'bcrypt'
 import ApiError from '../errors/ApiError.mjs'
 import jwt from 'jsonwebtoken'
@@ -43,6 +43,7 @@ class UserController {
         })
         console.log("FLAG")
         await Basket.create({userId: user.id})
+        await Wishlist.create({userId: user.id})
         const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
         return res.json({token})
     }

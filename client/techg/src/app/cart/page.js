@@ -34,13 +34,13 @@ const Cart = observer(() => {
     }
 
     return (
-        <div className="max-w-[1600px] mx-auto my-10">
+        <div className="max-w-[1600px] mx-auto my-10 h-full">
             <h1 className="text-[2.5em]">Shopping cart</h1>
             <div className="grid grid-cols-4 gap-5">
-                <div className="bg-categories shadow-xl my-10 col-span-3">
+                <div className="bg-categories shadow-xl my-30 col-span-3">
                     {
                         basket.items.length === 0 ?
-                        <div className="m-auto w-full h-full flex items-center justify-center">
+                        <div className="m-auto w-full h-full py-10 flex items-center justify-center">
                             <div className="flex flex-col gap-5">
                                 <h1 className="text-[2em] text-gray-text">
                                     There are no itmes in your cart
@@ -59,7 +59,7 @@ const Cart = observer(() => {
                                     <li key={item.id}
                                         className="grid grid-cols-5 grid-rows-4 grid-flow-col-dense">
                                         <img className="w-[200px] row-span-4"
-                                            src={`http://192.168.1.2:5000/${item.preview_image}`}></img>
+                                            src={`http://localhost:5000/${item.preview_image}`}></img>
                                         <h2 className="text-[1.2em] col-span-3">{item.title}</h2>
                                         <p className=" col-span-3">Estimated delivery time: {item.shippingDate || 'Not estimated'}</p>
                                         <div className="flex items-center row-span-2 col-span-3">

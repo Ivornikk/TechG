@@ -36,8 +36,8 @@ class CategoryController {
         }
     }
     async remove(req, res) {
-        const {id} = req.params
-        const deleteCount = Category.destroy({where: id})
+        const {id} = req.body
+        const deleteCount = Category.destroy({where: {id: id}})
         if (deleteCount) return res.json({"message": "Success!"})
         else return res.json({"message": "Failure!"})
     }

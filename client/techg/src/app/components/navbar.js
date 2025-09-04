@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
         <nav className="xl:px-30 pb-0
-                        bg-brand fixed w-[100vw] top-0 px-2 z-50 flex text-white justify-between items-center">
+                        bg-brand fixed w-[100vw] top-0 px-2 flex text-white justify-between items-center">
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <Link href={'/'}
