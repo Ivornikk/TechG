@@ -12,7 +12,7 @@ class OrderStore {
         this._orders = orders
     }
 
-    setCurrentOrders(order) {
+    setCurrentOrder(order) {
         this._currentOrder = order
     }
 

@@ -35,6 +35,16 @@ class WishlistController {
         }
     }
 
+    async getFavorites(req, res, next) {
+        try {
+            const { productId } = req.params
+            const products = await WishlistProduct.findAndCountAll({where: {productId}})
+            return res.json(products)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async create(req, res, next) {
         const { userId } = req.body
 

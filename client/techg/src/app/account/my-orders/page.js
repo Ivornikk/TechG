@@ -3,6 +3,7 @@
 import { deleteOrder, fetchOrderByUser } from "@/app/http/OrderAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
+import { redirect } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 const MyOrders = observer(() => {
@@ -95,7 +96,8 @@ const MyOrders = observer(() => {
                         return (
                             order.items.length == 1 ?
                             <div key={order.id}
-                                className="flex flex-col gap-3 border border-stroke">
+                                className="group flex flex-col gap-3 border border-stroke cursor-pointer hover:bg-stroke transition"
+                                onClick={() => redirect(`/order/${order.id}`)}>
                                 <div className="grid grid-cols-6 p-3">
                                     <div className="col-span-3 flex gap-2">
                                         <img src={`http://localhost:5000/${order.items[0].product.preview_image}`}
@@ -118,7 +120,7 @@ const MyOrders = observer(() => {
                                         Cancel order
                                     </button>
                                 </div>
-                                <hr className="border-stroke w-full" />
+                                <hr className="border-stroke w-full group-hover:border-categories" />
                                 <div className="flex gap-10 p-3">
                                     <p>Order No: {order.items[0].orderNo || 'N/A'}</p>
                                     <p>Order Time: {order.createdAt}</p>
@@ -127,7 +129,8 @@ const MyOrders = observer(() => {
                             </div>
                             :
                                 <div key={order.id}
-                                    className="border border-stroke">
+                                    className="group border border-stroke cursor-pointer hover:bg-stroke transition"
+                                    onClick={() => redirect(`/order/${order.id}`)}>
                                     <div className="grid grid-cols-6 flex items-center p-5">
                                         <div className="col-span-3 flex flex-col gap-2">
                                             <p>Order Time: {order.createdAt}</p>
@@ -144,7 +147,7 @@ const MyOrders = observer(() => {
                                             Cancel order
                                         </button>
                                     </div>
-                                    <hr className="border-stroke w-full" />
+                                    <hr className="border-stroke w-full group-hover:border-categories" />
                                     <ul>
                                         {
                                             order.items.map(item => {
@@ -166,9 +169,9 @@ const MyOrders = observer(() => {
                                                                 {item.priceAtPurchase} $
                                                             </h3>
                                                         </div>
-                                                        <hr className="border-stroke w-full" />
+                                                        <hr className="border-stroke w-full group-hover:border-categories" />
                                                         <p className="px-5">Order No: {order.items[0].orderNo || 'N/A'}</p>
-                                                        <hr className="border-stroke w-full" />
+                                                        <hr className="border-stroke w-full group-hover:border-categories" />
                                                     </li>
                                                 )
                                             })

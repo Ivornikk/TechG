@@ -1,4 +1,4 @@
-import { $authHost } from "."
+import { $authHost, $host } from "."
 
 export const fetchOneWishlist = async (userId) => {
     const {data} = await $authHost.get(`api/wishlist/${userId}`)
@@ -34,4 +34,9 @@ export const removeWishlist = async ({userId, productId}) => {
         userId, productId
     })
     return data
+}
+
+export const fetchNumberOfFavorites = async productId => {
+    const {data} = await $host.get(`api/wishlist/${productId}/get-favorites`)
+    return data.count
 }

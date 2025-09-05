@@ -16,17 +16,26 @@ class OrderController {
         }
     }
     async getOne(req, res, next) {
-        const {id} = req.params
         try {
-            let order = await Order.findOne({
-                where: {id}
-            })
-            const products = await OrderProduct.findAll({
-                where: {orderId: id}
-            })
+            const {id} = req.params
+            const order = await Order.findOne({where: {id}})
+
+            const items = await OrderProduct.findAll({where: {orderId: order.id}})
+            order.setDataValue('items', items)
+
+            order.dataValues.items = await Promise.all(
+                order.dataValues.items.flatMap(async item => {
+                    const product = await Product.findOne({where: {id: item.productId}})
+                    item.setDataValue('product', product)
+                    return item
+                })
+            )
+
+            const address = await Address.findOne({where: {id: order.addressId}})
+            order.setDataValue('address', address)
+            
             return res.json(order)
-        }
-        catch (err) {
+        } catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }
