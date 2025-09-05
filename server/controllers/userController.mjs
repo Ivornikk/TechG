@@ -25,47 +25,103 @@ class UserController {
             role,
             avatar
         } = req.body
-        const candidate = await User.findOne({where: {email}})
-        if (candidate) {
-            return next(ApiError.badRequest('User with this email already exists.'))
+
+        try {
+
+            const candidate = await User.findOne({where: {email}})
+            if (candidate) {
+                return next(ApiError.badRequest('User with this email already exists.'))
+            }
+            const hashPassword = await bcrypt.hash(password, 5)
+            const user = await User.create({
+                username,
+                phoneNumber,
+                email,
+                password: hashPassword,
+                country,
+                currency,
+                language,
+                role,
+                avatar,
+            })
+            await Basket.create({userId: user.id})
+            await Wishlist.create({userId: user.id})
+    
+            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
+    
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+    
+            return res.status(201).json(user)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
         }
-        const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({
-            username,
-            phoneNumber,
-            email,
-            password: hashPassword,
-            country,
-            currency,
-            language,
-            role,
-            avatar,
-        })
-        console.log("FLAG")
-        await Basket.create({userId: user.id})
-        await Wishlist.create({userId: user.id})
-        const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
-        return res.json({token})
     }
     
     async login(req, res, next) {
+        console.log('FLAG')
         const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
-        if (!user) {
-            return next(ApiError.badRequest('User not found'))
+
+        try {
+            const user = await User.findOne({where: {email}})
+            if (!user) {
+                return next(ApiError.badRequest('User not found'))
+            }
+            let comparePassword = bcrypt.compareSync(password, user.password)
+            if (!comparePassword) {
+                return next(ApiError.badRequest('Incorrect password'))
+            }
+            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
+    
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+            console.log(res.cookie)
+
+            return res.json(user)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
-        if (!comparePassword) {
-            return next(ApiError.badRequest('Incorrect password'))
-        }
-        const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
-        return res.json({token})
     }
     
     async check(req, res, next) {
+        const user = req.user
+
         try {
-            const token = generateJwtToken(req.user.id, req.user.username, req.user.email, req.user.role, req.user.avatar)
-            return res.json({token})
+            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
+
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+
+            return res.json(user)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async logOut(req, res, next) {
+        try {
+            res.clearCookie('token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                path: '/'
+            })
+            return res.json({message: 'Logged out successfully'})
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }
@@ -92,6 +148,7 @@ class UserController {
                 else return res.json({message: 'Passwrods do not match'})
             }
             await user.save()
+            console.log('USER: ', user)
             return res.json(user)
         } catch (err) { 
             next(ApiError.badRequest(err.message))

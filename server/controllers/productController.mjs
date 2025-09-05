@@ -39,30 +39,37 @@ class ProductController {
     }
 
     async create(req, res, next) {
+        try {
         const {
             title,
             price,
             description,
-            groupId
+            groupId,
         } = req.body
-        console.log(req.body.preview_image)
         const {previewImage} = req.files
         const {descriptionImages} = req.files
 
+        console.log(req.files)
+
         let previewFileName = v4() + '.jpg'
         let descriptionImagesNames = []
-        
-        previewImage.mv(`${process.cwd()}\\static\\${previewFileName}`)
 
-        for (let i = 0; i < descriptionImages.length; i++)
+        previewImage.mv(`${process.cwd()}\\static\\${previewFileName}`)
+        if (Array.isArray(descriptionImages)) {
+            for (let i = 0; i < descriptionImages.length; i++)
+                descriptionImagesNames.push(v4() + '.jpg')
+            
+            descriptionImages.map((image, index) => {
+                image.mv(`${process.cwd()}\\static\\${descriptionImagesNames[index]}`)
+            })
+        }
+        else {
             descriptionImagesNames.push(v4() + '.jpg')
-        descriptionImages.map((image, index) => {
-            image.mv(`${process.cwd()}\\static\\${descriptionImagesNames[index]}`)
-        })
+            descriptionImages.mv(`${process.cwd()}\\static\\${descriptionImagesNames[0]}`)
+        }
         
         descriptionImagesNames = descriptionImagesNames.toString()
 
-        try {
             const product = await createProduct({
                 title: title, 
                 price: price, 
@@ -77,6 +84,7 @@ class ProductController {
             next(ApiError.badRequest(err.message))
         }
     }
+
     async remove(req, res) {
         const {id} = req.body
         let deleteCount = Product.destroy({where: {id: id}})

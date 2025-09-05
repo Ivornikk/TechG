@@ -1,5 +1,5 @@
 'use client'
-import CreateProuctForm from "@/app/components/createProductForm"
+import CreateProuctForm from "@/app/components/forms/createProductForm"
 import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
@@ -28,7 +28,7 @@ const Product = observer(() => {
 
     const removeProduct = id => {
         deleteProduct(id)
-        .then(() => {
+        .finally(() => {
             fetchProducts({ page: 1 }).then(data => {
                 product.setProducts(data.rows)
             })

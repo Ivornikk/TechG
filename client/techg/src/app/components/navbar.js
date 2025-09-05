@@ -1,13 +1,13 @@
-import Categories from "./categories"
+import Categories from "./navbar/categories"
 import Link from "next/link"
-import NavbarAuthButtons from "./navbarAuthButtons"
-import SearchPanel from "./searchPanel"
+import NavbarAuthButtons from "./navbar/navbarAuthButtons"
+import SearchPanel from "./navbar/searchPanel"
 
 const Navbar = () => {
 
     return (
         <nav className="xl:px-30 pb-0
-                        bg-brand fixed w-[100vw] top-0 px-2 flex text-white justify-between items-center">
+                        bg-brand fixed w-[100vw] z-50 top-0 px-2 flex text-white justify-between items-center">
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <Link href={'/'}

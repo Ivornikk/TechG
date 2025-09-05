@@ -11,7 +11,10 @@ import fileUpload from 'express-fileupload'
 const App = express()
 
 
-App.use(cors())
+App.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:9200'],
+    credentials: true
+}))
 App.use(express.json())
 App.use(express.static(`${process.cwd()}\\static`))
 App.use(fileUpload({}))

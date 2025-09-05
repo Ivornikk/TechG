@@ -23,8 +23,8 @@ export const signUp = async ({
         role,
         avatar
     })
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
+    
+    return data.user
 }
 
 export const logIn = async (email, password) => {
@@ -32,14 +32,18 @@ export const logIn = async (email, password) => {
         email,
         password
     })
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
+    
+    return data.user
 }
 
 export const auth = async () => {
-    const {data} = await $authHost.get('api/user/auth' )
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
+    const {data} = await $authHost.get('api/user/auth')
+    return data
+}
+
+export const logOut = async () => {
+    const {data} = await $authHost.delete('api/user/log-out')
+    return data
 }
 
 export const editUser = async ({

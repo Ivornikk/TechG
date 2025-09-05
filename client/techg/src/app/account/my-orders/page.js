@@ -108,7 +108,7 @@ const MyOrders = observer(() => {
                                         </div>
                                     </div>
                                     <h3 className="text-[1.2em]">
-                                        {order.items[0].product.price} $
+                                        {order.items[0].priceAtPurchase} $
                                     </h3>
                                     <h3 className="text-[1.2em]">
                                         {order.status}

@@ -1,5 +1,5 @@
 'use client'
-import ProductVariations from "@/app/components/productVariations"
+import ProductVariations from "@/app/components/productPage/productVariations"
 import QuantityCounter from "../quantityCounter"
 import ProductPicturesCarousel from "./productPicturesCarousel"
 import { useParams } from "next/navigation"

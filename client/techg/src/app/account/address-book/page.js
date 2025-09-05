@@ -1,6 +1,6 @@
 'use client'
 
-import AddAddressForm from "@/app/components/addAddressForm"
+import AddAddressForm from "@/app/components/forms/addAddressForm"
 import { createAddress, fetchUserAddresses, removeAddress } from "@/app/http/AddressAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"

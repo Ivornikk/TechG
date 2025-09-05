@@ -4,15 +4,19 @@ import Link from "next/link"
 import { redirect, usePathname } from "next/navigation"
 import { useContext } from "react"
 import { StoreContext } from "../store/StoreProvider"
+import { logOut } from "../http/UserAPI"
 
 const Layout = ({children}) => {
     const { user } = useContext(StoreContext)
     const pathname = usePathname()
 
-    const LogOut = () => {
+    const LogOut = async () => {
         user.setUser({})
         user.setIsAuth(false)
-        localStorage.removeItem('token')
+        logOut()
+        .then(data => {
+            alert(data.message)
+        })
         redirect('/')
     }
 

@@ -6,7 +6,7 @@ route.get('/', controller.getAll)
 route.get('/:id', controller.getOne)
 route.get('/:userId/get-products', controller.getByUser)
 route.post('/', controller.create)
-route.patch('/:id/add-product', controller.addProduct)
+route.patch('/:id/add-track-number', controller.addProduct)
 route.delete('/', controller.remove)
 
 export default route

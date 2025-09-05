@@ -1,8 +1,8 @@
 'use client'
 
 import { useContext, useState, useEffect } from "react"
-import { StoreContext } from "../store/StoreProvider"
-import { createAddress, fetchUserAddresses } from "../http/AddressAPI"
+import { StoreContext } from "../../store/StoreProvider"
+import { createAddress, fetchUserAddresses } from "../../http/AddressAPI"
 import { observer } from "mobx-react-lite"
 
 const AddAddressForm = observer(({isShown, onHide}) => {

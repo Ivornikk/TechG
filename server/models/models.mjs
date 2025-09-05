@@ -31,7 +31,8 @@ const Order = sequelize.define('order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     createdAt: {type: DataTypes.DATE},
     status: {type: DataTypes.STRING, allowNull: false, defaultValue: "Pending"},
-    paymentMethod: {type: DataTypes.STRING, allowNull: false}
+    paymentMethod: {type: DataTypes.STRING, allowNull: false},
+    trackingNumber: {type: DataTypes.STRING, allowNull: true}
 })
 
 const OrderProduct = sequelize.define('order_product', {

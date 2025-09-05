@@ -131,6 +131,21 @@ class OrderController {
             next(ApiError.badRequest(err.message))
         }
     }
+
+    async addTrackingNum(req, res, next) {
+        const {id, trackingNumber} = req.body
+
+        try {
+            const order = await Order.findOne({where: {id}})
+            order.trackingNumber = trackingNumber
+            order.save()
+
+            return res.json(order)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async remove(req, res) {
         const {id} = req.body
         OrderProduct.destroy({

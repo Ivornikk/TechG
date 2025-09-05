@@ -1,15 +1,10 @@
 import { $authHost, $host } from ".";
 
-export const createProduct = async ({
-    title,
-    price,
-    description,
-    preview_image,
-    description_images,
-    groupId
-}) => {
-    const {data} = await $authHost.post('api/product', {
-        title, price, description, preview_image, description_images, groupId
+export const createProduct = async (product) => {
+    const {data} = await $authHost.post('api/product', product, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     })
     return data
 }

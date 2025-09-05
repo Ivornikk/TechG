@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react"
 import { auth } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
 import { redirect, usePathname } from "next/navigation"
-import { AuthRoutes, PublicRoutes } from "../routes"
+import { AuthRoutes } from "../routes"
 
 const Loader = () => {
     const [loading, setLoading] = useState(true)
@@ -14,7 +14,6 @@ const Loader = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                setLoading(true)
                 const data = await auth()
                 user.setUser(data)
                 user.setIsAuth(true)

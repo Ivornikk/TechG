@@ -17,6 +17,7 @@ class WishlistController {
         const { userId } = req.params
         try {
             const wishlist = await Wishlist.findAll({where: {userId}})
+            console.log(wishlist)
             const items = await WishlistProduct.findAll({where: {wishlistId: wishlist[0].id}})
 
             const productsSearch = items.flatMap(item => {

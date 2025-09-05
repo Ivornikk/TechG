@@ -1,9 +1,9 @@
 'use client'
 
 import { useContext, useEffect, useState } from "react"
-import { StoreContext } from "../store/StoreProvider"
+import { StoreContext } from "../../store/StoreProvider"
 import { observer } from "mobx-react-lite"
-import { createProduct, fetchGroups } from "../http/ProductAPI"
+import { createProduct, fetchGroups, fetchProducts } from "../../http/ProductAPI"
 
 const CreateProuctForm = observer(({onHide}) => {
 
@@ -12,7 +12,7 @@ const CreateProuctForm = observer(({onHide}) => {
     const [title, setTitle] = useState('')
     const [price, setPrice] = useState(0.00)
     const [description, setDescription] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    const [previewImage, setPreviewImage] = useState({})
     const [descriptionImages, setDescriptionImages] = useState([])
     const [groupId, setGroupId] = useState(0)
 
@@ -25,18 +25,26 @@ const CreateProuctForm = observer(({onHide}) => {
     }, [])
 
     const addProduct = () => {
-        createProduct({
-            title: title,
-            description: description,
-            price: Number(price),
-            preview_image: previewImage,
-            description_images: descriptionImages,
-            groupId: groupId
-        })
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('price', price)
+        formData.append('description', description)
+        formData.append('groupId', groupId)
+        formData.append('previewImage', previewImage)
+        console.log(descriptionImages)
+        for (let i = 0; i < descriptionImages.length; i++) {
+            console.log('FLAG')
+            formData.append('descriptionImages', descriptionImages[i])
+        }
+
+        createProduct(formData)
         .then(() => {
             fetchGroups()
             .then(data => {
                 product.setGroups(data.rows)
+            })
+            fetchProducts({ page: 1 }).then(data => {
+                product.setProducts(data.rows)
             })
         })
     }
@@ -82,9 +90,9 @@ const CreateProuctForm = observer(({onHide}) => {
                         placeholder="Choose preview image"
                         onChange={e => setPreviewImage(e.target.files[0])}
                         className="px-1 py-1 border border-brand rounded"></input>
-                    <input type="file"
+                    <input type="file" multiple
                         placeholder="Choose carousel images"
-                        onChange={e => setDescriptionImages(e.target.files)}
+                        onChange={e => setDescriptionImages(Array.from(e.target.files))}
                         className="px-1 py-1 border border-brand rounded"></input>
                 </div>
             </form>

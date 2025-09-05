@@ -2,8 +2,8 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { StoreContext } from "../store/StoreProvider";
-import { logIn } from "../http/UserAPI";
+import { StoreContext } from "../../store/StoreProvider";
+import { logIn } from "../../http/UserAPI";
 import { redirect } from "next/navigation";
 
 

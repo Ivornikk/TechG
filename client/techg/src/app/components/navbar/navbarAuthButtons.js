@@ -2,7 +2,7 @@
 import { observer } from "mobx-react-lite"
 import { useContext } from "react"
 import Link from "next/link"
-import { StoreContext } from "../store/StoreProvider"
+import { StoreContext } from "../../store/StoreProvider"
 
 const NavbarAuthButtons = observer(() => {
     const {user} = useContext(StoreContext)

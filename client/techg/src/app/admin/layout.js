@@ -9,49 +9,49 @@ const Layout = ({children}) => {
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/dashboard'}>
-                            <img src="/adminDashboardIcon.svg"></img>
+                            <img src="/dashboardIcon.svg" width={40}></img>
                         Dashboard
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/products'}>
-                            <img src="/adminProductsIcon.svg"></img>
+                            <img src="/productsIcon.svg" width={40}></img>
                         Products
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/orders'}>
-                            <img src="/adminOrdersIcon.svg"></img>
+                            <img src="/adminOrdersIcon.svg" width={40}></img>
                         Orders
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/clients'}>
-                            <img src="/adminClientsIcon.svg"></img>
+                            <img src="/clientsIcon.svg" width={40}></img>
                         Clients
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/delivery'}>
-                            <img src="/adminDeliveryIcon.svg"></img>
+                            <img src="/deliveryIcon.svg" width={40}></img>
                         Delivery
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/transactions'}>
-                            <img src="/adminTransactionsIcon.svg"></img>
+                            <img src="/transactionsIcon.svg" width={40}></img>
                         Transactions
                         </Link>
                     </li>
                     <li className={'hover:translate-x-5 transition'}>
                         <Link className="flex items-center gap-3 text-xl"
                             href={'/admin/settings'}>
-                            <img src="/adminSettingsIcon.svg"></img>
+                            <img src="/settingsIcon.svg" width={40}></img>
                         Settings
                         </Link>
                     </li>
