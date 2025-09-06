@@ -49,3 +49,10 @@ export const addTrackingNum = async ({id, trackingNumber}) => {
     })
     return data
 }
+
+export const EditStatus = async ({id, status}) => {
+    const {data} = await $authHost.patch('api/order/edit-status', {
+        id, status
+    })
+    return data
+}

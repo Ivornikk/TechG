@@ -1,30 +1,31 @@
 'use client'
 
-import { addTrackingNum } from "@/app/http/OrderAPI"
+import { EditStatus } from "@/app/http/OrderAPI"
 import { useState } from "react"
 
-const EditTrackingNumber = ({orderId, onHide, fetchOrders}) => {
-    const [trackingNumber, setTrackingNumber] = useState('')
+const EditOrderStatus = ({orderId, onHide, fetchOrders}) => {
+    const [status, setStatus] = useState('')
 
-    const addTrackingNumber = async () => {
+    const editStatus = async () => {
         try {
-            const res = await addTrackingNum({id: orderId, trackingNumber})
-            if (res.TrackingNumber != null) alert('Tracking number added successfully!')
+            await EditStatus({id: orderId, status})
+            alert('Status changed successfully!')
             fetchOrders()
             onHide()
+
         } catch (err) {
             alert(err.response.data.message)
         }
     }
 
     return (
-        <form className="flex gap-5 my-3"
+        <form className="flex gap-3 my-3"
             onSubmit={e => e.preventDefault()}>
             <input className="border border-brand px-3 rounded"
-                onChange={e => setTrackingNumber(e.target.value)} />
+                onChange={e => setStatus(e.target.value)} />
             <button className="px-3 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:bg-white hover:text-brand transition"
-                onClick={addTrackingNumber}>
-                Add
+                onClick={editStatus}>
+                Change
             </button>
             <button className="px-3 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:bg-white hover:text-brand transition"
                 onClick={onHide}>
@@ -34,4 +35,4 @@ const EditTrackingNumber = ({orderId, onHide, fetchOrders}) => {
     )
 }
 
-export default EditTrackingNumber
+export default EditOrderStatus

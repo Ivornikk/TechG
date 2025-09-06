@@ -13,7 +13,9 @@ class OrderController {
 
             const whereClause = filter.trackingNum == 'true' ? 
                 {trackingNumber: {[Op.ne]: null}} :
+                filter.trackingNum == 'all' ? {} :
                 {trackingNumber: null}
+                
             if (filter.status != 'all') {
                 whereClause.status = filter.status
             }
@@ -165,6 +167,22 @@ class OrderController {
                 {where: { id }}
             )
             order.trackingNumber = trackingNumber
+            order.save()
+
+            return res.json(order)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async EditStatus(req, res, next) {
+        try {
+            const {id, status} = req.body
+
+            const order = await Order.findOne({
+                where: { id }
+            })
+            order.status = status
             order.save()
 
             return res.json(order)

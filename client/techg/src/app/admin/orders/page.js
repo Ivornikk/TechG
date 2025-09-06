@@ -7,27 +7,30 @@ import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react"
 import dayjs from "dayjs"
 import EditTrackingNumber from "@/app/components/forms/editTrackingNumber"
+import EditOrderStatus from "@/app/components/forms/editOrderStatus"
 
 const Orders = observer(() => {
     const {order} = useContext(StoreContext)
 
     const [sort, setSort] = useState(['createdAt', 'ASC'])
-    const [trackingNumFilter, setTrackingNumfilter] = useState(false)
+    const [trackingNumFilter, setTrackingNumfilter] = useState('all')
     const [statusFilter, setStatusFilter] = useState('all')
     const [trackEditing, setTrackEditing] = useState({orderId: 0, state: false})
     const [statusEditing, setStatusEditing] = useState({orderId: 0, state: false})
 
-    useEffect(() => {
-        fetchAllOrders({
+    const refreshOrders = async () => {
+        const data = await fetchAllOrders({
             page: 1, limit: 10, sort: sort, filter: {
                 trackingNum: trackingNumFilter,
                 status: statusFilter
             }
         })
-        .then(data => {
-            order.setOrders(data.rows)
-            order.setOrdersCount(data.count)
-        })
+        order.setOrders(data.rows)
+        order.setOrdersCount(data.count)
+    }
+
+    useEffect(() => {
+        refreshOrders()
     }, [sort, trackingNumFilter, statusFilter])
 
     return (
@@ -47,6 +50,10 @@ const Orders = observer(() => {
                     <div className="flex  gap-5 text-[1.1em] my-2">
                         <select className="border border-black rounded p-1"
                             onChange={e => {setTrackingNumfilter(e.target.value)}}>
+                            <option
+                                value={'all'}>
+                                All
+                            </option>
                             <option
                                 value={false}>
                                 Without tracking number
@@ -106,17 +113,21 @@ const Orders = observer(() => {
                                             Order details
                                         </button>
                                         { trackEditing.orderId == order.id && trackEditing.state ?
-                                            <EditTrackingNumber orderId={order.id} onHide={() => setTrackEditing({orderId: 0, state: false})} />
+                                            <EditTrackingNumber orderId={order.id} onHide={() => setTrackEditing({orderId: 0, state: false})} fetchOrders={refreshOrders} />
                                             :
                                             <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
                                                 onClick={() => setTrackEditing({orderId: order.id, state: true})}>
                                                 {order.trackingNumber ? 'Edit' : 'Add'} tracking number
                                             </button>
                                         }
-                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
-                                            onClick={() => setStatusEditing([{orderId: order.id}, true])}>
-                                            Change status
-                                        </button>
+                                        { statusEditing.orderId == order.id && statusEditing.state ?
+                                            <EditOrderStatus orderId={order.id} onHide={() => setStatusEditing({orderId: 0, state: false})} fetchOrders={refreshOrders} />
+                                            :    
+                                            <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
+                                                onClick={() => setStatusEditing({orderId: order.id, state: true})}>
+                                                Change status
+                                            </button>
+                                        }
                                     </div>
                                 </li>
                             )
