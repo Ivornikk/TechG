@@ -159,8 +159,11 @@ class OrderController {
 
     async addTrackingNum(req, res, next) {
         try {
+            console.log(req.body)
             const {id, trackingNumber} = req.body
-            const order = await Order.findOne({where: {id}})
+            const order = await Order.findOne(
+                {where: { id }}
+            )
             order.trackingNumber = trackingNumber
             order.save()
 

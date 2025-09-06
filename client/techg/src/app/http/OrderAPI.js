@@ -43,9 +43,9 @@ export const deleteOrder = async id => {
     return data
 }
 
-export const addTrackingNum = async ({id, trackingNum}) => {
+export const addTrackingNum = async ({id, trackingNumber}) => {
     const {data} = await $authHost.patch('api/order/add-track-number', {
-        id, trackingNum
+        id, trackingNumber
     })
     return data
 }

@@ -6,15 +6,18 @@ import { DownArrow, UpArrow } from "@/app/utils/symbols"
 import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react"
 import dayjs from "dayjs"
+import EditTrackingNumber from "@/app/components/forms/editTrackingNumber"
 
 const Orders = observer(() => {
     const {order} = useContext(StoreContext)
+
     const [sort, setSort] = useState(['createdAt', 'ASC'])
     const [trackingNumFilter, setTrackingNumfilter] = useState(false)
     const [statusFilter, setStatusFilter] = useState('all')
+    const [trackEditing, setTrackEditing] = useState({orderId: 0, state: false})
+    const [statusEditing, setStatusEditing] = useState({orderId: 0, state: false})
 
     useEffect(() => {
-        
         fetchAllOrders({
             page: 1, limit: 10, sort: sort, filter: {
                 trackingNum: trackingNumFilter,
@@ -45,12 +48,12 @@ const Orders = observer(() => {
                         <select className="border border-black rounded p-1"
                             onChange={e => {setTrackingNumfilter(e.target.value)}}>
                             <option
-                                value={true}>
-                                With tracking number
-                            </option>
-                            <option
                                 value={false}>
                                 Without tracking number
+                            </option>
+                            <option
+                                value={true}>
+                                With tracking number
                             </option>
                         </select>
                         <select className="border border-black rounded p-1"
@@ -79,6 +82,7 @@ const Orders = observer(() => {
                     </div>
                 </div>
             </div>
+            <h1 className="text-[2em] text-center">{order.ordersCount} Results</h1>
             <div className="bg-categories shadow-xl my-5 p-5">
                 <ul className="flex flex-col gap-5">
                     { order.orders.length == 0 ?
@@ -101,10 +105,16 @@ const Orders = observer(() => {
                                         <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
                                             Order details
                                         </button>
-                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
-                                            Add tracking number
-                                        </button>
-                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
+                                        { trackEditing.orderId == order.id && trackEditing.state ?
+                                            <EditTrackingNumber orderId={order.id} onHide={() => setTrackEditing({orderId: 0, state: false})} />
+                                            :
+                                            <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
+                                                onClick={() => setTrackEditing({orderId: order.id, state: true})}>
+                                                {order.trackingNumber ? 'Edit' : 'Add'} tracking number
+                                            </button>
+                                        }
+                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
+                                            onClick={() => setStatusEditing([{orderId: order.id}, true])}>
                                             Change status
                                         </button>
                                     </div>
