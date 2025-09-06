@@ -9,7 +9,6 @@ import { useContext, useEffect, useState } from "react"
 const MyOrders = observer(() => {
 
     const {user, order} = useContext(StoreContext)
-    console.log(user.user)
     const userId = user.user.id
     const [filter, setFilter] = useState('all')
 

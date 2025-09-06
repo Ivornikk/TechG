@@ -1,5 +1,12 @@
 import { $authHost } from "."
 
+export const fetchAllOrders = async ({page=1, limit=10, sort, filter}) => {
+    const {data} = await $authHost.get('api/order', {
+        params: {page, limit, sort: JSON.stringify(sort), filter: JSON.stringify(filter)},
+    })
+    return data
+}
+
 export const createOrder = async ({
     status,
     paymentMethod,
@@ -32,6 +39,13 @@ export const fetchOneOrder = async (orderId) => {
 export const deleteOrder = async id => {
     const {data} = await $authHost.delete('api/order', {
         data: {id}
+    })
+    return data
+}
+
+export const addTrackingNum = async ({id, trackingNum}) => {
+    const {data} = await $authHost.patch('api/order/add-track-number', {
+        id, trackingNum
     })
     return data
 }

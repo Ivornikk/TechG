@@ -6,6 +6,7 @@ import { makeAutoObservable } from "mobx"
     constructor() {
         this._isAuth = false
         this._user = []
+        this._users = []
         makeAutoObservable(this)
     }
 
@@ -15,6 +16,9 @@ import { makeAutoObservable } from "mobx"
     setUser(user) {
         this._user = user
     }
+    setUsers(users) {
+        this._users = users
+    }
 
     get isAuth() {
         return this._isAuth
@@ -22,6 +26,10 @@ import { makeAutoObservable } from "mobx"
 
     get user() {
         return this._user
+    }
+
+    get users() {
+        return this._users
     }
 
 }

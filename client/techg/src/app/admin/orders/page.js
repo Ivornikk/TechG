@@ -1,0 +1,121 @@
+'use client'
+
+import { fetchAllOrders } from "@/app/http/OrderAPI"
+import { StoreContext } from "@/app/store/StoreProvider"
+import { DownArrow, UpArrow } from "@/app/utils/symbols"
+import { observer } from "mobx-react-lite"
+import { useContext, useEffect, useState } from "react"
+import dayjs from "dayjs"
+
+const Orders = observer(() => {
+    const {order} = useContext(StoreContext)
+    const [sort, setSort] = useState(['createdAt', 'ASC'])
+    const [trackingNumFilter, setTrackingNumfilter] = useState(false)
+    const [statusFilter, setStatusFilter] = useState('all')
+
+    useEffect(() => {
+        
+        fetchAllOrders({
+            page: 1, limit: 10, sort: sort, filter: {
+                trackingNum: trackingNumFilter,
+                status: statusFilter
+            }
+        })
+        .then(data => {
+            order.setOrders(data.rows)
+            order.setOrdersCount(data.count)
+        })
+    }, [sort, trackingNumFilter, statusFilter])
+
+    return (
+        <div className="max-w-[1300px] flex flex-col gap-5">
+            <div className="bg-categories shadow-xl my-5 p-5 flex gap-10">
+                <div>
+                    <h3 className="text-gray-text text-md">Sort by:</h3>
+                    <div className="flex gap-5 text-[1.3em] my-2">
+                        <button className={`hover:underline cursor-pointer flex`}
+                            onClick={() => setSort(['createdAt', sort[1]=='ASC'?'DESC':'ASC'])}>
+                            Date ({sort[1]=='ASC'?<UpArrow />:<DownArrow />})
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h3 className="text-gray-text text-md">Filter:</h3>
+                    <div className="flex  gap-5 text-[1.1em] my-2">
+                        <select className="border border-black rounded p-1"
+                            onChange={e => {setTrackingNumfilter(e.target.value)}}>
+                            <option
+                                value={true}>
+                                With tracking number
+                            </option>
+                            <option
+                                value={false}>
+                                Without tracking number
+                            </option>
+                        </select>
+                        <select className="border border-black rounded p-1"
+                            onChange={e => {setStatusFilter(e.target.value)}}>
+                            <option
+                                value={'all'}>
+                                    All
+                            </option>
+                            <option
+                                value={'Payment pending'}>
+                                Payment pending
+                            </option>
+                            <option
+                                value={'pending'}>
+                                pending
+                            </option>
+                            <option
+                                value={'processing'}>
+                                processing
+                            </option>
+                            <option
+                                value={'shipped'}>
+                                shipped
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="bg-categories shadow-xl my-5 p-5">
+                <ul className="flex flex-col gap-5">
+                    { order.orders.length == 0 ?
+                        <div className="text-[2em] flex justify-center items-center p-20">
+                            No Orders Found
+                        </div>
+                        :
+                        order.orders.map(order => {
+                            return (
+                                <li key={order.id}
+                                    className="border border-stroke p-5 text-xl">
+                                        <h2 className="text-[1.2em] my-5">Order ID: {order.id}</h2>
+                                    <div className="grid grid-rows-3 grid-flow-col-dense">
+                                        <div>User id: {order.userId}</div>
+                                        <div>Status: {order.status}</div>
+                                        <div>Date: {dayjs(order.createdAt).format("DD.MM.YYYY HH:mm")}</div>
+                                        <div>Tracking Number: {order.trackingNumber || 'N/A'}</div>
+                                        <div>Payment Method: {order.paymentMethod}</div>
+                                        <div>Address id: {order.addressId}</div>
+                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
+                                            Order details
+                                        </button>
+                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
+                                            Add tracking number
+                                        </button>
+                                        <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">
+                                            Change status
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+        </div>
+    )
+})
+
+export default Orders

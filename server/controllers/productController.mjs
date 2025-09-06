@@ -10,7 +10,9 @@ class ProductController {
         const {page} = req.query || 1
         let offset = page * limit - limit
         try {
-            const products = await Product.findAndCountAll({limit, offset})
+            const products = await Product.findAndCountAll({
+                limit, offset
+            })
             return res.json(products)
         }
         catch (err) {

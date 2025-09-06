@@ -1,14 +1,30 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
+import { Op } from "sequelize"
 const {Order, Address, Product, OrderProduct} =  models
 
 class OrderController {
     async getAll(req, res, next) {
-        const {limit, page} = req.query
-        let offset = page * limit - limit
         try {
-            let orders
-            orders = await Order.findAndCountAll({limit, offset})
+            const {limit, page} = req.query
+            const sort = JSON.parse(req.query.sort)
+            const filter = JSON.parse(req.query.filter)
+            let offset = page * limit - limit
+
+            const whereClause = filter.trackingNum == 'true' ? 
+                {trackingNumber: {[Op.ne]: null}} :
+                {trackingNumber: null}
+            if (filter.status != 'all') {
+                whereClause.status = filter.status
+            }
+            
+            const orders = await Order.findAndCountAll({
+                limit, offset,
+                where: whereClause,
+                order: [
+                    sort
+                ]
+            })
             return res.json(orders)
         }
         catch (err) {
@@ -142,9 +158,8 @@ class OrderController {
     }
 
     async addTrackingNum(req, res, next) {
-        const {id, trackingNumber} = req.body
-
         try {
+            const {id, trackingNumber} = req.body
             const order = await Order.findOne({where: {id}})
             order.trackingNumber = trackingNumber
             order.save()
