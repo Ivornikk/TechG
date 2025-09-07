@@ -1,6 +1,9 @@
 'use client'
+import CreateCategoryForm from "@/app/components/forms/createCategoryForm"
+import CreateGroupForm from "@/app/components/forms/createGroupForm"
 import CreateProuctForm from "@/app/components/forms/createProductForm"
-import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes } from "@/app/http/ProductAPI"
+import CreateTypeForm from "@/app/components/forms/createTypeForm"
+import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes, removeCategory, removeGroup, removeType } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
@@ -8,31 +11,78 @@ import { useContext, useEffect, useState } from "react"
 
 const Product = observer(() => {
     const [view, setView] = useState('products')
-    const [editProduct, setEditProduct] = useState(0)
     const [createProduct, setCreateProduct] = useState(false)
+    const [createCategory, setCreateCategory] = useState(false)
+    const [createType, setCreateType] = useState(false)
+    const [createGroup, setCreateGroup] = useState(false)
+    
     const { product } = useContext(StoreContext)
-    useEffect(() => {
-        fetchProducts({ page: 1 }).then(data => {
-            product.setProducts(data.rows)
-        })
-        fetchCategories().then(data => {
+
+    const getProducts = async () => {
+        const data = await fetchProducts({ page: 1 })
+        product.setProducts(data.rows)
+    }
+    const getCategories = () => {
+        fetchCategories()
+        .then(data => {
             product.setCategories(data.rows)
         })
-        fetchTypes().then(data => {
-            product.setTypes(data.rows)
-        })
-        fetchGroups().then(data => {
-            product.setGroups(data.rows)
-        })
+    }
+
+    const getTypes = async () => {
+        const data = await fetchTypes()
+        product.setTypes(data.rows)
+    }
+
+    const getGroups = async () => {
+        const data = await fetchGroups()
+        product.setGroups(data.rows)
+    }
+
+    useEffect(() => {
+        getProducts()
+        getCategories()
+        getTypes()
+        getGroups()
     }, [])
 
-    const removeProduct = id => {
-        deleteProduct(id)
-        .finally(() => {
-            fetchProducts({ page: 1 }).then(data => {
-                product.setProducts(data.rows)
+    const deleteProduct = async id => {
+        try {
+            const res = await deleteProduct(id)
+            fetchProducts()
+            alert(res.message)
+        } catch (err) {
+            alert(err.message)
+        }
+    }
+    const deleteCategory = id => {
+        try {
+            removeCategory(id)
+            .then (res => {
+                getCategories()
+                alert(res.message)
             })
-        })
+        }  catch (err) {
+            alert(err.message)
+        }
+    }
+    const deleteType = async id => {
+        try {
+            const res = await removeType(id)
+            getTypes()
+            alert(res.message)
+        } catch (err) {
+            alert(err.message)
+        }
+    }
+    const deleteGroup = async id => {
+        try {
+            const res = await removeGroup(id)
+            getGroups()
+            alert(res.message)
+        } catch (err) {
+            alert(err.message)
+        }
     }
 
     return (
@@ -100,9 +150,8 @@ const Product = observer(() => {
                                                     </div>
                                                 </div>
                                                 <button className="cursor-pointer"
-                                                    onClick={() => removeProduct(product.id)}>
-                                                    <img src="/binIcon.svg"
-                                                        className="">
+                                                    onClick={() => deleteProduct(product.id)}>
+                                                    <img src="/binIcon.svg">
                                                     </img>
                                                 </button>
                                             </li>
@@ -113,14 +162,30 @@ const Product = observer(() => {
                         </div>
                         : view === 'categories' ?
                             <div>
-                                <h1 className="text-[2em] mb-5">Categories</h1>
-                                <ul>
+                                <div className="flex justify-between items-center">
+                                    <h1 className="text-[2em] mb-5">Categories</h1>
+                                    { createCategory ?
+                                        <CreateCategoryForm onHide={() => setCreateCategory(false)} fetchCategories={getCategories} />
+                                     :
+                                        <button onClick={() => setCreateCategory(true)}
+                                                className="py-1 px-3 text-white bg-brand border border-brand rounded-xl cursor-pointer hover:bg-white hover:text-brand transition">
+                                            Create
+                                        </button>
+                                    }
+                                </div>
+                                <ul className="flex flex-col gap-3">
                                     {
                                         product.categories.map(category => {
                                             return (
                                                 <li key={category.id}
                                                     className="flex justify-between">
-                                                    <div>{category.name}</div>
+                                                    <div className="flex gap-5 items-center">
+                                                        <button className="cursor-pointer"
+                                                            onClick={() => deleteCategory(category.id)}>
+                                                            <img src="/binIcon.svg" width={30}/>
+                                                        </button>
+                                                        <div>{category.name}</div>
+                                                    </div>
                                                 </li>
                                             )
                                         })
@@ -129,20 +194,36 @@ const Product = observer(() => {
                             </div>
                             : view === 'types' ?
                                 <div>
-                                    <h1 className="text-[2em] mb-5">Types</h1>
+                                    <div className="flex justify-between items-center">
+                                        <h1 className="text-[2em] mb-5">Types</h1>
+                                        { createType ?
+                                            <CreateTypeForm onHide={() => setCreateType(false)} fetchTypes={getTypes} />
+                                        :
+                                            <button onClick={() => setCreateType(true)}
+                                                className="py-1 px-3 text-white bg-brand border border-brand rounded-xl cursor-pointer hover:bg-white hover:text-brand transition">
+                                                Create
+                                            </button>
+                                        }
+                                    </div>
                                     <div className="flex justify-between text-gray-text">
                                         <p>Type name:</p>
                                         <p>Belongs to category:</p>
                                     </div>
                                     <hr className="border-stroke mb-5" />
-                                    <ul>
+                                    <ul className="flex flex-col gap-3">
                                         {
                                             product.types.map(type => {
                                                 return (
                                                     <li key={type.id}
-                                                        className="flex justify-between">
+                                                        className="flex gap-5 items-center">
+                                                        <button className="cursor-pointer"
+                                                            onClick={() => deleteType(type.id)}>
+                                                            <img src="/binIcon.svg" width={30}/>
+                                                        </button>
+                                                        <div className="flex justify-between w-full">
                                                             <div>{type.name}</div>
                                                             <div>{type.category.name}</div>
+                                                        </div>
                                                     </li>
                                                 )
                                             })
@@ -151,7 +232,17 @@ const Product = observer(() => {
                                 </div>
                                 :
                                 <div>
-                                    <h1 className="text-[2em] mb-5">Groups</h1>
+                                    <div className="flex justify-between items-center">
+                                        <h1 className="text-[2em] mb-5">Groups</h1>
+                                        { createGroup ?
+                                            <CreateGroupForm onHide={() => setCreateGroup(false)} fetchGroups={getGroups} />
+                                        :
+                                            <button onClick={() => setCreateGroup(true)}
+                                                className="py-1 px-3 text-white bg-brand border border-brand rounded-xl cursor-pointer hover:bg-white hover:text-brand transition">
+                                                Create
+                                            </button>
+                                        }
+                                    </div>
                                     <div className="flex justify-between text-gray-text">
                                         <p>Group name:</p>
                                         <p>Belongs to type:</p>
@@ -162,9 +253,15 @@ const Product = observer(() => {
                                             product.groups.map(group => {
                                                 return (
                                                     <li key={group.id}
-                                                        className="flex justify-between">
-                                                        <div>{group.name}</div>
-                                                        <div>{group.type.name}</div>
+                                                        className="flex gap-5 items-center">
+                                                        <button className="cursor-pointer"
+                                                            onClick={() => deleteGroup(group.id)}>
+                                                            <img src="/binIcon.svg" width={30}/>
+                                                        </button>
+                                                        <div className="flex justify-between w-full">
+                                                            <div>{group.name}</div>
+                                                            <div>{group.type.name}</div>
+                                                        </div>
                                                     </li>
                                                 )
                                             })

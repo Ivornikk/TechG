@@ -35,11 +35,16 @@ class CategoryController {
             next(ApiError.badRequest(err.message))
         }
     }
+
     async remove(req, res) {
-        const {id} = req.body
-        const deleteCount = Category.destroy({where: {id: id}})
-        if (deleteCount) return res.json({"message": "Success!"})
-        else return res.json({"message": "Failure!"})
+        try {
+            const {id} = req.body
+            const deleteCount = Category.destroy({where: {id: id}})
+            if (deleteCount) return res.json({"message": "Success!"})
+            else return res.json({"message": "Failure!"})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
 }
 

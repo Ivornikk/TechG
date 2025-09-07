@@ -41,12 +41,51 @@ export const fetchCategories = async () => {
     return data
 }
 
+export const createCategory = async name => {
+    const {data} = await $authHost.post('api/category', {name})
+    return data
+}
+
+export const removeCategory = async id => {
+    const {data} = await $authHost.delete('api/category', {
+        data: {id}
+    })
+    return data
+}
+
 export const fetchTypes = async () => {
     const {data} = await $host.get('/api/type')
     return data
 }
 
+export const createType = async ({name, categoryId}) => {
+    const {data} = await $authHost.post('api/type', {
+        name, categoryId
+    })
+    return data
+}
+export const removeType = async id => {
+    const {data} = await $authHost.delete('api/type', {
+        data: {id}
+    })
+    return data
+}
+
+
 export const fetchGroups = async () => {
     const {data} = await $host.get('/api/group')
+    return data
+}
+
+export const createGroup = async ({name, typeId}) => {
+    const {data} = await $authHost.post('/api/group', {
+        name, typeId
+    })
+    return data
+}
+export const removeGroup = async id => {
+    const {data} = await $authHost.delete('api/group', {
+        data: {id}
+    })
     return data
 }

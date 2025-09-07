@@ -48,44 +48,50 @@ const Orders = observer(() => {
                 <div>
                     <h3 className="text-gray-text text-md">Filter:</h3>
                     <div className="flex  gap-5 text-[1.1em] my-2">
-                        <select className="border border-black rounded p-1"
-                            onChange={e => {setTrackingNumfilter(e.target.value)}}>
-                            <option
-                                value={'all'}>
-                                All
-                            </option>
-                            <option
-                                value={false}>
-                                Without tracking number
-                            </option>
-                            <option
-                                value={true}>
-                                With tracking number
-                            </option>
-                        </select>
-                        <select className="border border-black rounded p-1"
-                            onChange={e => {setStatusFilter(e.target.value)}}>
-                            <option
-                                value={'all'}>
+                        <div className="flex flex-col">
+                            <label className="text-gray-text text-sm">Tracking number</label>
+                            <select className="border border-black rounded p-1"
+                                onChange={e => {setTrackingNumfilter(e.target.value)}}>
+                                <option
+                                    value={'all'}>
                                     All
-                            </option>
-                            <option
-                                value={'Payment pending'}>
-                                Payment pending
-                            </option>
-                            <option
-                                value={'pending'}>
-                                pending
-                            </option>
-                            <option
-                                value={'processing'}>
-                                processing
-                            </option>
-                            <option
-                                value={'shipped'}>
-                                shipped
-                            </option>
-                        </select>
+                                </option>
+                                <option
+                                    value={false}>
+                                    Without tracking number
+                                </option>
+                                <option
+                                    value={true}>
+                                    With tracking number
+                                </option>
+                            </select>
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-gray-text text-sm">Status</label>
+                            <select className="border border-black rounded p-1"
+                                onChange={e => {setStatusFilter(e.target.value)}}>
+                                <option
+                                    value={'all'}>
+                                        All
+                                </option>
+                                <option
+                                    value={'Payment pending'}>
+                                    Payment pending
+                                </option>
+                                <option
+                                    value={'pending'}>
+                                    pending
+                                </option>
+                                <option
+                                    value={'processing'}>
+                                    processing
+                                </option>
+                                <option
+                                    value={'shipped'}>
+                                    shipped
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
