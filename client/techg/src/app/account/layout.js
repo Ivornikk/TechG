@@ -65,13 +65,15 @@ const Layout = ({children}) => {
                         Address Book
                         </Link>
                     </li>
-                    <li  className={`mb-50 hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
-                        <Link className="flex items-center gap-3 text-xl"
-                            href={'/admin/dashboard'}>
-                        <img src="/admin.svg" className="w-[48px]"></img>
-                        Admin page
-                        </Link>
-                    </li>
+                    { user.user.role === 'ADMIN' &&
+                        <li  className={`mb-50 hover:translate-x-5 transition ${pathname == '/account/address-book' ? 'text-button-active' : ''}`}>
+                            <Link className="flex items-center gap-3 text-xl"
+                                href={'/admin/dashboard'}>
+                            <img src="/admin.svg" className="w-[48px]"></img>
+                            Admin page
+                            </Link>
+                        </li>
+                    }
                     <li className="mb-5 hover:translate-x-5 transition justify-self-end">
                         <button className="flex items-center gap-3 text-xl cursor-pointer"
                             onClick={() => LogOut()}>

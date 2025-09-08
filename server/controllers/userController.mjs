@@ -14,19 +14,19 @@ const generateJwtToken = (id, username, email, role, pfp) => {
 
 class UserController {
     async registration(req, res, next) {
-        const {
-            username,
-            phoneNumber,
-            email, 
-            password,
-            country,
-            currency,
-            language,
-            role,
-            avatar
-        } = req.body
-
         try {
+            const {
+                username,
+                phoneNumber,
+                email, 
+                password,
+                country,
+                currency,
+                language,
+                avatar
+            } = req.body
+
+            const role = 'USER'
 
             const candidate = await User.findOne({where: {email}})
             if (candidate) {
@@ -64,7 +64,6 @@ class UserController {
     }
     
     async login(req, res, next) {
-        console.log('FLAG')
         const {email, password} = req.body
 
         try {
@@ -85,7 +84,6 @@ class UserController {
                 sameSite: 'strict',
                 path: '/'
             })
-            console.log(res.cookie)
 
             return res.json(user)
         } catch (err) {
@@ -168,9 +166,19 @@ class UserController {
                 else return res.json({message: 'Passwrods do not match'})
             }
             await user.save()
-            console.log('USER: ', user)
             return res.json(user)
         } catch (err) { 
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async remove(req, res, next) {
+        try {
+            const {id} = req.body
+            let deleteCount = User.destroy({where: { id: id }})
+            if (deleteCount) return res.json({message: 'Success!'})
+            else return res.json({message: 'Failure!'})
+        } catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }

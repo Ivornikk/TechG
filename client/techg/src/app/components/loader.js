@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react"
 import { auth } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
 import { redirect, usePathname } from "next/navigation"
-import { AuthRoutes } from "../routes"
+import { AdminRoutes, AuthRoutes } from "../routes"
 
 const Loader = () => {
     const [loading, setLoading] = useState(true)

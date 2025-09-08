@@ -1,6 +1,16 @@
+'use client'
 import Link from "next/link"
+import { useContext, useEffect } from "react"
+import { StoreContext } from "../store/StoreProvider"
+import { redirect } from "next/navigation"
 
 const Layout = ({children}) => {
+    const {user} = useContext(StoreContext)
+
+    useEffect(() => {
+        if (user.user.role !== 'ADMIN')
+            redirect('/')
+    }, [])
     return (
         <div className="grid grid-cols-4 gap-10 my-10 px-20">
             <div className=" bg-categories shadow-xl max-w-[363px] col-span-1 py-3">
