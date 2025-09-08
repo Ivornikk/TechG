@@ -7,6 +7,7 @@ import { makeAutoObservable } from "mobx"
         this._isAuth = false
         this._user = []
         this._users = []
+        this._usersCount = 0
         makeAutoObservable(this)
     }
 
@@ -19,6 +20,9 @@ import { makeAutoObservable } from "mobx"
     setUsers(users) {
         this._users = users
     }
+    setUsersCount(count) {
+        this._usersCount = count
+    }
 
     get isAuth() {
         return this._isAuth
@@ -30,6 +34,10 @@ import { makeAutoObservable } from "mobx"
 
     get users() {
         return this._users
+    }
+
+    get usersCount() {
+        return this._usersCount
     }
 
 }

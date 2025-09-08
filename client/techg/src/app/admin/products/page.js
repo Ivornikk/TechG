@@ -215,7 +215,7 @@ const Product = observer(() => {
                                             product.types.map(type => {
                                                 return (
                                                     <li key={type.id}
-                                                        className="flex gap-5 items-center">
+                                                        className="flex gap-5 items-center1">
                                                         <button className="cursor-pointer"
                                                             onClick={() => deleteType(type.id)}>
                                                             <img src="/binIcon.svg" width={30}/>

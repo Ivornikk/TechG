@@ -113,6 +113,26 @@ class UserController {
         }
     }
 
+    async getAll(req, res, next) {
+        try {
+            let {role, sort} = req.query
+
+            if (role == 'all') role = ['USER', 'ADMIN']
+            sort = JSON.parse(sort)
+
+            const users = await User.findAndCountAll({
+                where: {role},
+                order: [
+                    sort
+                ]
+            })
+
+            return res.json(users)
+        } catch (err) { 
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async logOut(req, res, next) {
         try {
             res.clearCookie('token', {
@@ -155,4 +175,5 @@ class UserController {
         }
     }
 }
+
 export default new UserController()

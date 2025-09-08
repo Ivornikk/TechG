@@ -1,5 +1,4 @@
 import { $host, $authHost } from ".";
-import { jwtDecode } from "jwt-decode";
 
 export const signUp = async ({
     username,
@@ -51,6 +50,20 @@ export const editUser = async ({
 }) => {
     const {data} = await $authHost.patch(`api/user/${id}/edit`, {
         email, username, oldPassword, newPassword
+    })
+    return data
+}
+
+export const fetchAllUsers = async ({role, sort}) => {
+    const {data} = await $authHost.get('api/user/get-all', {
+        params: {role, sort: JSON.stringify(sort)}
+    })
+    return data
+}
+
+export const deleteUser = async id => {
+    const {data} = await $authHost.delete('api/user', {
+        data: {id}
     })
     return data
 }
