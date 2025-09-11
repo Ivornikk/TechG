@@ -60,8 +60,6 @@ class ProductController {
         const {previewImage} = req.files
         const {descriptionImages} = req.files
 
-        console.log(req.files)
-
         let previewFileName = v4() + '.jpg'
         let descriptionImagesNames = []
 

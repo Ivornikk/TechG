@@ -9,6 +9,7 @@ class ProductStore {
         this._categories = []
         this._types = []
         this._groups = []
+        this._reviews = []
         this._productsQuantities = {}
         this._quantity = 1
         this._totalProductsCount = 0
@@ -41,6 +42,10 @@ class ProductStore {
 
     setGroups(groups) {
         this._groups = groups
+    }
+
+    setReviews(reviews) {
+        this._reviews = reviews
     }
 
     setProductsQuantities(productQuantities) {
@@ -77,6 +82,10 @@ class ProductStore {
 
     get groups() {
         return this._groups
+    }
+
+    get reviews() {
+        return this._reviews
     }
 
     get productsQuantities() {

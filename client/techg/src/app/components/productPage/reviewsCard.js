@@ -1,13 +1,35 @@
+'use client'
+import { fetchReviewsByProduct } from "@/app/http/ratingAPI"
+import { StoreContext } from "@/app/store/StoreProvider"
+import { observer } from "mobx-react-lite"
 import Link from "next/link"
+import { useParams } from "next/navigation"
+import { useContext, useEffect, useState } from "react"
 
-const ReviewsCard = ({reviews}) => {
+const ReviewsCard = observer(({reviews}) => {
+    const { product } = useContext(StoreContext)
+    const [rateFiler, setRateFilter] = useState(5)
+    const [sort, setSort] = useState(['createdAt', 'ASC'])
+    const { id } = useParams()
+
+    useEffect(() => {
+        fetchReviewsByProduct({
+            productId: id,
+            rate: rateFiler,
+            sort,
+        })
+        .then(data => {
+            product.setReviews(data.rows)
+        })
+    }, [])
+
 
     const estimateAverageRating = () => {
         let res = 0
-        reviews.map(review => {
-            res+=review.stars
+        product.reviews.map(review => {
+            res+=review.rate
         })
-        res/=reviews.length
+        res/=product.reviews.length
         return res.toFixed(2)
     }
 
@@ -15,8 +37,8 @@ const ReviewsCard = ({reviews}) => {
 
     const countReviewsByRating = (rating) => {
         let sum = 0
-        reviews.map(review => {
-            if (review.stars == rating) sum++
+        product.reviews.map(review => {
+            if (review.rate == rating) sum++
         })
         return sum
     }
@@ -90,7 +112,7 @@ const ReviewsCard = ({reviews}) => {
                 </div>
                 <div className="flex justify-center items-center">
                     <Link className="border border-button-active text-xl bg-button-active cursor-pointer text-white hover:bg-categories hover:text-button-active px-8 py-3 transition rounded-lg"
-                        href={`/write-review?productId=${26}`}>
+                        href={`/write-review?productId=${id}`}>
                         Write an review
                     </Link>
                 </div>
@@ -110,26 +132,39 @@ const ReviewsCard = ({reviews}) => {
             </select>
             <ul className="flex flex-col">
                 {
-                    reviews.map(review => {
+                    product.reviews.map(review => {
                         return (
                             <li key={review.id}>
-                                <div key={review.id} className="flex justify-between mt-5 mb-5">
+                                <div className="flex justify-between mt-5 mb-5">
                                     <div className="grid grid-cols-2 w-[15%]">
                                         <div className="w-[65px] h-[65px] bg-stroke rounded-4xl row-span-2"></div>
                                         <div>
-                                            <h2 className="text-lg mb-2">{review.user}</h2>
-                                            <h2 className="text-lg -translate-y-3">{review.country}</h2>
+                                            <h2 className="text-lg mb-2">{review.user?.username}</h2>
+                                            <h2 className="text-lg -translate-y-3">{review.user?.country}</h2>
                                         </div>
                                     </div>
                                     <div className="flex flex-col w-[70%]">
                                         <div className="flex items-center">
-                                            {stars(review.stars)}
-                                            <p className="text-gray-text ml-7 ">{review.date}</p>
+                                            {stars(review.rate)}
+                                            <p className="text-gray-text ml-7 ">{review.review}</p>
                                         </div>
                                         <p className="mt-5">
                                             {review.text}
                                         </p>
                                     </div>
+                                </div>
+                                <div>
+                                    <ul className="flex justify-center gap-5 m-5">
+                                        { 
+                                            review.images.split(',').map(image => {
+                                                return (
+                                                    <img className="w-50"
+                                                        src={`http://localhost:5000/${image}`}>
+                                                    </img>
+                                                )
+                                            })
+                                        }
+                                    </ul>
                                 </div>
                                 <hr className="w-[80%] border-stroke justify-self-center"></hr>
                             </li>
@@ -139,6 +174,6 @@ const ReviewsCard = ({reviews}) => {
             </ul>
         </div>
     )
-}
+})
 
 export default ReviewsCard

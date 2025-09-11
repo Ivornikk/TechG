@@ -31,9 +31,8 @@ const CreateProuctForm = observer(({onHide}) => {
         formData.append('description', description)
         formData.append('groupId', groupId)
         formData.append('previewImage', previewImage)
-        console.log(descriptionImages)
+
         for (let i = 0; i < descriptionImages.length; i++) {
-            console.log('FLAG')
             formData.append('descriptionImages', descriptionImages[i])
         }
 
