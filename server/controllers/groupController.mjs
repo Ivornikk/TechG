@@ -1,5 +1,6 @@
+import ApiError from "../errors/ApiError.mjs"
 import models from "../models/models.mjs"
-const {Group, Type} =  models
+const {Group, Type, Product} =  models
 
 class GroupController {
     async getAll(req, res, next) {
@@ -12,8 +13,8 @@ class GroupController {
         }
     }
     async create(req, res, next) {
-        const {name, typeId} = req.body
         try {
+            const {name, typeId} = req.body
             const group = await Group.create({name, typeId})
             return res.json(group)
         }
@@ -22,10 +23,23 @@ class GroupController {
         }
     }
     async remove(req, res) {
-        const {id} = req.body
-        const deleteCount = Group.destroy({where: {id: id}})
-        if (deleteCount) return res.json({"message": "Success!"})
-        else return res.json({"message": "Failure!"})
+        try {
+            const {id} = req.body
+
+            const products = await Product.findAll({
+                where: {groupId: id}
+            })
+
+            products.forEach(product => {
+                Product.destroy(product.id)
+            })
+
+            const deleteCount = Group.destroy({where: {id: id}})
+            if (deleteCount) return res.json({"message": "Success!"})
+            else return res.json({"message": "Failure!"})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
 }
 

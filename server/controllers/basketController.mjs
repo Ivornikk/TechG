@@ -19,8 +19,19 @@ class BasketController {
         const {userId, productId, quantity} = req.body
         try {
             const basket = await Basket.findAll({where: {userId: userId}})
-            const item = await BasketProduct.create({basketId: basket[0].id, productId, quantity})
-            return res.json(item)
+
+            const candidateItem = await BasketProduct.findOne({
+                where: {productId}
+            })
+
+            if (candidateItem) {
+                candidateItem.quantity += quantity
+                candidateItem.save()
+                return res.json(candidateItem)
+            } else {
+                const item = await BasketProduct.create({basketId: basket[0].id, productId, quantity})
+                return res.json(item)
+            }
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }
@@ -62,12 +73,19 @@ class BasketController {
                 return {id: item.productId}
             })
 
-            const products = await Product.findAll({where: {
-                [Op.or]: productsSearch
-            }})
+            const products = await Product.findAll({
+                where: {
+                    [Op.or]: productsSearch
+                }
+            })
 
-            items.map((item, index) => {
-                products[index].setDataValue('quantity', item.quantity)
+            items.forEach((item) => {
+                products.map(product => {
+                    if (item.productId == product.id) {
+                        product.setDataValue('quantity', item.quantity)
+                        return product
+                    }
+                })
             })
 
             basket[0].setDataValue('products', products)

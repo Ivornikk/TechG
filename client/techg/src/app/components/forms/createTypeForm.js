@@ -12,6 +12,7 @@ const CreateTypeForm = ({ onHide, fetchTypes}) => {
         fetchCategories()
         .then(data => {
             setCategories(data.rows)
+            setCategoryId(data.rows[0].id)
         })
     }, [])
 
@@ -20,7 +21,7 @@ const CreateTypeForm = ({ onHide, fetchTypes}) => {
             await createType({name, categoryId})
             fetchTypes()
             alert('Type added successfully!')
-            onHide()
+            setName('')
         } catch (err) {
             alert(err.response.data.message)
         }
@@ -31,7 +32,8 @@ const CreateTypeForm = ({ onHide, fetchTypes}) => {
             className="flex gap-5">
             <input placeholder="Type name"
                 className="px-3 py-1 border border-brand rounded"
-                onChange={e => setName(e.target.value)} />
+                onChange={e => setName(e.target.value)}
+                value={name} />
             <select onChange={e => setCategoryId(e.target.value)}
                 defaultValue={() => {
                     try{return categories[0].id}catch{return 0}

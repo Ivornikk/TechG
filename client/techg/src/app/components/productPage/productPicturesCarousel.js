@@ -8,7 +8,6 @@ const ProductPicturesCarousel = ({pictures}) => {
 
   pictures = pictures.flatMap((pic, index) => {return{id: index, name: pic}})
 
-  console.log(pictures)
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();

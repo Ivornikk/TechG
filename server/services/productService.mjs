@@ -27,7 +27,7 @@ export async function searchProducts(query) {
             query: {
                 multi_match: {
                     query: query,
-                    fields: ['title', 'description']
+                    fields: ['id', 'title', 'description']
                 }
             }
         }

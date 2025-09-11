@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link"
 import Pages from "./pages"
-import { searchProducts } from "../http/ProductAPI"
+import { getSoldCount, searchProducts } from "../http/ProductAPI"
 import { useEffect, useContext } from "react"
 import { useSearchParams } from "next/navigation"
 import { StoreContext } from "../store/StoreProvider"
@@ -13,34 +13,39 @@ const ProductsGrid = observer(() => {
     const {product} = useContext(StoreContext)
 
     useEffect(() => {
-        searchProducts({q: searchParams, page: 1, limit}).then(data => {
-            product.setProducts(data)
-            product.setTotalProductsCount(data)
-            console.log("VALUES UPDATED")
+        searchProducts({q: searchParams, page: 1, limit}).then(async data => {
+            data.rows = await Promise.all (
+                data.rows.flatMap(async searchResult => {
+                    const soldCount = await getSoldCount(searchResult.id)
+                    searchResult.soldNum = soldCount
+                    return searchResult
+                })
+            )
+            product.setProducts(data.rows)
+            product.setTotalProductsCount(data.count)
         })
     }, [])
 
     return (
-        <div>
+        <div className="m-10">
             <ul className="md:w-[1500px] w-500px grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
-                {console.log(product.products)}
                 {
                     product.products.map(product => {
                         return (
                             <Link href={`/product/${product.id}`}
                                 key={product.id}
                                 className="m-auto">
-                                <li className="text-black w-[300px] bg-white hover:shadow-xl transition">
-                                    <img className="w-[300px] h-[315px]"
-                                        src={`http://192.168.1.2:5000/${product.preview_image}`}>
-
-                                    </img>
-                                    <div>{product.title}</div>
-                                    <div className="mt-5">${product.price}</div>
-                                    <div className="flex">
-                                        <div className="mr-5">{product.soldNum} sold</div>
+                                <li className="p-5 flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
+                                        <img src={`http://192.168.1.2:5000/${product.preview_image}`}>
+                                        </img>
+                                    <div className="">
+                                        <div>{product.title}</div>
+                                        <div className="mt-5">${product.price}</div>
                                         <div className="flex">
-                                            <img src="/star.svg"></img>{product.rating}
+                                            <div className="mr-5">{product.soldNum} sold</div>
+                                            <div className="flex">
+                                                <img src="/star.svg"></img>{product.rating}
+                                            </div>
                                         </div>
                                     </div>
                                 </li>

@@ -3,7 +3,7 @@ import CreateCategoryForm from "@/app/components/forms/createCategoryForm"
 import CreateGroupForm from "@/app/components/forms/createGroupForm"
 import CreateProuctForm from "@/app/components/forms/createProductForm"
 import CreateTypeForm from "@/app/components/forms/createTypeForm"
-import { deleteProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes, removeCategory, removeGroup, removeType } from "@/app/http/ProductAPI"
+import { removeProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes, removeCategory, removeGroup, removeType } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
@@ -46,11 +46,13 @@ const Product = observer(() => {
         getGroups()
     }, [])
 
-    const deleteProduct = async id => {
+    const deleteProduct = id => {
         try {
-            const res = await deleteProduct(id)
-            fetchProducts()
-            alert(res.message)
+            removeProduct(id)
+            .then(res => {
+                getProducts()
+                alert(res.message)
+            })
         } catch (err) {
             alert(err.message)
         }
@@ -248,7 +250,7 @@ const Product = observer(() => {
                                         <p>Belongs to type:</p>
                                     </div>
                                     <hr className="border-stroke mb-5" />
-                                    <ul>
+                                    <ul className="flex flex-col gap-3">
                                         {
                                             product.groups.map(group => {
                                                 return (

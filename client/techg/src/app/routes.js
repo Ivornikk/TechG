@@ -1,5 +1,9 @@
 // Routes that can be visited only by authenticated users
 export const AuthRoutes = [
+    '/admin/dashboard',
+    '/admin/products',
+    '/admin/orders',
+    '/admin/clients',
     '/account/address-book',
     '/account/my-orders',
     '/account/settings',
@@ -8,13 +12,6 @@ export const AuthRoutes = [
     '/payment',
     '/wishlist',
 ]
-// Routes that can be only visited by administrators
-export const AdminRoutes = [
-    '/admin/dashboard',
-    '/admin/products',
-    '/admin/orders',
-    '/admin/clients',
-]
 // Routes that can be visited by any user
 export const PublicRoutes = [
     '/',
@@ -22,4 +19,5 @@ export const PublicRoutes = [
     '/sign-up',
     '/product',
     '/search',
+    '/page-not-found'
 ]

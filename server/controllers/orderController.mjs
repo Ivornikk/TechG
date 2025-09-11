@@ -59,11 +59,11 @@ class OrderController {
     }
     async getByUser(req, res, next) {
         const {userId} = req.params
-        const {status} = req.body || 'all'
+        const {status} = req.query || 'all'
         try {
             let orders
 
-            if (status && status != 'all') {
+            if (status != 'all') {
                 orders = await Order.findAndCountAll({
                     where: {
                         userId: userId,

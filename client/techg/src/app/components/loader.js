@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useEffect, useContext } from "react"
+import { useRouter } from "next/navigation"
 import { auth } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
 import { redirect, usePathname } from "next/navigation"
-import { AdminRoutes, AuthRoutes } from "../routes"
+import { AuthRoutes, PublicRoutes } from "../routes"
 
 const Loader = () => {
     const [loading, setLoading] = useState(true)
     const { user } = useContext(StoreContext)
+    const router = useRouter()
     let pathname = usePathname()
 
     useEffect(() => {
@@ -17,11 +19,18 @@ const Loader = () => {
                 const data = await auth()
                 user.setUser(data)
                 user.setIsAuth(true)
+                if (!AuthRoutes.includes(pathname) && 
+                !PublicRoutes.some(route => pathname.startsWith(route))) {
+                    router.push("/page-not-found");
+                }
+
+                
             } catch (e) {
+                console.log('ERROR CATCHED: ', e)
                 user.setUser(null)
                 user.setIsAuth(false)
                 if (AuthRoutes.includes(pathname)) {
-                    redirect('/sign-up')
+                    router.push('/sign-up')
                 }
             } finally {
                 setLoading(false)

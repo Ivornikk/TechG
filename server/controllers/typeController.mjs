@@ -1,6 +1,6 @@
 import ApiError from "../errors/ApiError.mjs"
 import models from "../models/models.mjs"
-const {Type, Group, Category} =  models
+const {Type, Group, Category, Product} =  models
 
 class TypeController {
     async getAll(req, res, next) {
@@ -35,6 +35,34 @@ class TypeController {
     async remove(req, res) {
         try {
             const {id} = req.body
+
+            const groups = await Group.findAll({
+                where: {typeId: id}
+            })
+
+            const products = await Promise.all(
+                groups.map(async group => {
+                    const productsArray = await Product.findAll({
+                        where: {groupId: group.id}
+                    })
+                    return productsArray
+                })
+            )
+
+            products.forEach(productsArray => {
+                productsArray.forEach(product => {
+                    Product.destroy({
+                        where: {id: product.id}
+                    })
+                })
+            })
+
+            groups.forEach(group => {
+                Group.destroy({
+                    where: {id: group.id}
+                })
+            })
+            
             const deleteCount = Type.destroy({where: {id: id}})
             if (deleteCount) return res.json({"message": "Success!"})
             else return res.json({"message": "Failure!"})

@@ -13,7 +13,7 @@ import { addProductToWishlist, fetchNumberOfFavorites } from "@/app/http/Wishlis
 const ProductCard = observer(() => {
     const {id} = useParams()
     const {product, user} = useContext(StoreContext)
-    const userId = user.user.id
+    const userId = user.user?.id
     const [quantity, setQuantity] = useState(1)
     const [favorites, setFavorites] = useState(0)
 
@@ -27,14 +27,32 @@ const ProductCard = observer(() => {
     }, [])
 
     const addToCart = () => {
+        if (!user.isAuth) {
+            alert('Please, log in or register first')
+            return
+        }
         addProductToBasket({
             userId, productId: product.currentProduct.id, quantity: quantity
+        })
+        .then(() => {
+            alert('Product added successfully')
         })
     }
 
     const addToWishlist = () => {
+        if (!user.isAuth) {
+            alert('Please, log in or register first')
+            return
+        }
         addProductToWishlist({
             userId, productId: product.currentProduct.id
+        })
+        .then(() => {
+            fetchNumberOfFavorites(id)
+            .then(data => setFavorites(data))
+        })
+        .finally(() => {
+            alert('Product added successfully')
         })
     }
 
@@ -86,6 +104,9 @@ const ProductCard = observer(() => {
     ]
 
     return (
+        <>
+        { product.currentProduct && 
+
         <div className="p-5 bg-categories flex flex-row shadow-xl my-10">
             <div className="max-w-[80%] flex m-auto">
                 <div>
@@ -101,11 +122,7 @@ const ProductCard = observer(() => {
                         <div className="float-center h-[174px]">
                             <h1 className="text-3xl my-3">Quantity:</h1>
                             <QuantityCounter defaultValue={1}
-                                increment={() => setQuantity(quantity + 1)}
-                                decrement={() => quantity > 1 ?
-                                            setQuantity(quantity - 1) :
-                                            setQuantity(1)}
-                            />
+                                changeQuantity={setQuantity}/>
                             <div className="mt-3">
                                 Shipping: 3.15$
                             </div>
@@ -119,7 +136,9 @@ const ProductCard = observer(() => {
                                 Buy now
                             </button>
                             <button className="my-3 w-full flex h-[43px] items-center justify-center cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition"
-                                onClick={addToWishlist}>
+                                onClick={() => {
+                                    addToWishlist()
+                                }}>
                                 <img className="mr-3"
                                 src="/heart-icon.svg"></img>
                                 <div className="">{favorites}</div>
@@ -129,6 +148,8 @@ const ProductCard = observer(() => {
                 </div>
             </div>
         </div>
+        }
+    </>
     )
 })
 

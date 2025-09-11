@@ -60,13 +60,25 @@ class WishlistController {
         const { userId, productId } = req.body
 
         try {
-            const wishlist = await Wishlist.findAll({where: {userId: userId}})
+            const wishlist = await Wishlist.findOne({where: {userId: userId}})
 
-            const item = await WishlistProduct.create({
-                wishlistId: wishlist[0].id,
-                productId: productId
+            const candidateItem = await WishlistProduct.findOne({
+                where: {wishlistId: wishlist.id, productId}
             })
-            return res.json(item)
+            if (candidateItem) {
+                WishlistProduct.destroy({
+                    where: {wishlistId: wishlist.id, productId}
+                })
+                return res.json({message: "Item removed from wishlist"})
+            }
+            else {
+                const item = await WishlistProduct.create({
+                    wishlistId: wishlist.id,
+                    productId: productId
+                })
+                return res.json(item)
+            }
+
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }

@@ -30,10 +30,16 @@ const Wishlist = observer(() => {
         })
     }
 
-    const addToCart = productId => {
+    const addToCart = (productId) => {
+        if (!user.isAuth) {
+            alert('Please, log in or register first')
+            return
+        }
         addProductToBasket({
-            userId: userId,
-            productId: productId
+            userId, productId, quantity: 1
+        })
+        .then(() => {
+            alert('Product added successfully')
         })
     }
 
@@ -60,22 +66,27 @@ const Wishlist = observer(() => {
                         wishlist.items.map(product => {
                             return (
                                 <li key={product.id}
-                                    className="grid grid-cols-5 grid-rows-4 grid-flow-col-dense">
-                                    <img className="w-[200px] row-span-4"
-                                        src={`http://localhost:5000/${product.preview_image}`}></img>
-                                    <h2 className="text-[1.2em] col-span-3">{product.title}</h2>
-                                    <p className=" col-span-3">Estimated delivery time: {product.shippingDate || "Not estimated"}</p>
-                                    <div className="flex items-center row-span-2 col-span-3">
-                                        <h2 className="text-[1.4em]">${product.price}</h2>
+                                    className="flex justify-between">
+                                    <div className="grid grid-rows-4 gap-5 grid-flow-col-dense cursor-pointer hover:underline p-3 transition-all"
+                                        onClick={() => {redirect(`/product/${product.id}`)}}>
+                                        <img className="w-[200px] row-span-4"
+                                            src={`http://localhost:5000/${product.preview_image}`}></img>
+                                        <h2 className="text-[1.2em] col-span-3">{product.title}</h2>
+                                        <p className=" col-span-3">Estimated delivery time: {product.shippingDate || "Not estimated"}</p>
+                                        <div className="flex items-center row-span-2 col-span-3">
+                                            <h2 className="text-[1.4em]">${product.price}</h2>
+                                        </div>
                                     </div>
-                                    <button className="px-10 py-3 cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:bg-categories hover:text-button-active transition"
-                                        onClick={() => addToCart(product.id)}>
-                                        Add to cart
-                                    </button>
-                                    <button className="row-span-2 text-center text-brand cursor-pointer text-xl hover:text-2xl transition-all"
-                                        onClick={() => removeProduct(product.id)}>
-                                        Remove
-                                    </button>
+                                    <div className="flex flex-col justify-evenly">
+                                        <button className="px-10 py-3 cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:bg-categories hover:text-button-active transition"
+                                            onClick={() => addToCart(product.id)}>
+                                            Add to cart
+                                        </button>
+                                        <button className="row-span-2 text-center text-brand cursor-pointer text-xl hover:text-2xl transition-all"
+                                            onClick={() => removeProduct(product.id)}>
+                                            Remove
+                                        </button>
+                                    </div>
                                 </li>
                             )
                         })

@@ -91,8 +91,9 @@ const Checkout = observer(() => {
                                             <div className="grid grid-rows-3 grid-cols-4 grid-flow-col-dense">
                                                 <img src={`http://localhost:5000/${product.preview_image}`}
                                                     className="row-span-3 w-[200px]"></img>
-                                                <h3 className="text-xl">{product.title}</h3>
+                                                <h3 className="text-xl">{product.title.substring(0, 50) + `${product.title.length > 50?'...':''}`}</h3>
                                                 <ul className="flex gap-5">
+                                                    {/* Attributes */}
                                                 </ul>
                                                 <h3 className="flex items-center text-xl">{product.price}$</h3>
                                                 <h3 className="col-span-3 flex justify-end text-2xl">x{product.quantity}</h3>

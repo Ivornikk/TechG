@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useContext, useState } from "react"
 import { signUp } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
+import { redirect } from "next/navigation"
 
 const SignUp = () => {
     const {user} = useContext(StoreContext)
@@ -37,6 +38,7 @@ const SignUp = () => {
             })
             user.setUser(user)
             user.setIsAuth(true)
+            redirect('/')
         } catch (err) {
             alert(err.message)
         }

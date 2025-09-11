@@ -1,5 +1,5 @@
 import models from "../models/models.mjs"
-const {Category, Type, Group} =  models
+const {Category, Type, Group, Product} =  models
 
 class CategoryController {
     async getAll(req, res, next) {
@@ -39,6 +39,7 @@ class CategoryController {
     async remove(req, res) {
         try {
             const {id} = req.body
+            
             const deleteCount = Category.destroy({where: {id: id}})
             if (deleteCount) return res.json({"message": "Success!"})
             else return res.json({"message": "Failure!"})

@@ -26,7 +26,7 @@ export const createOrder = async ({
 
 export const fetchOrderByUser = async ({userId, status}) => {
     const {data} = await $authHost.get(`api/order/${userId}/get-products`, {
-        data: {status}
+        params: {status}
     })
     return data
 }

@@ -25,11 +25,10 @@ export const searchProducts = async ({page, limit=5, q}) => {
     const {data} = await $host.get(`api/product/search?q=${q}`, {params: {
         page, limit
     }})
-    console.log(data)
     return data
 }
 
-export const deleteProduct = async id => {
+export const removeProduct = async id => {
     const {data} = await $authHost.delete('api/product', {
         data: {id}
     })
@@ -87,5 +86,10 @@ export const removeGroup = async id => {
     const {data} = await $authHost.delete('api/group', {
         data: {id}
     })
+    return data
+}
+
+export const getSoldCount = async id => {
+    const {data} = await $host.get(`api/product/${id}/get-sold-count`)
     return data
 }

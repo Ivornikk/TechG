@@ -2,7 +2,8 @@ import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
 import { createProduct, searchProducts } from "../services/productService.mjs"
 import { v4 } from "uuid"
-const {Product, Group} = models
+import { Op } from "sequelize"
+const {Product, Group, OrderProduct} = models
 
 class ProductController {
     async getAll(req, res, next) {
@@ -34,7 +35,16 @@ class ProductController {
         try {
             const {q} = req.query
             const results = await searchProducts(q)
-            res.json(results)
+            
+            const ids = results.map(result => {
+                return result.id
+            })
+
+            const products = await Product.findAndCountAll({
+                where: {id: {[Op.and]: ids}}
+            })
+            console.log(products.rows)
+            res.json(products)
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }
@@ -88,13 +98,31 @@ class ProductController {
     }
 
     async remove(req, res) {
-        const {id} = req.body
-        let deleteCount = Product.destroy({where: {id: id}})
-        if (deleteCount) return res.json({"message": "Success!"})
-        else return res.json({"message": "Failure!"})
+        try {
+            const {id} = req.body
+
+            let deleteCount = Product.destroy({where: {id: id}})
+            if (deleteCount) return res.json({"message": "Success!"})
+            else return res.json({"message": "Failure!"})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
     async edit(req, res, next) {
         
+    }
+
+    async getSoldCount(req, res) {
+        try {
+            const {id} = req.params
+            const count = await OrderProduct.count({
+                where: {productId: id}
+            })
+
+            return res.json(count)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
     }
 }
 

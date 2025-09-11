@@ -12,6 +12,7 @@ const CreateGroupForm = ({onHide, fetchGroups}) => {
         fetchTypes()
         .then(data => {
             setTypes(data.rows)
+            setTypeId(data.rows[0].id)
         })
     }, [])
 
@@ -20,7 +21,7 @@ const CreateGroupForm = ({onHide, fetchGroups}) => {
             await createGroup({name, typeId})
             fetchGroups()
             alert('Group added successfully!')
-            onHide()
+            setName('')
         } catch (err) {
             alert(err.response.data.message)
         }
@@ -31,7 +32,8 @@ const CreateGroupForm = ({onHide, fetchGroups}) => {
             className="flex gap-5 h-[50%]">
             <input placeholder="Group name"
                 className="px-3 py-1 border border-brand rounded"
-                onChange={e => setName(e.target.value)} />
+                onChange={e => setName(e.target.value)}
+                value={name} />
             <select onChange={e => setTypeId(e.target.value)}>
                 {
                     types.map(type => {

@@ -93,7 +93,7 @@ const MyOrders = observer(() => {
                 {
                     order.orders.map(order => {
                         return (
-                            order.items.length == 1 ?
+                            order.items?.length == 1 ?
                             <div key={order.id}
                                 className="group flex flex-col gap-3 border border-stroke cursor-pointer hover:bg-stroke transition"
                                 onClick={() => redirect(`/order/${order.id}`)}>
