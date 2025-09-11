@@ -3,6 +3,8 @@ import controller from '../controllers/ratingController.mjs'
 
 const route = new express()
 route.get('/', controller.getAll)
+route.get('/:productId/get-by-product', controller.getByProduct)
+route.get('/:userId/get-by-user', controller.getByUser)
 route.get('/:id', controller.getOne)
 route.post('/', controller.create)
 route.delete('/', controller.remove)

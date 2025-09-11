@@ -3,6 +3,7 @@ import controller from '../controllers/orderController.mjs'
 
 const route = new express()
 route.get('/', controller.getAll)
+route.get('/check-user-for-order', controller.checkUserForOrder)
 route.get('/:id', controller.getOne)
 route.get('/:userId/get-products', controller.getByUser)
 route.post('/', controller.create)

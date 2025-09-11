@@ -33,6 +33,30 @@ class OrderController {
             next(ApiError.badRequest(err.message))
         }
     }
+
+    async checkUserForOrder(req, res, next) {
+        try {
+            const {userId, productId} = req.query
+
+            const orders = await Order.findAll({
+                where: {userId}
+            })
+            const matches = await Promise.all(
+                orders.flatMap(async order => {
+                    const match = await OrderProduct.findOne({
+                        where: {orderId: order.id, productId}
+                    })
+                    return match
+                })
+            )
+            
+            if (matches.length > 0 && matches[0] != null) return res.json(true)
+            else return res.json(false)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async getOne(req, res, next) {
         try {
             const {id} = req.params

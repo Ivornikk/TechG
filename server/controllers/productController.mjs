@@ -43,7 +43,6 @@ class ProductController {
             const products = await Product.findAndCountAll({
                 where: {id: {[Op.and]: ids}}
             })
-            console.log(products.rows)
             res.json(products)
         } catch (err) {
             next(ApiError.badRequest(err.message))

@@ -56,3 +56,10 @@ export const EditStatus = async ({id, status}) => {
     })
     return data
 }
+
+export const CheckUserForOrder = async ({userId, productId}) => {
+    const {data} = await $authHost.get('/api/order/check-user-for-order', {
+        params: {userId, productId}
+    })
+    return data
+}

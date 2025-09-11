@@ -9,7 +9,7 @@ import basketRoute from './basketRoute.mjs'
 import orderRoute from './orderRoute.mjs'
 import promotionRoute from './promotionRoute.mjs'
 import promotionTypeRoute from './promotionTypeRoute.mjs'
-import ratingRouter from './ratingRouter.mjs'
+import ratingRouter from './ratingRoute.mjs'
 import wishlistRouter from './wishlistRouter.mjs'
 
 const route = new express()

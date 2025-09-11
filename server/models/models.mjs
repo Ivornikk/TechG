@@ -99,7 +99,7 @@ const Rating = sequelize.define('rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     rate: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 5},
     review: {type: DataTypes.STRING},
-    date: {type: DataTypes.DATE, allowNull: false}
+    images: {type: DataTypes.STRING}
 })
 
 const Wishlist = sequelize.define('wishlist', {

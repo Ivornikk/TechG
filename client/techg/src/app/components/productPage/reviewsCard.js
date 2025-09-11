@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const ReviewsCard = ({reviews}) => {
 
     const estimateAverageRating = () => {
@@ -87,9 +89,10 @@ const ReviewsCard = ({reviews}) => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
-                    <button className="border border-button-active text-xl bg-button-active cursor-pointer text-white hover:bg-categories hover:text-button-active px-8 py-3 transition rounded-lg">
+                    <Link className="border border-button-active text-xl bg-button-active cursor-pointer text-white hover:bg-categories hover:text-button-active px-8 py-3 transition rounded-lg"
+                        href={`/write-review?productId=${26}`}>
                         Write an review
-                    </button>
+                    </Link>
                 </div>
             </div>
             <select className="mr-5 cursor-pointer">
