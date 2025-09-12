@@ -8,20 +8,20 @@ import { useContext, useEffect, useState } from "react"
 
 const ReviewsCard = observer(({reviews}) => {
     const { product } = useContext(StoreContext)
-    const [rateFiler, setRateFilter] = useState(5)
+    const [rateFilter, setRateFilter] = useState('all')
     const [sort, setSort] = useState(['createdAt', 'ASC'])
     const { id } = useParams()
 
     useEffect(() => {
+        console.log(sort)
         fetchReviewsByProduct({
             productId: id,
-            rate: rateFiler,
             sort,
         })
         .then(data => {
             product.setReviews(data.rows)
         })
-    }, [])
+    }, [sort])
 
 
     const estimateAverageRating = () => {
@@ -117,36 +117,62 @@ const ReviewsCard = observer(({reviews}) => {
                     </Link>
                 </div>
             </div>
-            <select className="mr-5 cursor-pointer">
-                <option>1 star</option>
-                <option>2 star</option>
-                <option>3 star</option>
-                <option>4 star</option>
-                <option>5 star</option>
+            <select className="mr-5 cursor-pointer"
+                onChange={e => setRateFilter(e.target.value)}
+                defaultValue={'all'}>
+                <option value={'all'}>
+                    All
+                </option>
+                <option value={1}>
+                    1 star
+                </option>
+                <option value={2}>
+                    2 star
+                </option>
+                <option value={3}>
+                    3 star
+                </option>
+                <option value={4}>
+                    4 star
+                </option>
+                <option value={5}>
+                    5 star
+                </option>
             </select>
             <label>Sort by:</label>
-            <select className=" cursor-pointer">
-                <option>Highest rating</option>
-                <option>Most recent</option>
-                <option>Oldest</option>
+            <select className=" cursor-pointer"
+                onChange={e => setSort(e.target.value.split(','))}>
+                <option value={'rate,DESC'}>
+                    Highest rating
+                </option>
+                <option value={'createdAt,DESC'}>
+                    Most recent
+                </option>
+                <option value={'createdAt,ASC'}>
+                    Oldest
+                </option>
             </select>
             <ul className="flex flex-col">
                 {
                     product.reviews.map(review => {
+                        if (rateFilter != 'all')
+                            if (rateFilter != review.rate) {
+                                return
+                            }
                         return (
                             <li key={review.id}>
-                                <div className="flex justify-between mt-5 mb-5">
-                                    <div className="grid grid-cols-2 w-[15%]">
-                                        <div className="w-[65px] h-[65px] bg-stroke rounded-4xl row-span-2"></div>
+                                <div className="flex mt-5 mb-5">
+                                    <div className="grid grid-cols-2 gap-5">
+                                        <div className="w-[65px] h-[65px] bg-stroke rounded-4xl"></div>
                                         <div>
                                             <h2 className="text-lg mb-2">{review.user?.username}</h2>
                                             <h2 className="text-lg -translate-y-3">{review.user?.country}</h2>
                                         </div>
                                     </div>
                                     <div className="flex flex-col w-[70%]">
-                                        <div className="flex items-center">
+                                        <div className="flex items-center w-full ">
                                             {stars(review.rate)}
-                                            <p className="text-gray-text ml-7 ">{review.review}</p>
+                                            <p className="text-gray-text ml-17 ">{review.review}</p>
                                         </div>
                                         <p className="mt-5">
                                             {review.text}
@@ -158,7 +184,8 @@ const ReviewsCard = observer(({reviews}) => {
                                         { 
                                             review.images.split(',').map(image => {
                                                 return (
-                                                    <img className="w-50"
+                                                    <img key={image}
+                                                        className="w-50"
                                                         src={`http://localhost:5000/${image}`}>
                                                     </img>
                                                 )

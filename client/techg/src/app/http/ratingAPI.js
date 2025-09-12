@@ -9,9 +9,9 @@ export const createRating = async (rating) => {
     return data
 }
 
-export const fetchReviewsByProduct = async ({productId, rate, sort}) => {
+export const fetchReviewsByProduct = async ({productId, sort}) => {
     const {data} = await $authHost.get(`/api/rating/${productId}/get-by-product`, {
-        params: {rate, sort: JSON.stringify(sort)}
+        params: {sort: JSON.stringify(sort)}
     })
     return data
 }

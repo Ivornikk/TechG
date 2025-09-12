@@ -23,14 +23,13 @@ class RatingController {
     async getByProduct(req, res, next) {
         try {   
             const {productId} = req.params
-            let {rate, sort} = req.query
+            let {sort} = req.query
 
-            if (rate == 'all') rate = {}
             if (!productId) return res.json({message: 'Invalid product id: ' + productId})
             sort = JSON.parse(sort)
 
             let ratings = await Rating.findAndCountAll({
-                where: {productId, rate},
+                where: {productId},
                 order: [
                     sort
                 ]

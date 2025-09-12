@@ -1,7 +1,7 @@
 import models from "../models/models.mjs"
 import ApiError from "../errors/ApiError.mjs"
 import { Op } from "sequelize"
-const {Order, Address, Product, OrderProduct} =  models
+const {Order, Address, Product, OrderProduct, BasketProduct} =  models
 
 class OrderController {
     async getAll(req, res, next) {
@@ -150,7 +150,7 @@ class OrderController {
                 status, paymentMethod, userId, addressId
             })
             const resProducts = []
-            await products.map(async product => {
+            products.map(async product => {
                 await OrderProduct.create({
                     quantity: product.quantity,
                     priceAtPurchase: product.priceAtPurchase,
@@ -158,6 +158,7 @@ class OrderController {
                     productId: product.id
                 })
                 .then(data => resProducts.push(data))
+                BasketProduct.destroy({where: {productId: product.id}})
             })
             order.setDataValue('products', products)
             return res.json(order)
