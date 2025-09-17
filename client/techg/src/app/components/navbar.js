@@ -1,13 +1,52 @@
+'use client'
 import Categories from "./navbar/categories"
 import Link from "next/link"
 import NavbarAuthButtons from "./navbar/navbarAuthButtons"
 import SearchPanel from "./navbar/searchPanel"
+import AsidePanel from "./navbar/AsidePanel"
+import { useState, useEffect } from "react"
 
 const Navbar = () => {
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 568)
+        };
+
+        checkScreenSize()
+        window.addEventListener("resize", checkScreenSize)
+
+        return () => {
+            window.removeEventListener("resize", checkScreenSize)
+        };
+    }, []);
+
     return (
-        <nav className="xl:px-30 pb-0
-                        bg-brand fixed w-[100vw] z-50 top-0 px-2 flex text-white justify-between items-center">
+        <>
+        {
+            isMobile ?
+        <nav className="fixed flex flex-col gap-3 bg-brand w-full top-0 px-3 py-2">
+            <div className="flex items-center justify-between">
+                <div className="flex gap-3">
+                    <AsidePanel />
+                    <Link href={'/'}>
+                        <img
+                            src="/nav-logo-mobile.svg"
+                            alt="Logo"
+                            width={100}>
+                        </img>
+                    </Link>
+                </div>
+                <NavbarAuthButtons isMobile={isMobile} />
+            </div>
+            <SearchPanel isMobile={true} />
+        </nav>
+        :
+        <nav className="xl:px-30 pb-0 fixed
+                        bg-brand w-[100vw] z-50 top-0 px-2 flex text-white justify-between items-center">
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <Link href={'/'}
@@ -31,7 +70,7 @@ const Navbar = () => {
                     <SearchPanel />
                 </div>
                 <div className="flex gap-1">
-                    <div className="md:mr-20 md:justify-center flex flex-col mr-10 justify-end">
+                    <div className="md:mr-20 md:justify-center flex flex-col mr-3 justify-end">
                         <Link className="
                                         flex sm:hover:-translate-x-3 transition cursor-pointer"
                             href={'/wishlist'}>
@@ -53,11 +92,13 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div>
-                        <NavbarAuthButtons />
+                        <NavbarAuthButtons isMobile={isMobile} />
                     </div>
                 </div>
             </div>
         </nav>
+        }
+        </>
     )
 }
 

@@ -45,9 +45,9 @@ const SignUp = () => {
     }
 
     return (
-        <div className="m-auto bg-categories shadow-xl w-200 pt-10">
+        <div className="m-auto bg-categories shadow-xl md:w-200 pt-10 mb-20">
             <h2 className="text-[1.5em] text-center mb-5">Sign Up</h2>
-            <form className="flex flex-col gap-5 mx-50"
+            <form className="flex flex-col gap-5 m-10 md:mx-50"
                 onSubmit={e => e.preventDefault()}>
                 <input className="py-1 border border-brand" 
                     placeholder="Username"

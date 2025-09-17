@@ -31,8 +31,8 @@ const LogInForm = observer(() => {
     }
 
     return (
-        <div>
-            <form className="flex flex-col gap-5 mx-50"
+        <div className="mb-20">
+            <form className="flex flex-col gap-5 mx-10 md:mx-50"
                 onSubmit={e => e.preventDefault()}>
                 <input className="py-1 border border-brand" 
                     value={email}
