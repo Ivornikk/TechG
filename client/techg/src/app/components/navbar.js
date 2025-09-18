@@ -5,15 +5,15 @@ import NavbarAuthButtons from "./navbar/navbarAuthButtons"
 import SearchPanel from "./navbar/searchPanel"
 import AsidePanel from "./navbar/AsidePanel"
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 const Navbar = () => {
 
-    const [isMobile, setIsMobile] = useState(false);
-
+    const [isMobile, setIsMobile] = useState(false)
     useEffect(() => {
         
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth < 568)
+            setIsMobile(window.innerWidth < 768)
         };
 
         checkScreenSize()
@@ -28,7 +28,7 @@ const Navbar = () => {
         <>
         {
             isMobile ?
-        <nav className="fixed flex flex-col gap-3 bg-brand w-full top-0 px-3 py-2">
+        <nav className="fixed flex flex-col gap-3 bg-brand w-[100vw] top-0 px-3 py-2">
             <div className="flex items-center justify-between">
                 <div className="flex gap-3">
                     <AsidePanel />

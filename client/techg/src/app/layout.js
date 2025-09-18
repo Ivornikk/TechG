@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         </link>
         <meta name="viewport" content="width=width-device, initial-scale=1.0" />
       </head>
-      <body className="pt-50">
+      <body className="pt-35 md:pt-50">
         <StoreProvider>
           <Loader />
           <Navbar />

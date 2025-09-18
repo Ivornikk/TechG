@@ -34,15 +34,15 @@ const Cart = observer(() => {
     }
 
     return (
-        <div className="max-w-[1600px] mx-auto my-10 h-full">
-            <h1 className="text-[2.5em]">Shopping cart</h1>
-            <div className="grid grid-cols-4 gap-5">
-                <div className="bg-categories shadow-xl my-30 col-span-3">
+        <div className="max-w-[80vw] md:max-w-[100vw] m-auto md:my-10 h-full">
+            <h1 className="text-[1.8em]">Shopping cart</h1>
+            <div className="flex flex-col md:grid md:grid-cols-4 gap-5">
+                <div className={`bg-categories shadow-xl my-10 ${basket.items.length !== 0?'col-span-4 md:col-span-3':'col-span-4'}`}>
                     {
                         basket.items.length === 0 ?
-                        <div className="m-auto w-full h-full py-10 flex items-center justify-center">
+                        <div className="m-auto w-full h-full py-10 flex items-center justify-center px-4">
                             <div className="flex flex-col gap-5">
-                                <h1 className="text-[2em] text-gray-text">
+                                <h1 className="text-[2em] text-gray-text text-center">
                                     There are no itmes in your cart
                                 </h1>
                                 <button className="py-2 text-[1.5em] bg-brand border border-brand text-white rounded-xl cursor-pointer hover:bg-white hover:text-brand transition"
@@ -57,9 +57,10 @@ const Cart = observer(() => {
                             basket.items.map(item => {
                                 return (
                                     <li key={item.id}
-                                        className="grid grid-cols-5 grid-rows-4 grid-flow-col-dense">
+                                        className="flex flex-col gap-2 items-center text-center md:grid md:grid-cols-5 md:grid-rows-4 md:grid-flow-col-dense">
                                         <img className="w-[200px] row-span-4"
-                                            src={`http://localhost:5000/${item.preview_image}`}></img>
+                                            src={`http://localhost:5000/${item.preview_image}`}>
+                                        </img>
                                         <h2 className="text-[1.2em] col-span-3">{item.title}</h2>
                                         <p className=" col-span-3">Estimated delivery time: {item.shippingDate || 'Not estimated'}</p>
                                         <div className="flex items-center row-span-2 col-span-3">
@@ -82,22 +83,24 @@ const Cart = observer(() => {
                     </ul>
                     }
                 </div>
-                <div className="w-100 h-100 bg-categories shadow-xl">
-                    <h1 className="text-[1.8em] text-center my-5">Order Summary</h1>
-                    <div className="flex justify-between mx-10 text-[1.2em]">
-                        <p>Subtotal</p>
-                        <p>${estimateTotalPrice()}</p>
+                { basket.items.length !== 0 &&
+                    <div className="md:w-100 h-100 bg-categories shadow-xl mb-10 md:mb-0">
+                        <h1 className="text-[1.8em] text-center my-5">Order Summary</h1>
+                        <div className="flex justify-between mx-10 text-[1.2em]">
+                            <p>Subtotal</p>
+                            <p>${estimateTotalPrice()}</p>
+                        </div>
+                        <hr className="border-stroke mx-7 my-2"></hr>
+                        <div className="flex justify-between mx-10 text-[1.3em]">
+                            <p>Total</p>
+                            <p>${estimateTotalPrice()}</p>
+                        </div>
+                        <Link href={'/checkout'}
+                            className="py-3 px-5 flex cursor-pointer justify-self-center rounded-xl border hover:border-button-active bg-button-active text-white hover:bg-categories hover:text-button-active transition">
+                            Proceed to checkout
+                        </Link>
                     </div>
-                    <hr className="border-stroke mx-7 my-2"></hr>
-                    <div className="flex justify-between mx-10 text-[1.3em]">
-                        <p>Total</p>
-                        <p>${estimateTotalPrice()}</p>
-                    </div>
-                    <Link href={'/checkout'}
-                        className="py-3 px-5 flex cursor-pointer justify-self-center rounded-xl border hover:border-button-active bg-button-active text-white hover:bg-categories hover:text-button-active transition">
-                        Proceed to checkout
-                    </Link>
-                </div>
+                }
             </div>
         </div>
     )
