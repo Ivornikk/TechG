@@ -7,7 +7,7 @@ const SearchPanel = ({isMobile}) => {
     const router = useRouter()
     const handleSearch = () => {
         setSearchInput('')
-        router.push(`/search?q=${searchInput}`)
+        router.push(`/search?q=${searchInput}&page=1`)
     }
 
     return (

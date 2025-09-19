@@ -22,10 +22,14 @@ export const fetchOneProduct = async id => {
 }
 
 export const searchProducts = async ({page, limit=5, q}) => {
-    const {data} = await $host.get(`api/product/search?q=${q}`, {params: {
-        page, limit
-    }})
-    return data
+    try {
+        const {data} = await $host.get(`api/product/search?q=${q}`, {params: {
+            page, limit
+        }})
+        return data
+    } catch (err) {
+        return err
+    }
 }
 
 export const removeProduct = async id => {

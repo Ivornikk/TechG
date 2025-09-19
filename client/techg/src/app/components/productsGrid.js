@@ -8,55 +8,59 @@ import { StoreContext } from "../store/StoreProvider"
 import { observer } from "mobx-react-lite"
 
 const ProductsGrid = observer(() => {
-    const limit = 20
+    const limit = 1
     const searchParams = useSearchParams().get('q')
     const {product} = useContext(StoreContext)
 
     useEffect(() => {
-        searchProducts({q: searchParams, page: 1, limit}).then(async data => {
-            data.rows = await Promise.all (
-                data.rows.flatMap(async searchResult => {
-                    const soldCount = await getSoldCount(searchResult.id)
-                    searchResult.soldNum = soldCount
-                    return searchResult
-                })
-            )
-            product.setProducts(data.rows)
-            product.setTotalProductsCount(data.count)
-        })
+        try {
+            searchProducts({q: searchParams, page: 1, limit}).then(async data => {
+                data.rows = await Promise.all (
+                    data.rows.flatMap(async searchResult => {
+                        const soldCount = await getSoldCount(searchResult.id)
+                        searchResult.soldNum = soldCount
+                        return searchResult
+                    })
+                )
+                product.setProducts(data.rows)
+                product.setTotalProductsCount(data.count)
+            })
+        } catch (err) {
+            alert('ERROR: ', err.responce.data.message)
+        }
     }, [])
 
-    return (
-        <div className="m-10">
-            <ul className="md:w-[1500px] w-500px grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
-                {
-                    product.products.map(product => {
-                        return (
-                            <Link href={`/product/${product.id}`}
-                                key={product.id}
-                                className="m-auto">
-                                <li className="p-5 flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
-                                        <img src={`http://192.168.1.2:5000/${product.preview_image}`}>
-                                        </img>
-                                    <div className="">
-                                        <div>{product.title}</div>
-                                        <div className="mt-5">${product.price}</div>
-                                        <div className="flex">
-                                            <div className="mr-5">{product.soldNum} sold</div>
+        return (
+            <div className="m-10">
+                <ul className="md:w-[1500px] w-500px grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
+                    {
+                        product.products.map(product => {
+                            return (
+                                <Link href={`/product/${product.id}`}
+                                    key={product.id}
+                                    className="m-auto">
+                                    <li className="p-5 flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
+                                            <img src={`http://192.168.1.2:5000/${product.preview_image}`}>
+                                            </img>
+                                        <div className="">
+                                            <div>{product.title}</div>
+                                            <div className="mt-5">${product.price}</div>
                                             <div className="flex">
-                                                <img src="/star.svg"></img>{product.rating}
+                                                <div className="mr-5">{product.soldNum} sold</div>
+                                                <div className="flex">
+                                                    <img src="/star.svg"></img>{product.rating}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </Link>
-                        )
-                    })
-                }
-            </ul>
-            <Pages pagesNum={(product.totalProductsCount % limit)} />
-        </div>
-    )
+                                    </li>
+                                </Link>
+                            )
+                        })
+                    }
+                </ul>
+                <Pages pagesNum={Math.ceil(product.totalProductsCount / limit)} />
+            </div>
+        )
 })
 
 export default ProductsGrid
