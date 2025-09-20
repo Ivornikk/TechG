@@ -42,8 +42,13 @@ const Loader = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center min-h-screen fixed w-full h-full bg-black/50">
-                <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="z-100 flex items-center justify-center min-h-screen w-full h-full bg-black/50">
+                <div className="h-[100vh] w-[100vw] block">
+
+                </div>
+                <div className="fixed">
+                    <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
             </div>
         )
     }

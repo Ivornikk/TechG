@@ -1,6 +1,5 @@
 'use client'
 import Link from "next/link"
-import QuantityCounter from "../components/quantityCounter"
 import { useContext, useEffect } from "react"
 import { StoreContext } from "../store/StoreProvider"
 import { fetchOneBasket, removeProductFromBasket } from "../http/BasketAPI"
@@ -11,7 +10,7 @@ const Cart = observer(() => {
 
     const {user, basket} = useContext(StoreContext)
     useEffect(() => {
-        fetchOneBasket(user.user.id).then(data => {
+        fetchOneBasket(user.user?.id).then(data => {
             basket.setItems(data[0].products)
         })
     }, [])

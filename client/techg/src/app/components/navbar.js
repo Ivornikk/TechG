@@ -5,7 +5,6 @@ import NavbarAuthButtons from "./navbar/navbarAuthButtons"
 import SearchPanel from "./navbar/searchPanel"
 import AsidePanel from "./navbar/AsidePanel"
 import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
 
 const Navbar = () => {
 

@@ -39,11 +39,16 @@ class ProductController {
             const ids = results.map(result => {
                 return result.id
             })
+            let products = {
+                count: 0,
+                rows: []
+            }
 
-            const products = await Product.findAndCountAll({
-                where: {id: {[Op.and]: ids}}
-            })
-            res.json(products)
+            if (results.length > 0)
+                products = await Product.findAndCountAll({
+                    where: {id: {[Op.and]: ids}}
+                })
+            return res.json(products)
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }
