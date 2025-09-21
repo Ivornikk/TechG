@@ -71,12 +71,13 @@ const CreateProuctForm = observer(({onHide}) => {
                             Choose group for product:
                         </label>
                     <select
-                        className="px-1 py-1 border border-brand rounded">
+                        className="px-1 py-1 border border-brand rounded"
+                        onChange={e => setGroupId(e.target.value)}>
                         {
                             product.groups.map(group => {
                                 return (
                                     <option key={group.id}
-                                        onClick={() => setGroupId(group.id)}>
+                                        value={group.id}>
                                         {group.name}
                                     </option>
                                 )
