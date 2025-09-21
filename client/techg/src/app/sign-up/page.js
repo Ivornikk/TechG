@@ -45,7 +45,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="m-auto bg-categories shadow-xl md:w-200 pt-10 mb-20">
+        <div className="my-20 m-auto bg-categories shadow-xl md:w-200 pt-10">
             <h2 className="text-[1.5em] text-center mb-5">Sign Up</h2>
             <form className="flex flex-col gap-5 m-10 md:mx-50"
                 onSubmit={e => e.preventDefault()}>

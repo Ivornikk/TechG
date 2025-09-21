@@ -11,6 +11,8 @@ class ProductStore {
         this._groups = []
         this._reviews = []
         this._productsQuantities = {}
+        this._categoriesObject = {}
+        this._currentGroup = {}
         this._quantity = 1
         this._totalProductsCount = 0
         makeAutoObservable(this)
@@ -52,6 +54,14 @@ class ProductStore {
         this._productsQuantities = productQuantities
     }
 
+    setCategoriesObject(object) {
+        this._categoriesObject = object
+    }
+
+    setCurrentGroup(group) {
+        this._currentGroup = group
+    }
+
     setQuantity(quantity) {
         this._quantity = quantity
     }
@@ -90,6 +100,14 @@ class ProductStore {
 
     get productsQuantities() {
         return this._productsQuantities
+    }
+
+    get categoriesObject() {
+        return this._categoriesObject
+    }
+
+    get currentGroup() {
+        return this._currentGroup
     }
 
     get quantity() {

@@ -16,7 +16,7 @@ const ProductsGrid = observer(() => {
         try {
             searchProducts({q: searchParams, page: 1, limit}).then(async data => {
                 data.rows = await Promise.all (
-                    data.rows.flatMap(async searchResult => {
+                    data.rows?.flatMap(async searchResult => {
                         const soldCount = await getSoldCount(searchResult.id)
                         searchResult.soldNum = soldCount
                         return searchResult
@@ -32,7 +32,7 @@ const ProductsGrid = observer(() => {
 
         return (
             <div className="m-10 min-h-[80vh]">
-                <ul className="md:w-[1500px] w-500px grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
+                <ul className="md:w-[1500px] w-[500px] grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
                     { product.totalProductsCount <= 0 ?
                         <div className="text-[2em] text-center w-full m-auto">
                             No results found for {searchParams}

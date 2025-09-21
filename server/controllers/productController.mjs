@@ -20,6 +20,7 @@ class ProductController {
             next(ApiError.badRequest(err.message))
         }
     }
+    
     async getOne(req, res, next) {
         const {id} = req.params
         try {
@@ -114,7 +115,7 @@ class ProductController {
         
     }
 
-    async getSoldCount(req, res) {
+    async getSoldCount(req, res, next) {
         try {
             const {id} = req.params
             const count = await OrderProduct.count({

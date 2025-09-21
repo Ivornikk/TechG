@@ -1,10 +1,27 @@
 import models from "../models/models.mjs"
-const {Category, Type, Group, Product} =  models
+const {Category, Type, Group} =  models
 
 class CategoryController {
     async getAll(req, res, next) {
         try {
+            const {includeSub} = req.query
+
             const categories = await Category.findAndCountAll()
+
+            if (!includeSub)
+                return res.json(categories)
+
+            categories.rows = await Promise.all (
+                categories.rows.flatMap(async (cat) => {
+                    const category = await Category.findOne({
+                        where: cat.id, include: [{
+                            model: Type,
+                            include: [{ model: Group }]
+                        }]
+                    })
+                    return category
+                })
+            )
             return res.json(categories)
         }
         catch (err) {
@@ -14,9 +31,9 @@ class CategoryController {
     async getOne(req, res, next) {
         const {id} = req.params
         try {
-            const category = await Category.findOne({where: {id}, include: [{
+            const category = await Category.findOne({ where: {id}, include: [{
                 model: Type,
-                include: [{model: Group}]
+                include: [{ model: Group }]
                 }]
             })
             return res.json(category)

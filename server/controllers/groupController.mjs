@@ -12,6 +12,25 @@ class GroupController {
             next(ApiError.badRequest(err.message))
         }
     }
+
+    async getOne(req, res, next) {
+        try {
+            const {id} = req.params
+            const group = await Group.findOne({
+                where: {id}
+            })
+
+            const products = await Product.findAndCountAll({
+                where: {groupId: id}
+            })
+            group.setDataValue('products', products)
+
+            return res.json(group)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async create(req, res, next) {
         try {
             const {name, typeId} = req.body

@@ -39,8 +39,10 @@ export const removeProduct = async id => {
     return data
 }
 
-export const fetchCategories = async () => {
-    const {data} = await $host.get('/api/category')
+export const fetchCategories = async includeSub => {
+    const {data} = await $host.get('/api/category', {
+        params: {includeSub}
+    })
     return data
 }
 
@@ -95,5 +97,10 @@ export const removeGroup = async id => {
 
 export const getSoldCount = async id => {
     const {data} = await $host.get(`api/product/${id}/get-sold-count`)
+    return data
+}
+
+export const fetchGroup = async id => {
+    const {data} = await $host.get(`api/group/${id}`)
     return data
 }
