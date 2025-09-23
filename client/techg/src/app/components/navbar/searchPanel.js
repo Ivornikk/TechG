@@ -20,7 +20,7 @@ const SearchPanel = ({isMobile}) => {
                     className="bg-white text-black rounded-sm pl-3 pr-10 py-3 w-full" />
                 <button className="-translate-x-10 cursor-pointer"
                     onClick={handleSearch}>
-                    <img src="search-icon.svg"></img>
+                    <img src="/search-icon.svg"></img>
                 </button>
             </form>
         :

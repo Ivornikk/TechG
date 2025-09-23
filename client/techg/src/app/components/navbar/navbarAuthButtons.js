@@ -1,11 +1,18 @@
 'use client'
 import { observer } from "mobx-react-lite"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import { StoreContext } from "../../store/StoreProvider"
 
 const NavbarAuthButtons = observer(({isMobile}) => {
-    const {user} = useContext(StoreContext)
+    const { user, product } = useContext(StoreContext)
+
+    const [currency, setCurrency] = useState('EUR')
+
+    useEffect(() => {
+        product.setCurrency(currency)
+    }, [currency])
+
     const currencies = [
         { id: 1, name: "EUR" },
         { id: 2, name: "GBP" },
@@ -47,7 +54,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                     <Link href={'/cart'}
                         className="cursor-pointer">
                     <img
-                        src="cart-icon.svg"
+                        src="/cart-icon.svg"
                         width={35}>
                     </img>
                     </Link>
@@ -70,12 +77,14 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                         className="cursor-pointer flex-shrink-0">
                         <img src="/UserIcon.svg" className=" flex-shrink-0"></img>
                     </Link>
-                    <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full">
+                    <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full"
+                        onChange={e => setCurrency(e.target.value)}>
                         {
                             currencies.map(el => {
                                 return (
                                     <option className="text-black"
-                                        key={el.id}>
+                                        key={el.id}
+                                        value={el.name}>
                                         {el.name}
                                     </option>
                                 )

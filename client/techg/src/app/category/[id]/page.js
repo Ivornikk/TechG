@@ -14,6 +14,7 @@ const CategoryPage = observer(() => {
     useEffect(() => {
         fetchGroup(id)
         .then(async data => {
+            product.setCurrentGroup(data)
             data.products.rows = await Promise.all (
                 data.products.rows.flatMap(async searchResult => {
                     const soldCount = await getSoldCount(searchResult.id)
@@ -27,7 +28,10 @@ const CategoryPage = observer(() => {
     }, [])
 
     return (
-        <div className="md:w-[1500px] w-[500px] m-auto">
+        <div className="md:w-[1500px] w-[500px] m-auto min-h-[80vh] my-10">
+            <h1 className="text-[2em] my-5">
+                {product.totalProductsCount} {product.totalProductsCount>1?'items':'item'} found for category {product.currentGroup.name}
+            </h1>
             <ul className=" grid md:grid-cols-5 grid-cols-1 gap-3">
                 {
                     product.products.map(product => {
@@ -35,7 +39,7 @@ const CategoryPage = observer(() => {
                             <Link href={`/product/${product.id}`}
                                 key={product.id}
                                 className="m-auto">
-                                <li className="p-5 flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
+                                <li className="p-5 max-w-[70vw] flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
                                         <img src={`http://192.168.1.2:5000/${product.preview_image}`}>
                                         </img>
                                     <div className="">

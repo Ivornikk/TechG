@@ -4,13 +4,26 @@ import Link from "next/link"
 import NavbarAuthButtons from "./navbar/navbarAuthButtons"
 import SearchPanel from "./navbar/searchPanel"
 import AsidePanel from "./navbar/AsidePanel"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { fetchCartItemsByUser } from "../http/BasketAPI"
+import { StoreContext } from "../store/StoreProvider"
 
 const Navbar = () => {
 
     const [isMobile, setIsMobile] = useState(false)
+    const [cartItems, setCartItems] = useState(0)
+
+    const { user } = useContext(StoreContext)
+    const userId = user.user?.id
+
     useEffect(() => {
-        
+        fetchCartItemsByUser(userId)
+        .then(data => {
+            setCartItems(data.count)
+        })
+    }, [userId])
+
+    useEffect(() => {
         const checkScreenSize = () => {
             setIsMobile(window.innerWidth < 768)
         };
@@ -87,6 +100,7 @@ const Navbar = () => {
                             <button className="md:block
                                                 hidden cursor-pointer">
                                 Cart
+                                {cartItems}
                             </button>
                         </Link>
                     </div>

@@ -5,14 +5,28 @@ import { StoreContext } from "../store/StoreProvider"
 import { fetchOneBasket, removeProductFromBasket } from "../http/BasketAPI"
 import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
+import * as $ from 'jquery'
 
 const Cart = observer(() => {
 
     const {user, basket} = useContext(StoreContext)
+
     useEffect(() => {
         fetchOneBasket(user.user?.id).then(data => {
             basket.setItems(data[0].products)
         })
+    }, [])
+
+    useEffect(() => {
+        const toSummaryBtn = document.getElementById('ToSummaryButton')
+        const coords = toSummaryBtn.getBoundingClientRect()
+
+        $(window).bind('scroll', () => {
+            console.log($(window).scrollTop())
+            if ($(window).scrollTop() > coords.top) $('#ToSummaryButton').hide()
+            else $('#ToSummaryButton').show()
+        })
+
     }, [])
 
     const estimateTotalPrice = () => {
@@ -33,7 +47,7 @@ const Cart = observer(() => {
     }
 
     return (
-        <div className="max-w-[80vw] md:max-w-[100vw] m-auto md:my-10 h-full">
+        <div className="max-w-[80vw] md:max-w-[100vw] m-auto md:mx-20 md:my-10 h-full">
             <h1 className="text-[1.8em]">Shopping cart</h1>
             <div className="flex flex-col md:grid md:grid-cols-4 gap-5">
                 <div className={`bg-categories shadow-xl my-10 ${basket.items.length !== 0?'col-span-4 md:col-span-3':'col-span-4'}`}>
@@ -56,7 +70,7 @@ const Cart = observer(() => {
                             basket.items.map(item => {
                                 return (
                                     <li key={item.id}
-                                        className="flex flex-col gap-2 items-center text-center md:grid md:grid-cols-5 md:grid-rows-4 md:grid-flow-col-dense">
+                                        className="flex flex-col gap-2 items-center md:text-left text-center md:grid md:grid-cols-5 md:grid-rows-4 md:grid-flow-col-dense">
                                         <img className="w-[200px] row-span-4"
                                             src={`http://localhost:5000/${item.preview_image}`}>
                                         </img>
@@ -82,8 +96,16 @@ const Cart = observer(() => {
                     </ul>
                     }
                 </div>
+                <Link href={'#OrderSummary'}
+                    id="ToSummaryButton"
+                    className="self-center text-white text-[1.5em] cursor-pointer px-8
+                    py-2 bg-button-active border border-button-active rounded-xl 
+                    hover:bg-white hover:text-button-active transition shadow-xl md:hidden fixed bottom-5 right-5">
+                    To summary &darr;
+                </Link>
                 { basket.items.length !== 0 &&
-                    <div className="md:w-100 h-100 bg-categories shadow-xl mb-10 md:mb-0">
+                    <div className="md:w-100 h-100 bg-categories block xl:fixed right-10 shadow-xl mb-10 md:mb-0"
+                        id="OrderSummary">
                         <h1 className="text-[1.8em] text-center my-5">Order Summary</h1>
                         <div className="flex justify-between mx-10 text-[1.2em]">
                             <p>Subtotal</p>

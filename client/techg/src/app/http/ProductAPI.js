@@ -1,4 +1,5 @@
 import { $authHost, $host } from ".";
+const exchangeRates = require('../../exchangeRates.json')
 
 export const createProduct = async (product) => {
     const {data} = await $authHost.post('api/product', product, {
@@ -9,15 +10,40 @@ export const createProduct = async (product) => {
     return data
 }
 
-export const fetchProducts = async ({page, limit = 5}) => {
+export const fetchProducts = async ({page, limit = 5, currency = 'EUR'}) => {
     const {data} = await $host.get('api/product', {params: {
         page, limit
     }})
+
+    try {
+        if (currency != 'EUR') {
+            const rate = exchangeRates[currency]
+
+            data.rows = data.rows.map(product => {
+                product.price = (product.price*Number(rate)).toFixed(2)
+                return product
+            })
+        }
+    } catch (err) {
+        alert("Error! See console for info")
+        console.log(err)
+    }
+
     return data
 }
 
-export const fetchOneProduct = async id => {
+export const fetchOneProduct = async ({id, currency = 'EUR'}) => {
     const {data} = await $host.get(`api/product/${id}`)
+    data.shippingFee = 3.15
+    try {
+        const rate = exchangeRates[currency]
+        data.price = (data.price * Number(rate)).toFixed(2)
+        data.shippingFee = (data.shippingFee * Number(rate)).toFixed(2)
+    } catch (err) {
+        alert("Error! See console for info!")
+        console.log(err)
+    }
+
     return data
 }
 

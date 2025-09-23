@@ -3,6 +3,7 @@ import controller from '../controllers/basketController.mjs'
 
 const route = new express()
 route.get('/', controller.getAll)
+route.get('/items-count-by-user', controller.getItemsCountByUser)
 route.get('/:userId', controller.getOne)
 route.post('/', controller.create)
 route.post('/add-product', controller.addProduct)

@@ -19,7 +19,7 @@ const Product = observer(() => {
     const { product } = useContext(StoreContext)
 
     const getProducts = async () => {
-        const data = await fetchProducts({ page: 1 })
+        const data = await fetchProducts({ page: 1 , currency: product.currency})
         product.setProducts(data.rows)
     }
     const getCategories = () => {
@@ -44,7 +44,7 @@ const Product = observer(() => {
         getCategories()
         getTypes()
         getGroups()
-    }, [])
+    }, [product.currency])
 
     const deleteProduct = id => {
         try {
@@ -134,25 +134,25 @@ const Product = observer(() => {
                             }
                             <ul className="flex flex-col gap-3 mt-10">
                                 {
-                                    product.products.map(product => {
+                                    product.products.map(elem => {
                                         return (
-                                            <li key={product.id}
+                                            <li key={elem.id}
                                                 className="flex justify-between grid grid-rows-3 grid-flow-col-dense">
                                                 <div className="flex gap-3 row-span-3 cursor-pointer"
-                                                    onClick={ () => redirect(`/product/${product.id}`)}>
-                                                    <img src={`http://localhost:5000/${product.preview_image}`}
+                                                    onClick={ () => redirect(`/product/${elem.id}`)}>
+                                                    <img src={`http://localhost:5000/${elem.preview_image}`}
                                                         className="w-50"></img>
                                                     <div>
                                                         <h2 className="text-[1.3em]">
-                                                            {product.title}
+                                                            {elem.title}
                                                         </h2>
                                                         <h2 className="text-[1.2em]">
-                                                            {product.price}$
+                                                            {elem.price} {product.currency}
                                                         </h2>
                                                     </div>
                                                 </div>
                                                 <button className="cursor-pointer"
-                                                    onClick={() => deleteProduct(product.id)}>
+                                                    onClick={() => deleteProduct(elem.id)}>
                                                     <img src="/binIcon.svg">
                                                     </img>
                                                 </button>

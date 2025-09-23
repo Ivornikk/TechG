@@ -18,13 +18,13 @@ const ProductCard = observer(() => {
     const [favorites, setFavorites] = useState(0)
 
     useEffect(() => {
-        fetchOneProduct(id).then(data => {
+        fetchOneProduct({id, currency: product.currency}).then(data => {
             product.setCurrentProduct(data)
             product.setPictures(data.description_images.split(','))
         })
         fetchNumberOfFavorites(id)
         .then(data => setFavorites(data))
-    }, [])
+    }, [product.currency])
 
     const addToCart = () => {
         if (!user.isAuth) {
@@ -115,7 +115,7 @@ const ProductCard = observer(() => {
                 <div className="px-5 text-lg">
                     <h2>{product.currentProduct.title}</h2>
                     <h2 className="pt-3">Brand: </h2>
-                    <h1 className="text-brand text-4xl py-4">{product.currentProduct.price}$</h1>
+                    <h1 className="text-brand text-4xl py-4">{product.currentProduct.price} {product.currency}</h1>
                     <hr className="border-stroke" />
                     <ProductVariations variations={sampleVariations} />
                     <div className="flex flex-row justify-between">
@@ -124,7 +124,7 @@ const ProductCard = observer(() => {
                             <QuantityCounter defaultValue={1}
                                 changeQuantity={setQuantity}/>
                             <div className="mt-3">
-                                Shipping: 3.15$
+                                Shipping: {product.currentProduct.shippingFee} {product.currency}
                             </div>
                         </div>
                         <div className="flex flex-col mx-20 w-full">

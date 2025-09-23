@@ -13,6 +13,7 @@ class ProductStore {
         this._productsQuantities = {}
         this._categoriesObject = {}
         this._currentGroup = {}
+        this._currency = 'EUR'
         this._quantity = 1
         this._totalProductsCount = 0
         makeAutoObservable(this)
@@ -62,6 +63,10 @@ class ProductStore {
         this._currentGroup = group
     }
 
+    setCurrency(currency) {
+        this._currency = currency
+    }
+
     setQuantity(quantity) {
         this._quantity = quantity
     }
@@ -108,6 +113,10 @@ class ProductStore {
 
     get currentGroup() {
         return this._currentGroup
+    }
+
+    get currency() {
+        return this._currency
     }
 
     get quantity() {

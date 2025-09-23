@@ -37,6 +37,24 @@ class BasketController {
         }
     }
 
+    async getItemsCountByUser(req, res, next) {
+        try {
+            const {userId} = req.query
+
+            const basket = await Basket.findOne({
+                where: {userId}
+            })
+
+            const count = await BasketProduct.count({
+                where: {basketId: basket.id}
+            })
+
+            return res.json({count})
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async removeProduct(req, res, next) {
         try {
             const {userId, productId} = req.body
