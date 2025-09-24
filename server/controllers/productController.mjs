@@ -3,7 +3,7 @@ import ApiError from "../errors/ApiError.mjs"
 import { createProduct, searchProducts } from "../services/productService.mjs"
 import { v4 } from "uuid"
 import { Op } from "sequelize"
-const {Product, Group, OrderProduct, ProductAttributeValue} = models
+const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue} = models
 
 class ProductController {
     async getAll(req, res, next) {
@@ -134,12 +134,24 @@ class ProductController {
 
     async addAttributeToProduct(req, res, next) {
         try {
-            const {productId, attributeValueId} = req.body
+            const {productId, value, attributeId} = req.body
 
-            const result = await ProductAttributeValue.create({
-                productId,
-                attributeValueId
+            const attributeVal = await AttributeValue.findOne({
+                where: {value}
             })
+            let result
+
+            if (attributeVal) {
+                result = await ProductAttributeValue.create({
+                    productId, attributeValueId: attributeVal.id
+                })
+            }
+            else {
+                const newVal = await AttributeValue.create({ value, attributeId })
+                result = await ProductAttributeValue.create({
+                    productId, attributeValueId: newVal.id
+                })
+            }
 
             return res.json(result)
         } catch (err) {

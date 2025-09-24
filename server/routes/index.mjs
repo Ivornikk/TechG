@@ -11,6 +11,7 @@ import promotionRoute from './promotionRoute.mjs'
 import promotionTypeRoute from './promotionTypeRoute.mjs'
 import ratingRouter from './ratingRoute.mjs'
 import wishlistRouter from './wishlistRouter.mjs'
+import attributeRoute from './attributeRoute.mjs'
 
 const route = new express()
 route.use('/user', userRouter)
@@ -25,5 +26,6 @@ route.use('/promotion', promotionRoute)
 route.use('/promotion-type', promotionTypeRoute)
 route.use('/rating', ratingRouter)
 route.use('/wishlist', wishlistRouter)
+route.use('/attribute', attributeRoute)
 
 export default route

@@ -121,8 +121,7 @@ const BasketProduct = sequelize.define('basket_product', {
 
 const Attribute = sequelize.define('attribute', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false},
-    dataDype: {type: DataTypes.STRING, allowNull: false}
+    name: {type: DataTypes.STRING, allowNull: false}
 })
 
 const AttributeValue = sequelize.define('attribute_value', {
