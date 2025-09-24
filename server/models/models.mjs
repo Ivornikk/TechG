@@ -130,6 +130,10 @@ const AttributeValue = sequelize.define('attribute_value', {
     value: {type: DataTypes.STRING, allowNull: false}
 })
 
+const ProductAttributeValue = sequelize.define('product_attribute_value', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
 User.hasMany(Address)
 Address.belongsTo(User)
 
@@ -184,8 +188,8 @@ Group.belongsTo(Type)
 Group.hasMany(Product)
 Product.belongsTo(Group)
 
-AttributeValue.hasMany(Product)
-Product.belongsTo(AttributeValue)
+AttributeValue.belongsToMany(Product, {through: ProductAttributeValue})
+Product.belongsToMany(AttributeValue, {through: ProductAttributeValue})
 
 Attribute.hasMany(AttributeValue)
 AttributeValue.belongsTo(Attribute)
@@ -213,5 +217,6 @@ export default {
     Basket,
     BasketProduct,
     Attribute,
-    AttributeValue
+    AttributeValue,
+    ProductAttributeValue
 }

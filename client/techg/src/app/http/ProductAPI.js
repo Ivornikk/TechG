@@ -130,3 +130,8 @@ export const fetchGroup = async id => {
     const {data} = await $host.get(`api/group/${id}`)
     return data
 }
+
+export const editProduct = async ({inputData, id}) => {
+    const {data} = await $authHost.patch(`api/product/${id}/edit`, inputData)
+    return data
+}

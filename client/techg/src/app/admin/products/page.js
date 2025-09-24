@@ -8,6 +8,7 @@ import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { redirect } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import EditProductForm from "./editProductForm"
 
 const Product = observer(() => {
     const [view, setView] = useState('products')
@@ -16,6 +17,8 @@ const Product = observer(() => {
     const [createType, setCreateType] = useState(false)
     const [createGroup, setCreateGroup] = useState(false)
     
+    const [productEditing, setProductEditing] = useState(0)
+
     const { product } = useContext(StoreContext)
 
     const getProducts = async () => {
@@ -136,6 +139,14 @@ const Product = observer(() => {
                                 {
                                     product.products.map(elem => {
                                         return (
+                                            <div key={elem.id}>
+                                            {
+                                            productEditing == elem.id ?
+                                            <li key={elem.id}>
+                                                <EditProductForm productId={elem.id} 
+                                                    onHide={() => setProductEditing(0)} />
+                                            </li>
+                                            :
                                             <li key={elem.id}
                                                 className="flex justify-between grid grid-rows-3 grid-flow-col-dense">
                                                 <div className="flex gap-3 row-span-3 cursor-pointer"
@@ -153,10 +164,17 @@ const Product = observer(() => {
                                                 </div>
                                                 <button className="cursor-pointer"
                                                     onClick={() => deleteProduct(elem.id)}>
-                                                    <img src="/binIcon.svg">
+                                                    <img src="/binIcon.svg" className="w-10">
+                                                    </img>
+                                                </button>
+                                                <button className="cursor-pointer"
+                                                    onClick={() => setProductEditing(elem.id)}>
+                                                    <img src="/penIcon.svg" className="w-10">
                                                     </img>
                                                 </button>
                                             </li>
+                                            }
+                                            </div>
                                         )
                                     })
                                 }
