@@ -56,53 +56,6 @@ const ProductCard = observer(() => {
         })
     }
 
-    const sampleVariations = [
-        {
-            id: 0,
-            name: 'color',
-            types: [
-                {
-                    id: 1,
-                    name: 'white'
-                },
-                {
-                    id: 2,
-                    name: 'Black'
-                },
-                {
-                    id: 3,
-                    name: 'Yellow'
-                },
-                {
-                    id: 4,
-                    name: 'Purple'
-                },
-                {
-                    id: 5,
-                    name: 'Red'
-                },
-            ]
-        },
-        {
-            id: 1,
-            name: 'RAM',
-            types: [
-                {
-                    id: 1,
-                    name: '32GB'
-                },
-                {
-                    id: 2,
-                    name: '64GB'
-                },
-                {
-                    id: 3,
-                    name: '128GB'
-                },
-            ]
-        },
-    ]
-
     return (
         <>
         { product.currentProduct && 
@@ -117,7 +70,7 @@ const ProductCard = observer(() => {
                     <h2 className="pt-3">Brand: </h2>
                     <h1 className="text-brand text-4xl py-4">{product.currentProduct.price} {product.currency}</h1>
                     <hr className="border-stroke" />
-                    <ProductVariations variations={sampleVariations} />
+                    <ProductVariations variations={product.currentProduct.attributes} />
                     <div className="flex flex-row justify-between">
                         <div className="float-center h-[174px]">
                             <h1 className="text-3xl my-3">Quantity:</h1>

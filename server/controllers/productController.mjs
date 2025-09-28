@@ -3,7 +3,7 @@ import ApiError from "../errors/ApiError.mjs"
 import { createProduct, searchProducts } from "../services/productService.mjs"
 import { v4 } from "uuid"
 import { Op } from "sequelize"
-const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue} = models
+const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue, Attribute} = models
 
 class ProductController {
     async getAll(req, res, next) {
@@ -25,6 +25,42 @@ class ProductController {
         const {id} = req.params
         try {
             const product = await Product.findOne({where: {id}, include: Group})
+
+            const attributesIds = await ProductAttributeValue.findAll({
+                where: {productId: id}
+            }).then(data => {
+                return data.flatMap(attribute => {
+                    return attribute.attributeValueId
+                })
+            })
+            const reversedAttributes = await AttributeValue.findAll({
+                where: {
+                    id: attributesIds
+                },
+                include: Attribute
+            })
+            const whereClause = await Attribute.findAll({
+                where: {id: reversedAttributes.flatMap(el => {
+                    let result = []
+                    result += el.attribute.id
+                    return result
+                })}
+            }).then(data => {
+                return new Set(data.flatMap(el => el.id))
+            })
+            let attrResult = await Attribute.findAll({
+                where: {id: Array.from(whereClause)}
+            })
+            const values = await AttributeValue.findAll({
+                where: {attributeId: attrResult.flatMap(el => el.id)}
+            })
+            attrResult = attrResult.flatMap(result => {
+                result.setDataValue('values', values.filter(el => el.attributeId == result.id))
+                return result
+            })
+
+            product.setDataValue('attributes', attrResult)
+
             return res.json(product)
         }
         catch (err) {
@@ -113,7 +149,7 @@ class ProductController {
     }
     async edit(req, res, next) {
         try {
-            const { title, price, description } = req.body
+            const { title, price, description, attrValue, attributeId } = req.body
             const { id } = req.params
 
             const product = await Product.findOne({
@@ -126,34 +162,28 @@ class ProductController {
             if (description) product.description = description
 
             await product.save()
+
+            if (attrValue) {
+                const attributeValCandidate = await AttributeValue.findOne({
+                    where: {value: attrValue}
+                })
+
+                if (attributeValCandidate) {
+                    await ProductAttributeValue.create({
+                        productId: id, attributeValueId: attributeValCandidate.id, attributeId
+                    })
+                }
+                else {
+                    const newVal = await AttributeValue.create({
+                        value: attrValue, attributeId
+                    })
+                    await ProductAttributeValue.create({
+                        productId: id, attributeValueId: newVal.id
+                    })
+                }
+            }
+
             return res.json(product)
-        } catch (err) {
-            next(ApiError.badRequest(err.message))
-        }
-    }
-
-    async addAttributeToProduct(req, res, next) {
-        try {
-            const {productId, value, attributeId} = req.body
-
-            const attributeVal = await AttributeValue.findOne({
-                where: {value}
-            })
-            let result
-
-            if (attributeVal) {
-                result = await ProductAttributeValue.create({
-                    productId, attributeValueId: attributeVal.id
-                })
-            }
-            else {
-                const newVal = await AttributeValue.create({ value, attributeId })
-                result = await ProductAttributeValue.create({
-                    productId, attributeValueId: newVal.id
-                })
-            }
-
-            return res.json(result)
         } catch (err) {
             next(ApiError.badRequest(err.message))
         }
