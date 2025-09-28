@@ -40,7 +40,7 @@ const Navbar = () => {
         <>
         {
             isMobile ?
-        <nav className="fixed flex flex-col gap-3 bg-brand w-[100vw] top-0 px-3 py-2">
+        <nav className="fixed flex flex-col gap-3 bg-brand w-[100vw] top-0 px-3 py-2 z-20">
             <div className="flex items-center justify-between">
                 <div className="flex gap-3">
                     <AsidePanel />
