@@ -1,6 +1,6 @@
 FROM node:alpine as build
 
-COPY techg/package.json techg/package.json
+COPY package.json package.json
 RUN npm install
 
 COPY . .
