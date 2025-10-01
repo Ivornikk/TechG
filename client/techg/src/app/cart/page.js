@@ -22,7 +22,6 @@ const Cart = observer(() => {
         const coords = toSummaryBtn.getBoundingClientRect()
 
         $(window).bind('scroll', () => {
-            console.log($(window).scrollTop())
             if ($(window).scrollTop() > coords.top) $('#ToSummaryButton').hide()
             else $('#ToSummaryButton').show()
         })
