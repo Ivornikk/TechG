@@ -20,13 +20,13 @@ services:
     build:
       context: ./server
     networks:
-      -dev
+      - dev
       
   frontend:
     build:
       context: ./client
     networks:
-      -dev
+      - dev
 
   opensearch:
     image: opensearchproject/opensearch:2.11.1
@@ -43,4 +43,4 @@ services:
       - "9200:9200"
       - "9600:9600"
     networks:
-      -dev
+      - dev
