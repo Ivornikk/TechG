@@ -1,12 +1,12 @@
 import { Sequelize } from 'sequelize'
 
 export default new Sequelize(
-    'mydb',
-    'postgres',
-    'postgres',
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
         dialect: 'postgres',
-        host: 'postgres',
-        port: 'postgres'
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT
     }
 )
