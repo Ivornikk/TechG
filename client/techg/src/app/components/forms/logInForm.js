@@ -25,7 +25,7 @@ const LogInForm = observer(() => {
             user.setUser(user)
             user.setIsAuth(true)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(err.message)
         }
         if (user.isAuth) redirect('/')
     }

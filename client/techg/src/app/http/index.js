@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const $host = axios.create({
-    baseURL: process.env.API_BASE_URL,
+    baseURL: "http://localhost:5000",
     withCredentials: true
 })
 
 const $authHost = axios.create({
-    baseURL: process.env.API_BASE_URL,
+    baseURL: "http://localhost:5000",
     withCredentials: true
 })
 
