@@ -61,3 +61,6 @@ services:
       - "9600:9600"
     networks:
       - dev
+
+volumes:
+  postgres_data:
