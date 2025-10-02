@@ -26,6 +26,8 @@ services:
       POSTGRES_DB: mydb
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    depends_on:
+      - backend
     networks:
       - dev
     ports:
