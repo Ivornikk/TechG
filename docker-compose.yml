@@ -27,6 +27,8 @@ services:
       context: ./client/techg
     expose:
       - "3000"
+    networks:
+      - dev
 
   opensearch:
     image: opensearchproject/opensearch:2.11.1
