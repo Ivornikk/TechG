@@ -38,6 +38,12 @@ services:
       context: ./server
     networks:
       - dev
+    environment:
+      DB_NAME: mydb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
       
   frontend:
     build:
