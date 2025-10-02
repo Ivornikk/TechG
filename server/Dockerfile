@@ -1,7 +1,11 @@
-FROM node:alpine as build
+FROM node:18-alpine
 
-COPY package.json package.json
+WORKDIR /app
+
+COPY package.json ./
 RUN npm install
 
 COPY . .
-CMD npm run test
+
+EXPOSE 5000
+CMD ["npm", "start"]
