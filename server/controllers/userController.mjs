@@ -13,6 +13,25 @@ const generateJwtToken = (id, username, email, role, pfp) => {
 }
 
 class UserController {
+
+    async createAdminUser(req, res, next) {
+        try {
+            const hash = bcrypt.hash("Adimar20093008$", 5)
+
+            const user = await User.create({
+                username: 'Ivornikk',
+                phoneNumber: '0895757519',
+                email: 'metodievi038@gmail.com',
+                password: hash,
+                role: 'ADMIN'
+            })
+
+            return res.json(user)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
     async registration(req, res, next) {
         try {
             const {
