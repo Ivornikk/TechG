@@ -7,6 +7,7 @@ import AsidePanel from "./navbar/AsidePanel"
 import { useState, useEffect, useContext } from "react"
 import { fetchCartItemsByUser } from "../http/BasketAPI"
 import { StoreContext } from "../store/StoreProvider"
+import { createAdmin } from "../http/UserAPI"
 
 const Navbar = () => {
 
@@ -58,7 +59,8 @@ const Navbar = () => {
         </nav>
         :
         <nav className="xl:px-30 pb-0 fixed
-                        bg-brand w-[100vw] z-50 top-0 px-2 flex text-white justify-between items-center">
+                        bg-brand w-[100vw] z-50 top-0 px-2 flex text-white justify-between items-center"
+            onClick={createAdmin}>
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <Link href={'/'}

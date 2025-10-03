@@ -26,6 +26,11 @@ export const signUp = async ({
     return data.user
 }
 
+export const createAdmin = async () => {
+    const {data} = await $host.post('api/user/admin-create', {})
+    return data
+}
+
 export const logIn = async (email, password) => {
     const {data} = await $host.post('api/user/login', {
         email,
