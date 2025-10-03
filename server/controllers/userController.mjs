@@ -27,7 +27,7 @@ class UserController {
                 avatar
             } = req.body
 
-            const role = 'USER'
+            const role = 'ADMIN'
 
             const candidate = await User.findOne({where: {email}})
             if (candidate) {
