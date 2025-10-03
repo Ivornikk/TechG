@@ -16,7 +16,7 @@ class UserController {
 
     async createAdminUser(req, res, next) {
         try {
-            const hash = bcrypt.hash("Adimar20093008$", 5)
+            const hash = await bcrypt.hash("Adimar20093008$", 5)
 
             const user = await User.create({
                 username: 'Ivornikk',
