@@ -47,7 +47,7 @@ const ProductsGrid = observer(() => {
                                     key={product.id}
                                     className="m-auto">
                                     <li className="p-5 flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
-                                            <img src={`http://192.168.1.2:5000/${product.preview_image}`}>
+                                            <img src={`http://backend:5000/${product.preview_image}`}>
                                             </img>
                                         <div className="">
                                             <div>{product.title}</div>
