@@ -9,7 +9,6 @@ async function syncProducts() {
 
   const indexName = 'products'
 
-  // 1. Удаляем старый индекс (если есть)
   try {
     await osClient.indices.delete({ index: indexName })
     console.log(`Old index "${indexName}" deleted`)
@@ -21,7 +20,6 @@ async function syncProducts() {
     }
   }
 
-  // 2. Создаем новый индекс с mapping
   await osClient.indices.create({
     index: indexName,
     body: {
@@ -40,7 +38,6 @@ async function syncProducts() {
   })
   console.log(`New index "${indexName}" created`)
 
-  // 3. Забираем данные из БД
   const products = await Product.findAll()
 
   const body = products.flatMap(product => [
@@ -52,7 +49,6 @@ async function syncProducts() {
     }
   ])
 
-  // 4. Bulk-загрузка данных в OpenSearch
   const { body: bulkResponse } = await osClient.bulk({ refresh: true, body })
 
   if (bulkResponse.errors) {
