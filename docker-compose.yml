@@ -46,7 +46,6 @@ services:
       NODE_ENV: production
     depends_on:
       - postgres
-      - opensearch
       
   frontend:
     build:

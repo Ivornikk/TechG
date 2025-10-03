@@ -4,6 +4,7 @@ import { createProduct, searchProducts } from "../services/productService.mjs"
 import { v4 } from "uuid"
 import { Op } from "sequelize"
 const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue, Attribute} = models
+import syncProducts from '../syncOpenSearch.mjs'
 
 class ProductController {
     async getAll(req, res, next) {
@@ -129,6 +130,9 @@ class ProductController {
                 preview_image: previewFileName,
                 groupId: groupId
             })
+
+            syncProducts()
+
             return res.json(product)
         }
         catch (err) {
