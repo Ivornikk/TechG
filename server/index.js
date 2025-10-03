@@ -1,5 +1,5 @@
 import './envConf.mjs'
-import './syncOpenSearch'
+import './syncOpenSearch.mjs'
 const PORT = process.env.PORT || 5000
 import express from 'express'
 import Router from './routes/index.mjs'
