@@ -30,7 +30,7 @@ services:
       -w /usr/share/nginx/html
       -d techg.online
       -d www.techg.online
-      --email твой@email.com
+      --email metodievi038@gmail.com
       --agree-tos
       --no-eff-email
 
