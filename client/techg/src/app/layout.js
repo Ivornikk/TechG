@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
       <head>
         <link href="https://db.onlinewebfonts.com/c/381560810e4c36d16a07abb03254e264?family=JejuGothic" rel="stylesheet">
         </link>
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="viewport" content="width=width-device, initial-scale=1.0" />
       </head>
       <body className="pt-35 md:pt-50">
