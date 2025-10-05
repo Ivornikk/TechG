@@ -9,6 +9,7 @@ import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
 import { addProductToBasket } from "@/app/http/BasketAPI"
 import { addProductToWishlist, fetchNumberOfFavorites } from "@/app/http/WishlistAPI"
+import Link from "next/link"
 
 const ProductCard = observer(() => {
     const {id} = useParams()
@@ -85,9 +86,10 @@ const ProductCard = observer(() => {
                                 onClick={addToCart}>
                                 Add to cart
                             </button>
-                            <button className="my-3 w-full h-[43px] cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
+                            <Link href={`/buy-now/${id}`}
+                                className="flex items-center justify-center my-3 w-full h-[43px] cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition">
                                 Buy now
-                            </button>
+                            </Link>
                             <button className="my-3 w-full flex h-[43px] items-center justify-center cursor-pointer rounded-xl bg-button-active text-white border border-button-active hover:text-button-active hover:bg-categories transition"
                                 onClick={() => {
                                     addToWishlist()

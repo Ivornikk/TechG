@@ -11,6 +11,7 @@ export const AuthRoutes = [
     '/checkout',
     '/payment',
     '/wishlist',
+    '/buy-now'
 ]
 // Routes that can be visited by any user
 export const PublicRoutes = [

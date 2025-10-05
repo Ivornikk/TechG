@@ -41,7 +41,7 @@ const Checkout = observer(() => {
         let res = Number(subTotal)
 
         let discountsPercentage = 0
-        discounts.map(el => discountsPercentage += el.percentage)
+        discounts.forEach(el => discountsPercentage += el.percentage)
 
         res -= res * (discountsPercentage / 100)
 

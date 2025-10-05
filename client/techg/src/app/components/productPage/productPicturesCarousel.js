@@ -27,7 +27,7 @@ const ProductPicturesCarousel = ({pictures}) => {
                 return (
                   <div className="min-w-full h-full flex items-center justify-center"
                       key={pic.id}>
-                      <img src={`http://backend:5000/${pic.name}`}></img>
+                      <img src={`http://localhost:5000/${pic.name}`}></img>
                   </div>
                 )
             })
