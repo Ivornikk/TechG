@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const $host = axios.create({
-    baseURL: "/api/",
+    baseURL: "/",
     withCredentials: true
 })
 
 const $authHost = axios.create({
-    baseURL: "/api/",
+    baseURL: "/",
     withCredentials: true
 })
 
