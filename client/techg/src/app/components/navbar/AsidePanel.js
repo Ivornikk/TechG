@@ -21,7 +21,7 @@ const AsidePanel = () => {
             ${shown ? 'translate-x-0' : '-translate-x-full'}`}>
                 <ul className="flex flex-col gap-5">
                     <li onClick={() => setShown(false)}>
-                        <Link href={'/account/settings'}
+                        <Link href={'/account'}
                             className="flex gap-3 items-center">
                             <img src="/UserIcon.svg" className="invert w-12"></img>
                             My Account
