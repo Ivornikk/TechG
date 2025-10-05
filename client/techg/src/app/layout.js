@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
         </link>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="viewport" content="width=width-device, initial-scale=1.0" />
+        <meta name="google-site-verification" content="INZ2RtaCfSptWZa1xt8noTLTrZydPsed4rnqJE1Msyw" />
       </head>
       <body className="pt-35 md:pt-50">
         <StoreProvider>
