@@ -20,20 +20,20 @@ services:
     networks:
       - dev
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - ./nginx/certs:/etc/letsencrypt
-      - ./nginx/html:/usr/share/nginx/html
-    command: >
-      certonly --webroot
-      -w /usr/share/nginx/html
-      -d techg.online
-      -d www.techg.online
-      --email metodievi038@gmail.com
-      --agree-tos
-      --no-eff-email
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - ./nginx/certs:/etc/letsencrypt
+  #     - ./nginx/html:/usr/share/nginx/html
+  #   command: >
+  #     certonly --webroot
+  #     -w /usr/share/nginx/html
+  #     -d techg.online
+  #     -d www.techg.online
+  #     --email metodievi038@gmail.com
+  #     --agree-tos
+  #     --no-eff-email
 
   postgres:
     image: postgres:15
