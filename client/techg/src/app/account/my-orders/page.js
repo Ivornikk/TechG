@@ -58,7 +58,7 @@ const MyOrders = observer(() => {
     }
 
     return (
-        <div className="bg-categories shadow-xl px-10 py-3">
+        <div className="bg-categories shadow-xl px-10 py-3 m-auto my-20 max-w-[80vw]">
             <h1 className="text-[1.7em] mb-5">My Orders</h1>
             <div className="flex gap-10">
                 <button className="text-[1.5em] cursor-pointer hover:underline"
@@ -90,7 +90,12 @@ const MyOrders = observer(() => {
                     <h3 className="text-[1.3em]">Status</h3>
                     <h3 className="text-[1.3em]">Options</h3>
                 </div>
-                {
+                { 
+                    order.orders?.length == 0 ?
+                        <div className="text-[3em] text-gray-text my-30 w-full text-center">
+                            There are no orders
+                        </div>
+                    :
                     order.orders.map(order => {
                         return (
                             order.items?.length == 1 ?

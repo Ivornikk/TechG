@@ -73,7 +73,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
             user.isAuth ?
                 <div className="sm:justify-evenly
                                 flex flex-col items-center justify-end gap-1 flex-shrink-0">
-                    <Link href={'/account/settings'}
+                    <Link href={'/account/main'}
                         className="cursor-pointer flex-shrink-0">
                         <img src="/UserIcon.svg" className=" flex-shrink-0"></img>
                     </Link>
