@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const $host = axios.create({
-    baseURL: "/",
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     withCredentials: true
 })
 
 const $authHost = axios.create({
-    baseURL: "/",
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     withCredentials: true
 })
 

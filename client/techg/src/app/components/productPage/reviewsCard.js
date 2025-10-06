@@ -186,7 +186,7 @@ const ReviewsCard = observer(({reviews}) => {
                                                 return (
                                                     <img key={image}
                                                         className="w-50"
-                                                        src={`http://localhost:5000/${image}`}>
+                                                        src={`http://${process.env.NEXT_PUBLIC_API_BASE_URL}/${image}`}>
                                                     </img>
                                                 )
                                             })

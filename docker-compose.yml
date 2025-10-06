@@ -73,6 +73,8 @@ services:
       - "3000"
     networks:
       - dev
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=https://techg.online
 
   opensearch:
     image: opensearchproject/opensearch:2.11.1
