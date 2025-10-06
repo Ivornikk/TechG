@@ -516,7 +516,6 @@ const AddAddressForm = observer(({isShown, onHide}) => {
     const [selectedCountry, setSelectedCountry] = useState('Austria')
     const [currentRegions, setCurrentRegions] = useState(regions[0].regions)
 
-    // Changes the regions selection according to the selected country
     useEffect(() => {
         const reg = regions.filter(el => {
             if (el.country === selectedCountry) return el.regions
@@ -531,6 +530,20 @@ const AddAddressForm = observer(({isShown, onHide}) => {
     const [selectedRegion, setSelectedRegion] = useState(currentRegions[0].name)
     const [city, setCity] = useState('')
     const [ZipCode, setZipCode] = useState('')
+
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768)
+        };
+
+        checkScreenSize()
+        window.addEventListener("resize", checkScreenSize)
+
+        return () => {
+            window.removeEventListener("resize", checkScreenSize)
+        };
+    }, []);
 
     const add = () => {
         createAddress({
@@ -554,89 +567,167 @@ const AddAddressForm = observer(({isShown, onHide}) => {
     }
 
     return (
-        <>
-        { isShown &&
-        <div>
-            <form className="w-full grid grid-cols-2 gap-10">
-                <div className="flex flex-col gap-3">
-                    <label>Name:</label>
-                    <div className="grid grid-cols-2 gap-5">
-                        <input placeholder="First name"
+        <>{
+            isMobile ?
+            <>{ isShown &&
+                <div className="p-5">
+                    <form className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3">
+                            <label>Name:</label>
+                            <input placeholder="First name"
+                                className="border border-brand py-1 px-1"
+                                value={firstName}
+                                onChange={e => setFirstName(e.target.value)} />
+                            <input placeholder="Last name"
+                                className="border border-brand py-1 px-1"
+                                value={lastName}
+                                onChange={e => setLastName(e.target.value)} />
+                            <label>Address line:</label>
+                            <input placeholder="Street number, Company name, C/O"
+                                className="border border-brand py-1 px-1"
+                                value={addressLine}
+                                onChange={e => setAddressLine(e.target.value)} />
+                            <label>Country:</label>
+                            <select className="border border-brand py-1 cursor-pointer"
+                                value={selectedCountry}
+                                onChange={e => setSelectedCountry(e.target.value)}>
+                                {
+                                    euCountries.map(el => {
+                                        return (
+                                            <option key={el.id}>{el.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                            <label>City:</label>
+                            <input placeholder="Please enter your city"
+                                className="border border-brand py-1 px-1"
+                                value={city}
+                                onChange={e => setCity(e.target.value)} />
+                                <label>Telephone:</label>
+                            <input placeholder="Your phone number"
+                                className="border border-brand py-1 px-1"
+                                value={telephone}
+                                onChange={e => setTelephone(e.target.value)} />
+                            <label>Address Line 2 (optional):</label>
+                            <input placeholder="Street number, Company name, C/O"
+                                className="border border-brand py-1 px-1" />
+                            <label>State/Province/Region:</label>
+                            <select className="border border-brand py-1"
+                                value={selectedRegion}
+                                onChange={e => setSelectedRegion(e.target.value)}>
+                                {
+                                    currentRegions.map(region => {
+                                        return (
+                                            <option key={region.id}>
+                                                {region.name}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
+                            <label>ZIP/Post Code:</label>
+                            <input placeholder="Your Post Code:"
+                                className="border border-brand py-1 px-1"
+                                value={ZipCode}
+                                onChange={e => setZipCode(e.target.value)} />
+                        </div>
+                    </form>
+                    <div className="mt-20 flex justify-end gap-5 px-10 text-xl">
+                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                        onClick={onHide}>
+                        Cancel
+                    </button>
+                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                        onClick={add}>
+                        Add Address
+                    </button>
+                </div>
+                </div>
+            }</>
+            :
+            <>{ isShown &&
+            <div className="flex flex-col items-center">
+                <form className="w-full grid grid-cols-2 gap-10">
+                    <div className="flex flex-col gap-3">
+                        <label>Name:</label>
+                        <div className="grid grid-cols-2 gap-5">
+                            <input placeholder="First name"
+                                className="border border-brand py-1 px-1"
+                                value={firstName}
+                                onChange={e => setFirstName(e.target.value)} />
+                            <input placeholder="Last name"
+                                className="border border-brand py-1 px-1"
+                                value={lastName}
+                                onChange={e => setLastName(e.target.value)} />
+                        </div>
+                        <label>Address line:</label>
+                        <input placeholder="Street number, Company name, C/O"
                             className="border border-brand py-1 px-1"
-                            value={firstName}
-                            onChange={e => setFirstName(e.target.value)} />
-                        <input placeholder="Last name"
+                            value={addressLine}
+                            onChange={e => setAddressLine(e.target.value)} />
+                        <label>Country:</label>
+                        <select className="border border-brand py-1 cursor-pointer"
+                            value={selectedCountry}
+                            onChange={e => setSelectedCountry(e.target.value)}>
+                            {
+                                euCountries.map(el => {
+                                    return (
+                                        <option key={el.id}>{el.name}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                        <label>City:</label>
+                        <input placeholder="Please enter your city"
                             className="border border-brand py-1 px-1"
-                            value={lastName}
-                            onChange={e => setLastName(e.target.value)} />
+                            value={city}
+                            onChange={e => setCity(e.target.value)} />
                     </div>
-                    <label>Address line:</label>
-                    <input placeholder="Street number, Company name, C/O"
-                        className="border border-brand py-1 px-1"
-                        value={addressLine}
-                        onChange={e => setAddressLine(e.target.value)} />
-                    <label>City/Region:</label>
-                    <select className="border border-brand py-1 cursor-pointer"
-                        value={selectedCountry}
-                        onChange={e => setSelectedCountry(e.target.value)}>
-                        {
-                            euCountries.map(el => {
-                                return (
-                                    <option key={el.id}>{el.name}</option>
-                                )
-                            })
-                        }
-                    </select>
-                    <label>City:</label>
-                    <input placeholder="Please enter your city"
-                        className="border border-brand py-1 px-1"
-                        value={city}
-                        onChange={e => setCity(e.target.value)} />
-                </div>
-                <div className="flex flex-col gap-3">
-                    <label>Telephone:</label>
-                    <input placeholder="Your phone number"
-                        className="border border-brand py-1 px-1"
-                        value={telephone}
-                        onChange={e => setTelephone(e.target.value)} />
-                    <label>Address Line 2 (optional):</label>
-                    <input placeholder="Street number, Company name, C/O"
-                        className="border border-brand py-1 px-1" />
-                    <label>State/Province/Region:</label>
-                    <select className="border border-brand py-1"
-                        value={selectedRegion}
-                        onChange={e => setSelectedRegion(e.target.value)}>
-                        {
-                            currentRegions.map(region => {
-                                return (
-                                    <option key={region.id}>
-                                        {region.name}
-                                    </option>
-                                )
-                            })
-                        }
-                    </select>
-                    <label>ZIP/Post Code:</label>
-                    <input placeholder="Your Post Code:"
-                        className="border border-brand py-1 px-1"
-                        value={ZipCode}
-                        onChange={e => setZipCode(e.target.value)} />
+                    <div className="flex flex-col gap-3">
+                        <label>Telephone:</label>
+                        <input placeholder="Your phone number"
+                            className="border border-brand py-1 px-1"
+                            value={telephone}
+                            onChange={e => setTelephone(e.target.value)} />
+                        <label>Address Line 2 (optional):</label>
+                        <input placeholder="Street number, Company name, C/O"
+                            className="border border-brand py-1 px-1" />
+                        <label>State/Province/Region:</label>
+                        <select className="border border-brand py-1"
+                            value={selectedRegion}
+                            onChange={e => setSelectedRegion(e.target.value)}>
+                            {
+                                currentRegions.map(region => {
+                                    return (
+                                        <option key={region.id}>
+                                            {region.name}
+                                        </option>
+                                    )
+                                })
+                            }
+                        </select>
+                        <label>ZIP/Post Code:</label>
+                        <input placeholder="Your Post Code:"
+                            className="border border-brand py-1 px-1"
+                            value={ZipCode}
+                            onChange={e => setZipCode(e.target.value)} />
 
+                    </div>
+                </form>
+                <div className="mt-20 flex justify-end gap-5 px-10 text-xl">
+                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                        onClick={onHide}>
+                        Cancel
+                    </button>
+                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                        onClick={add}>
+                        Add Address
+                    </button>
                 </div>
-            </form>
-            <div className="mt-20 flex justify-end gap-5 px-10 text-xl">
-                <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
-                    onClick={onHide}>
-                    Cancel
-                </button>
-                <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
-                    onClick={add}>
-                    Add Address
-                </button>
             </div>
-        </div>
-        }
-        </>
+            }</>
+        }</>
     )
 })
 

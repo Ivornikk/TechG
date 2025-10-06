@@ -97,7 +97,7 @@ const Main = observer(() => {
                             </Link>
                         </li>
                         <li className="py-4 md:hover:text-xl transition-all">
-                            <Link href={'/account/settings'}
+                            <Link href={'/account/address-book'}
                                 className="flex justify-between">
                                 Address Book
                                 <p className="text-[0.8em]">{'>'}</p>
