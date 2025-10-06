@@ -21,23 +21,32 @@ const AsidePanel = () => {
             ${shown ? 'translate-x-0' : '-translate-x-full'}`}>
                 <ul className="flex flex-col gap-5">
                     <li onClick={() => setShown(false)}>
-                        <Link href={'/account'}
+                        <Link href={'/account/main'}
                             className="flex gap-3 items-center">
                             <img src="/UserIcon.svg" className="invert w-12"></img>
                             My Account
                         </Link>
                     </li>
-                    <li className="flex gap-3 items-center">
-                        <img src="/wishlist-icon.svg" className="invert w-12"></img>
-                        My Wishlist
+                    <li onClick={() => setShown(false)}>
+                        <Link href={'/wishlist'}
+                            className="flex gap-3 items-center">
+                            <img src="/wishlist-icon.svg" className="invert w-12"></img>
+                            My Wishlist
+                        </Link>
                     </li>
-                    <li className="flex gap-3 items-center">
-                        <img src="/cart-icon.svg" className="invert w-12"></img>
-                        My Cart
+                    <li onClick={() => setShown(false)}>
+                        <Link href={'/cart'}
+                            className="flex gap-3 items-center">
+                            <img src="/cart-icon.svg" className="invert w-12"></img>
+                            My Cart
+                        </Link>
                     </li>
-                    <li className="flex gap-3 items-center">
-                        <img src="/cart-icon.svg" className="invert w-12"></img>
-                        My Orders
+                    <li onClick={() => setShown(false)}>
+                        <Link href={'/account/my-orders'}
+                            className="flex gap-3 items-center">
+                            <img src="/adminOrdersIcon.svg" className="w-12"></img>
+                            My Orders
+                        </Link>
                     </li>
                     <hr className="border-stroke w-full" />
                 </ul>
