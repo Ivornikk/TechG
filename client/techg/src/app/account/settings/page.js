@@ -1,13 +1,6 @@
-'use client'
-import { editUser } from "@/app/http/UserAPI"
-import { StoreContext } from "@/app/store/StoreProvider"
-import { observer } from "mobx-react-lite"
 import Link from "next/link"
-import { useContext, useState } from "react"
 
-const Settings = observer(() => {
-    const { user } = useContext(StoreContext)
-    const userId = user.user.id
+const Settings = () => {
 
     return (
         <div className="bg-categories shadow-xl px-10 py-3 md:max-w-[65vw] m-auto flex flex-col md:my-30 my-10">
@@ -33,6 +26,6 @@ const Settings = observer(() => {
             </div> 
         </div>
     )
-})
+}
 
 export default Settings
