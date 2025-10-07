@@ -65,6 +65,8 @@ services:
       NODE_ENV: production
     depends_on:
       - postgres
+    volumes:
+      -./server/static:app/static
       
   frontend:
     build:
