@@ -89,7 +89,7 @@ const Checkout = observer(() => {
                                         className="w-full">
                                             <hr className="border-stroke w-full mb-10" />
                                             <div className="grid grid-rows-3 grid-cols-4 grid-flow-col-dense">
-                                                <img src={`http://localhost:5000/${product.preview_image}`}
+                                                <img src={process.env.NEXT_PUBLIC_STATIC_BASE_URL + product.preview_image}
                                                     className="row-span-3 w-[200px]"></img>
                                                 <h3 className="text-xl">{product.title.substring(0, 50) + `${product.title.length > 50?'...':''}`}</h3>
                                                 <ul className="flex gap-5">

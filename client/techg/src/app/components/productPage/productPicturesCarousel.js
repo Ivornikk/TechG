@@ -27,7 +27,7 @@ const ProductPicturesCarousel = ({pictures}) => {
                 return (
                   <div className="min-w-full h-full flex items-center justify-center"
                       key={pic.id}>
-                      <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${pic.name}`}></img>
+                      <img src={`${process.env.NEXT_STATIC_API_BASE_URL}/${pic.name}`}></img>
                   </div>
                 )
             })

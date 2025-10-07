@@ -104,7 +104,7 @@ const MyOrders = observer(() => {
                                 onClick={() => redirect(`/order/${order.id}`)}>
                                 <div className="grid grid-cols-6 p-3">
                                     <div className="col-span-3 flex gap-2">
-                                        <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${order.items[0].product.preview_image}`}
+                                        <img src={`${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${order.items[0].product.preview_image}`}
                                             className="w-[150px]"></img>
                                         <div className="flex flex-col gap-3">
                                             <p>{order.items[0].product.title}</p>
@@ -160,7 +160,7 @@ const MyOrders = observer(() => {
                                                         className="flex flex-col gap-5">
                                                         <div className="gap-3 grid grid-cols-6 p-5">
                                                             <div className="col-span-3 flex gap-2">
-                                                                <img src={`http://${process.env.NEXT_PUBLIC_API_BASE_URL}/${item.product.preview_image}`}
+                                                                <img src={`http://${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${item.product.preview_image}`}
                                                                     className="w-[150px]"></img>
                                                                 <div className="flex flex-col gap-3">
                                                                     <p>{item.product.title}</p>
