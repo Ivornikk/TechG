@@ -5,6 +5,7 @@ import { v4 } from "uuid"
 import { Op } from "sequelize"
 const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue, Attribute} = models
 import syncProducts from '../syncOpenSearch.mjs'
+import path from 'path'
 
 class ProductController {
     async getAll(req, res, next) {
@@ -100,24 +101,24 @@ class ProductController {
             description,
             groupId,
         } = req.body
-        const {previewImage} = req.files
         const {descriptionImages} = req.files
+        const {previewImage} = req.files
 
         let previewFileName = v4() + '.jpg'
+        previewImage.mv(path.resolve(__dirname, 'static', previewFileName))
         let descriptionImagesNames = []
 
-        previewImage.mv(`${process.cwd()}\\static\\${previewFileName}`)
         if (Array.isArray(descriptionImages)) {
             for (let i = 0; i < descriptionImages.length; i++)
                 descriptionImagesNames.push(v4() + '.jpg')
             
             descriptionImages.map((image, index) => {
-                image.mv(`${process.cwd()}\\static\\${descriptionImagesNames[index]}`)
+                image.mv(path.resolve(__dirname, 'static', descriptionImagesNames[index]))
             })
         }
         else {
             descriptionImagesNames.push(v4() + '.jpg')
-            descriptionImages.mv(`${process.cwd()}\\static\\${descriptionImagesNames[0]}`)
+            descriptionImages.mv(path.resolve(__dirname, 'static', descriptionImagesNames[0]))
         }
         
         descriptionImagesNames = descriptionImagesNames.toString()

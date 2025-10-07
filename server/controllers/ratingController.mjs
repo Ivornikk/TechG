@@ -3,6 +3,7 @@ const {Rating, User} =  models
 import ApiError from '../errors/ApiError.mjs'
 import { v4 } from "uuid"
 import fs from 'fs'
+import path from 'path'
 
 class RatingController {
     async getAll(req, res, next) {
@@ -70,11 +71,11 @@ class RatingController {
             if (Array.isArray(images)) {
                 images.forEach((image, index) => {
                     imagesNames.push(v4() + '.jpg')
-                    image.mv(`${process.cwd()}\\static\\${imagesNames[index]}`)
+                    image.mv(path.resolve(__dirname, 'static', imagesNames[index]))
                 })
             } else {
                 imagesNames.push(v4() + '.jpg')
-                images.mv(`${process.cwd()}\\static\\${imagesNames[0]}`)
+                images.mv(path.resolve(__dirname, 'static', imagesNames[0]))
             }
             imagesNames = imagesNames.toString()
             const rating = await Rating.create({
@@ -93,7 +94,7 @@ class RatingController {
             if (review.images != null) {
                 const imagesNames = review.images.split(',')
                 imagesNames.forEach(name => {
-                    fs.unlinkSync(`${process.cwd()}\\static\\${name}`)
+                    fs.unlinkSync(path.resolve(__dirname, 'static', name))
                 })
             }
 
