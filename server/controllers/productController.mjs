@@ -109,7 +109,7 @@ class ProductController {
         const __dirname = path.dirname(__filename)
 
         let previewFileName = v4() + '.jpg'
-        previewImage.mv(path.resolve(__dirname, '..', '..', 'static', previewFileName))
+        previewImage.mv(path.resolve(__dirname, '..', 'static', previewFileName))
         let descriptionImagesNames = []
 
         if (Array.isArray(descriptionImages)) {
@@ -117,12 +117,12 @@ class ProductController {
                 descriptionImagesNames.push(v4() + '.jpg')
             
             descriptionImages.map((image, index) => {
-                image.mv(path.resolve(__dirname, '..', '..', 'static', descriptionImagesNames[index]))
+                image.mv(path.resolve(__dirname, '..', 'static', descriptionImagesNames[index]))
             })
         }
         else {
             descriptionImagesNames.push(v4() + '.jpg')
-            descriptionImages.mv(path.resolve(__dirname, '..', '..', 'static', descriptionImagesNames[0]))
+            descriptionImages.mv(path.resolve(__dirname, '..', 'static', descriptionImagesNames[0]))
         }
         
         descriptionImagesNames = descriptionImagesNames.toString()
