@@ -7,12 +7,7 @@ import cors from 'cors'
 import './models/models.mjs'
 import errorhandler from "./middlewares/ErrorHandlingMiddleware.mjs"
 import fileUpload from 'express-fileupload'
-import { fileURLToPath } from 'url'
-import path from 'path'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-console.log("DIRNAME: ", path.resolve(__dirname, 'static'), "wafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwagwafwadfwgwafawawgwgwgwgawgwagwggwagwag")
 const App = express()
 
 App.use(cors({
@@ -20,7 +15,7 @@ App.use(cors({
     credentials: true
 }))
 App.use(express.json())
-App.use(express.static(path.resolve(__dirname, 'static')))
+App.use(express.static('/app/static'))
 App.use(fileUpload({}))
 App.use('/api', Router)
 
