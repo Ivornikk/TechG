@@ -72,13 +72,13 @@ class RatingController {
             const __filename = fileURLToPath(import.meta.url)
             const __dirname = path.dirname(__filename)
             if (Array.isArray(images)) {
-                images.forEach((image, index) => {
+                images.forEach(async (image, index) => {
                     imagesNames.push(v4() + '.jpg')
-                    image.mv(path.resolve(__dirname, '..', 'static', imagesNames[index]))
+                    await image.mv(path.resolve(__dirname, '..', 'static', imagesNames[index]))
                 })
             } else {
                 imagesNames.push(v4() + '.jpg')
-                images.mv(path.resolve(__dirname, '..', 'static', imagesNames[0]))
+                await images.mv(path.resolve(__dirname, '..', 'static', imagesNames[0]))
             }
             imagesNames = imagesNames.toString()
             const rating = await Rating.create({
