@@ -40,7 +40,7 @@ const CategoryPage = observer(() => {
                                 key={product.id}
                                 className="m-auto">
                                 <li className="p-5 max-w-[70vw] flex bg-categories flex-col gap-5 text-black hover:shadow-xl transition">
-                                        <img src={process.env.NEXT_PUBLIC_STATIC_BASE_URL + product.preview_image}>
+                                        <img src={`${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${product.preview_image}`}>
                                         </img>
                                     <div className="">
                                         <div>{product.title}</div>

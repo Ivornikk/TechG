@@ -72,7 +72,7 @@ export default async function OrderPage({ params }) {
                   <div className="gap-3 grid grid-cols-6 p-5">
                     <div className="col-span-3 flex gap-2">
                       <img
-                        src={process.env.NEXT_PUBLIC_STATIC_BASE_URL + item.product.preview_image}
+                        src={`${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${item.product.preview_image}`}
                         className="w-[150px]"
                       />
                       <div className="flex flex-col gap-3">
