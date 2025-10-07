@@ -66,7 +66,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      -./server/static:app/static
+      - ./server/static:app/static
       
   frontend:
     build:
