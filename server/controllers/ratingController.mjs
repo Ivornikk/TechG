@@ -4,6 +4,7 @@ import ApiError from '../errors/ApiError.mjs'
 import { v4 } from "uuid"
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from "url"
 
 class RatingController {
     async getAll(req, res, next) {
@@ -67,6 +68,9 @@ class RatingController {
             const {rate, review, userId, productId} = req.body
             const {images} = req.files
             let imagesNames = []
+
+            const __filename = fileURLToPath(import.meta.url)
+            const __dirname = path.dirname(__filename)
 
             if (Array.isArray(images)) {
                 images.forEach((image, index) => {

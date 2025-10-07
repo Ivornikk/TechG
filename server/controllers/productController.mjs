@@ -104,6 +104,9 @@ class ProductController {
         const {descriptionImages} = req.files
         const {previewImage} = req.files
 
+        const __filename = fileURLToPath(import.meta.url)
+        const __dirname = path.dirname(__filename)
+
         let previewFileName = v4() + '.jpg'
         previewImage.mv(path.resolve(__dirname, 'static', previewFileName))
         let descriptionImagesNames = []
