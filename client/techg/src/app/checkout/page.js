@@ -9,14 +9,13 @@ import { createOrder } from "../http/OrderAPI"
 import { redirect } from "next/navigation"
 const Checkout = observer(() => {
     
-    const {address, basket, user} = useContext(StoreContext)
+    const {basket, user} = useContext(StoreContext)
     const userId = user.user.id
     const [addressId, setAddressId] = useState(0)
 
     useEffect(() => {
         fetchOneBasket(userId).then(data => {
             basket.setItems(data[0].products)
-            console.log(data)
         })
     }, [])
 
