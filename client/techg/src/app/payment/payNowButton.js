@@ -1,7 +1,7 @@
 'use client'
 
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
-import { createIntent } from "../http/Stripe"
+import { createIntent } from "../http/paymentAPI"
 import { useContext } from "react"
 import { StoreContext } from "../store/StoreProvider"
 
