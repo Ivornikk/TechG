@@ -6,6 +6,7 @@ import { Op } from "sequelize"
 const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue, Attribute} = models
 import syncProducts from '../syncOpenSearch.mjs'
 import path from 'path'
+import { fileURLToPath } from "url"
 
 class ProductController {
     async getAll(req, res, next) {
