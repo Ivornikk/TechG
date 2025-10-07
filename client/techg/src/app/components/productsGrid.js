@@ -31,11 +31,11 @@ const ProductsGrid = observer(() => {
     }, [])
 
         return (
-            <div className="md:w-[1500px] w-[500px] m-auto min-h-[80vh] my-10">
+            <div className="sm:max-w-[90vw] text-center m-auto min-h-[80vh] my-10">
                 <h1 className="text-[2em] my-5">
                     {product.totalProductsCount} {product.totalProductsCount>1?'products':'product'} found
                 </h1>
-                <ul className=" grid md:grid-cols-5 grid-cols-1 md:gap-13 gap-5 mx-auto">
+                <ul className=" grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 md:gap-13 gap-5 mx-auto">
                     { product.totalProductsCount <= 0 ?
                         <div className="text-[2em] text-center w-full m-auto">
                             No results found for {searchParams}
