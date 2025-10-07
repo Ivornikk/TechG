@@ -64,6 +64,7 @@ services:
       DB_PORT: ${DB_PORT}
       SECRET_KEY: ${SECRET_KEY}
       NODE_ENV: production
+      STRIPE_SECRET: ${STRIPE_SECRET}
     depends_on:
       - postgres
     volumes:
