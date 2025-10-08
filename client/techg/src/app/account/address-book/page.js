@@ -27,7 +27,7 @@ const AddressBook = observer(() => {
     }
 
     return (
-        <div className="my-5">
+        <div className="my-5 w-full mx-auto">
             <h1 className="text-[1.7em] mb-5 flex gap-3 m-3">
                 <Link className="cursor-pointer"
                     href={'/account/main'}>
@@ -35,8 +35,8 @@ const AddressBook = observer(() => {
                 </Link>
                 Address Book
             </h1>
-            <div className="bg-categories shadow-xl px-10 py-3 md:my-30 mx-auto md:max-w-[60vw]">
-                <div className="grid grid-cols-2 grid-rows-2 md:mx-50 mx-auto gap-5">
+            <div className="bg-categories shadow-xl md:px-10 py-3 md:my-30 mx-auto md:max-w-[90vw]">
+                <div className="grid grid-cols-2 grid-rows-2 xl:mx-50 mx-auto gap-5">
                     { address.addresses?.length == 0 && !newAddressModalShown ?
                         <div className="text-[3em] text-gray-text text-center m-auto col-span-2">
                             No Addresses
@@ -45,11 +45,17 @@ const AddressBook = observer(() => {
                         address.addresses.map(address => {
                             return (
                                 <div key={address.id}
-                                    className="flex flex-col gap-5">
+                                    className="flex flex-col">
                                     <div>
-                                        {address.firstName} {address.lastName}, {address.telephone}, {address.addressLine}, {address.region}, {address.City}, {address.country}, {address.ZIP}
+                                        {address.firstName} {address.lastName}, {address.telephone}
                                     </div>
-                                    <div className="flex justify-between w-[50%]">
+                                    <div>
+                                        {address.addressLine}
+                                    </div>
+                                    <div>
+                                        {address.region}, {address.City}, {address.country}, {address.ZIP}
+                                    </div>
+                                    <div className="flex justify-between w-[50%] mt-5">
                                         <button className="bg-button-active text-white px-5 py-1 rounded-xl border border-button-active cursor-pointer hover:bg-categories hover:text-button-active transition"
                                             onClick={() => deleteAddress(address.id)}>
                                             Delete
@@ -61,7 +67,7 @@ const AddressBook = observer(() => {
                     }
                 </div>
                 { !newAddressModalShown &&
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-self-center">
                         <button className="bg-button-active flex gap-5 text-[1.3em] text-white px-10 py-2 rounded-xl border border-button-active cursor-pointer hover:bg-categories hover:text-button-active transition"
                             onClick={() => setNewAddressModalShown(true)}>
                             + Add New Address (Max 4)

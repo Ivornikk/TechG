@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import { signUp } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
 import { redirect } from "next/navigation"
+import { useRouter } from "next/router"
 
 const SignUp = () => {
     const {user} = useContext(StoreContext)
@@ -18,6 +19,7 @@ const SignUp = () => {
     const [language, setLanguage] = useState('ENG')
     const [role, setRole] = useState('ADMIN')
     const [avatar, setAvatar] = useState(null)
+    const router = useRouter()
 
     const handleSignIn = async () => {
         if (password !== confirmPassword) {
@@ -38,7 +40,7 @@ const SignUp = () => {
             })
             user.setUser(user)
             user.setIsAuth(true)
-            redirect('/')
+            router.push('/')
         } catch (err) {
             alert(err.message)
         }

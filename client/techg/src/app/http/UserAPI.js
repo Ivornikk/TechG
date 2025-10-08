@@ -67,3 +67,10 @@ export const deleteUser = async id => {
     })
     return data
 }
+
+export const changeCountry = async ({country, userId}) => {
+    const {data} = await $authHost.patch('/api/user/change-country', {
+        country, userId
+    })
+    return data
+}

@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
     email: {type: DataTypes.STRING, allowNull: false, unique: true},
     password: {type: DataTypes.STRING, allowNull: false},
     country: {type: DataTypes.STRING, allowNull: false, defaultValue: 'ENG'},
-    currency: {type: DataTypes.STRING, allowNull: false, defaultValue: 'USD'},
+    currency: {type: DataTypes.STRING, allowNull: false, defaultValue: 'EUR'},
     language: {type: DataTypes.STRING, allowNull: false, defaultValue: 'en'},
     role: {type: DataTypes.STRING, allowNull: false, defaultValue: 'USER'},
     avatar: {type: DataTypes.STRING},

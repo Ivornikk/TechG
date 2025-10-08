@@ -3,6 +3,8 @@ import Link from "next/link"
 import { useContext, useState, useEffect } from "react"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
+import { logOut } from "@/app/http/UserAPI"
+import { useRouter } from "next/navigation"
 
 const Main = observer(() => {
     const { user } = useContext(StoreContext)
@@ -20,6 +22,14 @@ const Main = observer(() => {
             window.removeEventListener("resize", checkScreenSize)
         };
     }, []);
+
+    const router = useRouter()
+    const LogOut = () => {
+        logOut()
+        .then(() => {
+            router.push('/')
+        })
+    }
 
     return (
         <div className="m-auto md:my-20 md:max-w-[65vw] md:text-xl">
@@ -110,7 +120,23 @@ const Main = observer(() => {
                                 <p className="text-[0.8em]">{'>'}</p>
                             </Link>
                         </li>
+                        <li className="py-4 md:hover:text-xl transition-all">
+                            <Link href={'/wishlist'}
+                                className="flex justify-between">
+                                    Wishlist
+                                <p className="text-[0.8em]">{'>'}</p>
+                            </Link>
+                        </li>
                     </ul>
+                </div>
+                <div className="bg-white flex p-5">
+                    <button className="px-5 py-2 rounded-xl cursor-pointer transition-all flex gap-3"
+                        onClick={LogOut}>
+                        Log Out
+                        <img src="/logOutIcon.svg"
+                            className="md:w-6 w-5">
+                        </img>
+                    </button>
                 </div>
             </div>
         </div>

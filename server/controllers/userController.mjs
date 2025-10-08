@@ -183,6 +183,20 @@ class UserController {
             next(ApiError.badRequest(err.message))
         }
     }
+
+    async changeCountry(req, res, next) {
+        try {
+            const {country, userId} = req.body
+
+            const user = await User.findByPk(userId)
+            user.country = country
+            await user.save()
+            
+            return res.json(user)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
 }
 
 export default new UserController()

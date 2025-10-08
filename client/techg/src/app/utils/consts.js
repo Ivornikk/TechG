@@ -1,0 +1,61 @@
+export const EUCountries = [
+        { id: 1, name: "Austria" },
+        { id: 2, name: "Belgium" },
+        { id: 3, name: "Bulgaria" },
+        { id: 4, name: "Croatia" },
+        { id: 5, name: "Cyprus" },
+        { id: 6, name: "Czechia" },
+        { id: 7, name: "Denmark" },
+        { id: 8, name: "Estonia" },
+        { id: 9, name: "Finland" },
+        { id: 10, name: "France" },
+        { id: 11, name: "Germany" },
+        { id: 12, name: "Greece" },
+        { id: 13, name: "Hungary" },
+        { id: 14, name: "Ireland" },
+        { id: 15, name: "Italy" },
+        { id: 16, name: "Latvia" },
+        { id: 17, name: "Lithuania" },
+        { id: 18, name: "Luxembourg" },
+        { id: 19, name: "Malta" },
+        { id: 20, name: "Netherlands" },
+        { id: 21, name: "Poland" },
+        { id: 22, name: "Portugal" },
+        { id: 23, name: "Romania" },
+        { id: 24, name: "Slovakia" },
+        { id: 25, name: "Slovenia" },
+        { id: 26, name: "Spain" },
+        { id: 27, name: "Sweden" }
+    ];
+
+export const currencies = [
+    { id: 1, name: "EUR" },
+    { id: 2, name: "GBP" },
+    { id: 3, name: "CHF" },
+    { id: 4, name: "NOK" },
+    { id: 5, name: "SEK" },
+    { id: 6, name: "DKK" },
+    { id: 7, name: "ISK" },
+    { id: 8, name: "CZK" },
+    { id: 9, name: "PLN" },
+    { id: 10, name: "HUF" },
+    { id: 11, name: "RON" },
+    { id: 12, name: "BGN" },
+    { id: 13, name: "RSD" },
+    { id: 14, name: "MKD" },
+    { id: 15, name: "ALL" },
+    { id: 16, name: "BAM" },
+    { id: 17, name: "MDL" },
+    { id: 18, name: "UAH" },
+    { id: 19, name: "BYN" },
+    { id: 20, name: "RUB" },
+    { id: 21, name: "GIP" },
+    { id: 22, name: "IMP" },
+    { id: 23, name: "JEP" },
+    { id: 24, name: "GGP" }
+    ]
+
+export const languages = [
+    { id: 1, name: 'English' },
+    { id: 2, name: 'Russian' }
+]

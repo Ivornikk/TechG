@@ -10,5 +10,6 @@ route.get('/get-all', controller.getAll)
 route.delete('/', controller.remove)
 route.delete('/log-out', controller.logOut)
 route.patch('/:id/edit', controller.edit)
+route.patch('/change-country', controller.changeCountry)
 
 export default route

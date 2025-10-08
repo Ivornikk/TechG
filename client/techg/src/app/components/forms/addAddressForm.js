@@ -633,15 +633,15 @@ const AddAddressForm = observer(({isShown, onHide}) => {
                                 onChange={e => setZipCode(e.target.value)} />
                         </div>
                     </form>
-                    <div className="mt-20 flex justify-end gap-5 px-10 text-xl">
-                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
-                        onClick={onHide}>
-                        Cancel
-                    </button>
-                    <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
-                        onClick={add}>
-                        Add Address
-                    </button>
+                    <div className="mt-20 flex justify-center gap-5 px-10 text-xl">
+                        <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                            onClick={onHide}>
+                            Cancel
+                        </button>
+                        <button className="px-10 py-3 border border-brand rounded-xl bg-brand text-white cursor-pointer hover:bg-categories hover:text-brand transition"
+                            onClick={add}>
+                            Add Address
+                        </button>
                 </div>
                 </div>
             }</>
