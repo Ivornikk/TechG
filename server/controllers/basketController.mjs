@@ -21,10 +21,10 @@ class BasketController {
             const basket = await Basket.findAll({where: {userId: userId}})
 
             const candidateItem = await BasketProduct.findOne({
-                where: {productId, basketId: basket.id}
+                where: {productId}
             })
 
-            if (candidateItem) {
+            if (candidateItem && candidateItem.basketId == basket.id) {
                 candidateItem.quantity += quantity
                 candidateItem.save()
                 return res.json(candidateItem)
