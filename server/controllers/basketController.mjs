@@ -21,7 +21,7 @@ class BasketController {
             const basket = await Basket.findAll({where: {userId: userId}})
 
             const candidateItem = await BasketProduct.findOne({
-                where: {productId}
+                where: {productId, basketId: basket.id}
             })
 
             if (candidateItem) {

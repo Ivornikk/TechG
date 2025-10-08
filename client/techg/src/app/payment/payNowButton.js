@@ -12,9 +12,9 @@ const PayNowButton = () => {
 
     const pay = async () => {
 
-        const amount = 1200
+        const amount = 100
         const currency = 'eur'
-        const description = "Test"
+        const description = "Test with real card"
         const data = await createIntent({ amount, currency, description})
         const clientSecret = data.data.clientSecret
         const cardElement = elements.getElement(CardElement)
