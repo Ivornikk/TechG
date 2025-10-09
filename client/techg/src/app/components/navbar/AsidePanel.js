@@ -53,7 +53,7 @@ const AsidePanel = () => {
                         </Link>
                     </li>
                     { user.isAuth &&
-                        <li onClick={() => setShown(false)}>
+                    <li onClick={() => setShown(false)}>
                         <Link href={'/account/my-orders'}
                             className="flex gap-3 items-center">
                             <img src="/adminOrdersIcon.svg" className="w-12"></img>
@@ -61,6 +61,13 @@ const AsidePanel = () => {
                         </Link>
                     </li>
                     }
+                    <li onClick={() => setShown(false)}>
+                        <Link href={'/categories'}
+                            className="flex gap-3 items-center">
+                            <img src="/categoriesIcon.svg" className=" w-12"></img>
+                            Categories
+                        </Link>
+                    </li>
                     <hr className="border-stroke w-full" />
                 </ul>
             </aside>
