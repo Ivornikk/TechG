@@ -12,7 +12,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
     const [currency, setCurrency] = useState(user.currency)
 
     useEffect(() => {
-        changeCurrency({userId: user.user.id, currency})
+        changeCurrency({userId: user.user?.id, currency})
     }, [currency])
 
 
@@ -49,7 +49,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                         <img src="/UserIcon.svg" className=" flex-shrink-0"></img>
                     </Link>
                     <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full"
-                        defaultValue={user.user.currency}
+                        defaultValue={user.user?.currency}
                         onChange={e => setCurrency(e.target.value)}>
                         {
                             currencies.map(el => {
@@ -64,7 +64,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                         }
                     </select>
                     <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full"
-                        defaultValue={user.user.language}>
+                        defaultValue={user.user?.language}>
                         {
                             languages.map(el => {
                                 return (

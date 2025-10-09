@@ -20,13 +20,13 @@ const Loader = () => {
                 user.setUser(data)
                 user.setIsAuth(true)
                 if (!AuthRoutes.includes(pathname) && 
-                !PublicRoutes.some(route => pathname.startsWith(route))) {
+                    !PublicRoutes.some(route => pathname.startsWith(route))
+                ) {
                     router.push("/page-not-found");
                 }
 
                 
             } catch (e) {
-                console.log('ERROR CATCHED: ', e)
                 user.setUser(null)
                 user.setIsAuth(false)
                 if (AuthRoutes.includes(pathname)) {

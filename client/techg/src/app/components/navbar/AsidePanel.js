@@ -1,10 +1,12 @@
 'use client'
+import { StoreContext } from "@/app/store/StoreProvider"
 import Link from "next/link"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 const AsidePanel = () => {
     
     const [shown, setShown] = useState(false)
+    const { user } = useContext(StoreContext)
 
     return (
         <>
@@ -21,12 +23,21 @@ const AsidePanel = () => {
             ${shown ? 'translate-x-0' : '-translate-x-full'}`}>
                 <ul className="flex flex-col gap-5">
                     <li onClick={() => setShown(false)}>
+                        <Link href={'/'}
+                            className="flex gap-3 items-center">
+                            <img src="/homeIcon.svg" className="w-12"></img>
+                            Home
+                        </Link>
+                    </li>
+                    { user.isAuth &&
+                    <li onClick={() => setShown(false)}>
                         <Link href={'/account/main'}
                             className="flex gap-3 items-center">
                             <img src="/UserIcon.svg" className="invert w-12"></img>
                             My Account
                         </Link>
                     </li>
+                    }
                     <li onClick={() => setShown(false)}>
                         <Link href={'/wishlist'}
                             className="flex gap-3 items-center">
@@ -41,13 +52,15 @@ const AsidePanel = () => {
                             My Cart
                         </Link>
                     </li>
-                    <li onClick={() => setShown(false)}>
+                    { user.isAuth &&
+                        <li onClick={() => setShown(false)}>
                         <Link href={'/account/my-orders'}
                             className="flex gap-3 items-center">
                             <img src="/adminOrdersIcon.svg" className="w-12"></img>
                             My Orders
                         </Link>
                     </li>
+                    }
                     <hr className="border-stroke w-full" />
                 </ul>
             </aside>

@@ -10,7 +10,7 @@ import { redirect } from "next/navigation"
 const Wishlist = observer(() => {
 
     const {wishlist, user} = useContext(StoreContext)
-    const userId = user.user.id
+    const userId = user.user?.id
 
     useEffect(() => {
         fetchOneWishlist(userId).then(data => {
