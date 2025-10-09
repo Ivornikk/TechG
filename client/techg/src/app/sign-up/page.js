@@ -4,7 +4,7 @@ import { useContext, useState } from "react"
 import { signUp } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
 import { redirect } from "next/navigation"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const SignUp = () => {
     const {user} = useContext(StoreContext)
