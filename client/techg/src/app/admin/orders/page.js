@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchAllOrders } from "@/app/http/OrderAPI"
+import { deleteOrder, fetchAllOrders } from "@/app/http/OrderAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { DownArrow, UpArrow } from "@/app/utils/symbols"
 import { observer } from "mobx-react-lite"
@@ -27,6 +27,13 @@ const Orders = observer(() => {
         })
         order.setOrders(data.rows)
         order.setOrdersCount(data.count)
+    }
+
+    const RemoveOrder = async id => {
+        await deleteOrder(id)
+        .then(alert('Successfully removed!'))
+        refreshOrders()
+        
     }
 
     useEffect(() => {
@@ -107,7 +114,13 @@ const Orders = observer(() => {
                             return (
                                 <li key={order.id}
                                     className="border border-stroke p-5 text-xl">
+                                        <div className="flex gap-3">
                                         <h2 className="text-[1.2em] my-5">Order ID: {order.id}</h2>
+                                        <button className="px-5 bg-brand border border-brand text-white rounded-xl cursor-pointer hover:bg-white hover:text-brand transition"
+                                            onClick={() => RemoveOrder(order.id)}>
+                                            Delete order
+                                        </button>
+                                        </div>
                                     <div className="grid grid-rows-3 grid-flow-col-dense">
                                         <div>User id: {order.userId}</div>
                                         <div>Status: {order.status}</div>

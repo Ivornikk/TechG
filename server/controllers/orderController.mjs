@@ -72,10 +72,10 @@ class OrderController {
                     return item
                 })
             )
-
-            const address = await Address.findOne({where: {id: order.addressId}})
-            order.setDataValue('address', address)
             
+            const address = JSON.parse(order.address)
+            order.address = address
+
             return res.json(order)
         } catch (err) {
             next(ApiError.badRequest(err.message))
@@ -122,10 +122,8 @@ class OrderController {
                             return item
                         })
                     )
-                    const address = await Address.findOne({
-                        where: {id: order.addressId}
-                    })
-                    order.setDataValue('address', address)
+                    order.address = JSON.parse(order.address)
+                    console.log(order.address)
                     return order
                 })
             )
@@ -133,7 +131,6 @@ class OrderController {
             return res.json(orders)
         }
         catch (err) {
-            console.log(err)
             next(ApiError.badRequest(err.message))
         }
     }
@@ -146,8 +143,11 @@ class OrderController {
             products
         } = req.body
         try {
+            const address = await Address.findByPk(addressId)
+            const stringyfiedAddress = JSON.stringify(address)
+
             const order = await Order.create({
-                status, paymentMethod, userId, addressId
+                status, paymentMethod, userId, address: stringyfiedAddress
             })
             const resProducts = []
             products.map(async product => {
@@ -186,7 +186,6 @@ class OrderController {
 
     async addTrackingNum(req, res, next) {
         try {
-            console.log(req.body)
             const {id, trackingNumber} = req.body
             const order = await Order.findOne(
                 {where: { id }}

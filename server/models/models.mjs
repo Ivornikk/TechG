@@ -32,7 +32,8 @@ const Order = sequelize.define('order', {
     createdAt: {type: DataTypes.DATE},
     status: {type: DataTypes.STRING, allowNull: false, defaultValue: "Pending"},
     paymentMethod: {type: DataTypes.STRING, allowNull: false},
-    trackingNumber: {type: DataTypes.STRING, allowNull: true}
+    trackingNumber: {type: DataTypes.STRING, allowNull: true},
+    address: {type: DataTypes.TEXT, allowNull: true}
 })
 
 const OrderProduct = sequelize.define('order_product', {
@@ -150,9 +151,6 @@ Basket.belongsTo(User)
 
 Order.belongsToMany(Product, {through: OrderProduct, as: "product"})
 Product.belongsToMany(Order, {through: OrderProduct})
-
-Address.hasMany(Order)
-Order.belongsTo(Address)
 
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
