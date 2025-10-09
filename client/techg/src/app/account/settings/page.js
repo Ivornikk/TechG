@@ -1,22 +1,23 @@
 'use client'
-import { changeCountry } from "@/app/http/UserAPI";
+import { changeCountry, changeCurrency } from "@/app/http/UserAPI";
 import { StoreContext } from "@/app/store/StoreProvider";
-import { currencies, EUCountries, languages } from "@/app/utils/consts";
+import { currencies, EUCountries } from "@/app/utils/consts";
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react";
 
 const Settings = () => {
     
-    const { user, product } = useContext(StoreContext)
+    const { user } = useContext(StoreContext)
 
-    const [selectedCountry, setSelectedCountry] = useState(EUCountries[0].name)
-    const [selectedCurrency, setselectedCurrency] = useState(product.currency)
+    const [selectedCountry, setSelectedCountry] = useState(user.country)
+    const [selectedCurrency, setselectedCurrency] = useState(user.currency)
 
     useEffect(() => {
         changeCountry({userId: user.user.id, country: selectedCountry})
     }, [selectedCountry])
+
     useEffect(() => {
-        product.setCurrency(selectedCountry)
+        changeCurrency({userId: user.user.id, currency: selectedCurrency})
     }, [selectedCurrency])
 
     return (
@@ -44,6 +45,7 @@ const Settings = () => {
                                     Shipping Country:
                                 </p>
                                 <select className="py-2 rounded border border-brand"
+                                    defaultValue={user.user.country}
                                     onChange={e => setSelectedCountry(e.target.value)}>
                                     { EUCountries.map(el => {
                                         return (
@@ -60,6 +62,7 @@ const Settings = () => {
                                     Currency:
                                 </p>
                                 <select className="py-2 rounded border border-brand"
+                                    defaultValue={user.user.currency}
                                     onChange={e => setselectedCurrency(e.target.value)}>
                                     { currencies.map(el => {
                                         return (

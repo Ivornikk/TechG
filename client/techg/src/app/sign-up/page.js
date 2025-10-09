@@ -3,7 +3,6 @@ import Link from "next/link"
 import { useContext, useState } from "react"
 import { signUp } from "../http/UserAPI"
 import { StoreContext } from "../store/StoreProvider"
-import { redirect } from "next/navigation"
 import { useRouter } from "next/navigation"
 
 const SignUp = () => {

@@ -4,14 +4,15 @@ import { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import { StoreContext } from "../../store/StoreProvider"
 import { currencies, languages } from "@/app/utils/consts"
+import { changeCurrency } from "@/app/http/UserAPI"
 
 const NavbarAuthButtons = observer(({isMobile}) => {
-    const { user, product } = useContext(StoreContext)
+    const { user } = useContext(StoreContext)
 
-    const [currency, setCurrency] = useState('EUR')
+    const [currency, setCurrency] = useState(user.currency)
 
     useEffect(() => {
-        product.setCurrency(currency)
+        changeCurrency({userId: user.user.id, currency})
     }, [currency])
 
 
@@ -48,6 +49,7 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                         <img src="/UserIcon.svg" className=" flex-shrink-0"></img>
                     </Link>
                     <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full"
+                        defaultValue={user.user.currency}
                         onChange={e => setCurrency(e.target.value)}>
                         {
                             currencies.map(el => {
@@ -61,7 +63,8 @@ const NavbarAuthButtons = observer(({isMobile}) => {
                             })
                         }
                     </select>
-                    <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full">
+                    <select className="cursor-pointer border border-white rounded text-[0.8em] sm:text-[1em] px-1 py-2 w-full"
+                        defaultValue={user.user.language}>
                         {
                             languages.map(el => {
                                 return (

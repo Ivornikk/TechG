@@ -11,5 +11,6 @@ route.delete('/', controller.remove)
 route.delete('/log-out', controller.logOut)
 route.patch('/:id/edit', controller.edit)
 route.patch('/change-country', controller.changeCountry)
+route.patch('/change-currency', controller.changeCurrency)
 
 export default route

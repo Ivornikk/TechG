@@ -74,3 +74,10 @@ export const changeCountry = async ({country, userId}) => {
     })
     return data
 }
+
+export const changeCurrency = async ({currency, userId}) => {
+    const {data} = await $authHost.patch('/api/user/change-currency', {
+        currency, userId
+    })
+    return data
+}

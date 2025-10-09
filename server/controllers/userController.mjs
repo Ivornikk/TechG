@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt'
 import ApiError from '../errors/ApiError.mjs'
 import jwt from 'jsonwebtoken'
 
-const generateJwtToken = (id, username, email, role, pfp) => {
+const generateJwtToken = (id, username, email, role, currency, country) => {
     return jwt.sign(
-        {id, username, email, role, pfp},
+        {id, username, email, role, currency, country},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -48,7 +48,14 @@ class UserController {
             await Basket.create({userId: user.id})
             await Wishlist.create({userId: user.id})
     
-            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
     
             res.cookie('token', token, {
                 httpOnly: true,
@@ -76,8 +83,14 @@ class UserController {
             if (!comparePassword) {
                 return next(ApiError.badRequest('Incorrect password'))
             }
-            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
-    
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: false,
@@ -96,8 +109,14 @@ class UserController {
         const user = req.user
 
         try {
-            const token = generateJwtToken(user.id, user.username, user.email, user.role, user.avatar)
-
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: false,
@@ -162,11 +181,28 @@ class UserController {
             if (newPassword) {
                 const validate = await bcrypt.compareSync(oldPassword, user.password)
                 if (validate) {
-                    user.passwrod = await bcrypt.hash(newPassword, 5)
+                    user.password = await bcrypt.hash(newPassword, 5)
                 }
-                else return res.json({message: 'Passwrods do not match'})
+                else return res.json({message: 'Incorrect password'})
             }
             await user.save()
+
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: false,
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+
             return res.json(user)
         } catch (err) { 
             next(ApiError.badRequest(err.message))
@@ -192,9 +228,54 @@ class UserController {
             user.country = country
             await user.save()
             
-            return res.json(user)
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: false,
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+
+            return res.json({message: 'Success!'})
         } catch (err) {
             next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async changeCurrency(req, res, next) {
+        try {
+            const {currency, userId} = req.body
+
+            const user = await User.findByPk(userId)
+            user.currency = currency
+            await user.save()
+
+            const token = generateJwtToken(
+                user.id, 
+                user.username, 
+                user.email, 
+                user.role, 
+                user.currency,
+                user.country
+            )
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: false,
+                maxAge: 60 * 60 * 24 * 7 * 1000,
+                sameSite: 'strict',
+                path: '/'
+            })
+            return res.json({message: 'Success!'})
+        } catch (err) {
+            ApiError.badRequest(err.message)
         }
     }
 }
