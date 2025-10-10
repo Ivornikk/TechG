@@ -1,5 +1,5 @@
 import models from "../models/models.mjs"
-const {User, Basket, Wishlist} = models
+const {User, Basket, Wishlist, Order, OrderProduct, BasketProduct, WishlistProduct, Product} = models
 import bcrypt from 'bcrypt'
 import ApiError from '../errors/ApiError.mjs'
 import jwt from 'jsonwebtoken'
@@ -148,6 +148,47 @@ class UserController {
             return res.json(users)
         } catch (err) { 
             next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async getOne(req, res, next) {
+        try {
+            const {id} = req.query
+            const user = await User.findByPk(id)
+            const basket = await Basket.findOne({
+                where: {userId: id}
+            })
+            const basketProducts = await BasketProduct.findAndCountAll({
+                where: {basketId: basket.id}
+            })
+            basket.setDataValue('products', basketProducts)
+            user.setDataValue('basket', basket)
+            const wishlist = await Wishlist.findOne({
+                where: {userId: id}
+            })
+            const wishlistProducts = await WishlistProduct.findAll({
+                where: {wishlistId: wishlist.id}
+            })
+            wishlist.setDataValue('products', wishlistProducts)
+            user.setDataValue('wishlist', wishlist)
+            let orders = await Order.findAndCountAll({
+                where: {userId: id}
+            })
+            orders.rows = await Promise.all(
+                orders.rows.map( async el => {
+                    const items = await OrderProduct.findAll({
+                        where: {orderId: el.id},
+                        include: Product
+                    })
+                    el.setDataValue('items', items)
+                    return el
+                })
+            )
+            user.setDataValue('orders', orders)
+            user.password = undefined
+            return res.json(user)
+        } catch (err) {
+            next(ApiError.badRequest(next.message))
         }
     }
 

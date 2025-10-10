@@ -61,7 +61,7 @@ const Clients = observer(() => {
                                     <div>Country: {user.country}</div>
                                     <div className="row-span-3 flex flex-col justify-evenly">
                                         <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition"
-                                            onClick={() => redirect(`/admin/clients/${user.id}`)}>
+                                            onClick={() => redirect(`/user-detail/${user.id}`)}>
                                             User Details
                                         </button>
                                         <button className="my-3 px-4 py-1 bg-brand text-white border border-brand rounded-xl cursor-pointer hover:text-brand hover:bg-white transition">

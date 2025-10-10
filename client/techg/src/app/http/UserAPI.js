@@ -61,6 +61,13 @@ export const fetchAllUsers = async ({role, sort}) => {
     return data
 }
 
+export const fetchOneUser = async id => {
+    const {data} = await $authHost.get('api/user/get-one', {
+        params: {id}
+    })
+    return data
+}
+
 export const deleteUser = async id => {
     const {data} = await $authHost.delete('api/user', {
         data: {id}
