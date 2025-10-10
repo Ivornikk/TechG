@@ -65,6 +65,8 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       NODE_ENV: production
       STRIPE_SECRET: ${STRIPE_SECRET}
+      SUPPLIER_KEY_PUBLIC: ${SUPPLIER_KEY_PUBLIC}
+      SUPPLIER_KEY_SECRET: ${SUPPLIER_KEY_SECRET}
     depends_on:
       - postgres
     volumes:
