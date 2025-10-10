@@ -26,7 +26,7 @@ class SupplierController {
             await Category.destroy({
                 where: {}
             })
-            const categories = await fetch(
+            let categories = await fetch(
                 `https://api.banggood.com/category/getCategoryList?access_token=${Access_token}&page=1&lang=en`
             )
             categories = await categories.json()
