@@ -81,16 +81,6 @@ const PackageElement = sequelize.define('package_element', {
     name: {type: DataTypes.STRING, allowNull: false}
 })
 
-const Group = sequelize.define('group', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false},
-})
-
-const Type = sequelize.define('type', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false},
-})
-
 const Category = sequelize.define('category', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, allowNull: false},
@@ -164,9 +154,6 @@ Product.belongsToMany(Basket, {through: BasketProduct})
 Product.hasOne(Promotion)
 Promotion.belongsTo(Product)
 
-PromotionType.hasMany(Promotion)
-Promotion.belongsTo(PromotionType)
-
 Product.hasMany(ProductInfo)
 ProductInfo.belongsTo(Product)
 
@@ -176,23 +163,17 @@ ProductFeature.belongsTo(Product)
 Product.hasMany(PackageElement)
 PackageElement.belongsTo(Product)
 
-Category.hasMany(Type)
-Type.belongsTo(Category)
-
-Type.hasMany(Group)
-Group.belongsTo(Type)
-
-Group.hasMany(Product)
-Product.belongsTo(Group)
-
 AttributeValue.belongsToMany(Product, {through: ProductAttributeValue})
 Product.belongsToMany(AttributeValue, {through: ProductAttributeValue})
 
 Attribute.hasMany(AttributeValue)
 AttributeValue.belongsTo(Attribute)
 
-Group.hasMany(Attribute)
-Attribute.belongsTo(Group)
+Category.hasOne(Category, {foreignKey: 'parent_id'})
+Category.belongsTo(Category)
+
+Category.hasMany(Product)
+Product.belongsTo(Category)
 
 export default {
     User,
@@ -205,8 +186,6 @@ export default {
     ProductInfo,
     ProductFeature,
     PackageElement,
-    Group,
-    Type,
     Category,
     Rating,
     Wishlist,
