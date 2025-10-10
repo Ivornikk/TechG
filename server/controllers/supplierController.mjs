@@ -23,7 +23,10 @@ class SupplierController {
     async UpdateCategories(req, res, next) {
         try {
             const {Access_token} = req.body
-            await Category.destroy()
+            await Category.destroy({
+                where: {},
+                truncate: true
+            })
             const categories = await fetch(
                 `https://api.banggood.com/category/getCategoryList?access_token=${Access_token}&page=1&lang=en`
             )
