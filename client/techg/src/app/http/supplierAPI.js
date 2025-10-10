@@ -2,7 +2,10 @@ import { $authHost } from "."
 
 export const setToken = async () => {
     const {data} = await $authHost.get('/api/supplier/get-token')
-    localStorage.setItem('accessToken', data.access_token)
+    if (!data.result)
+        localStorage.setItem('accessToken', data.access_token)
+    else
+        localStorage.setItem('accessToken', data.result.access_token)
     return data
 }
 
