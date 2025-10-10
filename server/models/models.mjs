@@ -84,6 +84,7 @@ const PackageElement = sequelize.define('package_element', {
 const Category = sequelize.define('category', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, allowNull: false},
+    parent_id: {type: DataTypes.INTEGER}
 })
 
 const Rating = sequelize.define('rating', {
@@ -168,9 +169,6 @@ Product.belongsToMany(AttributeValue, {through: ProductAttributeValue})
 
 Attribute.hasMany(AttributeValue)
 AttributeValue.belongsTo(Attribute)
-
-Category.hasOne(Category, {foreignKey: 'parent_id'})
-Category.belongsTo(Category)
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
