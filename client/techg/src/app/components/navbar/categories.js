@@ -9,13 +9,12 @@ import {useContext, useEffect, useState} from 'react'
 const Categories = observer(() => {
 
     const [shown, setShown] = useState(false)
-    const [typesShown, setTypesShown] = useState(false)
     const [selectedCategoryId, setSelectedCategoryId] = useState(0)
     
     const { product } = useContext(StoreContext)
 
     useEffect(() => {
-        fetchCategories("true")
+        fetchCategories()
         .then(data => {
             product.setCategoriesObject(data)
         })
@@ -50,37 +49,6 @@ const Categories = observer(() => {
                     </ul>
                 </div>
             </div>
-            { typesShown &&
-                <div className={`bg-categories max-w-[60vw] text-black fixed translate-x-65 translate-y-10 p-3 transition-all duration-300 origin-left ${typesShown ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
-                    <ul className='grid grid-cols-4 gap-2'>
-                        {
-                            product.categoriesObject.rows[selectedCategoryId].types.map(type => {
-                                return (
-                                    <li className='mx-10' key={type.id}>
-                                        <h3 className='font-semibold text-center mb-2'>{type.name}</h3>
-                                        <ul>
-                                            {type.groups.map(group => {
-                                                return (
-                                                <li key={group.id}
-                                                    className='cursor-pointer hover:text-gray-text'
-                                                    onClick={() => {
-                                                        setShown(false)
-                                                        setTypesShown(false)
-                                                    }}>
-                                                    <Link href={`/category/${group.id}`}>
-                                                        {group.name}
-                                                    </Link>
-                                                </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
-            }
         </div>
     )
 })

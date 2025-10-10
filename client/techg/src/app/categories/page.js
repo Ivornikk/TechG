@@ -13,7 +13,7 @@ const Categories = observer(() => {
     const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
-        fetchCategories(true)
+        fetchCategories()
         .then(data => {
             product.setCategoriesObject(data)
             setSelectedCategory(data.rows[0].id)
@@ -34,12 +34,10 @@ const Categories = observer(() => {
     }, []);
 
     const getCategoryId = (id) => {
-        console.log(id)
         let res = product.categoriesObject.rows.map(el => {
             if (el.id == id) return el
         })
         res = Object(res)
-        console.log(res[0])
         return res[0]
     }
 
@@ -105,23 +103,13 @@ const Categories = observer(() => {
             :
             <div className="xl:max-w-[60vw] max-w-[70vw] m-auto min-h-[100vh]">
                 <ul className="grid xl:grid-cols-3 grid-cols-2 gap-10">
-                    { product.categoriesObject.rows.map(category => {
+                    { product.categoriesObject.rows?.map(category => {
                         return(
                             <li key={category.id} 
                                 className="bg-categories flex flex-col items-center px-5">
                                 <h1 className="text-[1.4em] mb-5">
                                     {category.name}
                                 </h1>
-                                <ul className="text-[1.2em] flex flex-col gap-4 items-start w-full">
-                                    { category.types.map(type => {
-                                        return (
-                                            <li key={type.id}
-                                                className="cursor-pointer hover:underline hover:text-brand">
-                                                {type.name}
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
                             </li>
                         )
                     })}
