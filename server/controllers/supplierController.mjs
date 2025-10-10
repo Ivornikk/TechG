@@ -35,7 +35,7 @@ class SupplierController {
                     await Category.create({
                         id: category.cat_id,
                         name: category.cat_name,
-                        parent_id: category.parent_id
+                        parent: category.parent_id
                     })
                 })
             )
