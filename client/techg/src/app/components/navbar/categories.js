@@ -59,7 +59,7 @@ const Categories = observer(() => {
                         <div className={`bg-categories max-w-[60vw] text-black fixed translate-x-65 translate-y-10 p-3 transition-all duration-300 origin-left ${typesShown ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
                             <ul className='grid grid-cols-4 gap-2'>
                                 {
-                                    product.categoriesObject.rows[selectedCategoryId].children?.map(category => {
+                                    product.categoriesObject.rows?.[selectedCategoryId]?.children?.map(category => {
                                         return (
                                             <li className='mx-10' key={category.id}>
                                                 <h3 className='font-semibold text-center mb-2'>{category.name}</h3>
