@@ -17,7 +17,14 @@ class SupplierController {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
+
             const token = await response.json()
+
+            console.log("PARAMS: ", params.toString())
+            console.log("PUBLIC: ", process.env.SUPPLIER_KEY_PUBLIC)
+            console.log("SECRET: ", process.env.SUPPLIER_KEY_SECRET)
+            console.log("RESPONSE: ", token)
+
             return res.json(token)
         } catch (err) {
             next(ApiError.badRequest(err.message))
