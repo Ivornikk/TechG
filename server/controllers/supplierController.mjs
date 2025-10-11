@@ -1,5 +1,6 @@
 import ApiError from '../errors/ApiError.mjs'
 import models from '../models/models.mjs'
+import fetch from 'node-fetch'
 
 const {Category} = models
 
