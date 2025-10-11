@@ -12,8 +12,8 @@ class SupplierController {
                 app_id: process.env.SUPPLIER_KEY_PUBLIC,
                 app_secret: process.env.SUPPLIER_KEY_SECRET,
             });
-
-            const response = await fetch(`https://affapi.banggood.com/getAccessToken?${params.toString()}`, {
+            const address = `https://affapi.banggood.com/getAccessToken?${params.toString()}`
+            const response = await fetch(address, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
