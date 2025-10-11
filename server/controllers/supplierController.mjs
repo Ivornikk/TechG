@@ -8,12 +8,15 @@ class SupplierController {
 
     async getToken(req, res, next) {
         try {
-            const publicKey = process.env.SUPPLIER_KEY_PUBLIC
-            const secretKey = process.env.SUPPLIER_KEY_SECRET
+            const params = new URLSearchParams({
+                app_id: process.env.SUPPLIER_KEY_PUBLIC,
+                app_secret: process.env.SUPPLIER_KEY_SECRET,
+            });
 
-            const response = await fetch(
-                `https://affapi.banggood.com/getAccessToken?app_id=${publicKey}&app_secret=${secretKey}`
-            )
+            const response = await fetch(`https://affapi.banggood.com/getAccessToken?${params.toString()}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
             const token = await response.json()
             return res.json(token)
         } catch (err) {
