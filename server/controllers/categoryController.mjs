@@ -1,25 +1,23 @@
 import models from "../models/models.mjs"
-const {Category, Type, Group} =  models
+const {Category} =  models
 
 class CategoryController {
-    async getAll(req, res, next) {
+    async getFirstThreeLayers(req, res, next) {
         try {
-            const {includeSub} = req.query
-
-            const categories = await Category.findAndCountAll()
-
-            if (!includeSub)
-                return res.json(categories)
+            
+            const categories = await Category.findAndCountAll({
+                where: {
+                    parent: 0
+                }
+            })
 
             categories.rows = await Promise.all (
                 categories.rows.flatMap(async (cat) => {
-                    const category = await Category.findOne({
-                        where: cat.id, include: [{
-                            model: Type,
-                            include: [{ model: Group }]
-                        }]
+                    const children = await Category.findAll({
+                        where: {parent: cat.id}
                     })
-                    return category
+                    cat.setDataValue('children', children)
+                    return cat
                 })
             )
             return res.json(categories)
