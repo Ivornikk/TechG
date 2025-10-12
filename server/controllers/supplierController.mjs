@@ -77,15 +77,11 @@ class SupplierController {
             const categories = await Category.findAll()
             const productList = []
 
-            await Promise.all(
-                categories.forEach( async category => {
-                    const products = await fetch(
-                        `https://apibeta.banggood.com/product/getProductList?apiTest=1&access_token=${Access_token}&cat_id=${category.cat_id}`
-                    )
-                    await products.json()
-                    productList.push(products.product_list)
-                })
+            const products = await fetch(
+                `https://apibeta.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
             )
+            await products.json()
+            productList.push(products.product_list)
 
             await Promise.all(
                 productList.forEach(async product => {
