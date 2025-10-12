@@ -86,12 +86,18 @@ class SupplierController {
                     else return []
                 })
             )
+            const products = []
 
-            let products = await fetch(
-                `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=2035}`
+            await Promise.all(
+                categories.forEach(async category => {
+                    let result = await fetch(
+                        `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${category.id}}`
+                    )
+                    result = await result.json()
+                    products.push(result.product_list)
+                    console.log("FLAG")
+                })
             )
-            products = await products.json()
-            console.log(products)
 
             await Product.destroy({
                 where: {}
