@@ -82,8 +82,8 @@ class SupplierController {
                     const children = await Category.findAll({
                         where: { parent: category.id }
                     })
-                    if (children) return
-                    else return category
+                    if (children.length == 0) return category
+                    else return 
                 })
             )
 

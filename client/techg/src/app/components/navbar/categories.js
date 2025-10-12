@@ -10,7 +10,7 @@ const Categories = observer(() => {
 
     const [shown, setShown] = useState(false)
     const [selectedCategoryId, setSelectedCategoryId] = useState(0)
-    const [typesShown, setTypesShown] = useState(true)
+    const [typesShown, setTypesShown] = useState(false)
     
     const { product } = useContext(StoreContext)
 
