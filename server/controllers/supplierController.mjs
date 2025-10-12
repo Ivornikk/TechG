@@ -78,7 +78,7 @@ class SupplierController {
             const productList = []
 
             const products = await fetch(
-                `https://apibeta.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
+                `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
             )
             await products.json()
             productList.push(products.product_list)
