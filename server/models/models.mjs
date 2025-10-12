@@ -29,17 +29,23 @@ const Address = sequelize.define('address', {
 
 const Order = sequelize.define('order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    createdAt: {type: DataTypes.DATE},
+    saleRecord: {type: DataTypes.STRING, allowNull: false, unique: true},
     status: {type: DataTypes.STRING, allowNull: false, defaultValue: "Pending"},
-    paymentMethod: {type: DataTypes.STRING, allowNull: false},
     trackingNumber: {type: DataTypes.STRING, allowNull: true},
-    address: {type: DataTypes.TEXT, allowNull: true}
+    deliveryName: {type: DataTypes.STRING, allowNull: false},
+    deliveryCountry: {type: DataTypes.STRING, allowNull: false},
+    deliveryState: {type: DataTypes.STRING, allowNull: false},
+    deliveryCity: {type: DataTypes.STRING, allowNull: false},
+    deliveryStreetAddress: {type: DataTypes.STRING, allowNull: false},
+    deliveryZIP: {type: DataTypes.STRING, allowNull: false},
+    deliveryTelephone: {type: DataTypes.STRING, allowNull: false},
+    currency: {type: DataTypes.STRING, allowNull: false},
+    totalProducts: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 const OrderProduct = sequelize.define('order_product', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    quantity: {type: DataTypes.INTEGER,},
-    priceAtPurchase: {type: DataTypes.DECIMAL}
+    quantity: {type: DataTypes.INTEGER,}
 })
 
 const Product = sequelize.define('product', {
@@ -47,8 +53,53 @@ const Product = sequelize.define('product', {
     title: {type: DataTypes.STRING, allowNull: false},
     price: {type: DataTypes.DECIMAL},
     description: {type: DataTypes.STRING},
-    preview_image: {type: DataTypes.STRING, allowNull: false},
-    description_images: {type: DataTypes.STRING}
+    preview_image: {type: DataTypes.STRING, allowNull: false}
+})
+
+const ProductInfo = sequelize.define('product_info', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    fullDescription: {type: DataTypes.STRING},
+    weight: {type: DataTypes.INTEGER, allowNull: false},
+    productName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const AttributeName = sequelize.define('attribute_name', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, allowNull: false}
+})
+
+const AttributeValue = sequelize.define('attribute_value', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    value: {type: DataTypes.STRING, allowNull: false},
+    pride: {type: DataTypes.DECIMAL, allowNull: false},
+    smallImage: {type: DataTypes.STRING},
+    viewImage: {type: DataTypes.STRING},
+    largeImage: {type: DataTypes.STRING},
+    listGridImage: {type: DataTypes.STRING},
+})
+
+const ProductAttributeName = sequelize.define('product_attribute_name', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
+const Warehouse = sequelize.define('warehouse', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, allowNull: false},
+    price: {type: DataTypes.DECIMAL, allowNull: false}
+})
+
+const WarehouseProduct = sequelize.define('warehouse_product', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
+const ProductImage = sequelize.define('product_image', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    listGrid: {type: DataTypes.STRING},
+    grid: {type: DataTypes.STRING},
+    gallery: {type: DataTypes.STRING},
+    view: {type: DataTypes.STRING},
+    otherItems: {type: DataTypes.STRING},
+    large: {type: DataTypes.STRING}
 })
 
 const Promotion = sequelize.define('promotion', {
@@ -62,23 +113,6 @@ const Promotion = sequelize.define('promotion', {
 const PromotionType = sequelize.define('promotion_type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING},
-})
-
-const ProductInfo = sequelize.define('product_info', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false}
-})
-
-const ProductFeature = sequelize.define('product_feature', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false}
-})
-
-const PackageElement = sequelize.define('package_element', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false}
 })
 
 const Category = sequelize.define('category', {
@@ -111,19 +145,6 @@ const BasketProduct = sequelize.define('basket_product', {
     quantity: {type: DataTypes.INTEGER, defaultValue: 1},
 })
 
-const Attribute = sequelize.define('attribute', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: false}
-})
-
-const AttributeValue = sequelize.define('attribute_value', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    value: {type: DataTypes.STRING, allowNull: false}
-})
-
-const ProductAttributeValue = sequelize.define('product_attribute_value', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
 
 User.hasMany(Address)
 Address.belongsTo(User)
@@ -143,6 +164,9 @@ Basket.belongsTo(User)
 Order.belongsToMany(Product, {through: OrderProduct, as: "product"})
 Product.belongsToMany(Order, {through: OrderProduct})
 
+OrderProduct.hasMany(Warehouse)
+Warehouse.belongsTo(OrderProduct)
+
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
 
@@ -155,20 +179,20 @@ Product.belongsToMany(Basket, {through: BasketProduct})
 Product.hasOne(Promotion)
 Promotion.belongsTo(Product)
 
-Product.hasMany(ProductInfo)
+Product.hasOne(ProductInfo)
 ProductInfo.belongsTo(Product)
 
-Product.hasMany(ProductFeature)
-ProductFeature.belongsTo(Product)
+Product.hasMany(ProductImage)
+ProductImage.belongsTo(Product)
 
-Product.hasMany(PackageElement)
-PackageElement.belongsTo(Product)
+Warehouse.belongsToMany(Product, { through: WarehouseProduct})
+Product.belongsToMany(Warehouse, { through: WarehouseProduct})
 
-AttributeValue.belongsToMany(Product, {through: ProductAttributeValue})
-Product.belongsToMany(AttributeValue, {through: ProductAttributeValue})
+AttributeName.belongsToMany(Product, {through: ProductAttributeName})
+Product.belongsToMany(AttributeName, {through: ProductAttributeName})
 
-Attribute.hasMany(AttributeValue)
-AttributeValue.belongsTo(Attribute)
+AttributeName.hasMany(AttributeValue)
+AttributeValue.belongsTo(AttributeName)
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -179,18 +203,18 @@ export default {
     Order,
     OrderProduct,
     Product,
+    Warehouse,
+    WarehouseProduct,
     Promotion,
     PromotionType,
     ProductInfo,
-    ProductFeature,
-    PackageElement,
     Category,
     Rating,
     Wishlist,
     WishlistProduct,
     Basket,
     BasketProduct,
-    Attribute,
+    AttributeName,
     AttributeValue,
-    ProductAttributeValue
+    ProductAttributeName
 }

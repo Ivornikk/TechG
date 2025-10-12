@@ -2,7 +2,7 @@ import ApiError from '../errors/ApiError.mjs'
 import models from '../models/models.mjs'
 import fetch from 'node-fetch'
 
-const {Category} = models
+const {Category, Product} = models
 
 class SupplierController {
 
@@ -66,6 +66,40 @@ class SupplierController {
             
             return res.json(categories)
         } catch (err) { 
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async updateProducts(req, res, next) {
+        try {
+            const { Access_token } = req.body
+            const categories = await Category.findAll()
+            const productList = []
+
+            await Promise.all(
+                categories.forEach( async category => {
+                    const products = await fetch(
+                        `https://apibeta.banggood.com/product/getProductList?apiTest=1&access_token=${Access_token}&cat_id=${category.cat_id}`
+                    )
+                    await products.json()
+                    productList.push(products.product_list)
+                })
+            )
+
+            await Promise.all(
+                productList.forEach(async product => {
+                    await Product.create({
+                        id: product.product_id,
+                        title: product.product_name,
+                        description: product.meta_desc,
+                        categoryId: product.cat_id,
+                        image: product.img,
+                    })                    
+                })
+            )
+
+            return res.json(productList)
+        }  catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }
