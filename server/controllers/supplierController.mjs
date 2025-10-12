@@ -81,7 +81,7 @@ class SupplierController {
                 `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
             )
             await products.json()
-
+            console.log(products)
             await Promise.all(
                 products.product_list.forEach(async product => {
                     await Product.create({
