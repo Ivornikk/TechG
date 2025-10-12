@@ -87,10 +87,8 @@ class SupplierController {
                 })
             )
 
-            console.log("CATEGORIES: ", categories)
-
             let products = await fetch(
-                `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
+                `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=2035}`
             )
             products = await products.json()
             console.log(products)
