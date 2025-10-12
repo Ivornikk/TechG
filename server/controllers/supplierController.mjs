@@ -48,10 +48,10 @@ class SupplierController {
                 pagesArray.push(i)
             }
             pagesArray.forEach(async page => {
-                let res = await fetch(
+                let result = await fetch(
                     `https://api.banggood.com/category/getCategoryList?access_token=${Access_token}&page=${page}&lang=en`
                 )
-                categories.cat_list = [...categories.cat_list, ...res.cat_list]
+                categories.cat_list.push(result.cat_list)
             })
             console.log(categories)
             await Promise.all(
