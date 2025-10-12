@@ -41,6 +41,19 @@ class SupplierController {
                 `https://api.banggood.com/category/getCategoryList?access_token=${Access_token}&page=1&lang=en`
             )
             categories = await categories.json()
+
+            const pagesTotal = categories.pages_total
+            const pagesArray = []
+            for (let i = 1; i <= pagesTotal; i++) {
+                pagesArray.push(i)
+            }
+            pagesArray.forEach(async page => {
+                let res = await fetch(
+                    `https://api.banggood.com/category/getCategoryList?access_token=${Access_token}&page=${page}&lang=en`
+                )
+                categories.cat_list = [...categories.cat_list, ...res.cat_list]
+            })
+            console.log(categories)
             await Promise.all(
                 categories.cat_list.map(async category => {
                     await Category.create({
@@ -50,6 +63,7 @@ class SupplierController {
                     })
                 })
             )
+            
             return res.json(categories)
         } catch (err) { 
             next(ApiError.badRequest(err.message))
