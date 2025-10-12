@@ -94,6 +94,7 @@ class SupplierController {
                         `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${category.id}}`
                     )
                     result = await result.json()
+                    console.log(result)
                     products.push(result.product_list)
                     console.log("FLAG")
                 })
