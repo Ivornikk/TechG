@@ -93,7 +93,7 @@ class SupplierController {
             products = await products.json()
             console.log(products)
             await Promise.all(
-                products.product_list.forEach(async product => {
+                products.product_list.map(async product => {
                     await Product.create({
                         id: product.product_id,
                         title: product.product_name,
