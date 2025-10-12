@@ -13,7 +13,7 @@ class SupplierController {
                 app_id: process.env.SUPPLIER_KEY_PUBLIC,
                 app_secret: process.env.SUPPLIER_KEY_SECRET,
             });
-            const address = 'https://api.banggood.com/getAccessToken?app_id=bg68e7ceb78b2b2&app_secret=14299fe49d0eadaff273a6449b4d8b21'
+            const address = `https://affapi.banggood.com/getAccessToken?${params.toString()}`
             const response = await fetch(address, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -77,10 +77,10 @@ class SupplierController {
             const categories = await Category.findAll()
             const productList = []
 
-            const products = await fetch(
+            let products = await fetch(
                 `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
             )
-            await products.json()
+            products = await products.json()
             console.log(products)
             await Promise.all(
                 products.product_list.forEach(async product => {
