@@ -83,7 +83,7 @@ class SupplierController {
                         where: { parent: category.id }
                     })
                     if (children.length == 0) return category
-                    else return 
+                    else return []
                 })
             )
 
