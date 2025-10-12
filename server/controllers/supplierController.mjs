@@ -1,6 +1,7 @@
 import ApiError from '../errors/ApiError.mjs'
 import models from '../models/models.mjs'
 import fetch from 'node-fetch'
+import syncProducts from '../services/productService.mjs'
 
 const {Category, Product} = models
 
@@ -97,6 +98,8 @@ class SupplierController {
                     })
                 })
             )
+
+            syncProducts()
 
             return res.json(productList)
         }  catch (err) {

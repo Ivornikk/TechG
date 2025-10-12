@@ -15,3 +15,10 @@ export const updateCategories = async () => {
     })
     return data
 }
+
+export const updateProducts = async () => {
+    const {data} = await $authHost.patch('/api/supplier/update-products', {
+        Access_token: localStorage.getItem('accessToken')
+    })
+    return data
+}

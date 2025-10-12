@@ -1,6 +1,6 @@
 'use client'
 
-import { setToken, updateCategories } from "@/app/http/supplierAPI"
+import { setToken, updateCategories, updateProducts } from "@/app/http/supplierAPI"
 
 const Settings = () => {
     return (
@@ -12,6 +12,10 @@ const Settings = () => {
             <button className="px-5 py-2 rounded-xl bg-brand text-white cursor-pointer"
                 onClick={updateCategories}>
                 Update Categories
+            </button>
+            <button className="px-5 py-2 rounded-xl bg-brand text-white cursor-pointer"
+                onClick={updateProducts}>
+                Update Products
             </button>
         </div>
     )
