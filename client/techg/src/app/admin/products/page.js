@@ -106,7 +106,7 @@ const Product = observer(() => {
                                             className="flex justify-between grid grid-rows-3 grid-flow-col-dense">
                                             <div className="flex gap-3 row-span-3 cursor-pointer"
                                                 onClick={ () => redirect(`/product/${elem.id}`)}>
-                                                <img src={`${process.env.NEXT_PUBLIC_STATIC_BASE_URL}/${elem.preview_image}`}
+                                                <img src={elem.preview_image}
                                                     className="w-50"></img>
                                                 <div>
                                                     <h2 className="text-[1.3em]">
