@@ -12,7 +12,7 @@ class ProductController {
     async getAll(req, res, next) {
         const {limit} = req.query || 5
         const {page} = req.query || 1
-        let offset = page * limit - limit
+        let offset = (page * limit) - limit
         try {
             const products = await Product.findAndCountAll({
                 limit, offset

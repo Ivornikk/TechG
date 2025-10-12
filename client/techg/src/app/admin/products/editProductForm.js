@@ -1,6 +1,6 @@
 'use client'
 
-import { editProduct, fetchGroups } from "@/app/http/ProductAPI"
+import { editProduct, fetchTopCategories } from "@/app/http/ProductAPI"
 
 const { StoreContext } = require("@/app/store/StoreProvider")
 const { observer } = require("mobx-react-lite")
@@ -15,7 +15,7 @@ const EditProductForm = observer(({productId, onHide}) => {
     const [productDesc, setProductDesc] = useState('')
 
     useEffect(() => {
-        fetchGroups()
+        fetchTopCategories({page: 1})
         .then(data => {
             product.setGroups(data.rows)
         })

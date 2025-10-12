@@ -2,6 +2,19 @@ import models from "../models/models.mjs"
 const {Category} =  models
 
 class CategoryController {
+    async getAll(req, res, next) {
+        try {
+            let {page, limit} = req.query
+            let offset = page * limit - limit
+            const categories = await Category.findAndCountAll({
+                limit, offset
+            })
+
+            return res.json(categories)
+        } catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
     async getFirstThreeLayers(req, res, next) {
         try {
             

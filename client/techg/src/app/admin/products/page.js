@@ -1,30 +1,29 @@
 'use client'
 import CreateCategoryForm from "@/app/components/forms/createCategoryForm"
-import CreateGroupForm from "@/app/components/forms/createGroupForm"
 import CreateProuctForm from "@/app/components/forms/createProductForm"
-import CreateTypeForm from "@/app/components/forms/createTypeForm"
-import { removeProduct, fetchCategories, fetchGroups, fetchProducts, fetchTypes, removeCategory, removeGroup, removeType } from "@/app/http/ProductAPI"
+import { removeProduct, fetchAllCategories, fetchProducts, removeCategory } from "@/app/http/ProductAPI"
 import { StoreContext } from "@/app/store/StoreProvider"
 import { observer } from "mobx-react-lite"
-import { redirect } from "next/navigation"
+import { redirect, useSearchParams } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 import EditProductForm from "./editProductForm"
+import Pages from "@/app/components/pages"
 
 const Product = observer(() => {
     const [view, setView] = useState('products')
     const [createProduct, setCreateProduct] = useState(false)
     const [createCategory, setCreateCategory] = useState(false)
-    
     const [productEditing, setProductEditing] = useState(0)
-
+    const page = useSearchParams().get('page')
     const { product } = useContext(StoreContext)
 
     const getProducts = async () => {
-        const data = await fetchProducts({ page: 1 , currency: product.currency})
+        const data = await fetchProducts({ page , currency: product.currency})
         product.setProducts(data.rows)
+        product.setTotalProductsCount(data.count)
     }
     const getCategories = () => {
-        fetchCategories()
+        fetchAllCategories({page})
         .then(data => {
             product.setCategories(data.rows)
         })
@@ -33,7 +32,7 @@ const Product = observer(() => {
     useEffect(() => {
         getProducts()
         getCategories()
-    }, [product.currency])
+    }, [product.currency, page])
 
     const deleteProduct = id => {
         try {
@@ -168,6 +167,7 @@ const Product = observer(() => {
                         </ul>
                     </div>
                 }
+                <Pages pagesNum={(product.totalProductsCount / 5).toFixed()} />
             </div>
         </div>
     )

@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react"
 import { StoreContext } from "../../store/StoreProvider"
 import { observer } from "mobx-react-lite"
-import { createProduct, fetchGroups, fetchProducts } from "../../http/ProductAPI"
+import { createProduct, fetchProducts, fetchAllCategories } from "../../http/ProductAPI"
 
 const CreateProuctForm = observer(({onHide}) => {
 
@@ -14,13 +14,13 @@ const CreateProuctForm = observer(({onHide}) => {
     const [description, setDescription] = useState('')
     const [previewImage, setPreviewImage] = useState({})
     const [descriptionImages, setDescriptionImages] = useState([])
-    const [groupId, setGroupId] = useState(0)
+    const [categoryId, setCategoryId] = useState(0)
 
     useEffect(() => {
-        fetchGroups()
+        fetchAllCategories({page: 1})
         .then(data => {
             product.setGroups(data.rows)
-            setGroupId(data.rows[0].id)
+            setCategoryId(data.rows[0].id)
         })
     }, [])
 
@@ -29,7 +29,7 @@ const CreateProuctForm = observer(({onHide}) => {
         formData.append('title', title)
         formData.append('price', price)
         formData.append('description', description)
-        formData.append('groupId', groupId)
+        formData.append('groupId', categoryId)
         formData.append('previewImage', previewImage)
 
         for (let i = 0; i < descriptionImages.length; i++) {
@@ -38,7 +38,7 @@ const CreateProuctForm = observer(({onHide}) => {
 
         createProduct(formData)
         .then(() => {
-            fetchGroups()
+            fetchAllCategories({page: 1})
             .then(data => {
                 product.setGroups(data.rows)
             })
@@ -72,7 +72,7 @@ const CreateProuctForm = observer(({onHide}) => {
                         </label>
                     <select
                         className="px-1 py-1 border border-brand rounded"
-                        onChange={e => setGroupId(e.target.value)}>
+                        onChange={e => setCategoryId(e.target.value)}>
                         {
                             product.groups.map(group => {
                                 return (

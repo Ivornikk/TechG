@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchCategories } from '@/app/http/ProductAPI'
+import { fetchTopCategories } from '@/app/http/ProductAPI'
 import { StoreContext } from '@/app/store/StoreProvider'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ const Categories = observer(() => {
     const { product } = useContext(StoreContext)
 
     useEffect(() => {
-        fetchCategories()
+        fetchTopCategories({page: 1})
         .then(data => {
             product.setCategoriesObject(data)
         })

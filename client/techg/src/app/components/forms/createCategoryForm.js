@@ -8,7 +8,7 @@ const CreateCategoryForm = ({onHide, fetchCategories}) => {
     const addCategory = async () => {
         try {
             await createCategory(name)
-            fetchCategories()
+            await fetchCategories()
             alert('Category added successfully!')
             onHide()
         } catch (err) {

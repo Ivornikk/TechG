@@ -65,10 +65,15 @@ export const removeProduct = async id => {
     return data
 }
 
-export const fetchCategories = async includeSub => {
-    const {data} = await $host.get('/api/category', {
-        params: {includeSub}
+export const fetchAllCategories = async ({page, limit = 20}) => {
+    const {data} = await $authHost.get('/api/category', {
+        params: {page, limit}
     })
+    return data
+}
+
+export const fetchTopCategories = async () => {
+    const {data} = await $host.get('/api/category/get-top-categories')
     return data
 }
 
@@ -84,50 +89,8 @@ export const removeCategory = async id => {
     return data
 }
 
-export const fetchTypes = async () => {
-    const {data} = await $host.get('/api/type')
-    return data
-}
-
-export const createType = async ({name, categoryId}) => {
-    const {data} = await $authHost.post('api/type', {
-        name, categoryId
-    })
-    return data
-}
-export const removeType = async id => {
-    const {data} = await $authHost.delete('api/type', {
-        data: {id}
-    })
-    return data
-}
-
-
-export const fetchGroups = async () => {
-    const {data} = await $host.get('/api/group')
-    return data
-}
-
-export const createGroup = async ({name, typeId}) => {
-    const {data} = await $authHost.post('/api/group', {
-        name, typeId
-    })
-    return data
-}
-export const removeGroup = async id => {
-    const {data} = await $authHost.delete('api/group', {
-        data: {id}
-    })
-    return data
-}
-
 export const getSoldCount = async id => {
     const {data} = await $host.get(`api/product/${id}/get-sold-count`)
-    return data
-}
-
-export const fetchGroup = async id => {
-    const {data} = await $host.get(`api/group/${id}`)
     return data
 }
 
