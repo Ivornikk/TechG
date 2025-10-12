@@ -16,6 +16,15 @@ class CategoryController {
                     const children = await Category.findAll({
                         where: {parent: cat.id}
                     })
+                    await Promise.all(
+                        children.map(async category => {
+                            const childrenLastLayer = await Category.findAll({
+                                where: { parent: category.id}
+                            })
+                            category.setDataValue('children', childrenLastLayer)
+                            return category
+                        })
+                    )
                     cat.setDataValue('children', children)
                     return cat
                 })
