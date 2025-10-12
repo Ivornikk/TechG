@@ -74,8 +74,20 @@ class SupplierController {
     async updateProducts(req, res, next) {
         try {
             const { Access_token } = req.body
-            const categories = await Category.findAll()
+            let categories = await Category.findAll()
             const productList = []
+
+            await Promise.all(
+                categories.flatMap(async category => {
+                    const children = await Category.findAll({
+                        where: { parent: category.id }
+                    })
+                    if (children) return
+                    else return category
+                })
+            )
+
+            console.log("CATEGORIES: ", categories)
 
             let products = await fetch(
                 `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${categories[0].id}`
