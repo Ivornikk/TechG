@@ -92,6 +92,11 @@ class SupplierController {
             )
             products = await products.json()
             console.log(products)
+
+            await Product.destroy({
+                where: {}
+            })
+
             await Promise.all(
                 products.product_list.map(async product => {
                     await Product.create({
