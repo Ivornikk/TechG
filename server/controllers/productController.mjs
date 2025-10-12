@@ -3,7 +3,7 @@ import ApiError from "../errors/ApiError.mjs"
 import { createProduct, searchProducts } from "../services/productService.mjs"
 import { v4 } from "uuid"
 import { Op } from "sequelize"
-const {Product, Group, OrderProduct, ProductAttributeValue, AttributeValue, Attribute} = models
+const {Product, Warehouse, ProductInfo, OrderProduct, ProductInfoAttributeName, AttributeValue, AttributeName} = models
 import syncProducts from '../syncOpenSearch.mjs'
 import path from 'path'
 import { fileURLToPath } from "url"
@@ -25,44 +25,24 @@ class ProductController {
     }
     
     async getOne(req, res, next) {
-        const {id} = req.params
         try {
-            const product = await Product.findOne({where: {id}, include: Group})
+            const { id } = req.params
+            const product = await Product.findByPk(id)
+            const productInfo = await ProductInfo.findOne({
+                productId: product.id,
+                include: [AttributeName, Warehouse]
+            })
 
-            const attributesIds = await ProductAttributeValue.findAll({
-                where: {productId: id}
-            }).then(data => {
-                return data.flatMap(attribute => {
-                    return attribute.attributeValueId
+            await Promise.all(
+                productInfo.attribute_names = productInfo.attribute_names?.flatMap(async attribute => {
+                    const values = await AttributeValue.findAll({
+                        where: {attributeNameId: attribute.id}
+                    })
+                    attribute.values = values
                 })
-            })
-            const reversedAttributes = await AttributeValue.findAll({
-                where: {
-                    id: attributesIds
-                },
-                include: Attribute
-            })
-            const whereClause = await Attribute.findAll({
-                where: {id: reversedAttributes.flatMap(el => {
-                    let result = []
-                    result += el.attribute.id
-                    return result
-                })}
-            }).then(data => {
-                return new Set(data.flatMap(el => el.id))
-            })
-            let attrResult = await Attribute.findAll({
-                where: {id: Array.from(whereClause)}
-            })
-            const values = await AttributeValue.findAll({
-                where: {attributeId: attrResult.flatMap(el => el.id)}
-            })
-            attrResult = attrResult.flatMap(result => {
-                result.setDataValue('values', values.filter(el => el.attributeId == result.id))
-                return result
-            })
+            )
 
-            product.setDataValue('attributes', attrResult)
+            product.setDataValue('info', productInfo)
 
             return res.json(product)
         }
@@ -102,7 +82,6 @@ class ProductController {
             description,
             groupId,
         } = req.body
-        const {descriptionImages} = req.files
         const {previewImage} = req.files
 
         const __filename = fileURLToPath(import.meta.url)
@@ -110,28 +89,11 @@ class ProductController {
         
         let previewFileName = v4() + '.jpg'
         await previewImage.mv(path.resolve(__dirname, '..', 'static', previewFileName))
-        let descriptionImagesNames = []
-
-        if (Array.isArray(descriptionImages)) {
-            for (let i = 0; i < descriptionImages.length; i++)
-                descriptionImagesNames.push(v4() + '.jpg')
-            
-            descriptionImages.map(async (image, index) => {
-                await image.mv(path.resolve(__dirname, '..', 'static', descriptionImagesNames[index]))
-            })
-        }
-        else {
-            descriptionImagesNames.push(v4() + '.jpg')
-            await descriptionImages.mv(path.resolve(__dirname, '..', 'static', descriptionImagesNames[0]))
-        }
-        
-        descriptionImagesNames = descriptionImagesNames.toString()
 
             const product = await createProduct({
                 title: title, 
                 price: price, 
-                description: description, 
-                description_images: descriptionImagesNames,
+                description: description,
                 preview_image: previewFileName,
                 groupId: groupId
             })

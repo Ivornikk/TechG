@@ -78,7 +78,7 @@ const AttributeValue = sequelize.define('attribute_value', {
     listGridImage: {type: DataTypes.STRING},
 })
 
-const ProductAttributeName = sequelize.define('product_attribute_name', {
+const ProductInfoAttributeName = sequelize.define('product_info_attribute_name', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
@@ -88,7 +88,7 @@ const Warehouse = sequelize.define('warehouse', {
     price: {type: DataTypes.DECIMAL, allowNull: false}
 })
 
-const WarehouseProduct = sequelize.define('warehouse_product', {
+const WarehouseProductInfo = sequelize.define('warehouse_product_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
@@ -182,14 +182,14 @@ Promotion.belongsTo(Product)
 Product.hasOne(ProductInfo)
 ProductInfo.belongsTo(Product)
 
-Product.hasMany(ProductImage)
-ProductImage.belongsTo(Product)
+ProductInfo.hasMany(ProductImage)
+ProductImage.belongsTo(ProductInfo)
 
-Warehouse.belongsToMany(Product, { through: WarehouseProduct})
-Product.belongsToMany(Warehouse, { through: WarehouseProduct})
+Warehouse.belongsToMany(ProductInfo, { through: WarehouseProductInfo})
+ProductInfo.belongsToMany(Warehouse, { through: WarehouseProductInfo})
 
-AttributeName.belongsToMany(Product, {through: ProductAttributeName})
-Product.belongsToMany(AttributeName, {through: ProductAttributeName})
+AttributeName.belongsToMany(ProductInfo, {through: ProductInfoAttributeName})
+ProductInfo.belongsToMany(AttributeName, {through: ProductInfoAttributeName})
 
 AttributeName.hasMany(AttributeValue)
 AttributeValue.belongsTo(AttributeName)
@@ -204,7 +204,7 @@ export default {
     OrderProduct,
     Product,
     Warehouse,
-    WarehouseProduct,
+    WarehouseProductInfo,
     Promotion,
     PromotionType,
     ProductInfo,
@@ -216,5 +216,5 @@ export default {
     BasketProduct,
     AttributeName,
     AttributeValue,
-    ProductAttributeName
+    ProductInfoAttributeName
 }

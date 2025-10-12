@@ -93,8 +93,8 @@ class SupplierController {
                         title: product.product_name,
                         description: product.meta_desc,
                         categoryId: product.cat_id,
-                        image: product.img,
-                    })                    
+                        preview_image: product.img,
+                    })
                 })
             )
 
@@ -104,6 +104,15 @@ class SupplierController {
         }
     }
 
+    async createOrder(req, res, next) {
+        try {
+            const { addressId, orderId } = req.body
+
+            return res.json({message: "Working"})
+        } catch (err) {
+            return next(ApiError.badRequest(err.message))
+        }
+    }
 }
 
 export const supplierController = new SupplierController()
