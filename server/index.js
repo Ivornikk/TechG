@@ -17,9 +17,10 @@ const App = express()
 App.use(cors({
     origin: ['http://localhost:3000',
         'http://localhost:9200',
-        'https://techg.online/api'
+        'https://techg.online'
     ],
-    credentials: true
+    credentials: true,
+    
 }))
 App.use(express.json())
 App.use(express.static(path.resolve(__dirname, 'static')))
