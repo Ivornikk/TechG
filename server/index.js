@@ -15,7 +15,6 @@ const __dirname = path.dirname(__filename)
 const App = express()
 
 App.use(cors({
-    origin: ['*'],
     credentials: true,
 }))
 App.use(express.json())
