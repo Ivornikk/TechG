@@ -15,7 +15,10 @@ const __dirname = path.dirname(__filename)
 const App = express()
 
 App.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:9200'],
+    origin: ['http://localhost:3000',
+        'http://localhost:9200',
+        'https://techg.online/api'
+    ],
     credentials: true
 }))
 App.use(express.json())
