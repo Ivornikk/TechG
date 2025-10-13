@@ -15,12 +15,8 @@ const __dirname = path.dirname(__filename)
 const App = express()
 
 App.use(cors({
-    origin: ['http://localhost:3000',
-        'http://localhost:9200',
-        'https://techg.online'
-    ],
+    origin: ['*'],
     credentials: true,
-    
 }))
 App.use(express.json())
 App.use(express.static(path.resolve(__dirname, 'static')))
