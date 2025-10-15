@@ -2,7 +2,6 @@ import ApiError from '../errors/ApiError.mjs'
 import models from '../models/models.mjs'
 import fetch from 'node-fetch'
 import syncProducts from '../syncOpenSearch.mjs'
-require('../productInfoUpdated.json')
 import fs from 'fs'
 
 const {Category, Product, AttributeName, AttributeValue, ProductInfo, ProductInfoAttributeName,
