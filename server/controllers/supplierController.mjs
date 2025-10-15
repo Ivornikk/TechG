@@ -236,21 +236,17 @@ class SupplierController {
                     })
                 })
             )
-            console.log("IMAGE LIST: ", product.image_list)
-            product.images = await Promise.all(
-                product.image_list?.map(async el => {
-                    await ProductImage.create({
-                        home: el.home,
-                        listGrid: el.list_grid,
-                        grid: el.grid,
-                        gallery: el.gallery,
-                        view: el.view,
-                        otherItems: el.other_items,
-                        large: el.large,
-                        productInfoId: productInfo.id,
-                    })
-                })
-            )
+            // console.log("IMAGE LIST: ", product.image_list)
+            // product.images = await ProductImage.create({
+            //     home: product.image_list.home,
+            //     listGrid: product.image_list.list_grid,
+            //     grid: product.image_list.grid,
+            //     gallery: product.image_list.gallery,
+            //     view: product.image_list.view,
+            //     otherItems: product.image_list.other_items,
+            //     large: product.image_list.large,
+            //     productInfoId: productInfo.id,
+            // })
 
             return res.json(product)
         } catch (err) {
