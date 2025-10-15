@@ -14,9 +14,29 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const App = express()
 
+
 App.use(cors({
-    credentials: true,
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:9200',
+    'https://techg.online',
+    'https://www.techg.online'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }))
+
+App.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    return res.sendStatus(200)
+  }
+  next()
+})
+
 App.use(express.json())
 App.use(express.static(path.resolve(__dirname, 'static')))
 App.use(fileUpload({}))
