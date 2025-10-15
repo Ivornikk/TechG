@@ -192,6 +192,8 @@ class SupplierController {
             lastUpdatedInfo = lastUpdatedInfo.flatMap(el => {
                 if (el.id == productInfo.id) return productInfo
             })
+            if (lastUpdatedInfo == [])
+                lastUpdatedInfo.push(productInfo)
             fs.writeFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json'),
                 JSON.stringify(lastUpdatedInfo))  
 
@@ -236,7 +238,7 @@ class SupplierController {
             )
 
             product.images = await Promise.all(
-                product.image_list.map(async el => {
+                product.image_list?.map(async el => {
                     await ProductImage.create({
                         home: el.home,
                         listGrid: el.list_grid,
