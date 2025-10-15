@@ -188,7 +188,7 @@ class SupplierController {
             })
 
             productInfo.LAST_UPDATED = new Date().toDateString()
-            const lastUpdatedInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json')))
+            let lastUpdatedInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json')))
             lastUpdatedInfo = lastUpdatedInfo.flatMap(el => {
                 if (el.id == productInfo.id) return productInfo
             })
