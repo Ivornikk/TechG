@@ -236,7 +236,7 @@ class SupplierController {
                     })
                 })
             )
-
+            console.log("IMAGE LIST: ", product.image_list)
             product.images = await Promise.all(
                 product.image_list?.map(async el => {
                     await ProductImage.create({
@@ -249,7 +249,7 @@ class SupplierController {
                         large: el.large,
                         productInfoId: productInfo.id,
                     })
-                }) || undefined
+                })
             )
 
             return res.json(product)
