@@ -184,7 +184,11 @@ class SupplierController {
             })
 
             productInfo.LAST_UPDATED = new Date().toDateString()
-            fs.appendFileSync('../productInfoUpdated.json', JSON.stringify(productInfo))
+            const lastUpdatedInfo = fs.readFileSync()
+            lastUpdatedInfo = lastUpdatedInfo.flatMap(el => {
+                if (el.id == productInfo.id) return productInfo
+            })
+            fs.writeFileSync('../productInfoUpdated.json', JSON.stringify(lastUpdatedInfo))  
 
             product.attributes = await Promise.all(
                 product.poa_list.map(async el => {
