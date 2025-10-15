@@ -26,7 +26,8 @@ export const updateProducts = async () => {
 
 export const updateOneProduct = async ({id, currency = 'EUR'}) => {
     const {data} = await $authHost.patch('/api/supplier/update-one-product', {
-        accessToken: localStorage.getItem('accessToken')
+        accessToken: localStorage.getItem('accessToken'),
+        id
     })
     return data
 }
