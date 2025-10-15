@@ -249,7 +249,7 @@ class SupplierController {
                         large: el.large,
                         productInfoId: productInfo.id,
                     })
-                })
+                }) || undefined
             )
 
             return res.json(product)
