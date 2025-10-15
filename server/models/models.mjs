@@ -59,7 +59,7 @@ const Product = sequelize.define('product', {
 const ProductInfo = sequelize.define('product_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     fullDescription: {type: DataTypes.STRING},
-    weight: {type: DataTypes.INTEGER, allowNull: false},
+    weight: {type: DataTypes.DECIMAL, allowNull: false},
     productName: {type: DataTypes.STRING, allowNull: false}
 })
 
