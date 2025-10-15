@@ -4,6 +4,7 @@ import fetch from 'node-fetch'
 import syncProducts from '../syncOpenSearch.mjs'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 const {Category, Product, AttributeName, AttributeValue, ProductInfo, ProductInfoAttributeName,
     Warehouse, WarehouseProductInfo, ProductImage
