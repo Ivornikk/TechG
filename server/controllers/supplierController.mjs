@@ -3,6 +3,7 @@ import models from '../models/models.mjs'
 import fetch from 'node-fetch'
 import syncProducts from '../syncOpenSearch.mjs'
 import fs from 'fs'
+import path from 'path'
 
 const {Category, Product, AttributeName, AttributeValue, ProductInfo, ProductInfoAttributeName,
     Warehouse, WarehouseProductInfo, ProductImage
@@ -131,12 +132,15 @@ class SupplierController {
         try {
             const { id, accessToken } = req.body
 
+            const __filename = fileURLToPath(import.meta.url)
+            const __dirname = path.dirname(__filename)
+
             const infoCandidate = await ProductInfo.findOne({
                 where: { productId: id}
             })
 
             if (infoCandidate) {
-                const updatedInfo = JSON.parse(fs.readFileSync('../productInfoUpdated.json'))
+                const updatedInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json')))
                 let candidateLastUpdatedDate = updatedInfo.flatMap(el => {
                     if (el.productId == id) return el.LAST_UPDATED
                 })
@@ -183,11 +187,12 @@ class SupplierController {
             })
 
             productInfo.LAST_UPDATED = new Date().toDateString()
-            const lastUpdatedInfo = fs.readFileSync('../productInfoUpdated.json')
+            const lastUpdatedInfo = fs.readFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json'))
             lastUpdatedInfo = lastUpdatedInfo.flatMap(el => {
                 if (el.id == productInfo.id) return productInfo
             })
-            fs.writeFileSync('../productInfoUpdated.json', JSON.stringify(lastUpdatedInfo))  
+            fs.writeFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json'),
+                JSON.stringify(lastUpdatedInfo))  
 
             product.attributes = await Promise.all(
                 product.poa_list.map(async el => {
