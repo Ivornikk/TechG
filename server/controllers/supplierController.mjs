@@ -2,8 +2,12 @@ import ApiError from '../errors/ApiError.mjs'
 import models from '../models/models.mjs'
 import fetch from 'node-fetch'
 import syncProducts from '../syncOpenSearch.mjs'
+require('../productInfoUpdated.json')
+import fs from 'fs'
 
-const {Category, Product} = models
+const {Category, Product, AttributeName, AttributeValue, ProductInfo, ProductInfoAttributeName,
+    Warehouse, WarehouseProductInfo, ProductImage
+} = models
 
 class SupplierController {
 
@@ -120,6 +124,125 @@ class SupplierController {
 
             return res.json(productList)
         }  catch (err) {
+            next(ApiError.badRequest(err.message))
+        }
+    }
+
+    async updateOneProduct(req, res, next) {
+        try {
+            const { id, accessToken } = req.body
+
+            const infoCandidate = await ProductInfo.findOne({
+                where: { productId: id}
+            })
+
+            if (infoCandidate) {
+                const updatedInfo = JSON.parse(fs.readFileSync('../productInfoUpdated.json'))
+                let candidateLastUpdatedDate = updatedInfo.flatMap(el => {
+                    if (el.productId == id) return el.LAST_UPDATED
+                })
+                candidateLastUpdatedDate = Date.parse(candidateLastUpdatedDate)
+
+                // Estimates how much time has passed since the lastt update of
+                // the product info in hours
+                const sinceLastUpdated = (Date.now() - candidateLastUpdatedDate / 100 / 60 / 60).toFixed()
+                if (sinceLastUpdated < 24) {
+                    const productInfo = await ProductInfo.findByPk(infoCandidate.id, {
+                        include: [
+                            {
+                                model: AttributeName,
+                                as: 'attributes',
+                                include: {
+                                    model: AttributeValue,
+                                    as: 'values'
+                                }
+                            },
+                            {
+                                model: Warehouse,
+                                as: 'warehouses'
+                            },
+                            {
+                                model: ProductImage,
+                                as: 'images'
+                            }
+                        ]
+                    })
+                    return res.json(productInfo)
+                }
+            }
+
+            const response = await fetch(
+                `https://api.banggood.com/product/getProductInfo?access_token=${accessToken}&product_id=${id}&currency=EUR&lang=en`
+            )
+            const product = await response.json()
+
+            const productInfo = await ProductInfo.create({
+                fullDescription: product.description,
+                weight: product.weight,
+                productName: product.product_name,
+                productId: id
+            })
+
+            productInfo.LAST_UPDATED = new Date().toDateString()
+            fs.appendFileSync('../productInfoUpdated.json', JSON.stringify(productInfo))
+
+            product.attributes = await Promise.all(
+                product.poa_list.map(async el => {
+                    const attrName = await AttributeName.create({
+                        id: el.option_id,
+                        name: el.option_name
+                    })
+                    await Promise.all(
+                        el.option_values.map(async value => {
+                            await AttributeValue.create({
+                                id: value.poa_id,
+                                value: value.poa_name,
+                                price: value.poa_price,
+                                smallImage: value.small_image,
+                                viewImage: value.view_image,
+                                largeImage: value.large_image,
+                                listGridImage: value.list_grid_image,
+                                attributeNameId: el.id
+                            })
+                        })
+                    )
+                    await ProductInfoAttributeName.create({
+                        productInfoId: productInfo.id,
+                        attributeNameId: attrName.id
+                    })
+                })
+            )
+
+            product.warehouses = await Promise.all(
+                product.warehouse_list.map(async el => {
+                    const warehouse = await Warehouse.create({
+                        name: el.warehouse,
+                        price: el.warehouse_price
+                    })
+                    await WarehouseProductInfo.create({
+                        warehouseId: warehouse.id,
+                        productInfoId: productInfo.id
+                    })
+                })
+            )
+
+            product.images = await Promise.all(
+                product.image_list.map(async el => {
+                    await ProductImage.create({
+                        home: el.home,
+                        listGrid: el.list_grid,
+                        grid: el.grid,
+                        gallery: el.gallery,
+                        view: el.view,
+                        otherItems: el.other_items,
+                        large: el.large,
+                        productInfoId: productInfo.id,
+                    })
+                })
+            )
+
+            return res.json(product)
+        } catch (err) {
             next(ApiError.badRequest(err.message))
         }
     }

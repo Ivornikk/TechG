@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite"
 import { addProductToBasket } from "@/app/http/BasketAPI"
 import { addProductToWishlist, fetchNumberOfFavorites } from "@/app/http/WishlistAPI"
 import Link from "next/link"
+import { updateOneProduct } from "@/app/http/supplierAPI"
 
 const ProductCard = observer(() => {
     const {id} = useParams()
@@ -19,7 +20,8 @@ const ProductCard = observer(() => {
     const [favorites, setFavorites] = useState(0)
 
     useEffect(() => {
-        fetchOneProduct({id, currency: product.currency}).then(data => {
+        updateOneProduct({id, currency: product.currency}).then(data => {
+            console.log(data)
             product.setCurrentProduct(data)
             product.setPictures(data.description_images.split(','))
         })

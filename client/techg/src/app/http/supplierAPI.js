@@ -1,4 +1,5 @@
 import { $authHost } from "."
+const exchangeRates = require('../../exchangeRates.json')
 
 export const setToken = async () => {
     const {data} = await $authHost.get('/api/supplier/get-token')
@@ -19,6 +20,13 @@ export const updateCategories = async () => {
 export const updateProducts = async () => {
     const {data} = await $authHost.patch('/api/supplier/update-products', {
         Access_token: localStorage.getItem('accessToken')
+    })
+    return data
+}
+
+export const updateOneProduct = async ({id, currency = 'EUR'}) => {
+    const {data} = await $authHost.patch('/api/supplier/update-one-product', {
+        accessToken: localStorage.getItem('accessToken')
     })
     return data
 }

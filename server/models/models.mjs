@@ -71,7 +71,7 @@ const AttributeName = sequelize.define('attribute_name', {
 const AttributeValue = sequelize.define('attribute_value', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     value: {type: DataTypes.STRING, allowNull: false},
-    pride: {type: DataTypes.DECIMAL, allowNull: false},
+    price: {type: DataTypes.DECIMAL, allowNull: false},
     smallImage: {type: DataTypes.STRING},
     viewImage: {type: DataTypes.STRING},
     largeImage: {type: DataTypes.STRING},
@@ -94,6 +94,7 @@ const WarehouseProductInfo = sequelize.define('warehouse_product_info', {
 
 const ProductImage = sequelize.define('product_image', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    home: {type: DataTypes.STRING},
     listGrid: {type: DataTypes.STRING},
     grid: {type: DataTypes.STRING},
     gallery: {type: DataTypes.STRING},
@@ -208,6 +209,7 @@ export default {
     Promotion,
     PromotionType,
     ProductInfo,
+    ProductImage,
     Category,
     Rating,
     Wishlist,
