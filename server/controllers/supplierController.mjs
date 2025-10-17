@@ -139,6 +139,7 @@ class SupplierController {
             const infoCandidate = await ProductInfo.findOne({
                 where: { productId: id}
             })
+            console.log("CANDIDATE: ", infoCandidate)
 
             if (infoCandidate) {
                 const updatedInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'productInfoUpdated.json')))
@@ -147,8 +148,8 @@ class SupplierController {
                 })
                 candidateLastUpdatedDate = Date.parse(candidateLastUpdatedDate)
 
-                // Estimates how much time has passed since the lastt update of
-                // the product info in hours
+                // Estimates how much time has passed since the last update of
+                // the product info (in hours)
                 const sinceLastUpdated = (Date.now() - candidateLastUpdatedDate / 100 / 60 / 60).toFixed()
                 if (sinceLastUpdated < 24) {
                     const productInfo = await ProductInfo.findByPk(infoCandidate.id, {
@@ -236,17 +237,17 @@ class SupplierController {
                     })
                 })
             )
-            // console.log("IMAGE LIST: ", product.image_list)
-            // product.images = await ProductImage.create({
-            //     home: product.image_list.home,
-            //     listGrid: product.image_list.list_grid,
-            //     grid: product.image_list.grid,
-            //     gallery: product.image_list.gallery,
-            //     view: product.image_list.view,
-            //     otherItems: product.image_list.other_items,
-            //     large: product.image_list.large,
-            //     productInfoId: productInfo.id,
-            // })
+            console.log("IMAGE LIST: ", product.image_list)
+            product.images = await ProductImage.create({
+                home: product.image_list.home,
+                listGrid: product.image_list.list_grid,
+                grid: product.image_list.grid,
+                gallery: product.image_list.gallery,
+                view: product.image_list.view,
+                otherItems: product.image_list.other_items,
+                large: product.image_list.large,
+                productInfoId: productInfo.id,
+            })
 
             return res.json(product)
         } catch (err) {
