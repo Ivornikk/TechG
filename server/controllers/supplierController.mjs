@@ -83,7 +83,7 @@ class SupplierController {
             const productList = []
 
             await Promise.all(
-                categories.flatMap(async category => {
+                categories = categories.flatMap(async category => {
                     const children = await Category.findAll({
                         where: { parent: category.id }
                     })
@@ -91,39 +91,42 @@ class SupplierController {
                     else return []
                 })
             )
-            const products = []
+            console.log("CATEGORIES: ", categories)
 
-            await Promise.all(
-                categories.forEach(async category => {
-                    let result = await fetch(
-                        `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${category.id}}`
-                    )
-                    result = await result.json()
-                    console.log(result)
-                    products.push(result.product_list)
-                    console.log("FLAG")
-                })
-            )
+            // const products = []
 
-            await Product.destroy({
-                where: {}
-            })
+            // await Promise.all(
+            //     categories.forEach(async category => {
+            //         let result = await fetch(
+            //             `https://api.banggood.com/product/getProductList?access_token=${Access_token}&cat_id=${category.id}}`
+            //         )
+            //         result = await result.json()
+            //         console.log(result)
+            //         products.push(result.product_list)
+            //         console.log("FLAG")
+            //     })
+            // )
 
-            await Promise.all(
-                products.product_list.map(async product => {
-                    await Product.create({
-                        id: product.product_id,
-                        title: product.product_name,
-                        description: product.meta_desc,
-                        categoryId: product.cat_id,
-                        preview_image: product.img,
-                    })
-                })
-            )
+            // await Product.destroy({
+            //     where: {}
+            // })
 
-            syncProducts()
+            // await Promise.all(
+            //     products.product_list.map(async product => {
+            //         await Product.create({
+            //             id: product.product_id,
+            //             title: product.product_name,
+            //             description: product.meta_desc,
+            //             categoryId: product.cat_id,
+            //             preview_image: product.img,
+            //         })
+            //     })
+            // )
 
-            return res.json(productList)
+            // syncProducts()
+
+            // return res.json(productList)
+            return res.json({Message: "working"})
         }  catch (err) {
             next(ApiError.badRequest(err.message))
         }
@@ -179,6 +182,7 @@ class SupplierController {
             const response = await fetch(
                 `https://api.banggood.com/product/getProductInfo?access_token=${accessToken}&product_id=${id}&currency=EUR&lang=en`
             )
+            console.log("1 REQUEST SENT")
             const product = await response.json()
 
             const productInfo = await ProductInfo.create({
