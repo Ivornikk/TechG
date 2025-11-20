@@ -209,11 +209,11 @@ class SupplierController {
                                 id: value.poa_id,
                                 value: value.poa_name,
                                 price: value.poa_price,
-                                smallImage: value.small_image,
-                                viewImage: value.view_image,
-                                largeImage: value.large_image,
-                                listGridImage: value.list_grid_image,
-                                attributeNameId: el.id
+                                smallImage: JSON.stringify(value.small_image),
+                                viewImage: JSON.stringify(value.view_image),
+                                largeImage: JSON.stringify(value.large_image),
+                                listGridImage: JSON.stringify(value.list_grid_image),
+                                attributeNameId: el.id,
                             })
                         })
                     )
@@ -236,17 +236,6 @@ class SupplierController {
                     })
                 })
             )
-            // console.log("IMAGE LIST: ", product.image_list)
-            // product.images = await ProductImage.create({
-            //     home: product.image_list.home,
-            //     listGrid: product.image_list.list_grid,
-            //     grid: product.image_list.grid,
-            //     gallery: product.image_list.gallery,
-            //     view: product.image_list.view,
-            //     otherItems: product.image_list.other_items,
-            //     large: product.image_list.large,
-            //     productInfoId: productInfo.id,
-            // })
 
             return res.json(product)
         } catch (err) {
