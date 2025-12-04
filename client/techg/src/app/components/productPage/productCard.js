@@ -35,7 +35,7 @@ const ProductCard = observer(() => {
             return
         }
         addProductToBasket({
-            userId, productId: product.currentProduct.id, quantity: quantity
+            userId, productId: id, quantity: quantity
         })
         .then(() => {
             alert('Product added successfully')
@@ -48,7 +48,7 @@ const ProductCard = observer(() => {
             return
         }
         addProductToWishlist({
-            userId, productId: product.currentProduct.id
+            userId, productId: id
         })
         .then(() => {
             fetchNumberOfFavorites(id)

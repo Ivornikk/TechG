@@ -24,10 +24,12 @@ class BasketController {
                 where: {productId}
             })
 
-            if (candidateItem && candidateItem.basketId == basket.id) {
-                candidateItem.quantity += quantity
-                candidateItem.save()
-                return res.json(candidateItem)
+            if (candidateItem) {
+                if (candidateItem.basketId == basket[0].id) {
+                    candidateItem.quantity += quantity
+                    candidateItem.save()
+                    return res.json(candidateItem)
+                }
             } else {
                 const item = await BasketProduct.create({basketId: basket[0].id, productId, quantity})
                 return res.json(item)
@@ -84,9 +86,12 @@ class BasketController {
     async getOne(req, res, next) {
         const {userId} = req.params
         try {
-            const basket = await Basket.findAll({where: {userId: userId}})
-            const items = await BasketProduct.findAll({where: {basketId: basket[0].id}})
-
+            const basket = await Basket.findOne({where: {userId: userId}})
+            console.log("FLAG")
+            console.log("BASKET: ", basket)
+            const items = await BasketProduct.findAll({where: {basketId: basket.dataValues.id}})
+            console.log("FLAG")
+            
             const productsSearch = items.flatMap(item => {
                 return {id: item.productId}
             })
@@ -105,8 +110,8 @@ class BasketController {
                     }
                 })
             })
-
-            basket[0].setDataValue('products', products)
+            
+            basket.setDataValue('products', products)
             return res.json(basket)
         }
         catch (err) {

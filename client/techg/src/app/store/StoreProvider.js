@@ -7,6 +7,7 @@ import { basketStore } from "./basketStore"
 import { wishlistStore } from "./wishlistStore"
 import { addressStore } from "./addressStore"
 import { orderStore } from "./orderStore"
+import { ratingStore } from "./ratingStore"
 
 export const StoreContext = createContext({
     userStore,
@@ -15,6 +16,7 @@ export const StoreContext = createContext({
     wishlistStore,
     addressStore,
     orderStore,
+    ratingStore,
 })
 
 const StoreProvider = ({children}) => {
@@ -26,6 +28,7 @@ const StoreProvider = ({children}) => {
             wishlist: wishlistStore,
             address: addressStore,
             order: orderStore,
+            rating: ratingStore,
         }}>
             {children}
         </StoreContext.Provider>

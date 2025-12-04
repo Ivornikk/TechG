@@ -1,4 +1,4 @@
-import { $authHost } from "."
+import { $authHost, $host } from "."
 
 export const createRating = async (rating) => {
     const {data} = await $authHost.post('/api/rating', rating, {
@@ -18,5 +18,10 @@ export const fetchReviewsByProduct = async ({productId, sort}) => {
 
 export const fetchReviewsByUser = async (userId) => {
     const {data} = await $authHost.get(`/api/rating/${userId}/get-by-user`)
+    return data
+}
+
+export const fetchOneReview = async (id) => {
+    const {data} = await $host.get(`/api/rating/${id}`)
     return data
 }

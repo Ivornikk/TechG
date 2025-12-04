@@ -13,7 +13,7 @@ const Cart = observer(() => {
 
     useEffect(() => {
         fetchOneBasket(user.user?.id).then(data => {
-            basket.setItems(data[0].products)
+            basket.setItems(data.products)
         })
     }, [])
 
